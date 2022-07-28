@@ -89,7 +89,7 @@ paths:
               properties:
                 title:
                   type: string
-                  description: 標題
+                  description: 標題提
                   example: 'hi...'
       responses:
         '200':
