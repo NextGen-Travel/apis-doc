@@ -5,8 +5,8 @@ const config = {
             value: 'main'
         },
         {
-            name: '主頁',
-            value: 'main'
+            name: 'Ulitmate Pos',
+            value: 'ulitmate-pos'
         }
     ]
 }
