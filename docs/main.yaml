@@ -36,6 +36,9 @@ paths:
       # 分類
       tags:
         - user
+      # 更多文件
+      externalDocs:
+        url: https://swagger.io/docs/specification/links/
       # 有什麼變數
       parameters:
         # 可以透過開頭的 parameters 獲取通用的值
@@ -75,7 +78,7 @@ paths:
           schema:
             type: string
           required: true
-          example: '1'
+          example: '2'
       # 可以詳細定義 body
       requestBody:
         required: true

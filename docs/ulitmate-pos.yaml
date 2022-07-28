@@ -53,9 +53,7 @@ paths:
         - user
       # 需要怎樣的 token
       security:
-        - token:
-          # 權限說明(非標準)
-          - 'users.read'
+        - token: []
       parameters:
         # 個別定義各種參數
         - in: path
