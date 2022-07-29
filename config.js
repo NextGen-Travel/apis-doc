@@ -7,6 +7,10 @@ const config = {
         {
             name: 'Ulitmate Pos',
             value: 'ulitmate-pos'
+        },
+        {
+            name: 'Genius Cart',
+            value: 'genius-Cart'
         }
     ]
 }
