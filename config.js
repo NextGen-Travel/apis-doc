@@ -10,7 +10,7 @@ const config = {
         },
         {
             name: 'Genius Cart',
-            value: 'genius-Cart'
+            value: 'genius-cart'
         }
     ]
 }
