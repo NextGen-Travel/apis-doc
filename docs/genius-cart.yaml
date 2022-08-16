@@ -96,6 +96,50 @@ paths:
               schema:
                 type: object
                 properties:
+                  id:
+                    type: number
+                    description: 類別ID
+                    example: 1
+                  name:
+                    type: string
+                    description: 類別名稱
+                    example: '3C'
+                  photo:
+                    type: string
+                    description: 類別圖片url
+                    example: ''
+                  image:
+                    type: string
+                    description: 類別圖片url
+                    example: ''
+  /categories/{categoryId}/subs:
+    get:
+      summary: 取得該類別的子類別
+      description: 取得該類別的子類別
+      # 分類
+      tags:
+        - categories
+      # 有什麼變數
+      parameters:
+        # 個別定義各種參數
+        - in: path
+          name: categoryId
+          schema:
+            type: number
+          required: true
+          example: 1
+      # 更多文件
+      externalDocs:
+        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
                   data:
                     type: array
                     items:
@@ -103,20 +147,62 @@ paths:
                       properties:
                         id:
                           type: number
-                          description: 類別ID
+                          description: 子類別ID
+                          example: 1
+                        category_id:
+                          type: number
+                          description: 該類別ID
                           example: 1
                         name:
                           type: string
                           description: 類別名稱
-                          example: '3C'
-                        photo:
-                          type: string
-                          description: 類別圖片url
-                          example: ''
-                        image:
-                          type: string
-                          description: 類別圖片url
-                          example: ''
+                          example: '手機'
+  /categories/{categoryId}/subs/{id}:
+    get:
+      summary: 取得該類的子類別的單一類別
+      description: 取得該類的子類別的單一類別
+      # 分類
+      tags:
+        - categories
+      # 有什麼變數
+      parameters:
+        # 個別定義各種參數
+        - in: path
+          name: categoryId
+          schema:
+            type: number
+          required: true
+          example: 1
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+      # 更多文件
+      externalDocs:
+        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: 類別ID
+                    example: 1
+                  category_id:
+                    type: number
+                    description: 該類別ID
+                    example: 1
+                  name:
+                    type: string
+                    description: 類別名稱
+                    example: '保護貼'
   /deal-of-the-day/:
     get:
       summary: 取得限時活動資訊
@@ -202,6 +288,31 @@ paths:
                   type: number
                   description: 產品ID
                   example: 123
+      responses:
+        '200':
+          description: 成功
+  /user/token-refresh:
+    post:
+      tags:
+        - user
+      externalDocs:
+        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
+      # 可以詳細定義 body
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token: 
+                  type: string
+                  description: access_token
+                  example: ''
+                refreshToken: 
+                  type: string
+                  description: refresh_token
+                  example: ''
       responses:
         '200':
           description: 成功
