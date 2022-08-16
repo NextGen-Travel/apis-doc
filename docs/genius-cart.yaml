@@ -7,7 +7,7 @@ info:
 
 # 這裡可以選擇網域
 servers:
-  - url: http://localhost:8000
+  - url: http://localhost:8000/api/app
 
 components:
   # 定義一些 auth 認證的 token
@@ -313,6 +313,170 @@ paths:
                   type: string
                   description: refresh_token
                   example: ''
+      responses:
+        '200':
+          description: 成功
+
+  # ==================
+  # cart
+  # ==================
+
+  /cart/compute:
+    post:
+      tags:
+        - cart
+      externalDocs:
+        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
+      # 可以詳細定義 body
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  description: 購物車內容
+                  example:
+                    - product_id: 1
+                      qty: 2
+                      sku: '96062623'
+      responses:
+        '200':
+          description: 成功
+
+  /cart/checkout:
+    post:
+      tags:
+        - cart
+      externalDocs:
+        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
+      # 可以詳細定義 body
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_name:
+                  type: string
+                  description: 購買人
+                  example: '老高'
+                customer_country:
+                  type: string
+                  description: 帳單區域
+                  example: '香港'
+                customer_phone:
+                  type: string
+                  description: 帳單電話
+                  example: '0900123123'
+                customer_address:
+                  type: string
+                  description: 帳單地址
+                  example: '九龍'
+                customer_city:
+                  type: string
+                  description: 帳單城市
+                  example: '九龍'
+                customer_zip:
+                  type: string
+                  description: 帳單區碼
+                  example: '123'
+                customer_email:
+                  type: string
+                  description: 帳單郵件
+                  example: 'zzz@nextgen.com'
+                customer_state:
+                  type: string
+                  description: 帳單州
+                  example: '九龍'
+                shipping_name:
+                  type: string
+                  description: 取貨人
+                  example: '茉莉'
+                shipping_country:
+                  type: string
+                  description: 送達城市
+                  example: '香港'
+                shipping_phone:
+                  type: string
+                  description: 送達電話
+                  example: '0900123123'
+                shipping_address:
+                  type: string
+                  description: 送達地址
+                  example: '新界'
+                shipping_city:
+                  type: string
+                  description: 送達城市
+                  example: '新界'
+                shipping_zip:
+                  type: string
+                  description: 送達區碼
+                  example: '123'
+                shipping_email:
+                  type: string
+                  description: 送達郵件
+                  example: 'aaa@nextgen.hk.com'
+                shipping_state:
+                  type: string
+                  description: 送達州
+                  example: '新界'
+                order_note:
+                  type: string
+                  description: 訂單備註
+                  example: '加辣'
+                pickup_country:
+                  type: string
+                  description: 自取點城市
+                  example: '香港'
+                pickup_state:
+                  type: string
+                  description: 自取點州
+                  example: '新界'
+                shippingType:
+                  type: number
+                  description: 外送(1)或是自取點(2)
+                  example: 1
+                  enum:
+                    - 1
+                    - 2
+                items:
+                  type: array
+                  description: 購物車內容
+                  example:
+                    - product_id: 1
+                      qty: 2
+                      sku: '96062623'
+      responses:
+        '200':
+          description: 成功
+
+  # ==================
+  # order
+  # ==================
+
+  /orders/{orderNumber}/pay/{paymentName}:
+    post:
+      tags:
+        - order
+      externalDocs:
+        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
+      parameters:
+        - in: path
+          name: orderNumber
+          schema:
+            type: number
+          required: true
+          example: 1
+        - in: path
+          name: paymentName
+          schema:
+            type: string
+          required: true
+          example: 'linepay'
       responses:
         '200':
           description: 成功
