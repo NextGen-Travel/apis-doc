@@ -9,23 +9,16 @@ info:
 servers:
   - url: http://localhost:8000
 
-components:
-  # 定義一些 auth 認證的 token
-  securitySchemes:
-    token:
-      in: header
-      type: apiKey
-      name: Authorization
-      description: 驗證需要的token
-  # 定義一些通用參數避免繁複定義
-  parameters:
-    language:
-      in: header
-      name: accept-language
-      schema:
-        type: string
-      required: false
-      example: 'en'
+# tag 的詳細說明
+tags:
+  - name: Business
+    description: Operations about business
+  - name: Transaction
+    description: Operations about transaction
+  - name: Product
+    description: Operations about product
+  - name: user
+    description: Operations about user
 
 paths:
   /users:
@@ -77,3 +70,403 @@ paths:
       responses:
         '200':
           description: 成功
+  /info:
+    get:
+      summary: Business Location 詳細資訊
+      description: 會列出 Location 的詳細資訊
+      # 分類
+      tags:
+        - Business
+      security:
+        - bearerAuth: []
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/info'
+  /on-duty:
+    get:
+      summary: 值班人員
+      description: 取得值班店員與值班藥師資訊
+      # 分類
+      tags:
+        - Business
+      security:
+        - bearerAuth: []
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/onDuty'
+
+  /transactions:
+    get:
+      summary: 交易清單
+      description: 取得交易清單
+      # 分類
+      tags:
+        - Transaction
+      security:
+        - bearerAuth: []
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transactions'
+  /transactions/{id}:
+    get:
+      summary: 單一交易
+      description: 取得單一交易資訊
+      # 分類
+      tags:
+        - Transaction
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of transaction to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/singleTransaction'
+
+  /transactions/{id}/products:
+    get:
+      summary: 交易表裡的產品清單
+      description: 取得交易表裡的產品清單
+      # 分類
+      tags:
+        - Transaction
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of transaction to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/singleTransactionProducts'
+
+  /products:
+    get:
+      summary: 產品清單
+      description: "取得產品清單"
+      # 分類
+      tags:
+        - Product
+      security:
+        - bearerAuth: []
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/products'
+
+  /products/{id}:
+    get:
+      summary: '取得單一產品'
+      description: 取得單一產品詳細資訊
+      # 分類
+      tags:
+        - Product
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of product to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      # 定義各種回傳
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/singleProduct'
+
+
+components:
+  # 定義一些 auth 認證的 token
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 驗證需要的token
+  # 定義一些通用參數避免繁複定義
+  parameters:
+    language:
+      in: header
+      name: accept-language
+      schema:
+        type: string
+      required: false
+      example: 'en'
+  
+  schemas:
+    info:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/infoData'
+    onDuty:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ondutyData'
+    transactions:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            pharmacist_name:
+              type: string
+            prescription_sign_message:
+              type: string
+            username:
+              type: string
+            contact_name:
+              type: string
+            created_at:
+              type: string
+          example:
+            - id: 2
+              pharmacist_name: '王藥師'
+              prescription_sign_message: '頭痛'
+              username: 'Laplace Chen'
+              contact_name: '叫小賀'
+              created_at: '2022-08-08 12:03:36'
+            - id: 3
+              pharmacist_name: '黃藥師'
+              prescription_sign_message: '咳嗽'
+              username: '林店員'
+              contact_name: '蔡依林'
+              created_at: '2022-08-07 12:03:36'
+    singleTransaction:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/singleTransactionData'
+    singleTransactionProducts:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/singleTransactionProductsData'
+    products:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            sku:
+              type: string
+            name:
+              type: string
+            qty_available:
+              type: integer
+            alert_quantity:
+              type: integer
+            default_sell_price:
+              type: string
+            product_custom_field1:
+              type: string
+            product_custom_field2:
+              type: string
+            product_custom_field3:
+              type: string
+            product_custom_field4:
+              type: string
+          example:
+            - id: 1
+              sku: "0001"
+              name: '眼藥水'
+              qty_available: 1000
+              alert_quantity: '叫小賀'
+              default_sell_price: "100"
+              product_custom_field1: "HK-58956"
+              product_custom_field2: "\"S.T.\" NATURAL TEARS EYE DROPS"
+              product_custom_field3:
+              product_custom_field4:
+            - id: 2
+              sku: "0002"
+              name: '生理食鹽水'
+              qty_available: 1231
+              alert_quantity:
+              default_sell_price: "187.5000"
+              product_custom_field1: "HK-12411"
+              product_custom_field2: "0.18% SODIUM CHLORIDE 4.3% DEXTROSE INJ"
+              product_custom_field3:
+              product_custom_field4:
+    singleProduct:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/singleProductData'
+
+    infoData:
+      type: object
+      properties:
+        name:
+          type: string
+          example: '藥局 A'
+        mobile:
+          type: string
+          example: 0987123456
+        country:
+          type: string
+          example: '香港'
+        state:
+          type: string
+          example: 'HK state'
+        city:
+          type: string
+          example: 'HK city'
+        zip_code:
+          type: string
+          example: '666'
+    ondutyData:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 1
+        user_name:
+          type: string
+          example: 'Mr Jo Chen'
+        pharmacist_id:
+          type: integer
+          example: 3
+        pharmacist_name:
+          type: string
+          example: '王藥劑師'
+    singleTransactionData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        created_at:
+          type: string
+          example: '2022-08-08 12:03:36'
+        contact_id:
+          type: integer
+          example: 1
+        contact_dob:
+          type: string
+          example: '2022-04-01'
+        contact_name:
+          type: string
+          example: '郭雪芙'
+        total_amount:
+          type: string
+          example: '562.5000'
+    
+    singleTransactionProductsData:
+      type: object
+      properties:
+        sell_id:
+          type: integer
+          example: 3
+        quantity:
+          type: integer
+          example: 3
+        price:
+          type: string
+          example: "187.5000"
+        usage_id:
+          type: integer
+          example: 1
+        product_id:
+          type: integer
+          example: 2
+        days:
+          type: integer
+          example: 3
+        total:
+          type: integer
+          example: 3
+        dosage:
+          type: integer
+          example: 1
+        frequency:
+          type: integer
+          example: 1
+    singleProductData:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        sku:
+          type: string
+          example: '0001'
+        name:
+          type: string
+          example: "眼藥水"
+        unit_id:
+          type: integer
+          example: 1
+        qty_available:
+          type: integer
+          example: 1000
+        alert_quantity:
+          type: integer
+          example: 100
+        unit_short_name:
+          type: string
+          example: "Pc(s)"
+        default_sell_price:
+          type: string
+          example: "125.0000"
+        product_custom_field1:
+          type: string
+          example: "HK-58956"
+        product_custom_field2:
+          type: string
+          example: "\"S.T.\" NATURAL TEARS EYE DROPS"
+        product_custom_field3:
+          type: string
+          example:
+        product_custom_field4:
+          type: string
+          example:
+    
