@@ -3,21 +3,18 @@ openapi: 3.0.1
 info:
   title: Main
   version: 1.0.0
-  description: 這裡夾雜一些程式碼示範
 
-# 這裡可以選擇網域
 servers:
   - url: http://localhost:8000/api/app
 
 components:
   # 定義一些 auth 認證的 token
   securitySchemes:
-    token:
+    client:
       in: header
       type: apiKey
       name: Authorization
-      description: 驗證需要的token
-  # 定義一些通用參數避免繁複定義
+      description: 驗證需要的 token
   parameters:
     language:
       in: header
@@ -28,17 +25,120 @@ components:
       example: 'en'
 
 paths:
-  /categories:
+  /hello:
     get:
-      summary: 取得產品類別
-      description: 取得產品類別
-      # 分類
+      summary: 測試還有沒有活著用的
+      description: 測試還有沒有活著用的
       tags:
-        - categories
-      # 更多文件
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart#%5BinlineExtension%5D%E5%8F%96%E5%BE%97%E6%89%80%E6%9C%89%E7%94%A2%E5%93%81%E9%A1%9E%E5%88%A5
-      # 定義各種回傳
+        - hello
+      responses:
+        '200':
+          description: 成功
+
+  /sliders:
+    get:
+      responses:
+        '200':
+          description: 成功
+
+  /payments:
+    get:
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        title:
+                          type: string
+                        subtitle:
+                          type: string
+                        type:
+                          type: string
+                          enum:
+                            - manual
+                            - automatic
+  /deal-of-the-day:
+    get:
+      summary: 取得限時活動資訊
+      description: 取得限時活動資訊
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deal_title:
+                    type: string
+                    description: 活動標題
+                  deal_details:
+                    type: string
+                    description: 活動細節
+                  deal_time:
+                    type: string
+                    description: 活動結束時間 yyyy-mm-dd Thh:mm:ss
+                    example: '2022-07-28 T00:00:00'
+                  deal_background:
+                    type: string
+                    description: 活動背景圖片url
+
+  # ==================
+  # countries
+  # ==================
+
+  /countries:
+    get:
+      tags:
+        - country
+      parameters:
+        - in: path
+          name: countryId
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+
+  /countries/{countryId}/states:
+    get:
+      tags:
+        - country
+      parameters:
+        - in: path
+          name: countryId
+          schema:
+            type: number
+          required: true
+          example: 1
       responses:
         '200':
           description: 成功
@@ -55,39 +155,59 @@ paths:
                         id:
                           type: number
                           description: 類別ID
-                          example: 1
                         name:
                           type: string
                           description: 類別名稱
-                          example: '3C'
+
+  # ==================
+  # categories
+  # ==================
+
+  /categories:
+    get:
+      summary: 取得產品類別
+      description: 取得產品類別
+      tags:
+        - categories
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 類別ID
+                        name:
+                          type: string
+                          description: 類別名稱
                         photo:
                           type: string
                           description: 類別圖片url
-                          example: ''
                         image:
                           type: string
                           description: 類別圖片url
-                          example: ''
-  /categories/{id}:
+
+  /categories/{category}:
     get:
       summary: 取得特定產品類別
       description: 取得特定產品類別
-      # 分類
       tags:
         - categories
-      # 有什麼變數
       parameters:
-        # 個別定義各種參數
         - in: path
-          name: id
+          name: category
           schema:
             type: number
           required: true
           example: 1
-      # 更多文件
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart#%E5%8F%96%E5%BE%97%E7%94%A2%E5%93%81%E5%AD%90%E9%A1%9E%E5%88%A5
-      # 定義各種回傳
       responses:
         '200':
           description: 成功
@@ -99,39 +219,29 @@ paths:
                   id:
                     type: number
                     description: 類別ID
-                    example: 1
                   name:
                     type: string
                     description: 類別名稱
-                    example: '3C'
                   photo:
                     type: string
                     description: 類別圖片url
-                    example: ''
                   image:
                     type: string
                     description: 類別圖片url
-                    example: ''
-  /categories/{categoryId}/subs:
+
+  /categories/{category}/subs:
     get:
       summary: 取得該類別的子類別
       description: 取得該類別的子類別
-      # 分類
       tags:
         - categories
-      # 有什麼變數
       parameters:
-        # 個別定義各種參數
         - in: path
-          name: categoryId
+          name: category
           schema:
             type: number
           required: true
           example: 1
-      # 更多文件
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
-      # 定義各種回傳
       responses:
         '200':
           description: 成功
@@ -157,32 +267,26 @@ paths:
                           type: string
                           description: 類別名稱
                           example: '手機'
-  /categories/{categoryId}/subs/{id}:
+
+  /categories/{category}/subs/{sub}:
     get:
       summary: 取得該類的子類別的單一類別
       description: 取得該類的子類別的單一類別
-      # 分類
       tags:
         - categories
-      # 有什麼變數
       parameters:
-        # 個別定義各種參數
         - in: path
-          name: categoryId
+          name: category
           schema:
             type: number
           required: true
           example: 1
         - in: path
-          name: id
+          name: sub
           schema:
             type: number
           required: true
           example: 1
-      # 更多文件
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
-      # 定義各種回傳
       responses:
         '200':
           description: 成功
@@ -203,17 +307,15 @@ paths:
                     type: string
                     description: 類別名稱
                     example: '保護貼'
-  /deal-of-the-day/:
+
+  # ==================
+  # products
+  # ==================
+
+  /products:
     get:
-      summary: 取得限時活動資訊
-      description: 取得限時活動資訊
-      # 分類
       tags:
-        - deal-of-the-day
-      # 更多文件
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
-      # 定義各種回傳
+        - products
       responses:
         '200':
           description: 成功
@@ -222,33 +324,48 @@ paths:
               schema:
                 type: object
                 properties:
-                  deal_title:
-                    type: string
-                    description: 活動標題
-                    example: '限時活動'
-                  deal_details:
-                    type: string
-                    description: 活動細節
-                    example: '限時細節'
-                  deal_time:
-                    type: string
-                    description: 活動結束時間 yyyy-mm-dd Thh:mm:ss
-                    example: '2022-07-28 T00:00:00'
-                  deal_background:
-                    type: string
-                    description: 活動背景圖片url
-                    example: ''
-  /wishlists:
+                  data:
+                    type: array
+
+  /products/{id}:
+    get:
+      tags:
+        - products
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+        '404':
+          description: 查無資料
+
+  # ==================
+  # user
+  # ==================
+
+  /user:
+    get:
+      tags:
+        - user
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+
+  /user/wishlists:
     get:
       summary: 取得收藏商品
       description: 取得收藏商品
-      # 分類
       tags:
-        - wishlists
-      # 更多文件
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart#%E5%8F%96%E5%BE%97%E6%94%B6%E8%97%8F%E5%95%86%E5%93%81
-      # 定義各種回傳
+        - user
+      security:
+        - client: []
       responses:
         '200':
           description: 成功
@@ -268,15 +385,9 @@ paths:
                           example: 1
     post:
       tags:
-        - wishlists
-      # 需要怎樣的 token
+        - user
       security:
-        - token:
-          # 權限說明(非標準)
-          - ''
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart#%E6%94%B6%E8%97%8F%E5%95%86%E5%93%81(%E5%B8%B6token)
-      # 可以詳細定義 body
+        - client: []
       requestBody:
         required: true
         content:
@@ -291,28 +402,23 @@ paths:
       responses:
         '200':
           description: 成功
-  /user/token-refresh:
-    post:
+
+  /user/wishlists/{wishId}:
+    delete:
       tags:
         - user
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
-      # 可以詳細定義 body
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                token: 
-                  type: string
-                  description: access_token
-                  example: ''
-                refreshToken: 
-                  type: string
-                  description: refresh_token
-                  example: ''
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+
+  /user/orders:
+    get:
+      tags:
+        - user
+      security:
+        - client: []
       responses:
         '200':
           description: 成功
@@ -325,9 +431,6 @@ paths:
     post:
       tags:
         - cart
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
-      # 可以詳細定義 body
       requestBody:
         required: true
         content:
@@ -350,9 +453,6 @@ paths:
     post:
       tags:
         - cart
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
-      # 可以詳細定義 body
       requestBody:
         required: true
         content:
@@ -455,15 +555,28 @@ paths:
           description: 成功
 
   # ==================
-  # order
+  # orders
   # ==================
 
-  /orders/{orderNumber}/pay/{paymentName}:
+  /orders/{orderNumber}:
+    get:
+      tags:
+        - orders
+      parameters:
+        - in: path
+          name: orderNumber
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+
+  /orders/{orderNumber}/pay/{paymentId}:
     post:
       tags:
-        - order
-      externalDocs:
-        url: https://nextgenadmin.atlassian.net/wiki/spaces/TWFE/pages/134905972/Genius+cart
+        - orders
       parameters:
         - in: path
           name: orderNumber
@@ -472,11 +585,11 @@ paths:
           required: true
           example: 1
         - in: path
-          name: paymentName
+          name: paymentId
           schema:
-            type: string
+            type: number
           required: true
-          example: 'linepay'
+          example: 1
       responses:
         '200':
           description: 成功

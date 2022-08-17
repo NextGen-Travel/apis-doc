@@ -9,8 +9,8 @@ const config = {
             value: 'ulitmate-pos'
         },
         {
-            name: 'Genius Cart',
-            value: 'genius-cart'
+            name: 'Genius Cart App',
+            value: 'genius-cart-app'
         }
     ]
 }
