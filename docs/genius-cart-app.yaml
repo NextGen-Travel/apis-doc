@@ -229,23 +229,6 @@ paths:
                     type: string
                     description: 類別圖片url
 
-  /categories/{category}/products:
-    get:
-      summary: 取得特定產品類別
-      description: 取得特定產品類別
-      tags:
-        - categories
-      parameters:
-        - in: path
-          name: category
-          schema:
-            type: number
-          required: true
-          example: 1
-      responses:
-        '200':
-          description: 成功
-
   /categories/{category}/subs:
     get:
       summary: 取得該類別的子類別
