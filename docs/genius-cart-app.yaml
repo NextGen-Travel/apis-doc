@@ -229,6 +229,23 @@ paths:
                     type: string
                     description: 類別圖片url
 
+  /categories/{category}/products:
+    get:
+      summary: 取得特定產品類別
+      description: 取得特定產品類別
+      tags:
+        - categories
+      parameters:
+        - in: path
+          name: category
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+
   /categories/{category}/subs:
     get:
       summary: 取得該類別的子類別
@@ -358,7 +375,7 @@ paths:
         '200':
           description: 成功
 
-  /user/wishlists:
+  /user/wishlist:
     get:
       summary: 取得收藏商品
       description: 取得收藏商品
@@ -403,12 +420,19 @@ paths:
         '200':
           description: 成功
 
-  /user/wishlists/{wishId}:
+  /user/wishlist/{wishId}:
     delete:
       tags:
         - user
       security:
         - client: []
+      parameters:
+        - in: path
+          name: wishId
+          schema:
+            type: number
+          required: true
+          example: 123
       responses:
         '200':
           description: 成功
@@ -566,14 +590,33 @@ paths:
         - in: path
           name: orderNumber
           schema:
-            type: number
+            type: string
           required: true
-          example: 1
+          example: Xk9Z1639460878
       responses:
         '200':
           description: 成功
+        '404':
+          description: 訂單不存在
 
-  /orders/{orderNumber}/pay/{paymentId}:
+  /orders/{orderNumber}/products:
+    get:
+      tags:
+        - orders
+      parameters:
+        - in: path
+          name: orderNumber
+          schema:
+            type: string
+          required: true
+          example: Xk9Z1639460878
+      responses:
+        '200':
+          description: 成功
+        '404':
+          description: 訂單不存在
+
+  /orders/{orderNumber}/pay/{paymentName}:
     post:
       tags:
         - orders
@@ -581,15 +624,26 @@ paths:
         - in: path
           name: orderNumber
           schema:
-            type: number
+            type: string
           required: true
-          example: 1
+          example: Xk9Z1639460878
         - in: path
-          name: paymentId
+          name: paymentName
           schema:
-            type: number
+            type: string
           required: true
-          example: 1
+          example: paypal
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  description: 幣別
+                  example: 'hkd'
       responses:
         '200':
           description: 成功
