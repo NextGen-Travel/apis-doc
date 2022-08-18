@@ -262,28 +262,6 @@ paths:
       responses:
         '200':
           description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                          description: 子類別ID
-                          example: 1
-                        category_id:
-                          type: number
-                          description: 該類別ID
-                          example: 1
-                        name:
-                          type: string
-                          description: 類別名稱
-                          example: '手機'
 
   /categories/{category}/subs/{sub}:
     get:
@@ -307,23 +285,6 @@ paths:
       responses:
         '200':
           description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: number
-                    description: 類別ID
-                    example: 1
-                  category_id:
-                    type: number
-                    description: 該類別ID
-                    example: 1
-                  name:
-                    type: string
-                    description: 類別名稱
-                    example: '保護貼'
 
   # ==================
   # products
