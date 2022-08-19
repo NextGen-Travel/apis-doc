@@ -306,10 +306,10 @@ paths:
           description: 查無資料
 
   # ==================
-  # user
+  # client
   # ==================
 
-  /user:
+  /client:
     get:
       tags:
         - user
@@ -319,7 +319,7 @@ paths:
         '200':
           description: 成功
 
-  /user/wishlist:
+  /client/wishlist:
     get:
       summary: 取得收藏商品
       description: 取得收藏商品
@@ -364,7 +364,7 @@ paths:
         '200':
           description: 成功
 
-  /user/wishlist/{wishId}:
+  /client/wishlist/{wishId}:
     delete:
       tags:
         - user
@@ -381,7 +381,7 @@ paths:
         '200':
           description: 成功
 
-  /user/orders:
+  /client/orders:
     get:
       tags:
         - user
