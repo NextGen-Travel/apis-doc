@@ -11,9 +11,14 @@ components:
   # 定義一些 auth 認證的 token
   securitySchemes:
     client:
-      in: header
+      in: cookie
       type: apiKey
-      name: Authorization
+      name: laravel_session
+      description: 驗證需要的 token
+    xsrf-token:
+      in: cookie
+      type: apiKey
+      name: XSRF-TOKEN
       description: 驗證需要的 token
   parameters:
     language:
@@ -309,12 +314,36 @@ paths:
   # client
   # ==================
 
+  /login:
+    post:
+      tags:
+        - user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 帳號信箱
+                  example: aaaa@asd.com
+                password:
+                  type: string
+                  description: 密碼
+                  example: 12345
+      responses:
+        '200':
+          description: 成功
+
   /client:
     get:
       tags:
         - user
       security:
         - client: []
+        - xsrf-token: []
       responses:
         '200':
           description: 成功
