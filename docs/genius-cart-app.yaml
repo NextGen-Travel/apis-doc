@@ -689,3 +689,54 @@ paths:
       responses:
         '200':
           description: 成功
+
+
+  # ==================
+  # pickups
+  # ==================
+
+  /pickups/{countryId}:
+    get:
+      summary: 取得自取點
+      description: 取得特定國家下的自取點
+      tags:
+        - pickups
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: countryId
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 自取點ID
+                          example: 1
+                        location:
+                          type: string
+                          description: 自取點位置
+                        address:
+                          type: string
+                          description: 自取點詳細地址
+                        note:
+                          type: string
+                          description: 自取點相關內容
+                        cost:
+                          type: number
+                          description: 自取點費用
+                          example: 10
