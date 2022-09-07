@@ -379,6 +379,57 @@ paths:
           description: 成功
         '404':
           description: 查無資料
+        
+  /products/search:
+    get:
+      tags:
+        - products
+      parameters:
+        - in: query
+          name: keyword
+          required: false
+          description: 搜尋產品名稱
+          schema:
+            type: string
+            example: 'apple'
+        - in: query
+          name: condition
+          required: false
+          description: 篩選條件
+          schema:
+            type: string
+            enum:
+               - 'hot'
+               - 'updated_asc'
+               - 'updated_desc'
+               - 'price_desc'
+               - 'price_asc'
+        - in: query
+          name: min_price
+          required: false
+          description: 篩選條件-價格
+          schema:
+            type: number
+            example: 0
+          allowReserved: true  
+        - in: query
+          name: max_price
+          required: false
+          description: 篩選條件-價格
+          schema:
+            type: number
+            example: 2000000
+          allowReserved: true  
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
 
   # ==================
   # client
