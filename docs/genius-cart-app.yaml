@@ -165,6 +165,35 @@ paths:
                         name:
                           type: string
                           description: 類別名稱
+                          
+  /countries/tax/{countryId}:
+    get:
+      tags:
+        - country
+      parameters:
+        - in: path
+          name: countryId
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        tax:
+                          type: number
+                          description: 該國家稅率
+
 
   # ==================
   # categories
