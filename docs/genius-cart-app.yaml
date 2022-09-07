@@ -285,7 +285,44 @@ paths:
       tags:
         - products
       parameters:
-        - $ref: '#/components/parameters/page'
+        - in: query
+          name: hot
+          schema:
+            type: number
+          required: false
+          allowEmptyValue: true
+        - in: query
+          name: sale
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: category
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: best_seller
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: featured
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: trending
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: in
+          schema:
+            type: string
+          required: false
+          allowEmptyValue: true
+        #- $ref: '#/components/parameters/page'
       responses:
         '200':
           description: 成功
