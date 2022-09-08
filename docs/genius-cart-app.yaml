@@ -707,9 +707,44 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
         '404':
           description: 查無資料
-        
+
+  /products/search-tags:
+    get:
+      tags:
+        - products
+      responses:
+        '200':
+          description: 成功
+          
+        '404':
+          description: 查無資料
+    post:
+      tags:
+        - products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keyword:
+                  type: string
+                  description: 搜尋關鍵字
+                  example: airpod
+      responses:
+        '200':
+          description: 成功
+      
 
   # ==================
   # client
