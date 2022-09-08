@@ -281,6 +281,28 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 類別ID
+                        name:
+                          type: string
+                          description: 類別名稱
+                        photo:
+                          type: string
+                          description: 類別圖片url
+                        image:
+                          type: string
+                          description: 類別圖片url
 
   /categories/{category}/subs/{sub}:
     get:
@@ -304,12 +326,29 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: 類別ID
+                  name:
+                    type: string
+                    description: 類別名稱
+                  photo:
+                    type: string
+                    description: 類別圖片url
+                  image:
+                    type: string
+                    description: 類別圖片url
 
   # ==================
   # subcategories
   # ==================
 
-  /categories/{subcategory_id}/childs:
+  /subcategories/{subcategory_id}/children:
     get:
       summary: 取得特定第二層類別的所有子類別（第三層）
       description: 取得特定第二層類別的所有子類別（第三層）
@@ -317,7 +356,7 @@ paths:
         - subcategories
       parameters:
         - in: path
-          name: subcategories
+          name: subcategory_id
           schema:
             type: number
           required: true
@@ -325,8 +364,27 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 類別ID
+                        name:
+                          type: string
+                          description: 類別名稱
+                        subcategory_id:
+                          type: number
+                          description: 當前類別ID
 
-  /categories/{subcategory_id}/childs/{child}:
+  /subcategories/{subcategory_id}/children/{child}:
     get:
       summary: 取得特定第二層類別的特定子類別（第三層）
       description: 取得特定第二層類別的特定子類別（第三層）
@@ -334,13 +392,13 @@ paths:
         - subcategories
       parameters:
         - in: path
-          name: subcategories
+          name: subcategory_id
           schema:
             type: number
           required: true
           example: 1
         - in: path
-          name: sub
+          name: child
           schema:
             type: number
           required: true
@@ -348,12 +406,27 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: 類別ID
+                  subcategory_id:
+                    type: number
+                    description: 上層類別ID
+                  name:
+                    type: string
+                    description: 類別名稱
+                  
 
   # ==================
   # childcategories
   # ==================
 
-  /categories/{childcategory_id}/fourths:
+  /childcategories/{childcategory_id}/fourths:
     get:
       summary: 取得特定第三層類別的所有子類別（第四層）
       description: 取得特定第三層類別的所有子類別（第四層）
@@ -361,7 +434,7 @@ paths:
         - childcategories
       parameters:
         - in: path
-          name: childcategories
+          name: childcategory_id
           schema:
             type: number
           required: true
@@ -369,8 +442,25 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 類別ID
+                        name:
+                          type: string
+                          description: 類別名稱
 
-  /categories/{childcategory_id}/fourths/{forth}:
+
+  /childcategories/{childcategory_id}/fourths/{fourth}:
     get:
       summary: 取得特定第三層類別的特定子類別（第四層）
       description: 取得特定第三層類別的特定子類別（第四層）
@@ -378,13 +468,13 @@ paths:
         - childcategories
       parameters:
         - in: path
-          name: childcategories
+          name: childcategory_id
           schema:
             type: number
           required: true
           example: 1
         - in: path
-          name: sub
+          name: fourth
           schema:
             type: number
           required: true
@@ -392,12 +482,26 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: 類別ID
+                  childcategory_id:
+                    type: number
+                    description: 上層類別ID
+                  name:
+                    type: string
+                    description: 類別名稱
 
   # ==================
   # fourthcategories
   # ==================
 
-  /categories/{fourthcategory_id}/fifths:
+  /fourthcategories/{fourthcategory_id}/fifths:
     get:
       summary: 取得特定第四層類別的所有子類別（第五層）
       description: 取得特定第四層類別的所有子類別（第五層）
@@ -405,7 +509,7 @@ paths:
         - fourthcategories
       parameters:
         - in: path
-          name: fourthcategories
+          name: fourthcategory_id
           schema:
             type: number
           required: true
@@ -413,8 +517,24 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 類別ID
+                        name:
+                          type: string
+                          description: 類別名稱
 
-  /categories/{fourthcategory_id}/fifths/{fifth}:
+  /fourthcategories/{fourthcategory_id}/fifths/{fifth}:
     get:
       summary: 取得特定第四層類別的特定子類別（第五層）
       description: 取得特定第四層類別的特定子類別（第五層）
@@ -422,13 +542,13 @@ paths:
         - fourthcategories
       parameters:
         - in: path
-          name: fourthcategories
+          name: fourthcategory_id
           schema:
             type: number
           required: true
           example: 1
         - in: path
-          name: sub
+          name: fifth
           schema:
             type: number
           required: true
@@ -436,6 +556,20 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                    description: 類別ID
+                  fourthcategory_id:
+                    type: number
+                    description: 上層類別ID
+                  name:
+                    type: string
+                    description: 類別圖片url
 
   # ==================
   # products
