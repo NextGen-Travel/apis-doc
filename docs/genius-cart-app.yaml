@@ -531,7 +531,7 @@ paths:
             example: 2000000
           allowReserved: true  
         - in: query
-          name: orderBy
+          name: order_by
           required: false
           description: 篩選條件（需與orderBy一起使用）
           schema:
