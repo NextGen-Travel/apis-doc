@@ -201,8 +201,8 @@ paths:
 
   /categories:
     get:
-      summary: 取得產品類別
-      description: 取得產品類別
+      summary: 取得產品第一層類別
+      description: 取得產品第一層類別
       tags:
         - categories
       responses:
@@ -233,8 +233,8 @@ paths:
 
   /categories/{category}:
     get:
-      summary: 取得特定產品類別
-      description: 取得特定產品類別
+      summary: 取得特定第一層產品類別
+      description: 取得特定第一層產品類別
       tags:
         - categories
       parameters:
@@ -267,8 +267,8 @@ paths:
 
   /categories/{category}/subs:
     get:
-      summary: 取得該類別的子類別
-      description: 取得該類別的子類別
+      summary: 取得特定第一層產品類別的所有子類別（第二層）
+      description: 取得特定第一層產品類別的所有子類別（第二層）
       tags:
         - categories
       parameters:
@@ -284,13 +284,145 @@ paths:
 
   /categories/{category}/subs/{sub}:
     get:
-      summary: 取得該類的子類別的單一類別
-      description: 取得該類的子類別的單一類別
+      summary: 取得特定第一層產品類別下的特定子類別（第二層）
+      description: 取得特定第一層產品類別底下的特定子類別（第二層）
       tags:
         - categories
       parameters:
         - in: path
           name: category
+          schema:
+            type: number
+          required: true
+          example: 1
+        - in: path
+          name: sub
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+
+  # ==================
+  # subcategories
+  # ==================
+
+  /categories/{subcategory_id}/childs:
+    get:
+      summary: 取得特定第二層類別的所有子類別（第三層）
+      description: 取得特定第二層類別的所有子類別（第三層）
+      tags:
+        - subcategories
+      parameters:
+        - in: path
+          name: subcategories
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+
+  /categories/{subcategory_id}/childs/{child}:
+    get:
+      summary: 取得特定第二層類別的特定子類別（第三層）
+      description: 取得特定第二層類別的特定子類別（第三層）
+      tags:
+        - subcategories
+      parameters:
+        - in: path
+          name: subcategories
+          schema:
+            type: number
+          required: true
+          example: 1
+        - in: path
+          name: sub
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+
+  # ==================
+  # childcategories
+  # ==================
+
+  /categories/{childcategory_id}/fourths:
+    get:
+      summary: 取得特定第三層類別的所有子類別（第四層）
+      description: 取得特定第三層類別的所有子類別（第四層）
+      tags:
+        - childcategories
+      parameters:
+        - in: path
+          name: childcategories
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+
+  /categories/{childcategory_id}/fourths/{forth}:
+    get:
+      summary: 取得特定第三層類別的特定子類別（第四層）
+      description: 取得特定第三層類別的特定子類別（第四層）
+      tags:
+        - childcategories
+      parameters:
+        - in: path
+          name: childcategories
+          schema:
+            type: number
+          required: true
+          example: 1
+        - in: path
+          name: sub
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+
+  # ==================
+  # fourthcategories
+  # ==================
+
+  /categories/{fourthcategory_id}/fifths:
+    get:
+      summary: 取得特定第四層類別的所有子類別（第五層）
+      description: 取得特定第四層類別的所有子類別（第五層）
+      tags:
+        - fourthcategories
+      parameters:
+        - in: path
+          name: fourthcategories
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+
+  /categories/{fourthcategory_id}/fifths/{fifth}:
+    get:
+      summary: 取得特定第四層類別的特定子類別（第五層）
+      description: 取得特定第四層類別的特定子類別（第五層）
+      tags:
+        - fourthcategories
+      parameters:
+        - in: path
+          name: fourthcategories
           schema:
             type: number
           required: true
