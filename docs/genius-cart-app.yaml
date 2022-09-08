@@ -320,12 +320,37 @@ paths:
             type: number
           required: false
         - in: query
+          name: new
+          schema:
+             type: number
+          required: false
+        - in: query
           name: sale
           schema:
             type: number
           required: false
         - in: query
           name: category
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: subcategory
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: childcategory
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: fourthcategory
+          schema:
+            type: number
+          required: false
+        - in: query
+          name: fifthcategory
           schema:
             type: number
           required: false
