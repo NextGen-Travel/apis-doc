@@ -961,6 +961,27 @@ paths:
                     - product_id: 1
                       qty: 2
                       sku: '96062623'
+                coupon:
+                  type: number
+                  description: 優惠券
+                deposits:
+                  type: number
+                  description: 錢包
+                  example: 10
+                shippings:
+                  type: number
+                  description: 運送方式（快速或是一般...)
+                  example: 1
+                packages:
+                  type: number
+                  description: 包裝方式（豪華包裝或是一般...)
+                  example: 1
+                pickups: 
+                  type: number
+                  description: 自取點ID
+                country:  
+                  type: number
+                  description: 國家ID（計算稅率用）
       responses:
         '200':
           description: 成功
