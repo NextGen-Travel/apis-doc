@@ -934,7 +934,7 @@ paths:
                         type: number
                         description: 訂單總數
                         example: 18
-  /client/dashboard/pending:
+  /client/dashboard/orders/pending:
     get:
       tags:
         - user
@@ -948,15 +948,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        totalPending:
-                          type: number
-                          description: 未付款訂單數量
-                          example: 2
+                  totalPending:
+                    type: number
+                    description: 未付款訂單數量
+                    example: 2
 
   # ==================
   # cart
