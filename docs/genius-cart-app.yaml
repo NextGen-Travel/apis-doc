@@ -922,10 +922,6 @@ paths:
                   meta:
                     type: object
                     properties:
-                      totalPending:
-                        type: number
-                        description: 未處理訂單數量
-                        example: 16
                       current_page:
                         type: number
                         description: 當前頁面
@@ -938,6 +934,29 @@ paths:
                         type: number
                         description: 訂單總數
                         example: 18
+  /client/dashboard/pending:
+    get:
+      tags:
+        - user
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        totalPending:
+                          type: number
+                          description: 未付款訂單數量
+                          example: 2
 
   # ==================
   # cart
