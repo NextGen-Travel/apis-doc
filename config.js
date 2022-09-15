@@ -15,6 +15,10 @@ const config = {
         {
             name: 'Medicine Public',
             value: 'medicine-public'
-        }
+        },
+        {
+          name: 'Medicine Private',
+          value: 'medicine-private'
+      }
     ]
 }

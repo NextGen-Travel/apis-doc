@@ -1,0 +1,385 @@
+openapi: 3.0.1
+
+info:
+  title: 配藥系統
+  version: 1.0.0
+
+servers:
+  - url: https://medicine.nextgen.com.hk/api
+
+components:
+  securitySchemes:
+    client_token:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: 驗證需要的 token, Bearer xxx
+  parameters:
+    page:
+      in: query
+      name: page
+      schema:
+        type: number
+      required: true
+      example: 1
+    language:
+      in: header
+      name: accept-language
+      schema:
+        type: string
+      required: false
+      example: 'en'
+
+paths:
+
+  # ====================
+  #
+  # Auth
+  #
+
+  /users-permissions/auth/login:
+    post:
+      summary: 員工登錄帳號
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: email
+                  example: 'pharmacist@nextgen.com.hk'
+                password:
+                  type: string
+                  description: 密碼
+                  example: 'nextgen123'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      provider:
+                        type: string
+                      confirmed:
+                        type: boolean
+                      blocked:
+                        type: boolean
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      memo:
+                        type: string
+                      level:
+                        type: string
+                      startedAt:
+                        type: string
+                      finishedAt:
+                        type: string
+                      isPharmacist:
+                        type: boolean
+                      store:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          NameCn:
+                            type: string
+                          NameEn:
+                            type: string
+                          tel:
+                            type: string
+                          address:
+                            type: string
+                          district:
+                            type: string
+                          rx_no:
+                            type: string
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          publishedAt:
+                            type: string
+
+
+  # ====================
+  #
+  # customer
+  #
+  /customers:
+    get:
+      summary: 客人搜尋
+      tags:
+        - customers
+      security:
+        - client_token: []
+      parameters:
+        - in: query
+          name: expand
+          schema:
+            type: string
+          description: 擴展內容
+          example: 'store,allergy'
+        - in: query
+          name: email
+          schema:
+            type: string
+          description: 電子郵件
+          example: 'pharmacist@nextgen.com.hk'
+        - in: query
+          name: mobile
+          schema:
+            type: string
+          description: 電話號碼
+          example: '1222'
+        - in: query
+          name: account_no
+          schema:
+            type: string
+          description: 身份識別碼
+          example: 'a1234567'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        uuid:
+                          type: string
+                        gender:
+                          type: string
+                        address:
+                          type: string
+                        email:
+                          type: string
+                        birthday:
+                          type: string
+                        name:
+                          type: string
+                        mobile:
+                          type: string
+                        accountNo:
+                          type: string
+                        drugTaboo:
+                          type: string
+                        store:
+                          type: object
+                          properties:
+                            rx_no:
+                              type: string
+                            NameCn:
+                              type: string
+                            NameEn:
+                              type: string
+                            district:
+                              type: string
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      perPage:
+                        type: number
+                      pageCount:
+                        type: number
+                      totalCount:
+                        type: number
+
+    post:
+      summary: 新建客人
+      security:
+        - client_token: []
+      tags:
+        - customers
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              
+              properties:
+                account_no:
+                  type: string
+                  description: 身份識別碼  , mobile, drug_taboo
+                  example: 'a1234567'
+                name:
+                  type: string
+                  description: 顧客名稱
+                  example: '顧客名稱'
+                gender:
+                  type: string
+                  description: 性別
+                  example: 'F'
+                birthday:
+                  type: string
+                  description: 生日
+                  example: '2021-01-01'
+                address:
+                  type: string
+                  description: 地址
+                  example: '大安區'
+                email:
+                  type: string
+                  description: 電子郵件
+                  example: 'pharmacist@nextgen.com.hk'
+                mobile:
+                  type: string
+                  description: 聯絡電話
+                  example: '12345'
+                drug_taboo:
+                  type: string
+                  description: 禁忌
+                  example: '特定藥品禁忌'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      gender:
+                        type: string
+                      address:
+                        type: string
+                      email:
+                        type: string
+                      birthday:
+                        type: string
+                      name:
+                        type: string
+                      mobile:
+                        type: string
+                      accountNo:
+                        type: string
+                      drugTaboo:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      uuid:
+                        type: string
+  /customers/{uuid}:
+    put:
+      summary: 修改客人資訊
+      tags:
+        - customers
+      security:
+        - client_token: []
+      parameters:
+        - name: uuid
+          in: path
+          description: 客人唯一識別碼
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              
+              properties:
+                account_no:
+                  type: string
+                  description: 身份識別碼  , mobile, drug_taboo
+                  example: 'a1234567'
+                name:
+                  type: string
+                  description: 顧客名稱
+                  example: '顧客名稱'
+                gender:
+                  type: string
+                  description: 性別
+                  example: 'F'
+                birthday:
+                  type: string
+                  description: 生日
+                  example: '2021-01-01'
+                address:
+                  type: string
+                  description: 地址
+                  example: '大安區'
+                email:
+                  type: string
+                  description: 電子郵件
+                  example: 'pharmacist@nextgen.com.hk'
+                mobile:
+                  type: string
+                  description: 聯絡電話
+                  example: '12345'
+                drug_taboo:
+                  type: string
+                  description: 禁忌
+                  example: '特定藥品禁忌'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      gender:
+                        type: string
+                      address:
+                        type: string
+                      email:
+                        type: string
+                      birthday:
+                        type: string
+                      name:
+                        type: string
+                      mobile:
+                        type: string
+                      accountNo:
+                        type: string
+                      drugTaboo:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      uuid:
+                        type: string
