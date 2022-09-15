@@ -5,6 +5,12 @@ import { parse } from 'yaml'
 import { compile } from 'json-schema-to-typescript'
 import { OpenAPIV3_1 } from "openapi-types"
 import { JSONSchema4 } from 'json-schema'
+import { js as jsBeautify } from 'js-beautify'
+
+const descBeautify = (content: string) => {
+    let firstSpace = content.split('\n')[1].split(/[^\s]/)[0].length
+    return content.split('\n').map(e => e.slice(firstSpace)).join('\n').trim()
+}
 
 // multipart/form-data#json : 要使用formdata格式 但header帶的是json
 type OutputObject = {
@@ -49,6 +55,12 @@ export class OpenApiReader {
             }
             if (data.enum) {
                 output.enum = data.enum
+            }
+            if (data.description) {
+                output.description = descBeautify(`
+                    ${data.description}
+                    @example ${data.example}
+                `)
             }
             return output
         }
@@ -157,7 +169,7 @@ export class OpenApiReader {
         let tsData: JSONSchema4 = {
             type: 'object',
             required: [],
-            description: `${result.title}\n@see {${this.getLink()}}`,
+            description: `${result.title}\n@see ${this.getLink()}`,
             additionalProperties: false,
             properties: {}
         }
@@ -181,9 +193,11 @@ export class OpenApiReader {
             }
         }
         const defined = await compile(tsData, '__')
-        return `
+        return jsBeautify(`
             import { ApisDefinition } from 'nextgen-front-lib/modules/request'
-            export type Definitions = ApisDefinition<${defined.replace('export interface __', '')}>
-        `
+            export type Definitions = ApisDefinition<
+                ${defined.replace('export interface __', '')}
+            >
+        `)
     }
 }

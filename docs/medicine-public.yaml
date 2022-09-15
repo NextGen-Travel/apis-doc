@@ -1,0 +1,115 @@
+openapi: 3.0.1
+
+info:
+  title: 配藥系統
+  version: 1.0.0
+
+servers:
+  - url: https://medicine.nextgen.com.hk/api
+
+components:
+  parameters:
+    page:
+      in: query
+      name: page
+      schema:
+        type: number
+      required: true
+      example: 1
+    language:
+      in: header
+      name: accept-language
+      schema:
+        type: string
+      required: false
+      example: 'en'
+
+paths:
+
+  # ====================
+  #
+  # Auth
+  #
+
+  /users-permissions/auth/login:
+    post:
+      summary: 員工登錄帳號
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: email
+                  example: 'pharmacist@nextgen.com.hk'
+                password:
+                  type: string
+                  description: 密碼
+                  example: 'nextgen123'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      provider:
+                        type: string
+                      confirmed:
+                        type: boolean
+                      blocked:
+                        type: boolean
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      memo:
+                        type: string
+                      level:
+                        type: string
+                      startedAt:
+                        type: string
+                      finishedAt:
+                        type: string
+                      isPharmacist:
+                        type: boolean
+                      store:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          NameCn:
+                            type: string
+                          NameEn:
+                            type: string
+                          tel:
+                            type: string
+                          address:
+                            type: string
+                          district:
+                            type: string
+                          rx_no:
+                            type: string
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          publishedAt:
+                            type: string

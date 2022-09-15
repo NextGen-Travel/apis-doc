@@ -11,6 +11,10 @@ const config = {
         {
             name: 'Genius Cart App',
             value: 'genius-cart-app'
+        },
+        {
+            name: 'Medicine Public',
+            value: 'medicine-public'
         }
     ]
 }
