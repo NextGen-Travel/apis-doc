@@ -6,6 +6,9 @@ info:
 
 servers:
   - url: https://medicine.nextgen.com.hk/api
+    description: Staging server
+  - url: http://0.0.0.0:1337/api
+    description: local server
 
 components:
   securitySchemes:
@@ -101,9 +104,9 @@ paths:
                         properties:
                           id:
                             type: number
-                          NameCn:
+                          nanmeCn:
                             type: string
-                          NameEn:
+                          ameEn:
                             type: string
                           tel:
                             type: string
@@ -111,7 +114,7 @@ paths:
                             type: string
                           district:
                             type: string
-                          rx_no:
+                          rxNo:
                             type: string
                           createdAt:
                             type: string
@@ -193,11 +196,11 @@ paths:
                         store:
                           type: object
                           properties:
-                            rx_no:
+                            rxNo:
                               type: string
-                            NameCn:
+                            nameCn:
                               type: string
-                            NameEn:
+                            nameEn:
                               type: string
                             district:
                               type: string
@@ -227,9 +230,9 @@ paths:
               type: object
               
               properties:
-                account_no:
+                accountNo:
                   type: string
-                  description: 身份識別碼  , mobile, drug_taboo
+                  description: 身份識別碼
                   example: 'a1234567'
                 name:
                   type: string
@@ -255,7 +258,7 @@ paths:
                   type: string
                   description: 聯絡電話
                   example: '12345'
-                drug_taboo:
+                drugTaboo:
                   type: string
                   description: 禁忌
                   example: '特定藥品禁忌'
@@ -316,9 +319,9 @@ paths:
               type: object
               
               properties:
-                account_no:
+                accountNo:
                   type: string
-                  description: 身份識別碼  , mobile, drug_taboo
+                  description: 身份識別碼 
                   example: 'a1234567'
                 name:
                   type: string
@@ -344,7 +347,7 @@ paths:
                   type: string
                   description: 聯絡電話
                   example: '12345'
-                drug_taboo:
+                drugTaboo:
                   type: string
                   description: 禁忌
                   example: '特定藥品禁忌'
@@ -383,3 +386,223 @@ paths:
                         type: string
                       uuid:
                         type: string
+
+
+  # ====================
+  #
+  # order
+  #
+
+  /orders:
+    post:
+      summary: 新建訂單
+      security:
+        - client_token: []
+      tags:
+        - orders
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                customerUuid:
+                  type: string
+                  description:  顧客身份 uuid
+                  example: 'c764f34b-dd29-454d-9fa0-db9a08e04607'
+                signAt:
+                  type: string
+                  description: 生日
+                  example: '2021-01-01'
+                hospital:
+                  type: string
+                  description: 開藥醫院 id
+                  example: '334'
+                doctorName:
+                  type: string
+                  description: 開藥醫生
+                  example: '醫生名稱'
+                prescriptionSignMessage:
+                  type: string
+                  description: 處方簽症狀
+                  example: '治療發燒、喉嚨痛'
+                drug:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品id
+                  example: ['6595', '6597']
+                day:
+                  type: array
+                  items:
+                    type: integer
+                  description: 用藥天數
+                  example: ['3','3']
+                frequency:
+                  type: array
+                  items:
+                    type: string
+                  description: 用藥頻率
+                  example: ['早晚兩次','三餐飯後']
+                total:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品數量
+                  example: [6,9]
+                dosageForm:
+                  type: array
+                  items:
+                    type: string
+                  description: 藥品數量
+                  example: ['tablet', 'capsule']
+                caution:
+                  type: array
+                  items:
+                    type: string
+                  description: 警告
+                  example: ['', '服用時禁止空腹']
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      signAt:
+                        type: string
+                      doctorName:
+                        type: string
+                      prescriptionSignMessage:
+                        type: object
+                        properties:
+                      hospitalName:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      orderNo:
+                        type: string
+
+  /orders/{orderNo}:
+    put:
+      summary: 修改訂單
+      security:
+        - client_token: []
+      parameters:
+        - name: orderNo
+          in: path
+          description: 訂單唯一識別碼
+          required: true
+          schema:
+            type: string
+      tags:
+        - orders
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                customerUuid:
+                  type: string
+                  description:  顧客身份 uuid
+                  example: 'c764f34b-dd29-454d-9fa0-db9a08e04607'
+                signAt:
+                  type: string
+                  description: 生日
+                  example: '2021-01-01'
+                hospital:
+                  type: string
+                  description: 開藥醫院 id
+                  example: '334'
+                doctorName:
+                  type: string
+                  description: 開藥醫生
+                  example: '醫生名稱'
+                prescriptionSignMessage:
+                  type: string
+                  description: 處方簽症狀
+                  example: '治療發燒、喉嚨痛'
+                drug:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品id
+                  example: ['6595', '6597']
+                day:
+                  type: array
+                  items:
+                    type: integer
+                  description: 用藥天數
+                  example: ['3','3']
+                frequency:
+                  type: array
+                  items:
+                    type: string
+                  description: 用藥頻率
+                  example: ['早晚兩次','三餐飯後']
+                total:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品數量
+                  example: [6,9]
+                dosageForm:
+                  type: array
+                  items:
+                    type: string
+                  description: 藥品數量
+                  example: ['tablet', 'capsule']
+                caution:
+                  type: array
+                  items:
+                    type: string
+                  description: 警告
+                  example: ['', '服用時禁止空腹']
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      signAt:
+                        type: string
+                      doctorName:
+                        type: string
+                      prescriptionSignMessage:
+                        type: object
+                        properties:
+                      hospitalName:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      orderNo:
+                        type: string
+
+  # ====================
+  #
+  # drug
+  #
