@@ -174,3 +174,110 @@ paths:
                             type: number
                           total:
                             type: number
+
+  # ====================
+  #
+  # cautions
+  #
+
+  /cautions:
+    get:
+      summary: 獲取注意事項
+      tags:
+        - cautions
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/prepage'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        key:
+                          type: string
+                        value:
+                          type: string
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      perPage:
+                        type: number
+                      pageCount:
+                        type: number
+                      totalCount:
+                        type: number
+
+  # ====================
+  #
+  # hospitals
+  #
+
+  /hospitals:
+    get:
+      summary: 獲取醫院列表
+      tags:
+        - hospitals
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/prepage'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        institution_tc:
+                          type: string
+                        address_tc:
+                          type: string
+                        cluster_tc:
+                          type: string
+                        latitude:
+                          type: number
+                        longitude:
+                          type: number
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                        institution_eng:
+                          type: string
+                        locale:
+                          type: string
+                        type:
+                          type: object
+                          properties:
+                        key:
+                          type: string
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      perPage:
+                        type: number
+                      pageCount:
+                        type: number
+                      totalCount:
+                        type: number
