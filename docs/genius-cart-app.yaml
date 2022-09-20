@@ -1444,6 +1444,35 @@ paths:
                         example: 提取申請中
 
   # ==================
+  # deposit
+  # ==================
+  /client/deposit:
+    get:
+      summary: 取得使用者當前的錢包餘額
+      description:  取得使用者當前的錢包餘額
+      tags:
+        - deposit
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      deposits:
+                        type: number
+                        description: 使用者當前的錢包餘額
+                        example: 60000
+
+
+
+  # ==================
   # cart
   # ==================
 
