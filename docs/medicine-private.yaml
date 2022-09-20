@@ -484,7 +484,6 @@ paths:
                         type: string
                       prescriptionSignMessage:
                         type: object
-                        properties:
                       hospitalName:
                         type: string
                       createdAt:
@@ -592,7 +591,6 @@ paths:
                         type: string
                       prescriptionSignMessage:
                         type: object
-                        properties:
                       hospitalName:
                         type: string
                       createdAt:

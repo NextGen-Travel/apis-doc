@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "types": "ts-node index.ts types"
+    "types": "ts-node index.ts types",
+    "serve": "ts-node index.ts serve"
   },
   "dependencies": {
     "@types/js-beautify": "^1.13.3",

@@ -121,83 +121,45 @@
       // End Swagger UI call region
 
       window.ui = ui
-      window.switchNav = (event) => {
-        console.log()
-      }
-      
-      let script = document.createElement('script')
-      script.src = `./config.js?${Date.now()}`
-      document.body.appendChild(script)
-      script.onload = function() {
-        // devToken 處理
-        axios.get(url).then(e => {
-          let { paths } = jsyaml.load(e.data)
-          for (let url in paths) {
-            let path = paths[url]
-            for (let method in path) {
-              if (path[method].security && path[method].security[0]) {
-                let devToken = path[method].security[0].devToken
-                if (devToken && devToken.length >= 1) {
-                  setTimeout(() => {
-                    let blocks = document.getElementsByClassName(`opblock-${method}`)
-                    let els = []
-                    for (let block of blocks) {
-                      let data = block.getElementsByClassName('opblock-summary-path')[0].dataset
-                      if (data['path'] === url) {
-                        let div = document.createElement('div')
-                        let html = `<div style="font-size: 1.05em; color: red">需求權限: </div>`
-                        for (let key of devToken) {
-                          html += `<div>${key}</div>`
-                        }
-                        div.style = 'padding: 20px 15px'
-                        div.innerHTML = html
-                        block.append(div)
-                      }
-                    }
-                  }, 500)
-                }
-              }
-            }
-          }
-        })
-        setTimeout(() => {
-          let html = ''
-          let tags = document.getElementsByClassName('opblock-tag')
-          let sideBar = document.getElementById('sidebar')
-          sideBar.innerHTML = ''
-          for (let link of config.links) {
-            html += `
+
+      axios.get('./config.json').then(({ data }) => {
+        let config = data
+        let html = ''
+        let tags = document.getElementsByClassName('opblock-tag')
+        let sideBar = document.getElementById('sidebar')
+        sideBar.innerHTML = ''
+        for (let link of config.links) {
+          html += `
+            <a
+              class="nav-link ${link.value === target ? 'text-warning' : 'text-white'}"
+              href="javascript:void()"
+              onclick="toPage('${link.value}')">
+              ${link.name}
+            </a>
+          `
+          if (link.value === target) {
+            for (let tag of tags) {
+              html += `
               <a
-                class="nav-link ${link.value === target ? 'text-warning' : 'text-white'}"
-                href="javascript:void()"
-                onclick="toPage('${link.value}')">
-                ${link.name}
+                class="nav-link ml-4 text-white"
+                href="javascript:toTag('${tag.dataset.tag}')">
+                ${tag.dataset.tag}
               </a>
-            `
-            if (link.value === target) {
-              for (let tag of tags) {
-                html += `
-                <a
-                  class="nav-link ml-4 text-white"
-                  href="javascript:toTag('${tag.dataset.tag}')">
-                  ${tag.dataset.tag}
-                </a>
-                `
-              }
+              `
             }
           }
-          sideBar.innerHTML = html
-          let nostyles = document.getElementsByClassName('nostyle')
-          for (let style of nostyles) {
-            if (style.innerHTML.match(/\u200B/g)) {
-              style.innerHTML = style.innerHTML.replace(/\u200B/g, '')
-              style.addEventListener('click', () => {
-                copyText(style.innerText)
-              })
-            }
+        }
+        sideBar.innerHTML = html
+        let nostyles = document.getElementsByClassName('nostyle')
+        for (let style of nostyles) {
+          if (style.innerHTML.match(/\u200B/g)) {
+            style.innerHTML = style.innerHTML.replace(/\u200B/g, '')
+            style.addEventListener('click', () => {
+              copyText(style.innerText)
+            })
           }
-        }, 100)
-      }
+        }
+      })
     }
   </script>
   </body>

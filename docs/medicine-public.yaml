@@ -11,11 +11,18 @@ components:
   parameters:
     page:
       in: query
-      name: page
+      name: pagination[page]
       schema:
         type: number
       required: true
       example: 1
+    prepage:
+      in: query
+      name: pagination[pageSize]
+      schema:
+        type: number
+      required: true
+      example: 100
     language:
       in: header
       name: accept-language
@@ -113,3 +120,57 @@ paths:
                             type: string
                           publishedAt:
                             type: string
+
+  # ====================
+  #
+  # dosage
+  #
+
+  /dosage-forms:
+    get:
+      summary: 獲取藥物使用方法
+      tags:
+        - dosage
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/prepage'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        attributes:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                            publishedAt:
+                              type: string
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: number
+                          pageSize:
+                            type: number
+                          pageCount:
+                            type: number
+                          total:
+                            type: number
