@@ -102,6 +102,105 @@ paths:
                   deal_background:
                     type: string
                     description: 活動背景圖片url
+  /general:
+    get:
+      summary: 取得系統設定資訊
+      description: 取得系統設定資訊
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logo:
+                    type: string
+                    description: 網站logo url
+                  title:
+                    type: string
+                    description: 網站名稱
+                  colors:
+                    type: string
+                    description: 網站顏色
+                
+  /packages:
+    get:
+      summary: 取得包裝方式
+      description: 取得包裝方式
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 類別ID
+                        title:
+                          type: string
+                          description: 包裝名稱
+                        subtitle:
+                          type: string
+                          description: 子標題
+                        price:
+                          type: number
+                          description: 價格
+  /shippings:
+    get:
+      summary: 取得運送方式
+      description: 取得運送方式
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 類別ID
+                        title:
+                          type: string
+                          description: 運送方式名稱
+                        subtitle:
+                          type: string
+                          description: 子標題（所需時間）
+                        price:
+                          type: number
+                          description: 價格
+                        
+  /currency:
+    get:
+      summary: 取得幣別及幣值資料（以港幣為基準）
+      description: 取得幣別及幣值資料（以港幣為基準）
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  currency_sign:
+                    type: string
+                    description: 幣別
+                  currency_value:
+                    type: number
+                    description: 幣值（以港幣為基準）
 
   # ==================
   # countries
@@ -627,6 +726,11 @@ paths:
             type: number
           required: false
         - in: query
+          name: best
+          schema:
+            type: number
+          required: false
+        - in: query
           name: featured
           schema:
             type: number
@@ -718,6 +822,56 @@ paths:
         '404':
           description: 查無資料
 
+  /products/{id}/skus:
+    get:
+      tags:
+        - products
+      summary: 取得該產品的多個規格內容
+      description: 取得該產品的多個規格內容
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        sku:
+                          type: string
+                          description: 該規格的sku碼
+                        size:
+                          type: string
+                          description: 特定規格
+                        price:
+                          type: number
+                          description: 該規格價格
+                        color:
+                          type: string
+                          description: 該規格顏色
+                        stock:
+                          type: string
+                          description: 該規格庫存
+                        previous_price:
+                          type: number
+                          description: 該規格定價
+                        discount:
+                          type: number
+                          description: 該規格折扣
+        '404':
+          description: 查無資料
+
   /products/search-tags:
     get:
       tags:
@@ -773,6 +927,37 @@ paths:
       responses:
         '200':
           description: 成功
+
+  /register:
+    post:
+      tags:
+        - user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 用戶名稱
+                  example: Jin
+                email:
+                  type: string
+                  description: 帳號信箱
+                  example: aaa@abc.com
+                password:
+                  type: string
+                  description: 密碼
+                  example: 12345
+                password_confirmation:
+                  type: string
+                  description: 密碼確認
+                  example: 12345
+      responses:
+        '200':
+          description: 成功          
 
   /client:
     get:
@@ -1017,9 +1202,9 @@ paths:
                   description: 購買人
                   example: '老高'
                 customer_country:
-                  type: string
+                  type: number
                   description: 帳單區域
-                  example: '香港'
+                  example: 215
                 customer_phone:
                   type: string
                   description: 帳單電話
@@ -1027,10 +1212,6 @@ paths:
                 customer_address:
                   type: string
                   description: 帳單地址
-                  example: '九龍'
-                customer_city:
-                  type: string
-                  description: 帳單城市
                   example: '九龍'
                 customer_zip:
                   type: string
@@ -1041,17 +1222,17 @@ paths:
                   description: 帳單郵件
                   example: 'zzz@nextgen.com'
                 customer_state:
-                  type: string
+                  type: number
                   description: 帳單州
-                  example: '九龍'
+                  example: 47
                 shipping_name:
                   type: string
                   description: 取貨人
                   example: '茉莉'
                 shipping_country:
-                  type: string
+                  type: number
                   description: 送達城市
-                  example: '香港'
+                  example: 215
                 shipping_phone:
                   type: string
                   description: 送達電話
@@ -1059,10 +1240,6 @@ paths:
                 shipping_address:
                   type: string
                   description: 送達地址
-                  example: '新界'
-                shipping_city:
-                  type: string
-                  description: 送達城市
                   example: '新界'
                 shipping_zip:
                   type: string
@@ -1073,21 +1250,29 @@ paths:
                   description: 送達郵件
                   example: 'aaa@nextgen.hk.com'
                 shipping_state:
-                  type: string
+                  type: number
                   description: 送達州
-                  example: '新界'
-                order_note:
-                  type: string
-                  description: 訂單備註
-                  example: '加辣'
-                pickup_country:
-                  type: string
-                  description: 自取點城市
-                  example: '香港'
-                pickup_state:
-                  type: string
-                  description: 自取點州
-                  example: '新界'
+                  example: 47
+                pickups:
+                  type: number
+                  description: 自取點
+                  example: 0
+                packages:
+                  type: number
+                  description: 包裝方式
+                  example: 1
+                shippings:
+                  type: number
+                  description: 送達方式（快速，一般....)
+                  example: 1
+                payment_method:
+                  type: number
+                  description: 付款方式 (現金，信用卡等等，目前只有現金/1)
+                  example: 1
+                recipient:
+                  type: number
+                  description: 收件人資料 1 同訂購人  / 2 新增收件人資料 
+                  example: 1
                 shippingType:
                   type: number
                   description: 外送(1)或是自取點(2)
@@ -1095,16 +1280,63 @@ paths:
                   enum:
                     - 1
                     - 2
+                shipping_different:
+                  type: number
+                  description: 送達地址是否同顧客地址(0 false /1 true)
+                  example: 0
+                  enum:
+                    - 0
+                    - 1
                 items:
                   type: array
                   description: 購物車內容
                   example:
-                    - product_id: 1
+                    - product_id: 3
                       qty: 2
-                      sku: '96062623'
+                      sku: '3Hw3574JT8'
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      order_id:
+                        type: number
+                        description: 訂單ID
+                      order_number:
+                        type: string
+                        description: 訂單號碼    
+
+  /cart/checkout-info:
+    get:
+      tags:
+        - cart
+      summary: 取得免運費資料
+      description: 取得免運費資料
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      shipping_fee:
+                        type: number
+                        description: 基礎運費
+                        example: 50
+                      shipping_free:
+                        type: number
+                        description: 免運費門檻
+                        example: 200
 
   # ==================
   # orders
@@ -1226,3 +1458,38 @@ paths:
                           type: number
                           description: 自取點費用
                           example: 10
+
+  # ==================
+  # coupons
+  # ==================
+  /coupons/price/{couponCode}:
+    get:
+      summary: 取得該優惠卷
+      description: 取得特定國家下的自取點
+      tags:
+        - coupons
+      parameters:
+        - in: path
+          name: couponCode
+          schema:
+            type: string
+          required: true
+          example: 456
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: number
+                        description: 優惠卷類別 (1表示現金折抵 0表示百分比折抵)
+                        example: 1
+                      price:
+                        type: number
+                        description: 優惠卷折扣金額or百分比
