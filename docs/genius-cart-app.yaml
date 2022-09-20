@@ -1139,6 +1139,111 @@ paths:
                     description: 未付款訂單數量
                     example: 2
 
+  /client/rewards:
+    get:
+      summary: 取得使用者當前獎勵點數及最大可轉換金額以及轉換公式資訊
+      description:  取得使用者當前獎勵點數及最大可轉換金額以及轉換公式資訊
+      tags:
+        - user
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      user_reward_point:
+                        type: number
+                        description: 會員獎勵點數
+                        example: 1000
+                      reward_point:
+                        type: number
+                        description: 轉換公式點數
+                        example: 20
+                      reward_dollar:
+                        type: number
+                        description: 轉換公式金額
+                        example: 1
+                      max_reward:
+                        type: number
+                        description: 最多可兌換的金額（會員獎勵點數＊上轉換公式）
+                        example: 50
+                      reward_formula:
+                        type: number
+                        description: 轉換公式 (轉換公式金額／轉換公式點數)
+                        example: 0.5
+
+  /client/rewards/transactions:
+    get:
+      summary: 取得使用者過往獎勵點數轉換紀錄
+      description:  取得使用者過往獎勵點數轉換紀錄
+      tags:
+        - user
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        reward_point:
+                          type: number
+                          description: 用來轉換的獎勵點數
+                        reward_dollar:
+                          type: number
+                          description: 轉換後得到的金額
+                        created_at:
+                          type: string
+                          description: 轉換時間            
+
+  /client/rewards/convert:
+    post:
+      summary: 轉換點數計算
+      description:  轉換點數計算
+      tags:
+        - user
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reward_point:
+                  type: number
+                  description: 轉換使用的點數
+                  example: 50
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      reward_point:
+                        type: number
+                        description: 用來轉換的獎勵點數   
+
   # ==================
   # cart
   # ==================
