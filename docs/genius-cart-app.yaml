@@ -721,11 +721,6 @@ paths:
             type: number
           required: false
         - in: query
-          name: best_seller
-          schema:
-            type: number
-          required: false
-        - in: query
           name: best
           schema:
             type: number
@@ -1139,12 +1134,16 @@ paths:
                     description: 未付款訂單數量
                     example: 2
 
+  # ==================
+  # reward
+  # ==================
+
   /client/rewards:
     get:
       summary: 取得使用者當前獎勵點數及最大可轉換金額以及轉換公式資訊
       description:  取得使用者當前獎勵點數及最大可轉換金額以及轉換公式資訊
       tags:
-        - user
+        - reward
       security:
         - client: []
       responses:
@@ -1184,9 +1183,15 @@ paths:
       summary: 取得使用者過往獎勵點數轉換紀錄
       description:  取得使用者過往獎勵點數轉換紀錄
       tags:
-        - user
+        - reward
       security:
         - client: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          required: false        
       responses:
         '200':
           description: 成功
@@ -1215,7 +1220,7 @@ paths:
       summary: 轉換點數計算
       description:  轉換點數計算
       tags:
-        - user
+        - reward
       security:
         - client: []
       requestBody:
@@ -1243,6 +1248,11 @@ paths:
                       reward_point:
                         type: number
                         description: 用來轉換的獎勵點數   
+
+  # ==================
+  # affilate_income
+  # ==================
+
 
   # ==================
   # cart

@@ -444,7 +444,13 @@ paths:
                   items:
                     type: string
                   description: 用藥頻率
-                  example: ['早晚兩次','三餐飯後']
+                  example: ['take_morning_and_night','take_after_meals']
+                usage:
+                  type: array
+                  items:
+                    type: string
+                  description: 藥品使用方式
+                  example: ['oral','external']
                 total:
                   type: array
                   items:
@@ -455,7 +461,7 @@ paths:
                   type: array
                   items:
                     type: string
-                  description: 藥品數量
+                  description: 藥劑類型
                   example: ['tablet', 'capsule']
                 caution:
                   type: array
@@ -551,7 +557,13 @@ paths:
                   items:
                     type: string
                   description: 用藥頻率
-                  example: ['早晚兩次','三餐飯後']
+                  example: ['take_morning_and_night','take_after_meals']
+                usage:
+                  type: array
+                  items:
+                    type: string
+                  description: 藥品使用方式
+                  example: ['oral','external']
                 total:
                   type: array
                   items:
@@ -562,7 +574,7 @@ paths:
                   type: array
                   items:
                     type: string
-                  description: 藥品數量
+                  description: 藥劑類型
                   example: ['tablet', 'capsule']
                 caution:
                   type: array
@@ -604,3 +616,90 @@ paths:
   #
   # drug
   #
+  /dosage-forms:
+    get:
+      summary: 搜尋藥劑類型
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        key:
+                          type: string
+                        usage:
+                          type: string
+                        unit:
+                          type: string
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      perPage:
+                        type: number
+                      pageCount:
+                        type: number
+                      totalCount:
+                        type: number
+
+  /drugs/frequencies:
+    get:
+      summary: 藥品使用頻率(每天)
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+
+  /drugs/usages:
+    get:
+      summary: 藥劑使用方式
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
