@@ -1252,7 +1252,196 @@ paths:
   # ==================
   # affilate_income
   # ==================
+  /client/affilate:
+    get:
+      summary: 取得使用者當前的二次行銷獎金
+      description:  取得使用者當前的二次行銷獎金
+      tags:
+        - affilate
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      user_affilate_income:
+                        type: number
+                        description: 會員二次行銷獎勵獎金
+                        example: 1000
+  /affilate/affilate_info:
+    get:
+      summary: 取得二次行銷獎金的相關條件
+      description:  取得二次行銷獎金的相關條件
+      tags:
+        - affilate
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      fixed_commission:
+                        type: number
+                        description: 提取固定手續費用
+                        example: 10
+                      percentage_commission:
+                        type: number
+                        description: 提取百分比費用
+                        example: 5
 
+  /client/affilate/affilate_list:
+    get:
+      summary: 取得使用者的行銷紀錄
+      description:  取得使用者的行銷紀錄
+      tags:
+        - affilate
+      security:
+        - client: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          required: false    
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        username:
+                          type: string
+                          description: 下線
+                        item:
+                          type: string
+                          description: 下線購買的商品
+                        affilate_income:
+                          type: number 
+                          description: 獎金
+
+  /client/affilate/withdraw_list:
+    get:
+      summary: 取得使用者的提取紀錄
+      description:  取得使用者的提取紀錄
+      tags:
+        - affilate
+      security:
+        - client: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          required: false    
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        bank_account:
+                          type: string
+                          description: 銀行帳戶
+                        status:
+                          type: string
+                          description: 狀態
+                        amount:
+                          type: number
+                          description: 提出的金額（扣除手續費及相關費用）
+                        created_at:
+                          type: string
+                          description: 提取的日期
+
+  /client/affilate/create:
+    post:
+      summary: 提取獎金申請
+      description:  提取獎金申請
+      tags:
+        - affilate
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                affilate_income:
+                  type: number
+                  description: 打算提取的獎金
+                  example: 10
+                method:
+                  type: string
+                  description:  提取方法
+                  example: Bank
+                iban:
+                  type: string
+                  description: 使用者的帳戶
+                  example: 822175406331
+                acc_name:
+                  type: string
+                  description: 帳戶的持有人名稱
+                  example: Jin
+                swift:
+                  type: string
+                  description: Swift代碼
+                  example: 666
+                address:
+                  type: string
+                  description: 地址
+                  example: 陶朱隱園
+                reference:
+                  type: string
+                  description: 附加參考
+              required:
+                - affilate_income
+                - method
+                - iban
+                - acc_name
+                - address
+                - swift             
+                
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 提取申請中
 
   # ==================
   # cart
