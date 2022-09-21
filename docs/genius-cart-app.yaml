@@ -1639,6 +1639,59 @@ paths:
                         example: 加值成功
 
   # ==================
+  # transaction
+  # ==================
+
+  /client/deposit/transactions/{transactionId}:
+    get:
+      summary: 取得特定錢包交易紀錄
+      description:  取得特定錢包交易紀錄
+      tags:
+        - deposit
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: transactionId
+          schema:
+            type: number
+          required: true
+          example: 18
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    properties:
+                      id:
+                        type: number
+                        description: 交易紀錄的ID
+                        example: 18
+                      anount:
+                        type: string
+                        description: 交易結果的金額
+                        example: +HK$ 18
+                      type:
+                        type: string
+                        description: 屬於哪一種型式的交易紀錄
+                        example: 點數兌換／錢包付款／錢包加值
+                      details:
+                        type: string
+                        description: 交易詳情
+                        example: Payment Deposit
+                      created_at:
+                        type: string
+                        description: 交易日期
+                        example: "2022-09-08"
+                      txnid:
+                        type: string
+                        description: 交易ID（系統產生）
+
+  # ==================
   # profile
   # ==================
 
