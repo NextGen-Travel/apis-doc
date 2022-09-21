@@ -1530,6 +1530,44 @@ paths:
                         description: 使用者當前的錢包餘額
                         example: 60000
 
+  /client/deposit/index:
+    get:
+      summary: 取得使用者的錢包加值紀錄
+      description:  取得使用者的錢包加值紀錄
+      tags:
+        - deposit
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        date:
+                          type: string
+                          description: 加值日期
+                          example: "2022-09-08"
+                        method:
+                          type: string
+                          description: 加值方法
+                          example: Paypal
+                        status:
+                          type: string
+                          description: 狀態
+                          example: 完成／待處理
+                        amount:
+                          type: number
+                          description: 加值金額
+                          example: 60
+
   /client/deposit/create:
     get:
       summary: 取得錢包的加值方式
