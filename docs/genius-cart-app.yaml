@@ -1134,6 +1134,66 @@ paths:
                     description: 未付款訂單數量
                     example: 2
 
+  /client/reset:
+    post:
+      summary: 重設密碼
+      description:  重設密碼
+      tags:
+        - user
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 當前的登入密碼
+                  example: 666
+                newPassword:
+                  type: string
+                  description:  打算設定的新密碼
+                  example: 777
+                confirmPassword:
+                  type: string
+                  description: 新密碼確認
+                  example: 777
+              required:
+                - password
+                - newPassword
+                - confirmPassword   
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 密碼重設成功！
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 登入密碼輸入錯誤！/ 兩次輸入的新密碼不相符！
+ 
+      
   # ==================
   # reward
   # ==================
