@@ -1470,7 +1470,75 @@ paths:
                         description: 使用者當前的錢包餘額
                         example: 60000
 
+  /client/deposit/create:
+    get:
+      summary: 取得錢包的加值方式
+      description:  取得錢包的加值方式
+      tags:
+        - deposit
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      properties:
+                        id:
+                          type: number
+                          description: 加值方式的ID
+                          example: 2
+                        name:
+                          type: string
+                          description: 加值方式
+                          example: Paypal
 
+    post:
+      summary: 加值錢包
+      description:  加值錢包
+      tags:
+        - deposit
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                method:
+                  type: number
+                  description: 加值獎金的方法ID
+                  example: 2
+                amount:
+                  type: number
+                  description:  加值的金額
+                  example: 50
+              required:
+                - method
+                - amount         
+                
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 加值成功
 
   # ==================
   # cart
