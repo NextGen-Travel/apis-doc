@@ -66,61 +66,64 @@ paths:
               schema:
                 type: object
                 properties:
-                  jwt:
-                    type: string
-                  user:
+                  data:
                     type: object
                     properties:
-                      id:
-                        type: number
-                      username:
+                      jwt:
                         type: string
-                      email:
-                        type: string
-                      provider:
-                        type: string
-                      confirmed:
-                        type: boolean
-                      blocked:
-                        type: boolean
-                      createdAt:
-                        type: string
-                      updatedAt:
-                        type: string
-                      memo:
-                        type: string
-                      level:
-                        type: string
-                      startedAt:
-                        type: string
-                      finishedAt:
-                        type: string
-                      isPharmacist:
-                        type: boolean
-                      store:
+                      user:
                         type: object
                         properties:
                           id:
                             type: number
-                          NameCn:
+                          username:
                             type: string
-                          NameEn:
+                          email:
                             type: string
-                          tel:
+                          provider:
                             type: string
-                          address:
-                            type: string
-                          district:
-                            type: string
-                          rx_no:
-                            type: string
+                          confirmed:
+                            type: boolean
+                          blocked:
+                            type: boolean
                           createdAt:
                             type: string
                           updatedAt:
                             type: string
-                          publishedAt:
+                          memo:
                             type: string
-
+                          level:
+                            type: string
+                          startedAt:
+                            type: string
+                          finishedAt:
+                            type: string
+                          isPharmacist:
+                            type: boolean
+                          store:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              NameCn:
+                                type: string
+                              NameEn:
+                                type: string
+                              tel:
+                                type: string
+                              address:
+                                type: string
+                              district:
+                                type: string
+                              rx_no:
+                                type: string
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                              publishedAt:
+                                type: string
+  
   # ====================
   #
   # dosage
@@ -267,7 +270,6 @@ paths:
                           type: string
                         type:
                           type: object
-                          properties:
                         key:
                           type: string
                   meta:
