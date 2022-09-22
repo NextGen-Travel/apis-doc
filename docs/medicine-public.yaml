@@ -283,3 +283,78 @@ paths:
                         type: number
                       totalCount:
                         type: number
+
+  # ====================
+  #
+  # drugs
+  #
+
+  /drugs/{drugId}:
+    get:
+      summary: 獲取指定藥品
+      tags:
+        - drug
+      parameters:
+        - name: drugId
+          in: path
+          description: 藥品id
+          required: true
+          example: 6595
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  permitNo:
+                    type: string
+                  productName_zh:
+                    type: string
+                  productName:
+                    type: string
+                  indication:
+                    type: string
+                  registration_date:
+                    type: string
+                  precaution:
+                    type: string
+                  side_effect:
+                    type: string
+                  regCertHolderName:
+                    type: string
+                  regCertHolderAddress:
+                    type: string
+                  regCertHolderCountry:
+                    type: string
+                  legal_classification:
+                    type: string
+                  sale_requirement:
+                    type: string
+                  ingredients:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                  packages:
+                    type: array
+                    items:
+                      type: object
+                  images:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        url:
+                          type: string
