@@ -126,6 +126,173 @@ paths:
 
   # ====================
   #
+  # user
+  #
+
+  /users :
+    post:
+      summary: 新增員工
+      tags:
+        - users
+      security:
+        - client_token: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: 員工姓名
+                  example: 'dev'
+                email:
+                  type: string
+                  description: 電子郵件
+                  example: 'pharmacist@nextgen.com.hk'
+                password:
+                  type: string
+                  description: 密碼
+                  example: '1234567890'
+                level:
+                  type: string
+                  description: 員工身份 staff or admin
+                  example: 'staff'
+                isPharmacist:
+                  type: boolean
+                  description: 是否為藥劑師
+                  example: fasle
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  provider:
+                    type: string
+                  confirmed:
+                    type: boolean
+                  blocked:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+                  isPharmacist:
+                    type: boolean
+                  level:
+                    type: string
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      type:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+  /users/{id} :
+    put:
+      summary: 修改 員工資料
+      tags:
+        - users
+      security:
+        - client_token: []
+      parameters:
+        - name: id
+          in: path
+          description: 員工id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: 員工姓名
+                  example: 'dev'
+                email:
+                  type: string
+                  description: 電子郵件
+                  example: 'pharmacist@nextgen.com.hk'
+                password:
+                  type: string
+                  description: 密碼
+                  example: '1234567890'
+                level:
+                  type: string
+                  description: 員工身份 staff or admin
+                  example: 'staff'
+                isPharmacist:
+                  type: boolean
+                  description: 是否為藥劑師
+                  example: fasle
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  provider:
+                    type: string
+                  confirmed:
+                    type: boolean
+                  blocked:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+                  isPharmacist:
+                    type: boolean
+                  level:
+                    type: string
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      type:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+
+  # ====================
+  #
   # customer
   #
   /customers:
@@ -408,7 +575,7 @@ paths:
               drug[] :
                 style : form
                 explode : true
-              day[] :
+              days[] :
                 style : form
                 explode : true
               frequency[] :
@@ -426,7 +593,7 @@ paths:
               unit[] :
                 style : form
                 explode : true
-              note[] :
+              customCaution[] :
                 style : form
                 explode : true
               cautions[]  :
@@ -461,7 +628,7 @@ paths:
                     type: integer
                   description: 藥品id
                   example: ['6595', '6597']
-                day[]:
+                days[]:
                   type: array
                   items:
                     type: integer
@@ -497,7 +664,7 @@ paths:
                     type: string
                   description: 藥品單位
                   example: ['tablet','tablet']
-                note[]:
+                customCaution[]:
                   type: array
                   items:
                     type: string
@@ -561,7 +728,7 @@ paths:
               drug[] :
                 style : form
                 explode : true
-              day[] :
+              days[] :
                 style : form
                 explode : true
               frequency[] :
@@ -579,7 +746,7 @@ paths:
               unit[] :
                 style : form
                 explode : true
-              note[] :
+              customCaution[] :
                 style : form
                 explode : true
               cautions[]  :
@@ -614,7 +781,7 @@ paths:
                     type: integer
                   description: 藥品id
                   example: ['6595', '6597']
-                day[]:
+                days[]:
                   type: array
                   items:
                     type: integer
@@ -650,7 +817,7 @@ paths:
                     type: string
                   description: 藥品單位
                   example: ['tablet','tablet']
-                note[]:
+                customCaution[]:
                   type: array
                   items:
                     type: string
