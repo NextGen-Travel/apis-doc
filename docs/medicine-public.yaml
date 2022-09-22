@@ -105,9 +105,9 @@ paths:
                             properties:
                               id:
                                 type: number
-                              NameCn:
+                              nameCn:
                                 type: string
-                              NameEn:
+                              nameEn:
                                 type: string
                               tel:
                                 type: string
@@ -115,7 +115,7 @@ paths:
                                 type: string
                               district:
                                 type: string
-                              rx_no:
+                              rxNo:
                                 type: string
                               createdAt:
                                 type: string
@@ -123,7 +123,7 @@ paths:
                                 type: string
                               publishedAt:
                                 type: string
-  
+
   # ====================
   #
   # dosage
