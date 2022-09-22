@@ -463,6 +463,12 @@ paths:
                     type: string
                   description: 藥劑類型
                   example: ['tablet', 'capsule']
+                unit:
+                  type: array
+                  items:
+                    type: string
+                  description: 藥品單位
+                  example: ['tablet','tablet']
                 caution:
                   type: array
                   items:
@@ -576,6 +582,12 @@ paths:
                     type: string
                   description: 藥劑類型
                   example: ['tablet', 'capsule']
+                unit:
+                  type: array
+                  items:
+                    type: string
+                  description: 藥品單位
+                  example: ['tablet','tablet']
                 caution:
                   type: array
                   items:
@@ -616,44 +628,6 @@ paths:
   #
   # drug
   #
-  /dosage-forms:
-    get:
-      summary: 搜尋藥劑類型
-      tags:
-        - drug
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        key:
-                          type: string
-                        usage:
-                          type: string
-                        unit:
-                          type: string
-                  meta:
-                    type: object
-                    properties:
-                      page:
-                        type: number
-                      perPage:
-                        type: number
-                      pageCount:
-                        type: number
-                      totalCount:
-                        type: number
-
   /drugs/frequencies:
     get:
       summary: 藥品使用頻率(每天)
@@ -678,7 +652,12 @@ paths:
                           type: string
                         value:
                           type: string
-
+                        name:
+                          type: string
+                        nameEn:
+                          type: string
+                        nameZh:
+                          type: string
   /drugs/usages:
     get:
       summary: 藥劑使用方式
@@ -702,4 +681,70 @@ paths:
                         key:
                           type: string
                         value:
+                          type: string
+                        name:
+                          type: string
+                        nameEn:
+                          type: string
+                        nameZh:
+                          type: string
+  /drugs/dosageForms:
+    get:
+      summary: 藥劑類型
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                        name:
+                          type: string
+                        nameEn:
+                          type: string
+                        nameZh:
+                          type: string
+  /drugs/dosageUnits:
+    get:
+      summary: 藥劑單位
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                        name:
+                          type: string
+                        nameEn:
+                          type: string
+                        nameZh:
                           type: string
