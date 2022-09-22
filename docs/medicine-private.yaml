@@ -404,6 +404,34 @@ paths:
         required: true
         content:
           application/x-www-form-urlencoded:
+            encoding :
+              drug[] :
+                style : form
+                explode : true
+              day[] :
+                style : form
+                explode : true
+              frequency[] :
+                style : form
+                explode : true
+              usage[] :
+                style : form
+                explode : true
+              total[] :
+                style : form
+                explode : true
+              dosageForm[] :
+                style : form
+                explode : true
+              unit[] :
+                style : form
+                explode : true
+              note[] :
+                style : form
+                explode : true
+              cautions[]  :
+                style : form
+                explode : true
             schema:
               type: object
               properties:
@@ -413,7 +441,7 @@ paths:
                   example: 'c764f34b-dd29-454d-9fa0-db9a08e04607'
                 signAt:
                   type: string
-                  description: 生日
+                  description: 配藥日期
                   example: '2021-01-01'
                 hospital:
                   type: string
@@ -427,54 +455,60 @@ paths:
                   type: string
                   description: 處方簽症狀
                   example: '治療發燒、喉嚨痛'
-                drug:
+                drug[]:
                   type: array
                   items:
                     type: integer
                   description: 藥品id
                   example: ['6595', '6597']
-                day:
+                day[]:
                   type: array
                   items:
                     type: integer
                   description: 用藥天數
                   example: ['3','3']
-                frequency:
+                frequency[]:
                   type: array
                   items:
                     type: string
                   description: 用藥頻率
                   example: ['take_morning_and_night','take_after_meals']
-                usage:
+                usage[]:
                   type: array
                   items:
                     type: string
                   description: 藥品使用方式
                   example: ['oral','external']
-                total:
+                total[]:
                   type: array
                   items:
                     type: integer
                   description: 藥品數量
                   example: [6,9]
-                dosageForm:
+                dosageForm[]:
                   type: array
                   items:
                     type: string
                   description: 藥劑類型
                   example: ['tablet', 'capsule']
-                unit:
+                unit[]:
                   type: array
                   items:
                     type: string
                   description: 藥品單位
                   example: ['tablet','tablet']
-                caution:
+                note[]:
                   type: array
                   items:
                     type: string
-                  description: 警告
+                  description: 自訂警告
                   example: ['', '服用時禁止空腹']
+                cautions[]:
+                  type: array
+                  items:
+                    type: string
+                  description: 警告 id
+                  example: ['33,32', '']
       responses:
         '200':
           description: 成功
@@ -523,6 +557,34 @@ paths:
         required: true
         content:
           application/x-www-form-urlencoded:
+            encoding :
+              drug[] :
+                style : form
+                explode : true
+              day[] :
+                style : form
+                explode : true
+              frequency[] :
+                style : form
+                explode : true
+              usage[] :
+                style : form
+                explode : true
+              total[] :
+                style : form
+                explode : true
+              dosageForm[] :
+                style : form
+                explode : true
+              unit[] :
+                style : form
+                explode : true
+              note[] :
+                style : form
+                explode : true
+              cautions[]  :
+                style : form
+                explode : true
             schema:
               type: object
               properties:
@@ -532,7 +594,7 @@ paths:
                   example: 'c764f34b-dd29-454d-9fa0-db9a08e04607'
                 signAt:
                   type: string
-                  description: 生日
+                  description: 配藥日期
                   example: '2021-01-01'
                 hospital:
                   type: string
@@ -546,54 +608,60 @@ paths:
                   type: string
                   description: 處方簽症狀
                   example: '治療發燒、喉嚨痛'
-                drug:
+                drug[]:
                   type: array
                   items:
                     type: integer
                   description: 藥品id
                   example: ['6595', '6597']
-                day:
+                day[]:
                   type: array
                   items:
                     type: integer
                   description: 用藥天數
                   example: ['3','3']
-                frequency:
+                frequency[]:
                   type: array
                   items:
                     type: string
                   description: 用藥頻率
                   example: ['take_morning_and_night','take_after_meals']
-                usage:
+                usage[]:
                   type: array
                   items:
                     type: string
                   description: 藥品使用方式
                   example: ['oral','external']
-                total:
+                total[]:
                   type: array
                   items:
                     type: integer
                   description: 藥品數量
                   example: [6,9]
-                dosageForm:
+                dosageForm[]:
                   type: array
                   items:
                     type: string
                   description: 藥劑類型
                   example: ['tablet', 'capsule']
-                unit:
+                unit[]:
                   type: array
                   items:
                     type: string
                   description: 藥品單位
                   example: ['tablet','tablet']
-                caution:
+                note[]:
                   type: array
                   items:
                     type: string
-                  description: 警告
+                  description: 自訂警告
                   example: ['', '服用時禁止空腹']
+                cautions[]:
+                  type: array
+                  items:
+                    type: string
+                  description: 警告 id
+                  example: ['31,33', '27']
       responses:
         '200':
           description: 成功
@@ -748,3 +816,55 @@ paths:
                           type: string
                         nameZh:
                           type: string
+
+
+  # ====================
+  #
+  # other
+  #
+  /cautions:
+    get:
+      summary: 示警
+      tags:
+        - other
+      parameters:
+        - in: query
+          name: locale
+          schema:
+            type: string
+          description: 設定輸出語系，目前支援 all、en、zh
+          example: 'all'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        key:
+                          type: string
+                        content:
+                          type: string
+                        locale:
+                          type: string
+                        value:
+                          type: string
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      perPage:
+                        type: number
+                      pageCount:
+                        type: number
+                      totalCount:
+                        type: number
