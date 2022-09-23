@@ -163,6 +163,22 @@ paths:
                   type: boolean
                   description: 是否為藥劑師
                   example: fasle
+                startedAt:
+                  type: string
+                  description: 開始日期
+                  example: '2022-01-01'
+                finishedAt:
+                  type: string
+                  description: 結束日期
+                  example: '2022-12-01'
+                blocked:
+                  type: boolean
+                  description: 狀態(啟用/停用)
+                  example: true
+                memo:
+                  type: string
+                  description: 備註
+                  example: '備註'
       responses:
         '200':
           description: 成功
@@ -247,6 +263,22 @@ paths:
                   type: boolean
                   description: 是否為藥劑師
                   example: fasle
+                startedAt:
+                  type: string
+                  description: 開始日期
+                  example: '2022-01-01'
+                finishedAt:
+                  type: string
+                  description: 結束日期
+                  example: '2022-12-01'
+                blocked:
+                  type: boolean
+                  description: 狀態(啟用/停用)
+                  example: true
+                memo:
+                  type: string
+                  description: 備註
+                  example: '備註'
       responses:
         '200':
           description: 成功
