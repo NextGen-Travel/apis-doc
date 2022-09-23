@@ -351,10 +351,16 @@ paths:
           name: mobile
           schema:
             type: string
-          description: 電話號碼
+          description: 行動電話
           example: '1222'
         - in: query
-          name: account_no
+          name: phoneNumber
+          schema:
+            type: string
+          description: 電話號碼
+          example: '12221222'
+        - in: query
+          name: accountＮo
           schema:
             type: string
           description: 身份識別碼
@@ -387,6 +393,8 @@ paths:
                         name:
                           type: string
                         mobile:
+                          type: string
+                        phoneNumber:
                           type: string
                         accountNo:
                           type: string
@@ -455,8 +463,12 @@ paths:
                   example: 'pharmacist@nextgen.com.hk'
                 mobile:
                   type: string
-                  description: 聯絡電話
+                  description: 行動電話
                   example: '12345'
+                phoneNumber:
+                  type: string
+                  description: 電話號碼
+                  example: '12221222'
                 drugTaboo:
                   type: string
                   description: 禁忌
@@ -485,6 +497,8 @@ paths:
                       name:
                         type: string
                       mobile:
+                        type: string
+                      phoneNumber:
                         type: string
                       accountNo:
                         type: string
@@ -544,8 +558,12 @@ paths:
                   example: 'pharmacist@nextgen.com.hk'
                 mobile:
                   type: string
-                  description: 聯絡電話
+                  description: 行動電話
                   example: '12345'
+                phoneNumber:
+                  type: string
+                  description: 電話號碼
+                  example: '12221222'
                 drugTaboo:
                   type: string
                   description: 禁忌
@@ -574,6 +592,8 @@ paths:
                       name:
                         type: string
                       mobile:
+                        type: string
+                      phoneNumber:
                         type: string
                       accountNo:
                         type: string
