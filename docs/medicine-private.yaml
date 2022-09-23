@@ -586,6 +586,10 @@ paths:
                   type: string
                   description: 處方簽症狀
                   example: '治療發燒、喉嚨痛'
+                lang:
+                  type: string
+                  description: 紀錄語系 zh、en
+                  example: 'zh'
                 drug[]:
                   type: array
                   items:
@@ -669,7 +673,8 @@ paths:
                         type: string
                       orderNo:
                         type: string
-
+                      lang:
+                        type: string
   /orders/{orderNo}:
     put:
       summary: 修改訂單
@@ -739,6 +744,10 @@ paths:
                   type: string
                   description: 處方簽症狀
                   example: '治療發燒、喉嚨痛'
+                lang:
+                  type: string
+                  description: 紀錄語系 zh、en
+                  example: 'zh'
                 drug[]:
                   type: array
                   items:
@@ -821,4 +830,6 @@ paths:
                       updatedAt:
                         type: string
                       orderNo:
+                        type: string
+                      lang:
                         type: string
