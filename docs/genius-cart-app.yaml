@@ -47,6 +47,71 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        subtitle_text:
+                          type: string
+                        subtitle_size:
+                          type: string
+                        subtitle_color:
+                          type: string
+                        subtitle_anime:
+                          type: string
+                        title_text:
+                          type: string
+                        title_size:
+                          type: string
+                        title_color:
+                          type: string
+                        title_anime:
+                          type: string
+                        details_text:
+                          type: string
+                        details_size:
+                          type: string
+                        details_color:
+                          type: string
+                        details_anime:
+                          type: string
+                        photo:
+                          type: string
+                        link:
+                          type: string
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+
 
   /payments:
     get:
