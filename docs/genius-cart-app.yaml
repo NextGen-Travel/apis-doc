@@ -291,14 +291,39 @@ paths:
                 type: object
                 properties:
                   data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        name:
-                          type: string
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+
 
   /countries/{countryId}/states:
     get:
@@ -326,10 +351,33 @@ paths:
                       properties:
                         id:
                           type: number
-                          description: 類別ID
                         name:
                           type: string
-                          description: 類別名稱
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+
                           
   /countries/tax/{countryId}:
     get:
@@ -385,16 +433,34 @@ paths:
                       properties:
                         id:
                           type: number
-                          description: 類別ID
                         name:
                           type: string
-                          description: 類別名稱
                         photo:
                           type: string
-                          description: 類別圖片url
-                        image:
-                          type: string
-                          description: 類別圖片url
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
 
   /categories/{category}:
     get:
@@ -426,9 +492,6 @@ paths:
                   photo:
                     type: string
                     description: 類別圖片url
-                  image:
-                    type: string
-                    description: 類別圖片url
 
   /categories/{category}/subs:
     get:
@@ -458,16 +521,34 @@ paths:
                       properties:
                         id:
                           type: number
-                          description: 類別ID
                         name:
                           type: string
-                          description: 類別名稱
                         photo:
                           type: string
-                          description: 類別圖片url
-                        image:
-                          type: string
-                          description: 類別圖片url
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
 
   /categories/{category}/subs/{sub}:
     get:
@@ -498,16 +579,10 @@ paths:
                 properties:
                   id:
                     type: number
-                    description: 類別ID
+                  category_id:
+                    type: number
                   name:
                     type: string
-                    description: 類別名稱
-                  photo:
-                    type: string
-                    description: 類別圖片url
-                  image:
-                    type: string
-                    description: 類別圖片url
 
   # ==================
   # subcategories
@@ -541,13 +616,32 @@ paths:
                       properties:
                         id:
                           type: number
-                          description: 類別ID
                         name:
                           type: string
-                          description: 類別名稱
-                        subcategory_id:
-                          type: number
-                          description: 當前類別ID
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
 
   /subcategories/{subcategory_id}/children/{child}:
     get:
@@ -619,10 +713,32 @@ paths:
                       properties:
                         id:
                           type: number
-                          description: 類別ID
                         name:
                           type: string
-                          description: 類別名稱
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
 
 
   /childcategories/{childcategory_id}/fourths/{fourth}:
@@ -694,10 +810,32 @@ paths:
                       properties:
                         id:
                           type: number
-                          description: 類別ID
                         name:
                           type: string
-                          description: 類別名稱
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
 
   /fourthcategories/{fourthcategory_id}/fifths/{fifth}:
     get:
@@ -855,8 +993,68 @@ paths:
               schema:
                 type: object
                 properties:
-                  data:
-                    type: array
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          sku:
+                            type: string
+                          name:
+                            type: string
+                          photo:
+                            type: string
+                          price:
+                            type: number
+                          previous_price:
+                            type: number
+                          stock:
+                            type: number
+                          tags:
+                            type: string
+                          type:
+                            type: string
+                    links:
+                      type: object
+                      properties:
+                        first:
+                          type: string
+                        last:
+                          type: string
+                        prev:
+                          type: string
+                        next:
+                          type: string
+                    meta:
+                      type: object
+                      properties:
+                        current_page:
+                          type: number
+                        from:
+                          type: number
+                        last_page:
+                          type: number
+                        links:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              url:
+                                type: string
+                              label:
+                                type: string
+                              active:
+                                type: boolean
+                        path:
+                          type: string
+                        per_page:
+                          type: number
+                        to:
+                          type: number
+                        total:
+                          type: number
 
   /products/{id}:
     get:
@@ -878,7 +1076,32 @@ paths:
                 type: object
                 properties:
                   data:
-                    type: array
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        images:
+                          type: array
+                          items:
+                            type: string
+                        brand_name:
+                          type: string
+                        details:
+                          type: string
+                        policy:
+                          type: string
+                        max_price:
+                          type: number
+                        min_price:
+                          type: number
+                        tags:
+                          type: string
+                        stock:
+                          type: number
+                        type:
+                          type: string
         '404':
           description: 查無資料
 
@@ -921,7 +1144,7 @@ paths:
                           type: string
                           description: 該規格顏色
                         stock:
-                          type: string
+                          type: number
                           description: 該規格庫存
                         previous_price:
                           type: number
@@ -939,6 +1162,18 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
           
         '404':
           description: 查無資料
@@ -959,7 +1194,16 @@ paths:
       responses:
         '200':
           description: 成功
-      
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      code:
+                        type: string
 
   # ==================
   # client
@@ -987,6 +1231,16 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
 
   /register:
     post:
@@ -1028,6 +1282,40 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      photo:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      fax:
+                        type: string
+                      phone:
+                        type: string
+                      country:
+                        type: number
+                      state:
+                        type: number
+                      zip:
+                        type: string
+                      address:
+                        type: string
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                      balance:
+                        type: number
 
   /client/wishlist:
     get:
@@ -1050,10 +1338,34 @@ paths:
                     items:
                       type: object
                       properties:
+                        id:
+                          type: number
                         product_id:
                           type: number
-                          description: 產品ID
-                          example: 1
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
     post:
       tags:
         - user
@@ -1073,6 +1385,17 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    properties:
+                      code:
+                        type: string
+                      wishId:
+                        type: number
 
   /client/wishlist/{wishId}:
     delete:
@@ -1100,6 +1423,57 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        order_number:
+                          type: string
+                        total_qty:
+                          type: string
+                        pay_amount:
+                          type: number
+                        currency_sign:
+                          type: string
+                        currency_value:
+                          type: number
+                        shipping_fee:
+                          type: number
+                        payment_status:
+                          type: string
+                        created_at:
+                          type: string
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+
   
   /client/dashboard:
     get:
@@ -1165,21 +1539,45 @@ paths:
                           type: string
                           description: 訂單成立時間
                           example: "2022-09-08"
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
                   meta:
                     type: object
                     properties:
                       current_page:
                         type: number
-                        description: 當前頁面
-                        example: 1
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
                       per_page:
                         type: number
-                        description: 每頁數量
-                        example: 10
-                      total: 
+                      to:
                         type: number
-                        description: 訂單總數
-                        example: 18
+                      total:
+                        type: number
   /client/dashboard/orders/pending:
     get:
       tags:
@@ -1338,7 +1736,47 @@ paths:
                           description: 轉換後得到的金額
                         created_at:
                           type: string
-                          description: 轉換時間            
+                          description: 轉換時間  
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
+          
 
   /client/rewards/convert:
     post:
@@ -1400,7 +1838,7 @@ paths:
                         type: number
                         description: 會員二次行銷獎勵獎金
                         example: 1000
-  /affilate/affilate_info:
+  /client/affilate/affilate_info:
     get:
       summary: 取得二次行銷獎金的相關條件
       description:  取得二次行銷獎金的相關條件
@@ -1488,6 +1926,46 @@ paths:
                         affilate_income:
                           type: number 
                           description: 獎金
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
+
 
   /client/affilate/withdraw_list:
     get:
@@ -1528,6 +2006,45 @@ paths:
                         created_at:
                           type: string
                           description: 提取的日期
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
 
   /client/affilate/create:
     post:
@@ -1664,6 +2181,45 @@ paths:
                           type: number
                           description: 加值金額
                           example: 60
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number                          
 
   /client/deposit/create:
     get:
@@ -1693,6 +2249,45 @@ paths:
                           type: string
                           description: 加值方式
                           example: Paypal
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
 
     post:
       summary: 加值錢包
@@ -1788,6 +2383,46 @@ paths:
                         txnid:
                           type: string
                           description: 交易ID（系統產生）
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
+
 
   /client/deposit/transactions/{transactionId}:
     get:
@@ -2122,6 +2757,74 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      order_number:
+                        type: string
+                      customer_name:
+                        type: string
+                      customer_email:
+                        type: string
+                      customer_phone:
+                        type: string
+                      customer_address:
+                        type: string
+                      customer_country:
+                        type: string
+                      customer_state:
+                        type: string
+                      shipping_name:
+                        type: string
+                      shipping_email:
+                        type: string
+                      shipping_phone:
+                        type: string
+                      shipping_address:
+                        type: string
+                      shipping:
+                        type: string
+                      shipping_title:
+                        type: string
+                      shipping_cost:
+                        type: number
+                      shipping_fee:
+                        type: number
+                      packing_title:
+                        type: string
+                      packing_cost:
+                        type: number
+                      pickup_location:
+                        type: number
+                      pickup_cost:
+                        type: number
+                      payment_method:
+                        type: string
+                      deposits:
+                        type: number
+                      coupon_code:
+                        type: string
+                      coupon_discount:
+                        type: string
+                      pay_amount:
+                        type: number
+                      amount:
+                        type: number
+                      currency_sign:
+                        type: string
+                      currency_value:
+                        type: number
+                      tax:
+                        type: number
+                      payment_status:
+                        type: string
+                      created_at:
+                        type: string   
         '404':
           description: 訂單不存在
 
@@ -2139,6 +2842,58 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        product_id:
+                          type: number
+                        qty:
+                          type: number
+                        sku:
+                          type: string
+                        size:
+                          type: string
+                        color:
+                          type: string
+                        price:
+                          type: number
+                        stock:
+                          type: number
+                        photo:
+                          type: string
+                        name:
+                          type: string
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number          
         '404':
           description: 訂單不存在
 
@@ -2224,6 +2979,30 @@ paths:
                           type: number
                           description: 自取點費用
                           example: 10
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number                          
 
   # ==================
   # coupons
