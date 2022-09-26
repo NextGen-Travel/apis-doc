@@ -1360,6 +1360,30 @@ paths:
                         type: number
                         description: 提取百分比費用
                         example: 5
+                      
+  /affilate/program:
+    get:
+      summary: 取得二次行銷獎金計畫的敘述
+      description:  取得二次行銷獎金計畫的敘述
+      tags:
+        - affilate
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      user_affilate_link:
+                        type: string
+                        description: 合作商鏈接
+                      affilate_banner:
+                        type: string
+                        description: 聯盟行銷橫額                   
 
   /client/affilate/affilate_list:
     get:
@@ -1538,6 +1562,12 @@ paths:
         - deposit
       security:
         - client: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          required: false    
       responses:
         '200':
           description: 成功
@@ -1649,6 +1679,12 @@ paths:
         - deposit
       security:
         - client: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          required: false    
       responses:
         '200':
           description: 成功
@@ -1666,7 +1702,7 @@ paths:
                           type: number
                           description: 交易紀錄的ID
                           example: 18
-                        anount:
+                        amount:
                           type: string
                           description: 交易結果的金額
                           example: +HK$ 18
