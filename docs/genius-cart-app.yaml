@@ -1361,12 +1361,14 @@ paths:
                         description: 提取百分比費用
                         example: 5
                       
-  /affilate/program:
+  /client/affilate/program:
     get:
       summary: 取得二次行銷獎金計畫的敘述
       description:  取得二次行銷獎金計畫的敘述
       tags:
         - affilate
+      security:
+        - client: []
       responses:
         '200':
           description: 成功
