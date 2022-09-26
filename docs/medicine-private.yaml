@@ -554,6 +554,9 @@ paths:
               dosageForm[] :
                 style : form
                 explode : true
+              dosage[] :
+                style : form
+                explode : true
               unit[] :
                 style : form
                 explode : true
@@ -626,6 +629,12 @@ paths:
                     type: string
                   description: 藥劑類型
                   example: ['tablet', 'capsule']
+                dosage[]:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品劑量
+                  example: [1,1]
                 unit[]:
                   type: array
                   items:
@@ -712,6 +721,9 @@ paths:
               dosageForm[] :
                 style : form
                 explode : true
+              dosage[] :
+                style : form
+                explode : true
               unit[] :
                 style : form
                 explode : true
@@ -784,6 +796,12 @@ paths:
                     type: string
                   description: 藥劑類型
                   example: ['tablet', 'capsule']
+                dosage[]:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品劑量
+                  example: [1,1]
                 unit[]:
                   type: array
                   items:
