@@ -50,10 +50,10 @@ paths:
             schema:
               type: object
               properties:
-                email:
+                account:
                   type: string
                   description: email
-                  example: 'pharmacist@nextgen.com.hk'
+                  example: 'pharmacist'
                 password:
                   type: string
                   description: 密碼
