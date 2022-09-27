@@ -2541,6 +2541,287 @@ paths:
                         example: 已成功更新您的個人檔案！
 
   # ==================
+  # message
+  # ==================
+
+  /client/admin/messages:
+    get:
+      summary: 取得使用者所有傳給客服的訊息紀錄
+      description:  取得使用者所有訊息紀錄
+      tags:
+        - message
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        subject:
+                          type: string
+                        created_at:
+                          type: string
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
+    post:
+      summary: 新建主題
+      description:  新建主題
+      tags:
+        - message
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: string
+                  example: Test Api
+                message:
+                  type: string
+                  example: Test Api
+              required:
+                - subject
+                - message  
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: Success              
+
+  /client/admin/messages/{messageId}:
+    get:
+      summary: 取得特定訊息紀錄
+      description:  取得特定訊息紀錄
+      tags:
+        - message
+      parameters:
+        - in: path
+          name: messageId
+          schema:
+            type: number
+          required: true
+          example: 9  
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          from:
+                            type: string
+                          message:
+                            type: string
+                          created_at:
+                            type: string
+                    links:
+                      type: object
+                      properties:
+                        first:
+                          type: string
+                        last:
+                          type: string
+                        prev:
+                          type: string
+                        next:
+                          type: string
+                    meta:
+                      type: object
+                      properties:
+                        current_page:
+                          type: number
+                        from:
+                          type: number
+                        last_page:
+                          type: number
+                        links:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              url:
+                                type: string
+                              label:
+                                type: string
+                              active:
+                                type: boolean
+                        path:
+                          type: string
+                        per_page:
+                          type: number
+                        to:
+                          type: number
+                        total:
+                          type: number
+    post:
+      summary: 發新訊息
+      description:  發新訊息
+      tags:
+        - message
+      parameters:
+        - in: path
+          name: messageId
+          schema:
+            type: number
+          required: true
+          example: 9  
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Test Api
+              required:
+                - message  
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: Success     
+    delete:
+      tags:
+        - message
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: messageId
+          schema:
+            type: number
+          required: true
+          example: 9
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                      message:
+                        type: string
+   
+
+  /client/admin/messages/{messageId}/title:                                                                                      
+    get:
+      summary: 取得特定訊息標題跟時間
+      description:  取得特定訊息標題跟時間
+      tags:
+        - message
+      parameters:
+        - in: path
+          name: messageId
+          schema:
+            type: number
+          required: true
+          example: 6  
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      subject:
+                        type: string
+                      created_at:
+                        type: string
+
+  # ==================
   # cart
   # ==================
 
