@@ -2552,6 +2552,12 @@ paths:
         - message
       security:
         - client: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          required: false   
       responses:
         '200':
           description: 成功
