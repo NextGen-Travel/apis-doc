@@ -2650,6 +2650,8 @@ paths:
                   data:
                     type: object
                     properties:
+                      id:
+                        type: number
                       msg:
                         type: string
                         example: Success              
@@ -2764,6 +2766,8 @@ paths:
                   data:
                     type: object
                     properties:
+                      id:
+                        type: number
                       msg:
                         type: string
                         example: Success     
