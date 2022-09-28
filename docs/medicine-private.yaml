@@ -55,14 +55,18 @@ paths:
             schema:
               type: object
               properties:
+                account:
+                  type: string
+                  description: 帳號
+                  example: 'dev'
                 username:
                   type: string
                   description: 員工姓名
-                  example: 'dev'
+                  example: 'dev 員工'
                 email:
                   type: string
                   description: 電子郵件
-                  example: 'pharmacist@nextgen.com.hk'
+                  example: 'dev@nextgen.com.hk'
                 password:
                   type: string
                   description: 密碼
@@ -101,6 +105,8 @@ paths:
                 properties:
                   id:
                     type: number
+                  account:
+                    type: string
                   username:
                     type: string
                   email:
@@ -201,6 +207,8 @@ paths:
                 properties:
                   id:
                     type: number
+                  account:
+                    type: string
                   username:
                     type: string
                   email:
@@ -554,6 +562,9 @@ paths:
               dosageForm[] :
                 style : form
                 explode : true
+              dosage[] :
+                style : form
+                explode : true
               unit[] :
                 style : form
                 explode : true
@@ -626,6 +637,12 @@ paths:
                     type: string
                   description: 藥劑類型
                   example: ['tablet', 'capsule']
+                dosage[]:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品劑量
+                  example: [1,1]
                 unit[]:
                   type: array
                   items:
@@ -712,6 +729,9 @@ paths:
               dosageForm[] :
                 style : form
                 explode : true
+              dosage[] :
+                style : form
+                explode : true
               unit[] :
                 style : form
                 explode : true
@@ -784,6 +804,12 @@ paths:
                     type: string
                   description: 藥劑類型
                   example: ['tablet', 'capsule']
+                dosage[]:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品劑量
+                  example: [1,1]
                 unit[]:
                   type: array
                   items:
