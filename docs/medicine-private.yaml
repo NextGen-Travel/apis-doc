@@ -160,6 +160,15 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               type: object
+              required:
+                - username
+                - email
+                - level
+                - isPharmacist
+                - startedAt
+                - finishedAt
+                - blocked
+                - memo
               properties:
                 username:
                   type: string
@@ -450,7 +459,6 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               type: object
-              
               properties:
                 accountNo:
                   type: string
