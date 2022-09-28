@@ -276,12 +276,11 @@ paths:
       tags:
         - country
       parameters:
-        - in: path
-          name: countryId
+        - in: query
+          name: page
           schema:
             type: number
-          required: true
-          example: 1
+          required: false
       responses:
         '200':
           description: 成功
@@ -336,6 +335,11 @@ paths:
             type: number
           required: true
           example: 1
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
       responses:
         '200':
           description: 成功
@@ -1013,7 +1017,9 @@ paths:
                           stock:
                             type: number
                           tags:
-                            type: string
+                            type: array
+                            items:
+                              type: string
                           type:
                             type: string
                     links:
@@ -2347,6 +2353,11 @@ paths:
           schema:
             type: string
           required: false    
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
       responses:
         '200':
           description: 成功
@@ -2854,7 +2865,7 @@ paths:
                       qty: 2
                       sku: '96062623'
                 coupon:
-                  type: number
+                  type: string
                   description: 優惠券
                 deposits:
                   type: number
@@ -2874,9 +2885,28 @@ paths:
                 country:  
                   type: number
                   description: 國家ID（計算稅率用）
+              required:
+              - items
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                        description: 商品總價格
+                      shipping_free_amount:
+                        type: number
+                        description: 未達免運金額  
+                      pay_amount:
+                        type: number
+                        description: 最終價格 
 
   /cart/checkout:
     post:
@@ -3240,6 +3270,11 @@ paths:
             type: number
           required: true
           example: 1
+        - in: query
+          name: stateId
+          schema:
+            type: number
+          required: false
       responses:
         '200':
           description: 成功
