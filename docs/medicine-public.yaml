@@ -6,6 +6,9 @@ info:
 
 servers:
   - url: https://medicine.nextgen.com.hk/api
+  - url: https://medicine-api-dev.cloudsatlas.com.hk
+  - url: https://medicine-api-stage.cloudsatlas.com.hk
+  - url: https://medicine-api.cloudsatlas.com.hk
 
 components:
   parameters:
@@ -191,6 +194,82 @@ paths:
   # drugs
   #
 
+  /drugs:
+    get:
+      summary: 獲取指定藥品
+      tags:
+        - drug
+      parameters:
+        - name: page
+          in: query
+          description: 頁面
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        permitNo:
+                          type: string
+                        productName_zh:
+                          type: string
+                        productName:
+                          type: string
+                        regCertHolderName:
+                          type: string
+                        regCertHolderAddress:
+                          type: string
+                        regCertHolderCountry:
+                          type: string
+                        indication:
+                          type: string
+                        side_effect:
+                          type: string
+                        registration_date:
+                          type: string
+                        legal_classification:
+                          type: string
+                        sale_requirement:
+                          type: string
+                        precaution:
+                          type: string
+                        ingredients:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                            description:
+                              type: string
+                        packages:
+                          type: array
+                          items:
+                            type: object
+                  meta:
+                    type: object
+                    properties:
+                      page:
+                        type: string
+                      perPage:
+                        type: number
+                      pageCount:
+                        type: number
+                      totalCount:
+                        type: number
+
   /drugs/{drugId}:
     get:
       summary: 獲取指定藥品
@@ -260,6 +339,67 @@ paths:
                           type: number
                         url:
                           type: string
+    # review
+    put:
+      summary: 更新藥品資料
+      tags:
+        - drug
+      parameters:
+        - in: query
+          name: drugId
+          schema:
+            type: string
+          description: drug id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                permitNo:
+                  type: string
+                productName_zh:
+                  type: string
+                productName:
+                  type: string
+                dosage_form:
+                  type: string
+                package:
+                  type: string
+                indication:
+                  type: string
+                side_effect:
+                  type: string
+                drug_detail:
+                  type: string
+                images:
+                  type: array
+                  items:
+                    type: string
+                brand:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                drugDetail:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    unit_dose:
+                      type: string
+                    usage_and_dosage:
+                      type: string
+                    precaution:
+                      type: string
+                    drug_id:
+                      type: number
+      responses:
+        '200':
+          description: 成功
 
   # ====================
   #

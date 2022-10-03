@@ -256,6 +256,7 @@ paths:
   #
   # customer
   #
+
   /customers:
     get:
       summary: 客人搜尋
@@ -533,7 +534,6 @@ paths:
                         type: string
                       uuid:
                         type: string
-
 
   # ====================
   #
