@@ -1161,6 +1161,53 @@ paths:
         '404':
           description: 查無資料
 
+  /products/{id}/categories:
+    get:
+      tags:
+        - products
+      summary: 取得該產品的所有分類ID及名稱
+      description: 取得該產品的所有分類ID及名稱
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                   data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category_id:
+                          type: number
+                        category_name:
+                          type: string
+                        subcategory_id:
+                          type: number
+                        subcategory_name:
+                          type: string
+                        childcategory_id:
+                          type: number
+                        childcategory_name:
+                          type: string
+                        fourthcategory_id:
+                          type: number
+                        fourthcategory_name:
+                          type: string
+                        fifthcategory_id:
+                          type: number
+                        fifthcategory_name:
+                          type: string
+
   /products/search-tags:
     get:
       tags:
