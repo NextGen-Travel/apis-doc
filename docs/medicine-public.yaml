@@ -345,8 +345,9 @@ paths:
       tags:
         - drug
       parameters:
-        - in: query
+        - in: path
           name: drugId
+          required: true
           schema:
             type: string
           description: drug id
