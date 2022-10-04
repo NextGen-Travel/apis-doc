@@ -1191,22 +1191,6 @@ paths:
                           type: number
                         category_name:
                           type: string
-                        subcategory_id:
-                          type: number
-                        subcategory_name:
-                          type: string
-                        childcategory_id:
-                          type: number
-                        childcategory_name:
-                          type: string
-                        fourthcategory_id:
-                          type: number
-                        fourthcategory_name:
-                          type: string
-                        fifthcategory_id:
-                          type: number
-                        fifthcategory_name:
-                          type: string
 
   /products/search-tags:
     get:
