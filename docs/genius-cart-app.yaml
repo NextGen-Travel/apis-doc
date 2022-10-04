@@ -3220,17 +3220,18 @@ paths:
                 type: object
                 properties:
                   data:
-                    type: object
-                    properties:
-                      amount:
-                        type: number
-                        description: 商品總價格
-                      shipping_free_amount:
-                        type: number
-                        description: 未達免運金額  
-                      pay_amount:
-                        type: number
-                        description: 最終價格                         
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        product_id:
+                          type: number
+                        sku:
+                          type: string
+                        stock:
+                          type: number
+                        status:
+                          type: number          
 
   # ==================
   # orders
