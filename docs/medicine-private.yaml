@@ -32,6 +32,147 @@ components:
         type: string
       required: false
       example: 'en'
+    customerExpand:
+      in: query
+      name: expand
+      schema:
+        type: string
+      description: 擴展customer 輸出內容
+      example: 'store,allergy'
+  schemas:
+    customer:
+      type: object
+      properties:
+        accountNo:
+          type: string
+          description: 身份識別碼
+          example: 'a1234567'
+        name:
+          type: string
+          description: 顧客名稱
+          example: '顧客名稱'
+        gender:
+          type: string
+          description: 性別
+          example: 'F'
+        birthday:
+          type: string
+          description: 生日
+          example: '2021-01-01'
+        address:
+          type: string
+          description: 地址
+          example: '大安區'
+        email:
+          type: string
+          description: 電子郵件
+          example: 'pharmacist@nextgen.com.hk'
+        mobile:
+          type: string
+          description: 行動電話
+          example: '12345'
+        phoneNumber:
+          type: string
+          description: 電話號碼
+          example: '12221222'
+        drugTaboo:
+          type: string
+          description: 禁忌
+          example: '特定藥品禁忌'
+        allergyDrug:
+          type: array
+          items:
+            type: integer
+          description: 藥品id
+          example: ['6595', '6597']
+        drugNote:
+          type: array
+          items:
+            type: string
+          description: 備註
+          example: ['', '過敏']
+        allergyIngredient:
+          type: array
+          items:
+            type: string
+          description: 過敏成分
+          example: ['zolmitriptan', 'zopiclone']
+        ingredientNote:
+          type: array
+          items:
+            type: string
+          description: 備註
+          example: ['', '起疹子']
+    customerResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        uuid:
+          type: string
+        gender:
+          type: string
+        address:
+          type: string
+        email:
+          type: string
+        birthday:
+          type: string
+        name:
+          type: string
+        mobile:
+          type: string
+        accountNo:
+          type: string
+        drugTaboo:
+          type: string
+        store:
+          type: object
+          properties:
+            id:
+              type: number
+            rxNo:
+              type: string
+            nameCn:
+              type: string
+            nameEn:
+              type: string
+            district:
+              type: string
+        allergyDrugs:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              note:
+                type: string
+              drug:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  permitNo:
+                    type: string
+                  productName:
+                    type: string
+        allergyIngredients:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              note:
+                type: string
+              ingredient:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
 
 paths:
 
@@ -265,12 +406,7 @@ paths:
       security:
         - client_token: []
       parameters:
-        - in: query
-          name: expand
-          schema:
-            type: string
-          description: 擴展內容
-          example: 'store,allergy'
+        - $ref: '#/components/parameters/customerExpand'
         - in: query
           name: email
           schema:
@@ -306,41 +442,7 @@ paths:
                   data:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        uuid:
-                          type: string
-                        gender:
-                          type: string
-                        address:
-                          type: string
-                        email:
-                          type: string
-                        birthday:
-                          type: string
-                        name:
-                          type: string
-                        mobile:
-                          type: string
-                        phoneNumber:
-                          type: string
-                        accountNo:
-                          type: string
-                        drugTaboo:
-                          type: string
-                        store:
-                          type: object
-                          properties:
-                            rxNo:
-                              type: string
-                            nameCn:
-                              type: string
-                            nameEn:
-                              type: string
-                            district:
-                              type: string
+                      $ref: '#/components/schemas/customerResponse'
                   meta:
                     type: object
                     properties:
@@ -359,50 +461,31 @@ paths:
         - client_token: []
       tags:
         - customers
+      parameters:
+        - $ref: '#/components/parameters/customerExpand'
       requestBody:
         required: true
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
-              type: object
-              
-              properties:
-                accountNo:
-                  type: string
-                  description: 身份識別碼
-                  example: 'a1234567'
-                name:
-                  type: string
-                  description: 顧客名稱
-                  example: '顧客名稱'
-                gender:
-                  type: string
-                  description: 性別
-                  example: 'F'
-                birthday:
-                  type: string
-                  description: 生日
-                  example: '2021-01-01'
-                address:
-                  type: string
-                  description: 地址
-                  example: '大安區'
-                email:
-                  type: string
-                  description: 電子郵件
-                  example: 'pharmacist@nextgen.com.hk'
-                mobile:
-                  type: string
-                  description: 行動電話
-                  example: '12345'
-                phoneNumber:
-                  type: string
-                  description: 電話號碼
-                  example: '12221222'
-                drugTaboo:
-                  type: string
-                  description: 禁忌
-                  example: '特定藥品禁忌'
+              $ref: '#/components/schemas/customer'
+          application/x-www-form-urlencoded:
+            encoding :
+              allergyDrug :
+                style : form
+                explode : true
+              drugNote :
+                style : form
+                explode : true
+              allergyIngredient :
+                style : form
+                explode : true
+              ingredientNote :
+                style : form
+                explode : true
+            schema:
+              $ref: '#/components/schemas/customer'
+
       responses:
         '200':
           description: 成功
@@ -414,32 +497,8 @@ paths:
                   msg:
                     type: string
                   data:
-                    type: object
-                    properties:
-                      gender:
-                        type: string
-                      address:
-                        type: string
-                      email:
-                        type: string
-                      birthday:
-                        type: string
-                      name:
-                        type: string
-                      mobile:
-                        type: string
-                      phoneNumber:
-                        type: string
-                      accountNo:
-                        type: string
-                      drugTaboo:
-                        type: string
-                      createdAt:
-                        type: string
-                      updatedAt:
-                        type: string
-                      uuid:
-                        type: string
+                    $ref: '#/components/schemas/customerResponse'
+
   /customers/{uuid}:
     put:
       summary: 修改客人資訊
@@ -448,6 +507,7 @@ paths:
       security:
         - client_token: []
       parameters:
+        - $ref: '#/components/parameters/customerExpand'
         - name: uuid
           in: path
           description: 客人唯一識別碼
@@ -457,46 +517,26 @@ paths:
       requestBody:
         required: true
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
-              type: object
-              properties:
-                accountNo:
-                  type: string
-                  description: 身份識別碼 
-                  example: 'a1234567'
-                name:
-                  type: string
-                  description: 顧客名稱
-                  example: '顧客名稱'
-                gender:
-                  type: string
-                  description: 性別
-                  example: 'F'
-                birthday:
-                  type: string
-                  description: 生日
-                  example: '2021-01-01'
-                address:
-                  type: string
-                  description: 地址
-                  example: '大安區'
-                email:
-                  type: string
-                  description: 電子郵件
-                  example: 'pharmacist@nextgen.com.hk'
-                mobile:
-                  type: string
-                  description: 行動電話
-                  example: '12345'
-                phoneNumber:
-                  type: string
-                  description: 電話號碼
-                  example: '12221222'
-                drugTaboo:
-                  type: string
-                  description: 禁忌
-                  example: '特定藥品禁忌'
+              $ref: '#/components/schemas/customer'
+          application/x-www-form-urlencoded:
+            encoding :
+              allergyDrug :
+                style : form
+                explode : true
+              drugNote :
+                style : form
+                explode : true
+              allergyIngredient :
+                style : form
+                explode : true
+              ingredientNote :
+                style : form
+                explode : true
+            schema:
+              $ref: '#/components/schemas/customer'
+
       responses:
         '200':
           description: 成功
@@ -508,32 +548,7 @@ paths:
                   msg:
                     type: string
                   data:
-                    type: object
-                    properties:
-                      gender:
-                        type: string
-                      address:
-                        type: string
-                      email:
-                        type: string
-                      birthday:
-                        type: string
-                      name:
-                        type: string
-                      mobile:
-                        type: string
-                      phoneNumber:
-                        type: string
-                      accountNo:
-                        type: string
-                      drugTaboo:
-                        type: string
-                      createdAt:
-                        type: string
-                      updatedAt:
-                        type: string
-                      uuid:
-                        type: string
+                    $ref: '#/components/schemas/customerResponse'
 
   # ====================
   #

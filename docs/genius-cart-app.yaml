@@ -1161,6 +1161,37 @@ paths:
         '404':
           description: 查無資料
 
+  /products/{id}/categories:
+    get:
+      tags:
+        - products
+      summary: 取得該產品的所有分類ID及名稱
+      description: 取得該產品的所有分類ID及名稱
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                   data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        category_id:
+                          type: number
+                        category_name:
+                          type: string
+
   /products/search-tags:
     get:
       tags:
@@ -1206,10 +1237,38 @@ paths:
                 type: object
                 properties:
                   data:
-                    type: object
-                    properties:
-                      code:
-                        type: string
+                      type: object
+                      properties:
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        products:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              sku:
+                                type: string
+                              name:
+                                type: string
+                              photo:
+                                type: string
+                              price:
+                                type: number
+                              previous_price:
+                                type: number
+                              stock:
+                                type: number
+                              tags:
+                                type: array
+                                items:
+                                  type: string
+                              type:
+                                type: string
+
 
   # ==================
   # client
