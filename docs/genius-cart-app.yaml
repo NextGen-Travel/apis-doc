@@ -892,8 +892,8 @@ paths:
           schema:
             type: number
             enum:
-               - '1'
-               - '0'
+               - 1
+               - 0
           required: false
         - in: query
           name: hot
