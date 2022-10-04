@@ -1462,12 +1462,27 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
     post:
       tags:
@@ -3176,6 +3191,46 @@ paths:
                         type: number
                         description: 免運費門檻
                         example: 200
+
+  /cart/check-product:
+    post:
+      tags:
+        - cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  description: 購物車內容
+                  example:
+                    - product_id: 3
+                      sku: '3Hw3574JT8'
+              required:
+              - items
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                        description: 商品總價格
+                      shipping_free_amount:
+                        type: number
+                        description: 未達免運金額  
+                      pay_amount:
+                        type: number
+                        description: 最終價格                         
 
   # ==================
   # orders
