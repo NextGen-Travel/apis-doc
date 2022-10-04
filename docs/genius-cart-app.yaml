@@ -888,6 +888,12 @@ paths:
         - products
       parameters:
         - in: query
+          name: status
+          schema:
+            type: number
+            default: 1
+          required: true
+        - in: query
           name: hot
           schema:
             type: number
