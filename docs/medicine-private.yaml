@@ -173,6 +173,42 @@ components:
                     type: number
                   name:
                     type: string
+    user:
+      type: object
+      properties:
+        id:
+          type: number
+        account:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        provider:
+          type: string
+        confirmed:
+          type: boolean
+        blocked:
+          type: boolean
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        isPharmacist:
+          type: boolean
+        level:
+          type: string
+        role:
+          type: object
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+            description:
+              type: string
+            type:
+              type: string
 
 paths:
 
@@ -242,45 +278,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: number
-                  account:
-                    type: string
-                  username:
-                    type: string
-                  email:
-                    type: string
-                  provider:
-                    type: string
-                  confirmed:
-                    type: boolean
-                  blocked:
-                    type: boolean
-                  createdAt:
-                    type: string
-                  updatedAt:
-                    type: string
-                  isPharmacist:
-                    type: boolean
-                  level:
-                    type: string
-                  role:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      name:
-                        type: string
-                      description:
-                        type: string
-                      type:
-                        type: string
-                      createdAt:
-                        type: string
-                      updatedAt:
-                        type: string
+                $ref: '#/components/schemas/user'
   /users/{id} :
     put:
       summary: 修改 員工資料
@@ -353,45 +351,23 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: number
-                  account:
-                    type: string
-                  username:
-                    type: string
-                  email:
-                    type: string
-                  provider:
-                    type: string
-                  confirmed:
-                    type: boolean
-                  blocked:
-                    type: boolean
-                  createdAt:
-                    type: string
-                  updatedAt:
-                    type: string
-                  isPharmacist:
-                    type: boolean
-                  level:
-                    type: string
-                  role:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      name:
-                        type: string
-                      description:
-                        type: string
-                      type:
-                        type: string
-                      createdAt:
-                        type: string
-                      updatedAt:
-                        type: string
+                $ref: '#/components/schemas/user'
+
+  /users/me :
+    get:
+      summary: 取得個人資訊
+      tags:
+        - users
+      security:
+        - client_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+
 
   # ====================
   #
