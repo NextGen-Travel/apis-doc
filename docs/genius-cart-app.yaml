@@ -104,7 +104,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -315,7 +315,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -374,7 +374,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -458,7 +458,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -546,7 +546,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -639,7 +639,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -736,7 +736,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -833,7 +833,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -1047,7 +1047,7 @@ paths:
                         current_page:
                           type: number
                         from:
-                          type: string
+                          type: number
                         last_page:
                           type: number
                         links:
@@ -1584,7 +1584,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -1674,7 +1674,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       last_page:
                         type: number
                       links:
@@ -1877,7 +1877,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       last_page:
                         type: number
                       links:
@@ -2071,7 +2071,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       last_page:
                         type: number
                       links:
@@ -2156,7 +2156,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       last_page:
                         type: number
                       links:
@@ -2336,7 +2336,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       last_page:
                         type: number
                       links:
@@ -2404,7 +2404,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       last_page:
                         type: number
                       links:
@@ -2543,7 +2543,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       last_page:
                         type: number
                       links:
@@ -2737,7 +2737,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       last_page:
                         type: number
                       links:
@@ -2850,7 +2850,7 @@ paths:
                         current_page:
                           type: number
                         from:
-                          type: string
+                          type: number
                         last_page:
                           type: number
                         links:
@@ -3381,7 +3381,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
@@ -3495,7 +3495,7 @@ paths:
                       current_page:
                         type: number
                       from:
-                        type: string
+                        type: number
                       path:
                         type: string
                       per_page:
