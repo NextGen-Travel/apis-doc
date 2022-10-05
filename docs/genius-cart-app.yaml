@@ -3144,6 +3144,15 @@ paths:
                 items:
                   type: array
                   description: 購物車內容
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: number
+                      qty:
+                        type: number
+                      sku:
+                        type: string
                   example:
                     - product_id: 3
                       qty: 2
@@ -3205,7 +3214,13 @@ paths:
               properties:
                 items:
                   type: array
-                  description: 購物車內容
+                  items:
+                    type: object
+                    properties:
+                      product_id:
+                        type: number
+                      sku:
+                        type: string
                   example:
                     - product_id: 3
                       sku: '3Hw3574JT8'
