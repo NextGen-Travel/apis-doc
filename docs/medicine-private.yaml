@@ -250,6 +250,48 @@ components:
             type: integer
           description: 團檔 id
           example: [1]
+        sku:
+          type: array
+          items:
+            type: string
+          description: 商品編碼
+          example: ['adasdasdsad', 'sdsdsd']
+        packageName:
+          type: array
+          items:
+            type: string
+          description: 包裝名稱
+          example: ['三十片裝', '十片裝']
+        dosageForm:
+          type: array
+          items:
+            type: string
+          description: 藥劑類型
+          example: ['tablet', 'capsule']
+        usage:
+          type: array
+          items:
+            type: string
+          description: 藥品使用方式
+          example: ['oral','external']
+        dosage:
+          type: array
+          items:
+            type: integer
+          description: 藥品劑量
+          example: [1,1]
+        unit:
+          type: array
+          items:
+            type: string
+          description: 藥品單位
+          example: ['tablet','tablet']
+        packageImages:
+          type: array
+          items:
+            type: integer
+          description: 團檔 id
+          example: [[1],[3]]
     drugUpdateResponse :
       type: object
       properties:
