@@ -5,8 +5,9 @@ info:
   version: 1.0.0
 
 servers:
-  - url: https://medicine.nextgen.com.hk/api
-    description: Staging server
+  - url: https://medicine-api-dev.cloudsatlas.com.hk/api
+  - url: https://medicine-api-stage.cloudsatlas.com.hk/api
+  - url: https://medicine-api.cloudsatlas.com.hk/api
   - url: http://0.0.0.0:1337/api
     description: local server
 
@@ -173,7 +174,7 @@ components:
                     type: number
                   name:
                     type: string
-    user:
+    userResponse:
       type: object
       properties:
         id:
@@ -209,6 +210,97 @@ components:
               type: string
             type:
               type: string
+    packageResponse :
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        dosage:
+          type: string
+        dosageForm:
+          type: string
+        usage:
+          type: string
+        unit:
+          type: string
+    drugUpdate :
+      type: object
+      properties:
+        indication:
+          type: string
+          description: 適應症狀
+          example: '頭痛、發燒'
+        precaution:
+          type: string
+          description: 預防措施(注意事項)
+          example: '服用後建議不要開車'
+        side_effect:
+          type: string
+          description: 副作用
+          example: '注意力不集中'
+        productName_zh:
+          type: string
+          description: 俗名
+          example: '退燒藥'
+        images:
+          type: array
+          items:
+            type: integer
+          description: 團檔 id
+          example: [1]
+    drugUpdateResponse :
+      type: object
+      properties:
+        id:
+          type: number
+        uuid:
+          type: string
+        status:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        revise:
+          type: object
+          properties:
+            indication:
+              type: string
+            prevention:
+              type: string
+            side_effect:
+              type: string
+            product_name_zh:
+              type: string
+            images:
+              type: array
+              items:
+                type: number
+            packages:
+              type: array
+              items:
+                $ref : "#/components/schemas/packageResponse"
+        before:
+          type: object
+          properties:
+            indication:
+              type: string
+            prevention:
+              type: string
+            side_effect:
+              type: string
+            product_name_zh:
+              type: string
+            images:
+              type: array
+              items:
+                type: number
+            packages:
+              type: array
+              items:
+                $ref : "#/components/schemas/packageResponse"
 
 paths:
 
@@ -272,13 +364,17 @@ paths:
                   type: string
                   description: 備註
                   example: '備註'
+                store:
+                  type: integer
+                  description: 指定藥房(需 level 為  superadmin 變動才會生效 )
+                  example: 2
       responses:
         '200':
           description: 成功
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user'
+                $ref: '#/components/schemas/userResponse'
   /users/{id} :
     put:
       summary: 修改 員工資料
@@ -345,13 +441,17 @@ paths:
                   type: string
                   description: 備註
                   example: '備註'
+                store:
+                  type: integer
+                  description: 指定藥房(需 level 為  superadmin 變動才會生效 )
+                  example: 2
       responses:
         '200':
           description: 成功
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user'
+                $ref: '#/components/schemas/userResponse'
 
   /users/me :
     get:
@@ -366,7 +466,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user'
+                $ref: '#/components/schemas/userResponse'
 
 
   # ====================
@@ -858,3 +958,278 @@ paths:
                         type: string
                       lang:
                         type: string
+
+
+  # ====================
+  #
+  # drugUpdates
+  #
+  /drugUpdates/applyRevise/{permitNo}:
+    post:
+      security:
+        - client_token: []
+      summary: 申請藥品異動
+      tags:
+        - drug
+      parameters:
+        - name: permitNo
+          in: path
+          description: 藥品唯一代碼
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/drugUpdate'
+          application/x-www-form-urlencoded:
+            encoding :
+              sku :
+                style : form
+                explode : true
+              packageName:
+                style : form
+                explode : true
+              dosageForm :
+                style : form
+                explode : true
+              usage :
+                style : form
+                explode : true
+              dosage :
+                style : form
+                explode : true
+              unit :
+                style : form
+                explode : true
+              images:
+                style : form
+                explode : true
+            schema:
+              $ref: '#/components/schemas/drugUpdate'
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/drugUpdateResponse'
+
+  /drugUpdates/response/{uuid}:
+    post:
+      summary: 藥品異動審核
+      security:
+        - client_token: []
+      tags:
+        - drug
+      parameters:
+        - name: uuid
+          in: path
+          description: 申請異動唯一識別碼
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - approval
+                    - cancel
+                  description: approval(核准)、cancel(取消)
+                  example: 'approval'
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+                  enum:
+                    - approval
+                    - cancel
+                  description: approval(核准)、cancel(取消)
+                  example: 'cancel'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                     $ref: '#/components/schemas/drugUpdateResponse'
+
+
+  # ====================
+  #
+  # other
+  #
+
+  /upload:
+    post:
+      summary: 上傳檔案
+      tags:
+        - other
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                images:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    alternativeText:
+                      type: object
+                      properties:
+                    caption:
+                      type: object
+                      properties:
+                    width:
+                      type: number
+                    height:
+                      type: number
+                    formats:
+                      type: object
+                      properties:
+                        large:
+                          type: object
+                          properties:
+                            ext:
+                              type: string
+                            url:
+                              type: string
+                            hash:
+                              type: string
+                            mime:
+                              type: string
+                            name:
+                              type: string
+                            path:
+                              type: object
+                              properties:
+                            size:
+                              type: number
+                            width:
+                              type: number
+                            height:
+                              type: number
+                        small:
+                          type: object
+                          properties:
+                            ext:
+                              type: string
+                            url:
+                              type: string
+                            hash:
+                              type: string
+                            mime:
+                              type: string
+                            name:
+                              type: string
+                            path:
+                              type: object
+                              properties:
+                            size:
+                              type: number
+                            width:
+                              type: number
+                            height:
+                              type: number
+                        medium:
+                          type: object
+                          properties:
+                            ext:
+                              type: string
+                            url:
+                              type: string
+                            hash:
+                              type: string
+                            mime:
+                              type: string
+                            name:
+                              type: string
+                            path:
+                              type: object
+                              properties:
+                            size:
+                              type: number
+                            width:
+                              type: number
+                            height:
+                              type: number
+                        thumbnail:
+                          type: object
+                          properties:
+                            ext:
+                              type: string
+                            url:
+                              type: string
+                            hash:
+                              type: string
+                            mime:
+                              type: string
+                            name:
+                              type: string
+                            path:
+                              type: object
+                              properties:
+                            size:
+                              type: number
+                            width:
+                              type: number
+                            height:
+                              type: number
+                    hash:
+                      type: string
+                    ext:
+                      type: string
+                    mime:
+                      type: string
+                    size:
+                      type: number
+                    url:
+                      type: string
+                    previewUrl:
+                      type: object
+                      properties:
+                    provider:
+                      type: string
+                    provider_metadata:
+                      type: object
+                      properties:
+                    createdAt:
+                      type: string
+                    updatedAt:
+                      type: string
