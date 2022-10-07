@@ -3201,7 +3201,7 @@ paths:
                         description: 免運費門檻
                         example: 200
 
-  /cart/check-product:
+  /cart/product-search:
     post:
       tags:
         - cart
@@ -3239,15 +3239,26 @@ paths:
                     items:
                       type: object
                       properties:
-                        product_id:
+                        id:
                           type: number
                         sku:
+                          type: string
+                        name:
+                          type: string
+                        photo:
+                          type: string
+                        price:
+                          type: number
+                        size:
+                          type: string
+                        color:
                           type: string
                         stock:
                           type: number
                         status:
-                          type: number          
-
+                          type: number
+                        discount:
+                          type: number
   # ==================
   # orders
   # ==================
