@@ -1117,6 +1117,65 @@ paths:
                   data:
                      $ref: '#/components/schemas/drugUpdateResponse'
 
+  /drugUpdates/revise/{permitNo}:
+    post:
+      security:
+        - client_token: []
+      summary: 藥品異動
+      tags:
+        - drug
+      parameters:
+        - name: permitNo
+          in: path
+          description: 藥品唯一代碼
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/drugUpdate'
+          application/x-www-form-urlencoded:
+            encoding :
+              sku :
+                style : form
+                explode : true
+              packageName:
+                style : form
+                explode : true
+              dosageForm :
+                style : form
+                explode : true
+              usage :
+                style : form
+                explode : true
+              dosage :
+                style : form
+                explode : true
+              unit :
+                style : form
+                explode : true
+              images:
+                style : form
+                explode : true
+            schema:
+              $ref: '#/components/schemas/drugUpdate'
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/drugUpdateResponse'
+
 
   # ====================
   #
