@@ -284,6 +284,12 @@ paths:
     get:
       tags:
         - country
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
       responses:
         '200':
           description: 成功
