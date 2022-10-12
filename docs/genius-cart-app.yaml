@@ -185,7 +185,7 @@ paths:
                   title:
                     type: string
                     description: 網站名稱
-                  colors:
+                  color:
                     type: string
                     description: 網站顏色
                 
@@ -1428,12 +1428,6 @@ paths:
         - user
       security:
         - client: []
-      parameters:
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false   
       responses:
         '200':
           description: 成功
