@@ -154,19 +154,22 @@ paths:
               schema:
                 type: object
                 properties:
-                  deal_title:
-                    type: string
-                    description: 活動標題
-                  deal_details:
-                    type: string
-                    description: 活動細節
-                  deal_time:
-                    type: string
-                    description: 活動結束時間 yyyy-mm-dd Thh:mm:ss
-                    example: '2022-07-28 T00:00:00'
-                  deal_background:
-                    type: string
-                    description: 活動背景圖片url
+                  data:
+                    type: object
+                    properties:
+                      deal_title:
+                        type: string
+                        description: 活動標題
+                      deal_details:
+                        type: string
+                        description: 活動細節
+                      deal_time:
+                        type: string
+                        description: 活動結束時間 yyyy-mm-dd Thh:mm:ss
+                        example: '2022-07-28 T00:00:00'
+                      deal_background:
+                        type: string
+                        description: 活動背景圖片url
   /general:
     get:
       summary: 取得系統設定資訊
@@ -179,15 +182,18 @@ paths:
               schema:
                 type: object
                 properties:
-                  logo:
-                    type: string
-                    description: 網站logo url
-                  title:
-                    type: string
-                    description: 網站名稱
-                  color:
-                    type: string
-                    description: 網站顏色
+                  data:
+                    type: object
+                    properties:
+                      logo:
+                        type: string
+                        description: 網站logo url
+                      title:
+                        type: string
+                        description: 網站名稱
+                      colors:
+                        type: string
+                        description: 網站顏色
                 
   /packages:
     get:
@@ -260,12 +266,15 @@ paths:
               schema:
                 type: object
                 properties:
-                  currency_sign:
-                    type: string
-                    description: 幣別
-                  currency_value:
-                    type: number
-                    description: 幣值（以港幣為基準）
+                  data:
+                    type: object
+                    properties:
+                      currency_sign:
+                        type: string
+                        description: 幣別
+                      currency_value:
+                        type: number
+                        description: 幣值（以港幣為基準）
 
   # ==================
   # countries
@@ -275,12 +284,6 @@ paths:
     get:
       tags:
         - country
-      parameters:
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false
       responses:
         '200':
           description: 成功
@@ -335,11 +338,6 @@ paths:
             type: number
           required: true
           example: 1
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false
       responses:
         '200':
           description: 成功
@@ -487,15 +485,18 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: number
-                    description: 類別ID
-                  name:
-                    type: string
-                    description: 類別名稱
-                  photo:
-                    type: string
-                    description: 類別圖片url
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: 類別ID
+                      name:
+                        type: string
+                        description: 類別名稱
+                      photo:
+                        type: string
+                        description: 類別圖片url
 
   /categories/{category}/subs:
     get:
@@ -581,12 +582,15 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: number
-                  category_id:
-                    type: number
-                  name:
-                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      category_id:
+                        type: number
+                      name:
+                        type: string
 
   # ==================
   # subcategories
@@ -674,15 +678,18 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: number
-                    description: 類別ID
-                  subcategory_id:
-                    type: number
-                    description: 上層類別ID
-                  name:
-                    type: string
-                    description: 類別名稱
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: 類別ID
+                      subcategory_id:
+                        type: number
+                        description: 上層類別ID
+                      name:
+                        type: string
+                        description: 類別名稱
                   
 
   # ==================
@@ -772,15 +779,18 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: number
-                    description: 類別ID
-                  childcategory_id:
-                    type: number
-                    description: 上層類別ID
-                  name:
-                    type: string
-                    description: 類別名稱
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: 類別ID
+                      childcategory_id:
+                        type: number
+                        description: 上層類別ID
+                      name:
+                        type: string
+                        description: 類別名稱
 
   # ==================
   # fourthcategories
@@ -868,15 +878,18 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: number
-                    description: 類別ID
-                  fourthcategory_id:
-                    type: number
-                    description: 上層類別ID
-                  name:
-                    type: string
-                    description: 類別圖片url
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: 類別ID
+                      fourthcategory_id:
+                        type: number
+                        description: 上層類別ID
+                      name:
+                        type: string
+                        description: 類別圖片url
 
   # ==================
   # products
@@ -1710,10 +1723,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  totalPending:
-                    type: number
-                    description: 未付款訂單數量
-                    example: 2
+                  data:
+                    type: object
+                    properties:
+                      totalPending:
+                        type: number
+                        description: 未付款訂單數量
+                        example: 2
 
   /client/reset:
     post:
@@ -1832,12 +1848,7 @@ paths:
           name: keyword
           schema:
             type: string
-          required: false
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false       
+          required: false 
       responses:
         '200':
           description: 成功
@@ -2027,11 +2038,6 @@ paths:
           schema:
             type: string
           required: false
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false   
       responses:
         '200':
           description: 成功
@@ -2109,11 +2115,6 @@ paths:
           schema:
             type: string
           required: false
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false     
       responses:
         '200':
           description: 成功
@@ -2285,11 +2286,6 @@ paths:
           schema:
             type: string
           required: false    
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false
       responses:
         '200':
           description: 成功
@@ -2485,11 +2481,6 @@ paths:
           schema:
             type: string
           required: false    
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false
       responses:
         '200':
           description: 成功
@@ -2591,6 +2582,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    type: object
                     properties:
                       id:
                         type: number
@@ -3417,6 +3409,7 @@ paths:
         '404':
           description: 訂單不存在
 
+#  待釐清此api用途
   /orders/{orderNumber}/pay/{paymentName}:
     post:
       tags:
