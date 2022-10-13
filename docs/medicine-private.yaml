@@ -343,8 +343,156 @@ components:
               type: array
               items:
                 $ref : "#/components/schemas/packageResponse"
+    storeForm :
+      type: object
+      properties:
+        data[nameCn]:
+          type: string
+          description: 藥局名稱(中文}
+          example: '大安藥局'
+        data[nameEn]:
+          type: string
+          description: 藥局名稱(英文}
+          example: '大安藥局'
+        data[tel]:
+          type: string
+          description: 聯絡電話
+          example: '1234567890'
+        data[address]:
+          type: string
+          description: 地址
+          example: '安和路'
+        data[district]:
+          type: string
+          description: 區域
+          example: '大安區'
+        data[rxNo]:
+          type: string
+          description: rxNo
+          example: 'NO001'
+    store :
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            nameCn:
+              type: string
+              description: 藥局名稱(中文}
+              example: '大安藥局'
+            nameEn:
+              type: string
+              description: 藥局名稱(英文}
+              example: '大安藥局'
+            tel:
+              type: string
+              description: 聯絡電話
+              example: '1234567890'
+            address:
+              type: string
+              description: 地址
+              example: '安和路'
+            district:
+              type: string
+              description: 區域
+              example: '大安區'
+            rxNo:
+              type: string
+              description: rxNo
+              example: 'NO001'
+            finishedAt:
+              type: string
+              description: 結束日期
+              example: '2022-12-01'
+    storeResponse :
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: number
+            attributes:
+              type: object
+              properties:
+                nameEn:
+                  type: string
+                rxNo:
+                  type: string
+                tel:
+                  type: string
+                district:
+                  type: string
+                address:
+                  type: string
+                createdAt:
+                  type: string
+                updatedAt:
+                  type: string
+                publishedAt:
+                  type: string
+                nameCn:
+                  type: string
 
 paths:
+  # ====================
+  #
+  # stores
+  #
+  /stores :
+    post:
+      summary: 新增藥房
+      tags:
+        - stores
+      security:
+        - client_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/store'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/storeForm'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storeResponse'
+
+  /stores/{id} :
+    put:
+      summary: 修改 藥房
+      tags:
+        - stores
+      security:
+        - client_token: []
+      parameters:
+        - name: id
+          in: path
+          description: 藥房id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/store'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/storeForm'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/storeResponse'
 
 
   # ====================
