@@ -983,6 +983,11 @@ paths:
             type: string
             example: 'apple'
         - in: query
+          name: page
+          schema:
+            type: number
+          required: false
+        - in: query
           name: min_price
           required: false
           description: 篩選條件-價格
@@ -1130,7 +1135,9 @@ paths:
                         min_price:
                           type: number
                         tags:
-                          type: string
+                          type: array
+                          items:
+                            type: string
                         stock:
                           type: number
                         type:
@@ -1854,7 +1861,12 @@ paths:
           name: keyword
           schema:
             type: string
-          required: false 
+          required: false
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
       responses:
         '200':
           description: 成功
@@ -2044,6 +2056,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
       responses:
         '200':
           description: 成功
@@ -2116,6 +2133,11 @@ paths:
       security:
         - client: []
       parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
         - in: query
           name: keyword
           schema:
@@ -2291,7 +2313,12 @@ paths:
           name: keyword
           schema:
             type: string
-          required: false    
+          required: false
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false  
       responses:
         '200':
           description: 成功
@@ -2486,7 +2513,12 @@ paths:
           name: keyword
           schema:
             type: string
-          required: false    
+          required: false
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false 
       responses:
         '200':
           description: 成功
@@ -2698,6 +2730,11 @@ paths:
           name: keyword
           schema:
             type: string
+          required: false
+        - in: query
+          name: page
+          schema:
+            type: number
           required: false   
       responses:
         '200':
@@ -3125,7 +3162,7 @@ paths:
                   type: number
                   description: 收件人資料 1 同訂購人  / 2 新增收件人資料 
                   example: 1
-                shippingType:
+                shipping_type:
                   type: number
                   description: 外送(1)或是自取點(2)
                   example: 1
@@ -3318,7 +3355,7 @@ paths:
                       packing_cost:
                         type: number
                       pickup_location:
-                        type: number
+                        type: string
                       pickup_cost:
                         type: number
                       payment_method:
