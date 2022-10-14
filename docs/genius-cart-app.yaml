@@ -194,7 +194,50 @@ paths:
                       colors:
                         type: string
                         description: 網站顏色
-                
+  
+  /forgot:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 信箱
+                  example: 123@123.com
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                      type: object
+                      example: "Verification Link Sent Successfully!. Please Check your email."
+                  code:
+                      type: number
+                      example: 200
+        '400':
+            description: 失敗
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                        type: object
+                        example: "No Account Found With This Email."
+                    code:
+                        type: number
+                        example: 400
+
+
+
   /packages:
     get:
       summary: 取得包裝方式
@@ -407,13 +450,11 @@ paths:
                 type: object
                 properties:
                   data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        tax:
-                          type: number
-                          description: 該國家稅率
+                    type: object
+                    properties:
+                      tax:
+                        type: number
+                        description: 該國家稅率
 
 
   # ==================
@@ -2314,11 +2355,6 @@ paths:
           schema:
             type: string
           required: false
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false  
       responses:
         '200':
           description: 成功
@@ -2341,9 +2377,9 @@ paths:
                           description: 加值方法
                           example: Paypal
                         status:
-                          type: string
+                          type: number
                           description: 狀態
-                          example: 完成／待處理
+                          example: 1／0
                         amount:
                           type: number
                           description: 加值金額
@@ -2626,7 +2662,7 @@ paths:
                         type: number
                         description: 交易紀錄的ID
                         example: 18
-                      anount:
+                      amount:
                         type: string
                         description: 交易結果的金額
                         example: +HK$ 18
@@ -3210,6 +3246,143 @@ paths:
                         type: string
                         description: 訂單號碼    
 
+  /client/cart/checkout:
+    post:
+          tags:
+            - cart
+          security:
+            - client: []
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    customer_name:
+                      type: string
+                      description: 購買人
+                      example: '老高'
+                    customer_country:
+                      type: number
+                      description: 帳單區域
+                      example: 215
+                    customer_phone:
+                      type: string
+                      description: 帳單電話
+                      example: '0900123123'
+                    customer_address:
+                      type: string
+                      description: 帳單地址
+                      example: '九龍'
+                    customer_zip:
+                      type: string
+                      description: 帳單區碼
+                      example: '123'
+                    customer_email:
+                      type: string
+                      description: 帳單郵件
+                      example: 'zzz@nextgen.com'
+                    customer_state:
+                      type: number
+                      description: 帳單州
+                      example: 47
+                    shipping_name:
+                      type: string
+                      description: 取貨人
+                      example: '茉莉'
+                    shipping_country:
+                      type: number
+                      description: 送達城市
+                      example: 215
+                    shipping_phone:
+                      type: string
+                      description: 送達電話
+                      example: '0900123123'
+                    shipping_address:
+                      type: string
+                      description: 送達地址
+                      example: '新界'
+                    shipping_zip:
+                      type: string
+                      description: 送達區碼
+                      example: '123'
+                    shipping_email:
+                      type: string
+                      description: 送達郵件
+                      example: 'aaa@nextgen.hk.com'
+                    shipping_state:
+                      type: number
+                      description: 送達州
+                      example: 47
+                    pickups:
+                      type: number
+                      description: 自取點
+                      example: 0
+                    packages:
+                      type: number
+                      description: 包裝方式
+                      example: 1
+                    shippings:
+                      type: number
+                      description: 送達方式（快速，一般....)
+                      example: 1
+                    payment_method:
+                      type: number
+                      description: 付款方式 (現金，信用卡等等，目前只有現金/1)
+                      example: 1
+                    recipient:
+                      type: number
+                      description: 收件人資料 1 同訂購人  / 2 新增收件人資料 
+                      example: 1
+                    shipping_type:
+                      type: number
+                      description: 外送(1)或是自取點(2)
+                      example: 1
+                      enum:
+                        - 1
+                        - 2
+                    shipping_different:
+                      type: number
+                      description: 送達地址是否同顧客地址(0 false /1 true)
+                      example: 0
+                      enum:
+                        - 0
+                        - 1
+                    items:
+                      type: array
+                      description: 購物車內容
+                      items:
+                        type: object
+                        properties:
+                          product_id:
+                            type: number
+                          qty:
+                            type: number
+                          sku:
+                            type: string
+                      example:
+                        - product_id: 3
+                          qty: 2
+                          sku: '3Hw3574JT8'
+          responses:
+            '200':
+              description: 成功
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          order_id:
+                            type: number
+                            description: 訂單ID
+                          order_number:
+                            type: string
+                            description: 訂單號碼    
+
   /cart/checkout-info:
     get:
       tags:
@@ -3365,7 +3538,7 @@ paths:
                       coupon_code:
                         type: string
                       coupon_discount:
-                        type: string
+                        type: number
                       pay_amount:
                         type: number
                       amount:
