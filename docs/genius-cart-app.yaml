@@ -2411,6 +2411,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false
       responses:
         '200':
           description: 成功
