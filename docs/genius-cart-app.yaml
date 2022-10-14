@@ -112,7 +112,6 @@ paths:
                       to:
                         type: number
 
-
   /payments:
     get:
       responses:
@@ -170,6 +169,7 @@ paths:
                       deal_background:
                         type: string
                         description: 活動背景圖片url
+
   /general:
     get:
       summary: 取得系統設定資訊
@@ -236,7 +236,63 @@ paths:
                         type: number
                         example: 400
 
-
+  /reset:
+    post:
+      summary: 重設密碼
+      description:  重設密碼
+      tags:
+        - user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newPassword:
+                  type: string
+                  description:  打算設定的新密碼
+                  example: 777
+                confirmPassword:
+                  type: string
+                  description: 新密碼確認
+                  example: 777
+              required:
+                - newPassword
+                - confirmPassword   
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 密碼重設成功！
+                      code:
+                        type: number
+                        example: 200
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  兩次輸入的新密碼不相符！
+                      code:
+                        type: number
+                        example: 400
 
   /packages:
     get:
