@@ -374,6 +374,9 @@ paths:
                       currency_value:
                         type: number
                         description: 幣值（以港幣為基準）
+                      currency_name:
+                        type: string
+                        description: 貨幣代碼（以港幣為基準）
 
   # ==================
   # countries
@@ -486,13 +489,13 @@ paths:
                         type: number
 
                           
-  /countries/tax/{countryId}:
+  /countries/{country_id}/tax:
     get:
       tags:
         - country
       parameters:
         - in: path
-          name: countryId
+          name: country_id
           schema:
             type: number
           required: true
