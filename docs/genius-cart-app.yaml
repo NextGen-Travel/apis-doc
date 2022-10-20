@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 
 servers:
-  - url: http://localhost:8000/api/app
+  - url: https://nss-dev.girlssecrets.com/api/app
 
 components:
   # 定義一些 auth 認證的 token
@@ -3701,6 +3701,16 @@ paths:
         responses:
             '200':
               description: 成功
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          url:
+                            type: string
 
 
   /cart/checkout/paypal-notify:
