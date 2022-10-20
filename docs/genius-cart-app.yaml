@@ -1273,25 +1273,57 @@ paths:
                       properties:
                         sku:
                           type: string
-                          description: 該規格的sku碼
                         size:
                           type: string
-                          description: 特定規格
                         price:
                           type: number
-                          description: 該規格價格
                         color:
                           type: string
-                          description: 該規格顏色
                         stock:
                           type: number
-                          description: 該規格庫存
                         previous_price:
                           type: number
-                          description: 該規格定價
                         discount:
                           type: number
-                          description: 該規格折扣
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
         '404':
           description: 查無資料
 
@@ -1440,6 +1472,17 @@ paths:
                     properties:
                       token:
                         type: string
+        '422':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
 
   /register:
     post:
@@ -1484,7 +1527,7 @@ paths:
                       messages:
                         type: string
 
-        '400':
+        '422':
           description: 錯誤
           content:
             application/json:
