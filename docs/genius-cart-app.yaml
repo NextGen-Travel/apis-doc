@@ -1678,6 +1678,7 @@ paths:
                 type: object
                 properties:
                   data:
+                    type: object
                     properties:
                       code:
                         type: string
