@@ -1247,9 +1247,7 @@ paths:
                           stock:
                             type: number
                           tags:
-                            type: array
-                            items:
-                              type: string
+                            type: string
                           type:
                             type: string
                     links:
