@@ -1333,9 +1333,7 @@ paths:
                         min_price:
                           type: number
                         tags:
-                          type: array
-                          items:
-                            type: string
+                          type: string
                         stock:
                           type: number
                         type:
