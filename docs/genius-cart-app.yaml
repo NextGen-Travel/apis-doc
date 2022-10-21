@@ -6,6 +6,7 @@ info:
 
 servers:
   - url: https://nss-dev.girlssecrets.com/api/app
+  - url: http://localhost:8000/api/app
 
 components:
   # 定義一些 auth 認證的 token
@@ -140,6 +141,30 @@ paths:
                           enum:
                             - manual
                             - automatic
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
   /deal-of-the-day:
     get:
       summary: 取得限時活動資訊
@@ -323,6 +348,46 @@ paths:
                         price:
                           type: number
                           description: 價格
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
+
   /shippings:
     get:
       summary: 取得運送方式
@@ -352,6 +417,45 @@ paths:
                         price:
                           type: number
                           description: 價格
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
                         
   /currency:
     get:
@@ -386,12 +490,6 @@ paths:
     get:
       tags:
         - country
-      parameters:
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false
       responses:
         '200':
           description: 成功
@@ -1377,6 +1475,30 @@ paths:
                       properties:
                         name:
                           type: string
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
           
         '404':
           description: 查無資料
@@ -1866,6 +1988,7 @@ paths:
                         type: number
                       total:
                         type: number
+
   /client/dashboard/orders/pending:
     get:
       tags:
@@ -2005,11 +2128,6 @@ paths:
           name: keyword
           schema:
             type: string
-          required: false
-        - in: query
-          name: page
-          schema:
-            type: number
           required: false
       responses:
         '200':
@@ -2200,11 +2318,6 @@ paths:
           schema:
             type: string
           required: false
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false
       responses:
         '200':
           description: 成功
@@ -2277,11 +2390,6 @@ paths:
       security:
         - client: []
       parameters:
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false
         - in: query
           name: keyword
           schema:
@@ -2457,11 +2565,6 @@ paths:
           name: keyword
           schema:
             type: string
-          required: false
-        - in: query
-          name: page
-          schema:
-            type: number
           required: false
       responses:
         '200':
@@ -2658,11 +2761,6 @@ paths:
           schema:
             type: string
           required: false
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false 
       responses:
         '200':
           description: 成功
@@ -2874,12 +2972,7 @@ paths:
           name: keyword
           schema:
             type: string
-          required: false
-        - in: query
-          name: page
-          schema:
-            type: number
-          required: false   
+          required: false 
       responses:
         '200':
           description: 成功
