@@ -45,6 +45,12 @@ paths:
 
   /sliders:
     get:
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false       
       responses:
         '200':
           description: 成功
@@ -106,15 +112,36 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
                         type: number
+                      total:
+                        type: number
 
   /payments:
     get:
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false       
       responses:
         '200':
           description: 成功
@@ -159,11 +186,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
   /deal-of-the-day:
     get:
@@ -323,6 +365,12 @@ paths:
     get:
       summary: 取得包裝方式
       description: 取得包裝方式
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false       
       responses:
         "200":
           description: success
@@ -392,6 +440,12 @@ paths:
     get:
       summary: 取得運送方式
       description: 取得運送方式
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false             
       responses:
         "200":
           description: success
@@ -490,6 +544,12 @@ paths:
     get:
       tags:
         - country
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false        
       responses:
         '200':
           description: 成功
@@ -525,11 +585,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
 
 
@@ -544,6 +619,11 @@ paths:
             type: number
           required: true
           example: 1
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false          
       responses:
         '200':
           description: 成功
@@ -579,11 +659,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
 
                           
@@ -624,6 +719,12 @@ paths:
       description: 取得產品第一層類別
       tags:
         - categories
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false
       responses:
         '200':
           description: 成功
@@ -644,16 +745,16 @@ paths:
                         photo:
                           type: string
                   links:
-                    type: object
-                    properties:
-                      first:
-                        type: string
-                      last:
-                        type: string
-                      prev:
-                        type: string
-                      next:
-                        type: string
+                      type: object
+                      properties:
+                        first:
+                          type: string
+                        last:
+                          type: string
+                        prev:
+                          type: string
+                        next:
+                          type: string
                   meta:
                     type: object
                     properties:
@@ -661,11 +762,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
 
   /categories/{category}:
@@ -715,6 +831,11 @@ paths:
             type: number
           required: true
           example: 1
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false
       responses:
         '200':
           description: 成功
@@ -735,16 +856,16 @@ paths:
                         photo:
                           type: string
                   links:
-                    type: object
-                    properties:
-                      first:
-                        type: string
-                      last:
-                        type: string
-                      prev:
-                        type: string
-                      next:
-                        type: string
+                      type: object
+                      properties:
+                        first:
+                          type: string
+                        last:
+                          type: string
+                        prev:
+                          type: string
+                        next:
+                          type: string
                   meta:
                     type: object
                     properties:
@@ -752,11 +873,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
 
   /categories/{category}/subs/{sub}:
@@ -813,6 +949,11 @@ paths:
             type: number
           required: true
           example: 1
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false
       responses:
         '200':
           description: 成功
@@ -831,16 +972,16 @@ paths:
                         name:
                           type: string
                   links:
-                    type: object
-                    properties:
-                      first:
-                        type: string
-                      last:
-                        type: string
-                      prev:
-                        type: string
-                      next:
-                        type: string
+                      type: object
+                      properties:
+                        first:
+                          type: string
+                        last:
+                          type: string
+                        prev:
+                          type: string
+                        next:
+                          type: string
                   meta:
                     type: object
                     properties:
@@ -848,11 +989,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
 
   /subcategories/{subcategory_id}/children/{child}:
@@ -913,6 +1069,11 @@ paths:
             type: number
           required: true
           example: 1
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false          
       responses:
         '200':
           description: 成功
@@ -931,16 +1092,16 @@ paths:
                         name:
                           type: string
                   links:
-                    type: object
-                    properties:
-                      first:
-                        type: string
-                      last:
-                        type: string
-                      prev:
-                        type: string
-                      next:
-                        type: string
+                      type: object
+                      properties:
+                        first:
+                          type: string
+                        last:
+                          type: string
+                        prev:
+                          type: string
+                        next:
+                          type: string
                   meta:
                     type: object
                     properties:
@@ -948,11 +1109,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
 
 
@@ -1013,6 +1189,11 @@ paths:
             type: number
           required: true
           example: 1
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false               
       responses:
         '200':
           description: 成功
@@ -1031,16 +1212,16 @@ paths:
                         name:
                           type: string
                   links:
-                    type: object
-                    properties:
-                      first:
-                        type: string
-                      last:
-                        type: string
-                      prev:
-                        type: string
-                      next:
-                        type: string
+                      type: object
+                      properties:
+                        first:
+                          type: string
+                        last:
+                          type: string
+                        prev:
+                          type: string
+                        next:
+                          type: string
                   meta:
                     type: object
                     properties:
@@ -1048,11 +1229,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
 
   /fourthcategories/{fourthcategory_id}/fifths/{fifth}:
@@ -1352,6 +1548,11 @@ paths:
             type: number
           required: true
           example: 1
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false               
       responses:
         '200':
           description: 成功
@@ -1456,6 +1657,12 @@ paths:
     get:
       tags:
         - products
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false            
       responses:
         '200':
           description: 成功
@@ -1489,11 +1696,26 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
+                        type: number
+                      total:
                         type: number
           
         '404':
@@ -1713,6 +1935,12 @@ paths:
         - user
       security:
         - client: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false            
       responses:
         '200':
           description: 成功
@@ -1824,6 +2052,12 @@ paths:
         - user
       security:
         - client: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false               
       responses:
         '200':
           description: 成功
@@ -1871,13 +2105,27 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
                         type: number
-
+                      total:
+                        type: number
   
   /client/dashboard:
     get:
@@ -1914,6 +2162,12 @@ paths:
         - user
       security:
         - client: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false            
       responses:
         '200':
           description: 成功
@@ -2123,6 +2377,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false                 
       responses:
         '200':
           description: 成功
@@ -2312,6 +2571,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false
       responses:
         '200':
           description: 成功
@@ -2389,6 +2653,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false    
       responses:
         '200':
           description: 成功
@@ -2560,6 +2829,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false    
       responses:
         '200':
           description: 成功
@@ -2637,6 +2911,12 @@ paths:
         - deposit
       security:
         - client: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false            
       responses:
         '200':
           description: 成功
@@ -2755,6 +3035,11 @@ paths:
           schema:
             type: string
           required: false
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false              
       responses:
         '200':
           description: 成功
@@ -2967,6 +3252,11 @@ paths:
           schema:
             type: string
           required: false 
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false              
       responses:
         '200':
           description: 成功
@@ -3077,7 +3367,12 @@ paths:
           schema:
             type: number
           required: true
-          example: 9  
+          example: 9
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false                
       security:
         - client: []
       responses:
@@ -3960,12 +4255,27 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
-                        type: number          
+                        type: number
+                      total:
+                        type: number      
         '404':
           description: 訂單不存在
 
@@ -4027,6 +4337,11 @@ paths:
           schema:
             type: number
           required: false
+        - in: query
+          name: page
+          schema:
+            type: string
+          required: false                 
       responses:
         '200':
           description: 成功
@@ -4075,12 +4390,27 @@ paths:
                         type: number
                       from:
                         type: number
+                      last_page:
+                        type: number
+                      links:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            url:
+                              type: string
+                            label:
+                              type: string
+                            active:
+                              type: boolean
                       path:
                         type: string
                       per_page:
                         type: number
                       to:
-                        type: number                          
+                        type: number
+                      total:
+                        type: number                        
 
   # ==================
   # coupons
