@@ -1136,6 +1136,168 @@ paths:
 
   # ====================
   #
+  # drugs
+  #
+  /drugs/{drugId}/uploadImages:
+    post:
+      summary: 上傳藥品圖片
+      tags:
+        - drug
+      parameters:
+        - name: drugId
+          in: path
+          description: 藥品id
+          required: true
+          example: 6595
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                images:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        alternativeText:
+                          type: string
+                        caption:
+                          type: string
+                        width:
+                          type: number
+                        height:
+                          type: number
+                        formats:
+                          type: object
+                          properties:
+                            large:
+                              type: object
+                              properties:
+                                ext:
+                                  type: string
+                                url:
+                                  type: string
+                                hash:
+                                  type: string
+                                mime:
+                                  type: string
+                                name:
+                                  type: string
+                                path:
+                                  type: string
+                                size:
+                                  type: number
+                                width:
+                                  type: number
+                                height:
+                                  type: number
+                            small:
+                              type: object
+                              properties:
+                                ext:
+                                  type: string
+                                url:
+                                  type: string
+                                hash:
+                                  type: string
+                                mime:
+                                  type: string
+                                name:
+                                  type: string
+                                path:
+                                  type: string
+                                size:
+                                  type: number
+                                width:
+                                  type: number
+                                height:
+                                  type: number
+                            medium:
+                              type: object
+                              properties:
+                                ext:
+                                  type: string
+                                url:
+                                  type: string
+                                hash:
+                                  type: string
+                                mime:
+                                  type: string
+                                name:
+                                  type: string
+                                path:
+                                  type: string
+                                size:
+                                  type: number
+                                width:
+                                  type: number
+                                height:
+                                  type: number
+                            thumbnail:
+                              type: object
+                              properties:
+                                ext:
+                                  type: string
+                                url:
+                                  type: string
+                                hash:
+                                  type: string
+                                mime:
+                                  type: string
+                                name:
+                                  type: string
+                                path:
+                                  type: string
+                                size:
+                                  type: number
+                                width:
+                                  type: number
+                                height:
+                                  type: number
+                        hash:
+                          type: string
+                        ext:
+                          type: string
+                        mime:
+                          type: string
+                        size:
+                          type: number
+                        url:
+                          type: string
+                        previewUrl:
+                          type: string
+                        provider:
+                          type: string
+                        provider_metadata:
+                          type: string
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+
+  # ====================
+  #
   # drugUpdates
   #
   /drugUpdates/applyRevise/{permitNo}:
