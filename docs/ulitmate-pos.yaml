@@ -41,18 +41,21 @@ components:
         contact_id:  # 病人ID
           type: integer
           example: 4
-        contact_name: # 病人姓名
+        contact_name:
           type: string
           example: 桂綸鎂
-        doctor_name: # 醫生姓名
+          description: 病人姓名
+        doctor_name:
           type: string
           example: 王醫師
+          description: 醫生姓名
         hospital_key:
           type: integer
           example: 8
-        hospital_name:  # 醫院名稱
+        hospital_name:
           type: string
           example: 中九龍診所
+          description: 醫院名稱
         prescription_sign_created_at:
           type: string
           example: 
@@ -62,30 +65,38 @@ components:
         products:
           type: string
           example: 
-        contact_custom_field1:  # 病人身分證字號
+        contact_custom_field1:
           type: string
           example: A12345678
-        contact_mobile:  # 病人手機
+          description: 病人身分證字號
+        contact_mobile:
           type: string
           example: 0962875124
-        contact_custom_field2:  # 病人性別
+          description: 病人手機
+        contact_custom_field2:
           type: string
           example: M
-        contact_dob:            # 病人生日
+          description: 病人性別
+        contact_dob:
           type: string
           example: 1990/1/20
-        contact_custom_field3:  # 病人藥物忌諱
+          description: 病人生日
+        contact_custom_field3:
           type: string
           example: 八角
-        purchase_id:            # 購買人 id
+          description: 病人藥物忌諱
+        purchase_id:
           type: integer
           example: 8
-        purchase_name:          # 購買人姓名
+          description: 購買人 id
+        purchase_name:
           type: string
           example: 戴立忍
-        purchase_mobile:        # 購買人電話
+          description: 購買人姓名
+        purchase_mobile:
           type: string
           example: 09937645284
+          description: 購買人電話
       # Both properties are required
       required:  
         - contact_name
@@ -93,49 +104,59 @@ components:
     Contact:
       type: object
       properties:
-        type: # 客戶類型: patient/customer/p_and_c
+        type:
           type: string
           example: patient
           description: 客戶類型 patient/customer/p_and_c
-        accountNo:  # 身分證字號
+        accountNo:
           type: string
           example: A12345678
-        address: #地址
+          description: 身分證字號
+        address:
           type: string
           example: 九龍灣
-        allergyDrug: # 過敏藥物
+          description: 地址
+        allergyDrug:
           type: array
           example: []
-        allergyIngredient: #
+          description: 過敏藥物
+        allergyIngredient:
           type: array
           example: []
-        birthday: # 生日
+        birthday:
           type: string
           example: 2022-10-1
-        drugNote: # 
+          description: 生日
+        drugNote:
           type: string
           example: []
-        drugTaBoo: # 藥物忌諱
+        drugTaBoo:
           type: string
           example: 消炎藥
+          description: 藥物忌諱
         email:
           type: string
           example: abcdefg@nextgen.com.hk
-        gender: # 性別
+          description: 電子信箱
+        gender:
           type: string
           example: F
+          description: 性別
         ingredientNote:
           type: string
           example: []
-        mobile: # 手機
+        mobile:
           type: string
           example: 0911765872
-        name: # 姓名
+          description: 手機號碼
+        name:
           type: string
           example: 桂綸鎂
+          description: 姓名
         phoneNumber:
           type: string
           example: 025438762
+          description: 電話
       required:
         - type
         - name
