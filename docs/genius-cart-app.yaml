@@ -357,9 +357,6 @@ paths:
                       msg:
                         type: string
                         example:  兩次輸入的新密碼不相符！
-                      code:
-                        type: number
-                        example: 400
 
   /packages:
     get:
@@ -1533,7 +1530,19 @@ paths:
                         type:
                           type: string
         '404':
-          description: 查無資料
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 查無資料！
+
 
   /products/{id}/skus:
     get:
@@ -1619,8 +1628,6 @@ paths:
                         type: number
                       total:
                         type: number
-        '404':
-          description: 查無資料
 
   /products/{id}/categories:
     get:
@@ -1718,8 +1725,6 @@ paths:
                       total:
                         type: number
           
-        '404':
-          description: 查無資料
     post:
       tags:
         - products
@@ -2050,6 +2055,30 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: Deleted success!               
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 查無資料！          
 
   /client/orders:
     get:
@@ -3507,6 +3536,19 @@ paths:
                         type: string
                       message:
                         type: string
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string  
+                        example: 'No data'
    
 
   /client/admin/messages/{messageId}/title:                                                                                      
@@ -3740,6 +3782,19 @@ paths:
                       order_number:
                         type: string
                         description: 訂單號碼    
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 訂單建立失敗                            
 
   /client/cart/checkout:
     post:
@@ -4198,7 +4253,18 @@ paths:
                       created_at:
                         type: string   
         '404':
-          description: 訂單不存在
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 查無資料！
 
   /orders/{orderNumber}/products:
     get:
@@ -4282,7 +4348,18 @@ paths:
                       total:
                         type: number      
         '404':
-          description: 訂單不存在
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 查無資料！
 
 #  待釐清此api用途
   /orders/{orderNumber}/pay/{paymentName}:
@@ -4451,6 +4528,32 @@ paths:
                       price:
                         type: number
                         description: 優惠卷折扣金額or百分比
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 無此優惠卷資料！
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 優惠卷已過期！
 
   # ==================
   # Auth login
