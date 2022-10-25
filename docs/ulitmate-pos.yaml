@@ -1,9 +1,9 @@
 openapi: 3.0.1
 
 info:
-  title: Main
+  title: ERP配藥系統API
   version: 1.0.0
-  description: 這裡夾雜一些程式碼示範
+  description: ERP配藥系統API相關說明文件
 
 servers:
   - url: http://localhost:8000
@@ -16,8 +16,8 @@ tags:
     description: Operations about transaction
   - name: Product
     description: Operations about product
-  - name: user
-    description: Operations about user
+  - name: Contact
+    description: Operations about contact
 
 components:
   securitySchemes:
@@ -34,6 +34,111 @@ components:
         type: string
       required: false
       example: 'en'
+  schemas:
+    Transaction:
+      type: object
+      properties:
+        contact_id:  # 病人ID
+          type: integer
+          example: 4
+        contact_name: # 病人姓名
+          type: string
+          example: 桂綸鎂
+        doctor_name: # 醫生姓名
+          type: string
+          example: 王醫師
+        hospital_key:
+          type: integer
+          example: 8
+        hospital_name:  # 醫院名稱
+          type: string
+          example: 中九龍診所
+        prescription_sign_created_at:
+          type: string
+          example: 
+        prescription_sign_message:
+          type: string
+          example: 
+        products:
+          type: string
+          example: 
+        contact_custom_field1:  # 病人身分證字號
+          type: string
+          example: A12345678
+        contact_mobile:  # 病人手機
+          type: string
+          example: 0962875124
+        contact_custom_field2:  # 病人性別
+          type: string
+          example: M
+        contact_dob:            # 病人生日
+          type: string
+          example: 1990/1/20
+        contact_custom_field3:  # 病人藥物忌諱
+          type: string
+          example: 八角
+        purchase_id:            # 購買人 id
+          type: integer
+          example: 8
+        purchase_name:          # 購買人姓名
+          type: string
+          example: 戴立忍
+        purchase_mobile:        # 購買人電話
+          type: string
+          example: 09937645284
+      # Both properties are required
+      required:  
+        - contact_name
+        - contact_custom_field1
+    Contact:
+      type: object
+      properties:
+        type: # 客戶類型: patient/customer/p_and_c
+          type: string
+          example: patient
+          description: 客戶類型 patient/customer/p_and_c
+        accountNo:  # 身分證字號
+          type: string
+          example: A12345678
+        address: #地址
+          type: string
+          example: 九龍灣
+        allergyDrug: # 過敏藥物
+          type: array
+          example: []
+        allergyIngredient: #
+          type: array
+          example: []
+        birthday: # 生日
+          type: string
+          example: 2022-10-1
+        drugNote: # 
+          type: string
+          example: []
+        drugTaBoo: # 藥物忌諱
+          type: string
+          example: 消炎藥
+        email:
+          type: string
+          example: abcdefg@nextgen.com.hk
+        gender: # 性別
+          type: string
+          example: F
+        ingredientNote:
+          type: string
+          example: []
+        mobile: # 手機
+          type: string
+          example: 0911765872
+        name: # 姓名
+          type: string
+          example: 桂綸鎂
+        phoneNumber:
+          type: string
+          example: 025438762
+      required:
+        - type
+        - name
 
 paths:
   /info:
@@ -67,7 +172,6 @@ paths:
                         type: string
                       zip_code:
                         type: string
-
   /on-duty:
     get:
       summary: 值班人員
@@ -95,8 +199,6 @@ paths:
                         type: number
                       pharmacist_name:
                         type: string
-
-
   /transactions:
     get:
       summary: 交易清單
@@ -158,7 +260,19 @@ paths:
                         type: number
                       total:
                         type: number
-
+    post:
+      summary: 建立一筆交易.
+      tags:
+        - Transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transaction'
+      responses:
+        '200':
+          description: Created
   /transactions/{id}:
     get:
       summary: 單一交易
@@ -199,8 +313,6 @@ paths:
                         type: string
                       total_amount:
                         type: string
-
-
   /transactions/{id}/products:
     get:
       summary: 交易表裡的產品清單
@@ -285,7 +397,6 @@ paths:
                         type: number
                       total:
                         type: number
-
   /products:
     get:
       summary: 產品清單
@@ -294,6 +405,12 @@ paths:
         - Product
       security:
         - bearerAuth: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: The keyword for search products
       responses:
         '200':
           description: 成功
@@ -355,8 +472,6 @@ paths:
                         type: number
                       total:
                         type: number
-
-
   /products/{id}:
     get:
       summary: '取得單一產品'
@@ -408,3 +523,148 @@ paths:
                         type: string
                       product_custom_field4:
                         type: string
+  /contacts:
+    get:
+      summary: 客戶清單
+      description: 取得客戶清單
+      tags:
+        - Contact
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: accountNo  # 身分證字號
+          schema:
+            type: string
+          description: The account number for search contacts
+        - in: query
+          name: neme  # 姓名
+          schema:
+            type: string
+          description: The name for search contacts
+        - in: query
+          name: mobile  # 手機號碼
+          schema:
+            type: string
+          description: The mobile for search contacts
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        type:
+                          type: string
+                        name:
+                          type: string
+                        mobile:
+                          type: string
+                        created_at:
+                          type: string
+                  links:
+                    type: object
+                    properties:
+                      first:
+                        type: string
+                      last:
+                        type: string
+                      prev:
+                        type: string
+                      next:
+                        type: string
+                  meta:
+                    type: object
+                    properties:
+                      current_page:
+                        type: number
+                      from:
+                        type: number
+                      last_page:
+                        type: number
+                      path:
+                        type: string
+                      per_page:
+                        type: number
+                      to:
+                        type: number
+                      total:
+                        type: number
+
+  /contact/{id}:
+    get:
+      summary: '取得單一客戶資訊'
+      description: 取得單一客戶詳細資訊
+      tags:
+        - Contact
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of contact to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      sku:
+                        type: string
+                      name:
+                        type: string
+                      unit_id:
+                        type: number
+                      qty_available:
+                        type: number
+                      alert_quantity:
+                        type: string
+                      unit_short_name:
+                        type: string
+                      default_sell_price:
+                        type: string
+                      product_custom_field1:
+                        type: string
+                      product_custom_field2:
+                        type: string
+                      product_custom_field3:
+                        type: string
+                      product_custom_field4:
+                        type: string
+
+  /contact:
+    post:
+      summary: '建立病人/購買人資訊'
+      description: 建立病人/購買人資訊
+      tags:
+        - Contact
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: Created
