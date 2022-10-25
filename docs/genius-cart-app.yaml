@@ -49,7 +49,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false       
       responses:
         '200':
@@ -140,7 +140,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false       
       responses:
         '200':
@@ -369,7 +369,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false       
       responses:
         "200":
@@ -444,7 +444,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false             
       responses:
         "200":
@@ -548,7 +548,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false        
       responses:
         '200':
@@ -622,7 +622,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false          
       responses:
         '200':
@@ -723,7 +723,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false
       responses:
         '200':
@@ -834,7 +834,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false
       responses:
         '200':
@@ -952,7 +952,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false
       responses:
         '200':
@@ -1072,7 +1072,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false          
       responses:
         '200':
@@ -1192,7 +1192,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false               
       responses:
         '200':
@@ -1551,7 +1551,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false               
       responses:
         '200':
@@ -1661,7 +1661,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false            
       responses:
         '200':
@@ -1939,7 +1939,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false            
       responses:
         '200':
@@ -2056,7 +2056,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false               
       responses:
         '200':
@@ -2166,7 +2166,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false            
       responses:
         '200':
@@ -2380,7 +2380,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false                 
       responses:
         '200':
@@ -2574,7 +2574,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false
       responses:
         '200':
@@ -2656,7 +2656,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false    
       responses:
         '200':
@@ -2832,7 +2832,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false    
       responses:
         '200':
@@ -2915,7 +2915,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false            
       responses:
         '200':
@@ -3038,7 +3038,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false              
       responses:
         '200':
@@ -3255,7 +3255,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false              
       responses:
         '200':
@@ -3371,7 +3371,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false                
       security:
         - client: []
@@ -4340,7 +4340,7 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
           required: false                 
       responses:
         '200':
