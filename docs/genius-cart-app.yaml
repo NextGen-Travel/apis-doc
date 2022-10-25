@@ -1662,7 +1662,7 @@ paths:
           name: page
           schema:
             type: number
-          required: false            
+          required: false                      
       responses:
         '200':
           description: 成功
@@ -1748,7 +1748,12 @@ paths:
                         tags:
                           type: array
                           items:
-                            type: string
+                            type: object
+                            properties:
+                              product_id:
+                                type: number
+                              name:
+                                type: string
                         products:
                           type: array
                           items:
