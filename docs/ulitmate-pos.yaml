@@ -99,6 +99,10 @@ components:
           type: string
           example: 09937645284
           description: 購買人電話
+        purchase_identy_number:
+          type: string
+          example: B8230185284
+          description: 購買人身份證字號
       # Both properties are required
       required:  
         - contact_name
