@@ -673,7 +673,23 @@ paths:
                         type: number
                       total:
                         type: number
-  /contact/{id}:
+    post:
+      summary: '建立病人/購買人資訊'
+      description: 建立病人/購買人資訊
+      tags:
+        - Contact
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: Created
+  /contacts/{id}:
     get:
       summary: '取得單一客戶資訊'
       description: 取得單一客戶詳細資訊
@@ -754,20 +770,4 @@ paths:
                         type: string
                         example: 2022-10-21
                         description: 建立日期
-  /contact:
-    post:
-      summary: '建立病人/購買人資訊'
-      description: 建立病人/購買人資訊
-      tags:
-        - Contact
-      security:
-        - bearerAuth: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Contact'
-      responses:
-        '200':
-          description: Created
+    
