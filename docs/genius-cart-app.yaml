@@ -4153,19 +4153,11 @@ paths:
                       data:
                         type: object
                         properties:
+                          order_number:
+                            type: string
                           url:
                             type: string
 
-
-  /cart/checkout/paypal-notify:
-    get:
-      tags:
-        - paypal
-      summary: 取得 paypal response
-      description: 取得 paypal response
-      responses:
-        '200':
-          description: 成功
 
   # ==================
   # orders
