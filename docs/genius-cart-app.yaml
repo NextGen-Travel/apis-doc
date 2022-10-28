@@ -316,17 +316,17 @@ paths:
             schema:
               type: object
               properties:
-                newPassword:
+                new_password:
                   type: string
                   description:  打算設定的新密碼
                   example: 777
-                confirmPassword:
+                confirm_password:
                   type: string
                   description: 新密碼確認
                   example: 777
               required:
-                - newPassword
-                - confirmPassword   
+                - new_password
+                - confirm_password   
       responses:
         '200':
           description: 成功
@@ -2962,12 +2962,13 @@ paths:
                   data:
                     type: array
                     items:
+                      type: object
                       properties:
                         id:
                           type: number
                           description: 加值方式的ID
                           example: 2
-                        name:
+                        method:
                           type: string
                           description: 加值方式
                           example: Paypal
