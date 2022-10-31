@@ -4036,112 +4036,21 @@ paths:
                 schema:
                   type: object
                   properties:
-                    customer_name:
+                    order_number:
                       type: string
-                      description: 購買人
-                      example: '老高'
-                    customer_country:
-                      type: number
-                      description: 帳單區域
-                      example: 215
-                    customer_phone:
+                      description: 訂單編號
+                    fail_redirect:
                       type: string
-                      description: 帳單電話
-                      example: '0900123123'
-                    customer_address:
+                      description: 失敗時的導向url
+                      example: https://nss-dev.girlssecrets.com/api/app/open?url_scheme=girlssecrets.link://?entrance=carts
+                    success_redirect:
                       type: string
-                      description: 帳單地址
-                      example: '九龍'
-                    customer_zip:
-                      type: string
-                      description: 帳單區碼
-                      example: '123'
-                    customer_email:
-                      type: string
-                      description: 帳單郵件
-                      example: 'zzz@nextgen.com'
-                    customer_state:
-                      type: number
-                      description: 帳單州
-                      example: 47
-                    shipping_name:
-                      type: string
-                      description: 取貨人
-                      example: '茉莉'
-                    shipping_country:
-                      type: number
-                      description: 送達城市
-                      example: 215
-                    shipping_phone:
-                      type: string
-                      description: 送達電話
-                      example: '0900123123'
-                    shipping_address:
-                      type: string
-                      description: 送達地址
-                      example: '新界'
-                    shipping_zip:
-                      type: string
-                      description: 送達區碼
-                      example: '123'
-                    shipping_email:
-                      type: string
-                      description: 送達郵件
-                      example: 'aaa@nextgen.hk.com'
-                    shipping_state:
-                      type: number
-                      description: 送達州
-                      example: 47
-                    pickups:
-                      type: number
-                      description: 自取點
-                      example: 0
-                    packages:
-                      type: number
-                      description: 包裝方式
-                      example: 1
-                    shippings:
-                      type: number
-                      description: 送達方式（快速，一般....)
-                      example: 1
-                    payment_method:
-                      type: number
-                      description: 付款方式 (現金，信用卡等等，目前只有現金/1)
-                      example: 1
-                    recipient:
-                      type: number
-                      description: 收件人資料 1 同訂購人  / 2 新增收件人資料 
-                      example: 1
-                    shipping_type:
-                      type: number
-                      description: 外送(1)或是自取點(2)
-                      example: 1
-                      enum:
-                        - 1
-                        - 2
-                    shipping_different:
-                      type: number
-                      description: 送達地址是否同顧客地址(0 false /1 true)
-                      example: 0
-                      enum:
-                        - 0
-                        - 1
-                    items:
-                      type: array
-                      description: 購物車內容
-                      items:
-                        type: object
-                        properties:
-                          product_id:
-                            type: number
-                          qty:
-                            type: number
-                          sku:
-                            type: string
-                      example:
-                        - product_id: 3
-                          qty: 2
-                          sku: '3Hw3574JT8'
+                      description: 成功時的導向url
+                      example: https://nss-dev.girlssecrets.com/api/app/open?url_scheme=girlssecrets.link://?entrance=carts/{orderNumber}
+                  required:
+                  - orderNumber
+                  - fail_redirect
+                  - success_redirect
         responses:
             '200':
               description: 成功
@@ -4153,8 +4062,6 @@ paths:
                       data:
                         type: object
                         properties:
-                          order_number:
-                            type: string
                           url:
                             type: string
 
