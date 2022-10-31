@@ -1400,18 +1400,14 @@ paths:
           description: 篩選條件（需與orderBy一起使用）
           schema:
             type: string
-            enum:
-               - 'updated_at'
-               - 'price'
+            enum: [ "updated_at", "price"]
         - in: query
           name: sort
           required: false
           description: 篩選條件
           schema:
             type: string
-            enum:
-               - 'asc'
-               - 'desc'
+            enum: [ "asc" , "desc" ]
       responses:
         '200':
           description: 成功
