@@ -261,6 +261,9 @@ paths:
                       colors:
                         type: string
                         description: 網站顏色
+                      is_affilate:
+                        type: number
+                        description: 是否有使用二次行銷
   
   /forgot:
     post:
