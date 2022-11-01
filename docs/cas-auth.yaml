@@ -1,0 +1,325 @@
+openapi: 3.0.1
+
+info:
+  title: Central Authentication Service
+  version: 1.0.0
+
+servers:
+  - url: https://cas-api-dev.cloudsatlas.com.hk/api
+    description: dev server
+
+components:
+  securitySchemes:
+    client_token:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: 驗證需要的 token, Bearer xxx
+  parameters:
+    accessToken:
+      in: header
+      name: accessToken
+      schema:
+        type: string
+      required: true
+      description: accessToken
+      example: 'xxx'
+    UserExpand:
+      in: query
+      name: expand
+      schema:
+        type: string
+      description: 擴展內容，profile：輸出登入者prefile，validity：延長 token 有效期限
+      example: 'profile,validity'
+    MicroServices:
+      in: query
+      name: service
+      schema:
+        type: string
+      description: 'nss, pos, scrm, dispensing'
+      example: 'nss'
+    appId:
+      in: path
+      name: appId
+      schema:
+        type: string
+      required: true
+      description: appId(uuid)
+      example: '6f046e51-fd54-4749-b3ac-68e8a37f5e86'
+  schemas:
+    userResponse :
+      type: object
+      properties:
+        id:
+          type: number
+        username:
+          type: string
+        email:
+          type: string
+        provider:
+          type: string
+        confirmed:
+          type: boolean
+        blocked:
+          type: boolean
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+    resetPassword :
+      type: object
+      required:
+        - code
+        - password
+        - passwordConfirmation
+      properties:
+        code:
+          type: string
+          description: 一次性
+          example: '9bec366ab69043e54158b675065296d66c519b1ed9810abbf32d236cc40d7e2030fd2327818e9f9bbba0230c2a9c3403d21da10c7e168b58b3c36fcbe54bb1fd'
+        password:
+          type: string
+          description: 密碼
+          example: '123456789'
+        passwordConfirmation:
+          type: string
+          description: 密碼
+          example: '123456789'
+    forgotPassword :
+      type: object
+      properties:
+        email:
+          type: string
+          description: 電子郵件
+          example: 'dev@nextgen.com.hk'
+        account:
+          type: string
+          description: 帳號
+          example: 'dev'
+
+paths:
+
+  # ====================
+  #
+  # Auth
+  #
+
+  /v1/auth/companies:
+    post:
+      summary: 取的該帳號可登入公司
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: string
+                  description: 帳號
+                  example: 'developer'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      appId:
+                        type: string
+  /v1/login/{appId}:
+    post:
+      summary: 帳號登錄
+      tags:
+        - auth
+      parameters:
+        - $ref: '#/components/parameters/appId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: string
+                  description: 帳號
+                  example: 'developer'
+                password:
+                  type: string
+                  description: 密碼
+                  example: '123456789'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+                      user:
+                        $ref: '#/components/schemas/userResponse'
+                      accessToken:
+                        type: string
+  /v1/auth/{appId}:
+    get:
+      summary: 取得登入 accessToken
+      tags:
+        - auth
+      security:
+        - client_token: []
+      parameters:
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/MicroServices'
+        - $ref: '#/components/parameters/UserExpand'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                      user:
+                        $ref: '#/components/schemas/userResponse'
+
+    post:
+      summary: 確定登入狀態
+      tags:
+        - auth
+      parameters:
+        - $ref: "#/components/parameters/accessToken"
+        - $ref: '#/components/parameters/MicroServices'
+        - $ref: '#/components/parameters/UserExpand'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                      user:
+                        $ref: '#/components/schemas/userResponse'
+
+  /v1/auth/forgot-password/{appId}:
+    post:
+      summary: 忘記密碼
+      tags:
+        - auth
+      parameters:
+        - $ref: '#/components/parameters/appId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/forgotPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/forgotPassword'
+      responses:
+        '200':
+          description: 成功
+
+  /v1/auth/reset-password:
+    post:
+      summary: 修改密碼
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/resetPassword'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/resetPassword'
+      responses:
+        '200':
+          description: 成功
+
+  # ====================
+  #
+  # user
+  #
+
+  /v1/register/{appId}:
+    post:
+      summary: 建立帳號
+      tags:
+        - user
+      parameters:
+        - $ref: '#/components/parameters/appId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: string
+                  description: 帳號
+                  example: 'developer'
+                email:
+                  type: string
+                  description: 電子郵件
+                  example: 'developer@nextgen.com.hk'
+                password:
+                  type: string
+                  description: 密碼
+                  example: '123456789'
+                passwordConfirmation:
+                  type: string
+                  description: 再次確認密碼
+                  example: '123456789'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        $ref: '#/components/schemas/userResponse'
