@@ -17,8 +17,12 @@
             "value": "medicine-public"
         },
         {
-          "name": "Medicine Private",
-          "value": "medicine-private"
-      }
+            "name": "Medicine Private",
+            "value": "medicine-private"
+        },
+        {
+            "name": "Cas Auth",
+            "value": "cas-auth"
+        }
     ]
 }
