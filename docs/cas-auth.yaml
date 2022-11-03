@@ -131,14 +131,13 @@ paths:
                   msg:
                     type: string
                   data:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      name:
-                        type: string
-                      appId:
-                        type: string
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        appId:
+                          type: string
+
   /v1/login/{appId}:
     post:
       summary: 帳號登錄
@@ -180,60 +179,6 @@ paths:
                         $ref: '#/components/schemas/userResponse'
                       accessToken:
                         type: string
-  /v1/auth/{appId}:
-    get:
-      summary: 取得登入 accessToken
-      tags:
-        - auth
-      security:
-        - client_token: []
-      parameters:
-        - $ref: '#/components/parameters/appId'
-        - $ref: '#/components/parameters/MicroServices'
-        - $ref: '#/components/parameters/UserExpand'
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      accessToken:
-                        type: string
-                      user:
-                        $ref: '#/components/schemas/userResponse'
-
-    post:
-      summary: 確定登入狀態
-      tags:
-        - auth
-      parameters:
-        - $ref: "#/components/parameters/accessToken"
-        - $ref: '#/components/parameters/MicroServices'
-        - $ref: '#/components/parameters/UserExpand'
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      accessToken:
-                        type: string
-                      user:
-                        $ref: '#/components/schemas/userResponse'
 
   /v1/auth/forgot-password/{appId}:
     post:
@@ -272,6 +217,64 @@ paths:
       responses:
         '200':
           description: 成功
+
+  /v1/private/auth/{appId}:
+    get:
+      summary: 取得登入 accessToken
+      tags:
+        - auth
+      security:
+        - client_token: []
+      parameters:
+        - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/MicroServices'
+        - $ref: '#/components/parameters/UserExpand'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                      user:
+                        $ref: '#/components/schemas/userResponse'
+                      jwt:
+                        type: string
+
+  /v1/auth/{appId}:
+    post:
+      summary: 確定登入狀態 for client server
+      tags:
+        - auth
+      parameters:
+        - $ref: "#/components/parameters/accessToken"
+        - $ref: '#/components/parameters/MicroServices'
+        - $ref: '#/components/parameters/UserExpand'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      accessToken:
+                        type: string
+                      user:
+                        $ref: '#/components/schemas/userResponse'
 
   # ====================
   #
@@ -323,3 +326,37 @@ paths:
                     properties:
                       user:
                         $ref: '#/components/schemas/userResponse'
+
+  # ====================
+  #
+  # company
+  #
+
+  /v1/private/company/state:
+    get:
+      summary: 取得登入 accessToken
+      tags:
+        - company
+      security:
+        - client_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      nss:
+                        type: boolean
+                      pos:
+                        type: boolean
+                      scrm:
+                        type: boolean
+                      dispensing:
+                        type: boolean
