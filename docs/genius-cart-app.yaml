@@ -4504,18 +4504,18 @@ paths:
       description: 前端提供token供後端驗證確認後進行註冊並交換token給前端
       tags:
         - auth
-        requestBody:
-            required: true
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    token:
-                      type: string
-                      description: 前端拿到Google提供的token
-                  required:
-                  - token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: 前端拿到Google提供的token
+              required:
+                - token
 
       responses:
         '200':
