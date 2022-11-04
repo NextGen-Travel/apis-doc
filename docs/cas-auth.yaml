@@ -249,12 +249,36 @@ paths:
                       jwt:
                         type: string
 
+  /v1/private/auth/renew:
+    get:
+      summary: 更新 Jwt
+      tags:
+        - auth
+      security:
+        - client_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+
   /v1/auth/{appId}:
     post:
       summary: 確定登入狀態 for client server
       tags:
         - auth
       parameters:
+        - $ref: '#/components/parameters/appId'
         - $ref: "#/components/parameters/accessToken"
         - $ref: '#/components/parameters/MicroServices'
         - $ref: '#/components/parameters/UserExpand'
@@ -334,7 +358,7 @@ paths:
 
   /v1/private/company/state:
     get:
-      summary: 取得登入 accessToken
+      summary: 取得 company 啟用的服務狀態
       tags:
         - company
       security:
