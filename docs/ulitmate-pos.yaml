@@ -124,6 +124,72 @@ components:
           description: 地址
         allergyDrug:
           type: array
+          items:
+            type: integer
+          example: [5048, 5059]
+          description: 藥物過敏
+        drugNote:
+          type: array
+          items:
+            type: string
+          example: ['想睡', '肌肉酸痛']
+          description: 藥物過敏備註
+        allergyIngredient:
+          type: array
+          items:
+            type: integer
+          example: [2012, 3023]
+          description: 主成份過敏 IS
+        ingredientNote:
+          type: array
+          items:
+            type: string
+          example: ["頭暈", "肌肉酸痛"]
+          description: 主成份過敏備註
+        birthday:
+          type: string
+          example: 2022-10-1
+          description: 生日
+        drugTaBoo:
+          type: string
+          example: 消炎藥
+          description: 藥物忌諱
+        email:
+          type: string
+          example: abcdefg@nextgen.com.hk
+          description: 電子信箱
+        gender:
+          type: string
+          example: F
+          description: 性別
+        mobile:
+          type: string
+          example: 0911765872
+          description: 手機號碼
+        name:
+          type: string
+          example: 桂綸鎂
+          description: 姓名
+        phoneNumber:
+          type: string
+          example: 025438762
+          description: 電話
+      required:
+        - type
+        - name
+    ContactUpdate:
+      type: object
+      properties:
+        accountNo:
+          type: string
+          example: A12345678
+          description: 身分證字號
+        address:
+          type: string
+          example: 九龍灣
+          description: 地址
+        allergyDrug:
+          type: array
           example: []
           description: 過敏藥物
         allergyIngredient:
@@ -612,6 +678,11 @@ paths:
           schema:
             type: string
           description: The mobile for search contacts
+        - in: query
+          name: keyword  # 關鍵字
+          schema:
+            type: string
+          description: The keyword for search contact's name, mobile and account no
       responses:
         '200':
           description: 成功
@@ -641,6 +712,10 @@ paths:
                           type: string
                           example: 0934987146
                           description: 手機號碼
+                        accountNo:
+                          type: string
+                          example: Z12345678
+                          description: 身分證字號
                         created_at:
                           type: string
                           example: 2022-10-21
@@ -761,13 +836,57 @@ paths:
                         example: 八角
                         description: 藥物忌諱
                       allergyDrugs:
-                        type: string
-                        example: []
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: 藥品ID
+                            note:
+                              type: string
+                              description: 藥品備註
+                        example:
+                          - id: 2038
+                            note: "頭痛"
+                          - id: 2058
+                            note: "心悸"
+                        description: 藥品過敏
                       allergyIngredients:
-                        type: string
-                        example: []
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: integer
+                              description: 主成份 ID
+                            note:
+                              type: string
+                              description: 主成份過敏備註
+                        example:
+                          - id: 1038
+                            note: "胸痛"
+                          - id: 1058
+                            note: "眼痛"
+                        description: 主成份過敏
                       created_at:
                         type: string
                         example: 2022-10-21
                         description: 建立日期
+    put:
+      summary: '更新病人/購買人資訊'
+      description: 更新病人/購買人資訊
+      tags:
+        - Contact
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: Created
     
