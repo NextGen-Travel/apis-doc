@@ -5,10 +5,9 @@ info:
   version: 1.0.0
 
 servers:
-  - url: https://medicine.nextgen.com.hk/api
-  - url: https://medicine-api-dev.cloudsatlas.com.hk
-  - url: https://medicine-api-stage.cloudsatlas.com.hk
-  - url: https://medicine-api.cloudsatlas.com.hk
+  - url: https://medicine-api-dev.cloudsatlas.com.hk/api
+  - url: https://medicine-api-stage.cloudsatlas.com.hk/api
+  - url: https://medicine-api.cloudsatlas.com.hk/api
 
 components:
   parameters:
@@ -522,6 +521,60 @@ paths:
                           type: string
                         nameZh:
                           type: string
+
+  /drug-classifications:
+    get:
+      summary: 藥品分類
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+
+  /holders:
+    get:
+      summary: 藥廠列表
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            address:
+                              type: string
 
   # ====================
   #
