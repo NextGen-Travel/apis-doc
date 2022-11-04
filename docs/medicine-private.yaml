@@ -8,8 +8,6 @@ servers:
   - url: https://medicine-api-dev.cloudsatlas.com.hk/api
   - url: https://medicine-api-stage.cloudsatlas.com.hk/api
   - url: https://medicine-api.cloudsatlas.com.hk/api
-  - url: http://0.0.0.0:1337/api
-    description: local server
 
 components:
   securitySchemes:
@@ -459,6 +457,32 @@ components:
           type: string
 
 paths:
+  # ====================
+  #
+  # Auth
+  #
+
+  /users-permissions/auth/renew:
+    post:
+      summary: 更新jwt 有效間
+      tags:
+        - auth
+      security:
+        - client_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+
   # ====================
   #
   # stores
