@@ -125,7 +125,7 @@ components:
         allergyDrug:
           type: array
           items:
-            type: integer
+            type: string
           example: [5048, 5059]
           description: 藥物過敏
         drugNote:
@@ -137,7 +137,7 @@ components:
         allergyIngredient:
           type: array
           items:
-            type: integer
+            type: string
           example: [2012, 3023]
           description: 主成份過敏 IS
         ingredientNote:
