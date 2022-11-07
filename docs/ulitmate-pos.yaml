@@ -310,6 +310,12 @@ paths:
         - Transaction
       security:
         - bearerAuth: []
+      parameters:
+        - in: query
+          name: contactId  # 身分證字號
+          schema:
+            type: integer
+          description: Search contact for transactions
       responses:
         '200':
           description: 成功
