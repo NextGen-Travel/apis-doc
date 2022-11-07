@@ -4511,7 +4511,7 @@ paths:
             schema:
               type: object
               properties:
-                token:
+                credential:
                   type: string
                   description: 前端拿到Google提供的token
               required:
