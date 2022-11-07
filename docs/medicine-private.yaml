@@ -369,6 +369,10 @@ components:
           type: string
           description: rxNo
           example: 'NO001'
+        data[enable]:
+          type: boolean
+          description: 是否啟用
+          example: true
     store :
       type: object
       properties:
@@ -403,6 +407,10 @@ components:
               type: string
               description: 結束日期
               example: '2022-12-01'
+            enable:
+              type: boolean
+              description: 是否啟用
+              example: true
     storeResponse :
       type: object
       properties:
@@ -432,6 +440,8 @@ components:
                   type: string
                 nameCn:
                   type: string
+                enable:
+                  type: boolean
     orderResponse :
       type: object
       properties:
