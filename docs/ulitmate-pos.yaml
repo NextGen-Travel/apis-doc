@@ -484,6 +484,10 @@ paths:
                           type: string
                         dosage_form:
                           type: string
+                        unit:
+                          type: string
+                        usage:
+                          type: number
                   links:
                     type: object
                     properties:
