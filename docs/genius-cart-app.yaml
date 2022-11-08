@@ -1942,6 +1942,8 @@ paths:
                         type: string
                       balance:
                         type: number
+                      provider:
+                        type: string 
 
   /client/wishlist:
     get:
