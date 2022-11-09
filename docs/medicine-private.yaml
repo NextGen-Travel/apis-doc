@@ -736,17 +736,19 @@ paths:
                   - $ref: '#/components/schemas/userResponse'
                   - type: object
                     required:
-                      - "id"
-                      - "nameEn"
-                      - "nameCn"
-                      - "rxNo"
-                      - "tel"
-                      - "district"
-                      - "address"
-                      - "enable"
+                      - "store"
                     properties:
                       store:
                         type: object
+                        required:
+                          - "id"
+                          - "nameEn"
+                          - "nameCn"
+                          - "rxNo"
+                          - "tel"
+                          - "district"
+                          - "address"
+                          - "enable"
                         properties:
                           id:
                             type: number
