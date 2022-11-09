@@ -35,7 +35,98 @@ components:
       required: false
       example: 'en'
   schemas:
-    Transaction:
+    BusinessInfoResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            name:
+              type: string
+              description: 商店名稱
+            mobile:
+              type: string
+              description: 電話
+            country:
+              type: string
+              description: 國家
+            state:
+              type: string
+            city:
+              type: string
+              description: 城市
+            zip_code:
+              type: string
+              description: 郵遞區號
+    OnDutyResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            user_id:
+              type: number
+              description: 店員 ID
+            user_name:
+              type: string
+              description: 店員姓名
+            pharmacist_id:
+              type: number
+              description: 藥劑師 ID
+            pharmacist_name:
+              type: string
+              description: 藥劑師姓名
+    TransactionsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: 訂單編號
+              pharmacist_name:
+                type: string
+                description: 藥師姓名
+              prescription_sign_message:
+                type: string
+                description: 症狀
+              username:
+                type: string
+                description: 使用者名稱
+              contact_name:
+                type: string
+                description: 病人姓名
+              created_at:
+                type: string
+                description: 訂單產生日期
+    SingleTransactionResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: number
+              description: 訂單編號
+            created_at:
+              type: string
+              description: 訂單產生日期
+            contact_id:
+              type: number
+              description: 病人 ID
+            contact_dob:
+              type: string
+              description: 病人生日
+            contact_name:
+              type: string
+              description: 病人姓名
+            total_amount:
+              type: string
+              description: 總金額
+    CreateTransaction:
       type: object
       properties:
         contact_id:  # 病人ID
@@ -95,7 +186,7 @@ components:
       required:  
         - contact_name
         - contact_custom_field1
-    Contact:
+    CreateContact:
       type: object
       properties:
         type:
@@ -172,65 +263,109 @@ components:
         mobile: 0911765872
         name: 桂綸鎂
         phoneNumber: 025438762
-
-    ContactUpdate:
+    ContactsResponse:
       type: object
       properties:
-        accountNo:
-          type: string
-          example: A12345678
-          description: 身分證字號
-        address:
-          type: string
-          example: 九龍灣
-          description: 地址
-        allergyDrug:
+        data:
           type: array
-          example: []
-          description: 過敏藥物
-        allergyIngredient:
-          type: array
-          example: []
-        birthday:
-          type: string
-          example: 2022-10-1
-          description: 生日
-        drugNote:
-          type: string
-          example: []
-        drugTaBoo:
-          type: string
-          example: 消炎藥
-          description: 藥物忌諱
-        email:
-          type: string
-          example: abcdefg@nextgen.com.hk
-          description: 電子信箱
-        gender:
-          type: string
-          enum:
-            - F
-            - M
-          example: F
-          description: 性別
-        ingredientNote:
-          type: string
-          example: []
-        mobile:
-          type: string
-          example: 0911765872
-          description: 手機號碼
-        name:
-          type: string
-          example: 桂綸鎂
-          description: 姓名
-        phoneNumber:
-          type: string
-          example: 025438762
-          description: 電話
-      required:
-        - type
-        - name
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: 顧客 id
+              type:
+                type: string
+                enum:
+                  - patient
+                  - customer
+                  - p_and_c
+                description: 顧客類型(病人 or 購買人)
+              name:
+                type: string
+                description: 顧客名稱
+              mobile:
+                type: string
+                description: 手機號碼
+              accountNo:
+                type: string
+                description: 身分證字號
+              created_at:
+                type: string
+                description: 建立日期
+    SingleContactResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: number
+              description: 顧客 id
+            type:
+              type: string
+              enum:
+                - patient
+                - customer
+                - p_and_c
+              description: 顧客類型(病人 or 購買人)
+            identity_id:
+              type: string
+              description: 身分證字號
+            name:
+              type: string
+              description: 顧客名稱
+            gender:
+              type: string
+              enum:
+                - F
+                - M
+              description: 性別
+            birthday:
+              type: string
+              description: 生日
+            email:
+              type: string
+              description: email
+            mobile: 
+              type: string
+              description: 手機號碼
+            phoneNumber:
+              type: string
+              description: 電話號碼
+            address:
+              type: string
+              description: 地址
+            drugTaBoo:
+              type: string
+              description: 藥物忌諱
+            allergyDrugs:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 藥品ID
+                  note:
+                    type: string
+                    description: 藥品備註
+              description: 藥品過敏
+            allergyIngredients:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: 主成份 ID
+                  note:
+                    type: string
+                    description: 主成份過敏備註                          
+              description: 主成份過敏
+            created_at:
+              type: string
+              description: 建立日期
 
 paths:
   /info:
@@ -247,35 +382,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        description: 商店名稱
-                      mobile:
-                        type: string
-                        description: 電話
-                      country:
-                        type: string
-                        description: 國家
-                      state:
-                        type: string
-                      city:
-                        type: string
-                        description: 城市
-                      zip_code:
-                        type: string
-                        description: 郵遞區號
-                    example:
-                      name: A藥局
-                      mobile: 0945761435
-                      country: 香港
-                      state: 尖沙嘴頂好北路50巷10號
-                      city: 九龍
-                      zip_code: 111
+                $ref: '#/components/schemas/BusinessInfoResponse'
+              example:
+                data: 
+                  name: A藥局
+                  mobile: 0945761435
+                  country: 香港
+                  state: 尖沙嘴頂好北路50巷10號
+                  city: 九龍
+                  zip_code: 111
   /on-duty:
     get:
       summary: 值班人員
@@ -290,28 +405,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      user_id:
-                        type: number
-                        description: 店員 ID
-                      user_name:
-                        type: string
-                        description: 店員姓名
-                      pharmacist_id:
-                        type: number
-                        description: 藥劑師 ID
-                      pharmacist_name:
-                        type: string
-                        description: 藥劑師姓名
-                    example:
-                      usage_id: 1
-                      user_name: A店員
-                      pharmacist_id: 2
-                      pharmacist_name: 陳藥劑師
+                $ref: '#/components/schemas/OnDutyResponse'
+              example:
+                data:
+                  usage_id: 1
+                  user_name: A店員
+                  pharmacist_id: 2
+                  pharmacist_name: 陳藥劑師
   /transactions:
     get:
       summary: 交易清單
@@ -332,67 +432,21 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        pharmacist_name:
-                          type: string
-                        prescription_sign_message:
-                          type: string
-                        username:
-                          type: string
-                        contact_name:
-                          type: string
-                        created_at:
-                          type: string
-                    example:
-                      - id: 180
-                        pharmacist_name: 陳藥師
-                        prescription_sign_message: 頭痛
-                        username: A店員
-                        contact_name: A病人
-                        created_at: 2022-10-21 09:33:52
-                      - id: 181
-                        pharmacist_name: 王藥師
-                        prescription_sign_message: 胸悶
-                        username: B店員
-                        contact_name: B病人
-                        created_at: 2022-10-30 09:33:52
-
-                  links:
-                    type: object
-                    properties:
-                      first:
-                        type: string
-                      last:
-                        type: string
-                      prev:
-                        type: string
-                      next:
-                        type: string
-                  meta:
-                    type: object
-                    properties:
-                      current_page:
-                        type: number
-                      from:
-                        type: number
-                      last_page:
-                        type: number
-                      path:
-                        type: string
-                      per_page:
-                        type: number
-                      to:
-                        type: number
-                      total:
-                        type: number
+                $ref: '#/components/schemas/TransactionsResponse'
+              example:
+                data:
+                  - id: 180
+                    pharmacist_name: 陳藥師
+                    prescription_sign_message: 頭痛
+                    username: A店員
+                    contact_name: A病人
+                    created_at: 2022-10-21 09:33:52
+                  - id: 181
+                    pharmacist_name: 王藥師
+                    prescription_sign_message: 胸悶
+                    username: B店員
+                    contact_name: B病人
+                    created_at: 2022-10-30 09:33:52
     post:
       summary: 建立一筆交易.
       tags:
@@ -402,7 +456,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Transaction'
+              $ref: '#/components/schemas/CreateTransaction'
             example:
               contact_id: 4
               contact_name: 桂綸鎂
@@ -447,30 +501,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      created_at:
-                        type: string
-                      contact_id:
-                        type: number
-                      contact_dob:
-                        type: string
-                      contact_name:
-                        type: string
-                      total_amount:
-                        type: string
-                    example:
-                      id: 258
-                      created_at: 2022-11-08
-                      contact_id: 45
-                      contact_dob:
-                      contact_name: "林志玲"
-                      total_amount: 125.0000
+                $ref: '#/components/schemas/SingleTransactionResponse'
+              example:
+                data:
+                  id: 258
+                  created_at: 2022-11-08
+                  contact_id: 45
+                  contact_dob:
+                  contact_name: "林志玲"
+                  total_amount: 125.0000
   /transactions/{id}/products:
     get:
       summary: 交易表裡的產品清單
@@ -763,76 +802,49 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                          description: 顧客 id
-                        type:
-                          type: string
-                          enum:
-                            - patient
-                            - customer
-                            - p_and_c
-                          description: 顧客類型(病人 or 購買人)
-                        name:
-                          type: string
-                          description: 顧客名稱
-                        mobile:
-                          type: string
-                          description: 手機號碼
-                        accountNo:
-                          type: string
-                          description: 身分證字號
-                        created_at:
-                          type: string
-                          description: 建立日期
-                    example:
-                      - id: 20
-                        type: customer
-                        name: 王大明
-                        mobile: 0934987146
-                        accountNo: Z12345678
-                        created_at: 2022-10-21
-                      - id: 21
-                        type: patient
-                        name: 林小美
-                        mobile: 0933167832
-                        accountNo: S76893542
-                        created_at: 2022-10-21
-                  links:
-                    type: object
-                    properties:
-                      first:
-                        type: string
-                      last:
-                        type: string
-                      prev:
-                        type: string
-                      next:
-                        type: string
-                  meta:
-                    type: object
-                    properties:
-                      current_page:
-                        type: number
-                      from:
-                        type: number
-                      last_page:
-                        type: number
-                      path:
-                        type: string
-                      per_page:
-                        type: number
-                      to:
-                        type: number
-                      total:
-                        type: number
+                $ref: '#/components/schemas/ContactsResponse'
+              example:
+                data:
+                  - id: 20
+                    type: customer
+                    name: 王大明
+                    mobile: 0934987146
+                    accountNo: Z12345678
+                    created_at: 2022-10-21
+                  - id: 21
+                    type: patient
+                    name: 林小美
+                    mobile: 0933167832
+                    accountNo: S76893542
+                    created_at: 2022-10-21
+                links:
+                  type: object
+                  properties:
+                    first:
+                      type: string
+                    last:
+                      type: string
+                    prev:
+                      type: string
+                    next:
+                      type: string
+                meta:
+                  type: object
+                  properties:
+                    current_page:
+                      type: number
+                    from:
+                      type: number
+                    last_page:
+                      type: number
+                    path:
+                      type: string
+                    per_page:
+                      type: number
+                    to:
+                      type: number
+                    total:
+                      type: number
     post:
       summary: '建立病人/購買人資訊'
       description: 建立病人/購買人資訊
@@ -845,7 +857,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Contact'
+              $ref: '#/components/schemas/CreateContact'
       responses:
         '200':
           description: Created
@@ -882,101 +894,31 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                        description: 顧客 id
-                      type:
-                        type: string
-                        enum:
-                          - patient
-                          - customer
-                          - p_and_c
-                        description: 顧客類型(病人 or 購買人)
-                      identity_id:
-                        type: string
-                        description: 身分證字號
-                      name:
-                        type: string
-                        description: 顧客名稱
-                      gender:
-                        type: string
-                        enum:
-                          - F
-                          - M
-                        description: 性別
-                      birthday:
-                        type: string
-                        description: 生日
-                      email:
-                        type: string
-                        description: email
-                      mobile: 
-                        type: string
-                        description: 手機號碼
-                      phoneNumber:
-                        type: string
-                        description: 電話號碼
-                      address:
-                        type: string
-                        description: 地址
-                      drugTaBoo:
-                        type: string
-                        description: 藥物忌諱
-                      allergyDrugs:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              description: 藥品ID
-                            note:
-                              type: string
-                              description: 藥品備註
-                        description: 藥品過敏
-                      allergyIngredients:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: integer
-                              description: 主成份 ID
-                            note:
-                              type: string
-                              description: 主成份過敏備註                          
-                        description: 主成份過敏
-                      created_at:
-                        type: string
-                        description: 建立日期
-                    example:
-                      id: 20
-                      type: customer
-                      identity_id: "3412753"
-                      name: A病人
-                      gender: M
-                      birthday: 2022-09-07
-                      email: allen@nextgen.com.hk
-                      mobile: 0934184625
-                      phoneNumber: 07 654876
-                      address: 大安區, 台北市, 台灣 11033
-                      drugTaBoo: 八角
-                      allergyDrugs:
-                        - id: 2038
-                          note: "頭痛"
-                        - id: 2058
-                          note: "心悸"
-                      allergyIngredients:
-                        - id: 1038
-                          note: "胸痛"
-                        - id: 1058
-                          note: "眼痛"
-                      created_at: 2022-10-21
+                $ref: '#/components/schemas/SingleContactResponse'
+              example:
+                data:
+                  id: 20
+                  type: customer
+                  identity_id: "3412753"
+                  name: A病人
+                  gender: M
+                  birthday: 2022-09-07
+                  email: allen@nextgen.com.hk
+                  mobile: 0934184625
+                  phoneNumber: 07 654876
+                  address: 大安區, 台北市, 台灣 11033
+                  drugTaBoo: 八角
+                  allergyDrugs:
+                    - id: 2038
+                      note: "頭痛"
+                    - id: 2058
+                      note: "心悸"
+                  allergyIngredients:
+                    - id: 1038
+                      note: "胸痛"
+                    - id: 1058
+                      note: "眼痛"
+                  created_at: 2022-10-21
 
     put:
       summary: '更新病人/購買人資訊'
@@ -990,7 +932,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Contact'
+              $ref: '#/components/schemas/CreateContact'
       responses:
         '200':
           description: Created
