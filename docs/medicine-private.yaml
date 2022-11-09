@@ -800,7 +800,7 @@ paths:
           description: 電話號碼
           example: '12221222'
         - in: query
-          name: accountＮo
+          name: accountNo
           schema:
             type: string
           description: 身份識別碼
