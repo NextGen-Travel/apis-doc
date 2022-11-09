@@ -849,6 +849,17 @@ paths:
       responses:
         '200':
           description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                      contactId:
+                        type: number
+                        description: 顧客 id
+                      success:
+                        type: boolean
+                        description: 是否成功
   /contacts/{id}:
     get:
       summary: '取得單一客戶資訊'
