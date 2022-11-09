@@ -714,26 +714,29 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/userResponse'
-                store:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    nameEn:
-                      type: string
-                    nameCn:
-                      type: string
-                    rxNo:
-                      type: string
-                    tel:
-                      type: string
-                    district:
-                      type: string
-                    address:
-                      type: string
-                    enable:
-                      type: boolean
+                allOf:
+                  - $ref: '#/components/schemas/userResponse'
+                  - type: object
+                    properties:
+                      store:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          nameEn:
+                            type: string
+                          nameCn:
+                            type: string
+                          rxNo:
+                            type: string
+                          tel:
+                            type: string
+                          district:
+                            type: string
+                          address:
+                            type: string
+                          enable:
+                            type: boolean
 
   # ====================
   #
