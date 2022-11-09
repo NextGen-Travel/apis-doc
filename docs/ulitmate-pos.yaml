@@ -40,68 +40,56 @@ components:
       properties:
         contact_id:  # 病人ID
           type: integer
-          example: 4
+          description: 病人 ID
         contact_name:
           type: string
-          example: 桂綸鎂
           description: 病人姓名
         doctor_name:
           type: string
-          example: 王醫師
           description: 醫生姓名
         hospital_key:
           type: integer
-          example: 8
         hospital_name:
           type: string
-          example: 中九龍診所
           description: 醫院名稱
         prescription_sign_created_at:
           type: string
-          example: 2022-10-20
           description: 配藥日期
         prescription_sign_message:
           type: string
-          example: 頭痛
           description: 處方簽症狀
         products:
           type: string
-          example: 
+          description: 藥品清單
         contact_custom_field1:
           type: string
-          example: A12345678
           description: 病人身分證字號
         contact_mobile:
           type: string
-          example: 0962875124
           description: 病人手機
         contact_custom_field2:
           type: string
-          example: M
+          enum:
+            - F
+            - M
           description: 病人性別
         contact_dob:
           type: string
-          example: 1990/1/20
           description: 病人生日
         contact_custom_field3:
           type: string
-          example: 八角
           description: 病人藥物忌諱
         purchase_id:
           type: integer
-          example: 8
           description: 購買人 id
         purchase_name:
           type: string
-          example: 戴立忍
           description: 購買人姓名
         purchase_mobile:
           type: string
-          example: 09937645284
           description: 購買人電話
         purchase_identy_number:
           type: string
-          example: B8230185284
           description: 購買人身份證字號
       # Both properties are required
       required:  
@@ -112,71 +100,79 @@ components:
       properties:
         type:
           type: string
-          example: patient
-          description: 客戶類型 patient/customer/p_and_c
+          enum:
+            - patient
+            - customer
+          description: 客戶類型 patient/customer
         accountNo:
           type: string
-          example: A12345678
           description: 身分證字號
         address:
           type: string
-          example: 九龍灣
           description: 地址
         allergyDrug:
           type: array
           items:
             type: string
-          example: [5048, 5059]
           description: 藥物過敏
         drugNote:
           type: array
           items:
             type: string
-          example: ['想睡', '肌肉酸痛']
           description: 藥物過敏備註
         allergyIngredient:
           type: array
           items:
             type: string
-          example: [2012, 3023]
-          description: 主成份過敏 IS
+          description: 主成份過敏
         ingredientNote:
           type: array
           items:
             type: string
-          example: ["頭暈", "肌肉酸痛"]
           description: 主成份過敏備註
         birthday:
           type: string
-          example: 2022-10-1
           description: 生日
         drugTaBoo:
           type: string
-          example: 消炎藥
           description: 藥物忌諱
         email:
           type: string
-          example: abcdefg@nextgen.com.hk
           description: 電子信箱
         gender:
           type: string
-          example: F
+          enum:
+            - F
+            - M
           description: 性別
         mobile:
           type: string
-          example: 0911765872
           description: 手機號碼
         name:
           type: string
-          example: 桂綸鎂
           description: 姓名
         phoneNumber:
           type: string
-          example: 025438762
           description: 電話
       required:
         - type
         - name
+      example:
+        type: patient
+        accountNo: A12345678
+        address: 九龍灣
+        allergyDrug: [5048, 5059]
+        drugNote: ['想睡', '肌肉酸痛']
+        allergyIngredient: [2012, 3023]
+        ingredientNote: ["頭暈", "肌肉酸痛"]
+        birthday: 2022-10-1
+        drugTaBoo: 消炎藥
+        email: abcdefg@nextgen.com.hk
+        gender: F
+        mobile: 0911765872
+        name: 桂綸鎂
+        phoneNumber: 025438762
+
     ContactUpdate:
       type: object
       properties:
@@ -212,6 +208,9 @@ components:
           description: 電子信箱
         gender:
           type: string
+          enum:
+            - F
+            - M
           example: F
           description: 性別
         ingredientNote:
@@ -255,22 +254,28 @@ paths:
                     properties:
                       name:
                         type: string
-                        example: A藥局
+                        description: 商店名稱
                       mobile:
                         type: string
-                        example: 0945761435
+                        description: 電話
                       country:
                         type: string
-                        example: 香港
+                        description: 國家
                       state:
                         type: string
-                        example: 尖沙嘴頂好北路50巷10號
                       city:
                         type: string
-                        example: 九龍
+                        description: 城市
                       zip_code:
                         type: string
-                        example: 111
+                        description: 郵遞區號
+                    example:
+                      name: A藥局
+                      mobile: 0945761435
+                      country: 香港
+                      state: 尖沙嘴頂好北路50巷10號
+                      city: 九龍
+                      zip_code: 111
   /on-duty:
     get:
       summary: 值班人員
@@ -292,16 +297,21 @@ paths:
                     properties:
                       user_id:
                         type: number
-                        example: 1
+                        description: 店員 ID
                       user_name:
                         type: string
-                        example: A店員
+                        description: 店員姓名
                       pharmacist_id:
                         type: number
-                        example: 2
+                        description: 藥劑師 ID
                       pharmacist_name:
                         type: string
-                        example: 陳藥劑師
+                        description: 藥劑師姓名
+                    example:
+                      usage_id: 1
+                      user_name: A店員
+                      pharmacist_id: 2
+                      pharmacist_name: 陳藥劑師
   /transactions:
     get:
       summary: 交易清單
@@ -331,22 +341,30 @@ paths:
                       properties:
                         id:
                           type: number
-                          example: 180
                         pharmacist_name:
                           type: string
-                          example: 陳藥師
                         prescription_sign_message:
                           type: string
-                          example: 頭痛
                         username:
                           type: string
-                          example: A店員
                         contact_name:
                           type: string
-                          example: A病人
                         created_at:
                           type: string
-                          example: 2022-10-21 09:33:52
+                    example:
+                      - id: 180
+                        pharmacist_name: 陳藥師
+                        prescription_sign_message: 頭痛
+                        username: A店員
+                        contact_name: A病人
+                        created_at: 2022-10-21 09:33:52
+                      - id: 181
+                        pharmacist_name: 王藥師
+                        prescription_sign_message: 胸悶
+                        username: B店員
+                        contact_name: B病人
+                        created_at: 2022-10-30 09:33:52
+
                   links:
                     type: object
                     properties:
@@ -385,6 +403,24 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Transaction'
+            example:
+              contact_id: 4
+              contact_name: 桂綸鎂
+              doctor_name: 王醫師
+              hospital_key: 8
+              hospital_name: 中九龍診所
+              prescription_sign_created_at: 2022-10-20
+              prescription_sign_message: 頭痛
+              products:
+              contact_custom_field1: A12345678
+              contact_mobile: 0962875124
+              contact_custom_field2: F
+              contact_dob: 1990/1/20
+              contact_custom_field3: 八角
+              purchase_id: 8
+              purchase_name: 戴立忍
+              purchase_mobile: 09937645284
+              purchase_identy_number: B8230185284
       responses:
         '200':
           description: Created
@@ -428,6 +464,13 @@ paths:
                         type: string
                       total_amount:
                         type: string
+                    example:
+                      id: 258
+                      created_at: 2022-11-08
+                      contact_id: 45
+                      contact_dob:
+                      contact_name: "林志玲"
+                      total_amount: 125.0000
   /transactions/{id}/products:
     get:
       summary: 交易表裡的產品清單
@@ -573,6 +616,27 @@ paths:
                         product_custom_field4:
                           type: string
                           description: 藥品主成份
+                    example:
+                      - id: 1
+                        sku: SKU123
+                        name: 眼藥水
+                        qty_available: 200
+                        alert_quantity: 10
+                        default_sell_price: 125.000
+                        product_custom_field1: HK-58956
+                        product_custom_field2: S.T. NATURAL TEARS EYE DROPS
+                        product_custom_field3: BIO
+                        product_custom_field4: Vintamic C
+                      - id: 2
+                        sku: SKU223
+                        name: 暈船藥
+                        qty_available: 250
+                        alert_quantity: 15
+                        default_sell_price: 110.000
+                        product_custom_field1: HK-68741
+                        product_custom_field2: S.T. NATURAL TEARS EYE DROPS
+                        product_custom_field3: BIO
+                        product_custom_field4: Vintamic C
                   links:
                     type: object
                     properties:
@@ -708,28 +772,39 @@ paths:
                       properties:
                         id:
                           type: number
-                          example: 20
                           description: 顧客 id
                         type:
                           type: string
-                          example: customer
+                          enum:
+                            - patient
+                            - customer
+                            - p_and_c
                           description: 顧客類型(病人 or 購買人)
                         name:
                           type: string
-                          example: 王大明
                           description: 顧客名稱
                         mobile:
                           type: string
-                          example: 0934987146
                           description: 手機號碼
                         accountNo:
                           type: string
-                          example: Z12345678
                           description: 身分證字號
                         created_at:
                           type: string
-                          example: 2022-10-21
                           description: 建立日期
+                    example:
+                      - id: 20
+                        type: customer
+                        name: 王大明
+                        mobile: 0934987146
+                        accountNo: Z12345678
+                        created_at: 2022-10-21
+                      - id: 21
+                        type: patient
+                        name: 林小美
+                        mobile: 0933167832
+                        accountNo: S76893542
+                        created_at: 2022-10-21
                   links:
                     type: object
                     properties:
@@ -803,47 +878,43 @@ paths:
                     properties:
                       id:
                         type: number
-                        example: 20
                         description: 顧客 id
                       type:
                         type: string
-                        example: customer
+                        enum:
+                          - patient
+                          - customer
+                          - p_and_c
                         description: 顧客類型(病人 or 購買人)
                       identity_id:
                         type: string
-                        example: "3412753"
                         description: 身分證字號
                       name:
                         type: string
-                        example: A病人
                         description: 顧客名稱
                       gender:
                         type: string
-                        example: M
+                        enum:
+                          - F
+                          - M
                         description: 性別
                       birthday:
                         type: string
-                        example: 2022-09-07
                         description: 生日
                       email:
                         type: string
-                        example: allen@nextgen.com.hk
                         description: email
                       mobile: 
                         type: string
-                        example: 0934184625
                         description: 手機號碼
                       phoneNumber:
                         type: string
-                        example: 07 654876
                         description: 電話號碼
                       address:
                         type: string
-                        example: 大安區, 台北市, 台灣 11033
                         description: 地址
                       drugTaBoo:
                         type: string
-                        example: 八角
                         description: 藥物忌諱
                       allergyDrugs:
                         type: array
@@ -856,11 +927,6 @@ paths:
                             note:
                               type: string
                               description: 藥品備註
-                        example:
-                          - id: 2038
-                            note: "頭痛"
-                          - id: 2058
-                            note: "心悸"
                         description: 藥品過敏
                       allergyIngredients:
                         type: array
@@ -872,17 +938,35 @@ paths:
                               description: 主成份 ID
                             note:
                               type: string
-                              description: 主成份過敏備註
-                        example:
-                          - id: 1038
-                            note: "胸痛"
-                          - id: 1058
-                            note: "眼痛"
+                              description: 主成份過敏備註                          
                         description: 主成份過敏
                       created_at:
                         type: string
-                        example: 2022-10-21
                         description: 建立日期
+                    example:
+                      id: 20
+                      type: customer
+                      identity_id: "3412753"
+                      name: A病人
+                      gender: M
+                      birthday: 2022-09-07
+                      email: allen@nextgen.com.hk
+                      mobile: 0934184625
+                      phoneNumber: 07 654876
+                      address: 大安區, 台北市, 台灣 11033
+                      drugTaBoo: 八角
+                      allergyDrugs:
+                        - id: 2038
+                          note: "頭痛"
+                        - id: 2058
+                          note: "心悸"
+                      allergyIngredients:
+                        - id: 1038
+                          note: "胸痛"
+                        - id: 1058
+                          note: "眼痛"
+                      created_at: 2022-10-21
+
     put:
       summary: '更新病人/購買人資訊'
       description: 更新病人/購買人資訊
