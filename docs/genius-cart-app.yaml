@@ -43,6 +43,19 @@ paths:
         '200':
           description: 成功
 
+  /redirect:
+    get:
+      summary: 測試app url跳轉使用
+      parameters:
+        - in: query
+          name: url_scheme
+          schema:
+            type: string
+          required: true       
+      responses:
+        '200':
+          description: 成功
+
   /sliders:
     get:
       parameters:
