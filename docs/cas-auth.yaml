@@ -17,7 +17,7 @@ components:
       description: 驗證需要的 token, Bearer xxx
   parameters:
     accessToken:
-      in: header
+      in: body
       name: accessToken
       schema:
         type: string
@@ -220,7 +220,7 @@ paths:
 
   /v1/private/auth/{appId}:
     get:
-      summary: 取得登入 accessToken
+      summary: 取得登入 Bearer jwt
       tags:
         - auth
       security:
