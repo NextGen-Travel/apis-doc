@@ -145,6 +145,7 @@ paths:
         - auth
       parameters:
         - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/MicroServices'
       requestBody:
         required: true
         content:
