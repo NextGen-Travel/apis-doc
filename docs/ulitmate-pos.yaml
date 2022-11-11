@@ -248,21 +248,6 @@ components:
       required:
         - type
         - name
-      example:
-        type: patient
-        accountNo: A12345678
-        address: 九龍灣
-        allergyDrug: [5048, 5059]
-        drugNote: ['想睡', '肌肉酸痛']
-        allergyIngredient: [2012, 3023]
-        ingredientNote: ["頭暈", "肌肉酸痛"]
-        birthday: 2022-10-1
-        drugTaBoo: 消炎藥
-        email: abcdefg@nextgen.com.hk
-        gender: F
-        mobile: 0911765872
-        name: 桂綸鎂
-        phoneNumber: 025438762
     ContactsResponse:
       type: object
       properties:
@@ -777,25 +762,34 @@ paths:
         - bearerAuth: []
       parameters:
         - in: query
-          name: accountNo  # 身分證字號
+          name: accountNo
           schema:
             type: string
-          description: The account number for search contacts
+          description: 身分證字號
         - in: query
-          name: neme  # 姓名
+          name: neme
           schema:
             type: string
-          description: The name for search contacts
+          description: 客戶姓名
         - in: query
-          name: mobile  # 手機號碼
+          name: mobile
           schema:
             type: string
-          description: The mobile for search contacts
+          description: 手機號碼
         - in: query
-          name: keyword  # 關鍵字
+          name: keyword
           schema:
             type: string
-          description: The keyword for search contact's name, mobile and account no
+          description: 關鍵字(搜尋 客戶姓名,手機號碼跟身分證字號)
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum:
+              - patient
+              - customer
+              - p_and_c
+          description: 客戶類型
       responses:
         '200':
           description: 成功
@@ -933,6 +927,21 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateContact'
+            example:
+              type: patient
+              accountNo: A12345678
+              address: 九龍灣
+              allergyDrug: [5048, 5059]
+              drugNote: ['想睡', '肌肉酸痛']
+              allergyIngredient: [2012, 3023]
+              ingredientNote: ["頭暈", "肌肉酸痛"]
+              birthday: 2022-10-1
+              drugTaBoo: 消炎藥
+              email: abcdefg@nextgen.com.hk
+              gender: F
+              mobile: 0911765872
+              name: 桂綸鎂
+              phoneNumber: 025438762
       responses:
         '200':
           description: Created
