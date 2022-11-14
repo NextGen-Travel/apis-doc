@@ -11,13 +11,13 @@ servers:
 
 tags:
   - name: Business
-    description: Operations about business
+    description: 商店相關功能
   - name: Transaction
-    description: Operations about transaction
+    description: 交易相關功能
   - name: Product
-    description: Operations about product
+    description: 產品相關功能
   - name: Contact
-    description: Operations about contact
+    description: 聯絡人相關功能
 
 components:
   securitySchemes:
@@ -351,6 +351,86 @@ components:
             created_at:
               type: string
               description: 建立日期
+    ProductsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: 藥品 id
+              sku:
+                type: string
+                description: 藥品 SKU
+              name:
+                type: string
+                description: 藥品名稱
+              qty_available:
+                type: number
+                description: 庫存數量
+              alert_quantity:
+                type: string
+                description: 庫存警告數量
+              default_sell_price:
+                type: string
+                description: 售價
+              product_custom_field1:
+                type: string
+                description: 藥品證號
+              product_custom_field2:
+                type: string
+                description: 藥品英文名稱
+              product_custom_field3:
+                type: string
+                description: 藥廠
+              product_custom_field4:
+                type: string
+                description: 藥品主成份
+    SingleProductResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: number
+              description: 藥品 id
+            sku:
+              type: string
+              description: 藥品 SKU
+            name:
+              type: string
+              description: 藥品名稱
+            unit_id:
+              type: number
+              description: 單位 id
+            qty_available:
+              type: number
+              description: 庫存數量
+            alert_quantity:
+              type: string
+              description: 庫存警告數量
+            unit_short_name:
+              type: string
+              description: 單位簡稱
+            default_sell_price:
+              type: string
+              description: 售價
+            product_custom_field1:
+              type: string
+              description: 藥品證號
+            product_custom_field2:
+              type: string
+              description: 藥品英文名稱
+            product_custom_field3:
+              type: string
+              description: 藥廠
+            product_custom_field4:
+              type: string
+              description: 藥品主成份
 
 paths:
   /info:
@@ -603,92 +683,57 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                          description: 藥品 id
-                        sku:
-                          type: string
-                          description: 藥品 SKU
-                        name:
-                          type: string
-                          description: 藥品名稱
-                        qty_available:
-                          type: number
-                          description: 庫存數量
-                        alert_quantity:
-                          type: string
-                          description: 庫存警告數量
-                        default_sell_price:
-                          type: string
-                          description: 售價
-                        product_custom_field1:
-                          type: string
-                          description: 藥品證號
-                        product_custom_field2:
-                          type: string
-                          description: 藥品英文名稱
-                        product_custom_field3:
-                          type: string
-                          description: 藥廠
-                        product_custom_field4:
-                          type: string
-                          description: 藥品主成份
-                    example:
-                      - id: 1
-                        sku: SKU123
-                        name: 眼藥水
-                        qty_available: 200
-                        alert_quantity: 10
-                        default_sell_price: 125.000
-                        product_custom_field1: HK-58956
-                        product_custom_field2: S.T. NATURAL TEARS EYE DROPS
-                        product_custom_field3: BIO
-                        product_custom_field4: Vintamic C
-                      - id: 2
-                        sku: SKU223
-                        name: 暈船藥
-                        qty_available: 250
-                        alert_quantity: 15
-                        default_sell_price: 110.000
-                        product_custom_field1: HK-68741
-                        product_custom_field2: S.T. NATURAL TEARS EYE DROPS
-                        product_custom_field3: BIO
-                        product_custom_field4: Vintamic C
-                  links:
-                    type: object
-                    properties:
-                      first:
-                        type: string
-                      last:
-                        type: string
-                      prev:
-                        type: string
-                      next:
-                        type: string
-                  meta:
-                    type: object
-                    properties:
-                      current_page:
-                        type: number
-                      from:
-                        type: number
-                      last_page:
-                        type: number
-                      path:
-                        type: string
-                      per_page:
-                        type: number
-                      to:
-                        type: number
-                      total:
-                        type: number
+                $ref: '#/components/schemas/ProductsResponse'
+              example:
+                date:
+                - id: 1
+                  sku: SKU123
+                  name: 眼藥水
+                  qty_available: 200
+                  alert_quantity: 10
+                  default_sell_price: 125.000
+                  product_custom_field1: HK-58956
+                  product_custom_field2: S.T. NATURAL TEARS EYE DROPS
+                  product_custom_field3: BIO
+                  product_custom_field4: Vintamic C
+                - id: 2
+                  sku: SKU223
+                  name: 暈船藥
+                  qty_available: 250
+                  alert_quantity: 15
+                  default_sell_price: 110.000
+                  product_custom_field1: HK-68741
+                  product_custom_field2: S.T. NATURAL TEARS EYE DROPS
+                  product_custom_field3: BIO
+                  product_custom_field4: Vintamic C
+                links:
+                  type: object
+                  properties:
+                    first:
+                      type: string
+                    last:
+                      type: string
+                    prev:
+                      type: string
+                    next:
+                      type: string
+                meta:
+                  type: object
+                  properties:
+                    current_page:
+                      type: number
+                    from:
+                      type: number
+                    last_page:
+                      type: number
+                    path:
+                      type: string
+                    per_page:
+                      type: number
+                    to:
+                      type: number
+                    total:
+                      type: number
   /products/{id}:
     get:
       summary: '取得單一產品'
@@ -711,47 +756,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                        description: 藥品 id
-                      sku:
-                        type: string
-                        description: 藥品 SKU
-                      name:
-                        type: string
-                        description: 藥品名稱
-                      unit_id:
-                        type: number
-                        description: 單位 id
-                      qty_available:
-                        type: number
-                        description: 庫存數量
-                      alert_quantity:
-                        type: string
-                        description: 庫存警告數量
-                      unit_short_name:
-                        type: string
-                        description: 單位簡稱
-                      default_sell_price:
-                        type: string
-                        description: 售價
-                      product_custom_field1:
-                        type: string
-                        description: 藥品證號
-                      product_custom_field2:
-                        type: string
-                        description: 藥品英文名稱
-                      product_custom_field3:
-                        type: string
-                        description: 藥廠
-                      product_custom_field4:
-                        type: string
-                        description: 藥品主成份
+                $ref: '#/components/schemas/SingleProductResponse'
   /contacts:
     get:
       summary: 客戶清單
