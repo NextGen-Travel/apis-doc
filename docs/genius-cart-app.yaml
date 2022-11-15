@@ -4479,103 +4479,11 @@ paths:
   # ==================
   # Auth login
   # ==================
-  /auth/{provider}:
-    get:
-      summary: 第三方登入
-      description: 第三方登入
-      tags:
-        - auth
-      parameters:
-        - in: path
-          name: provider
-          schema:
-            type: string
-          required: true
-          example: google
-      responses:
-        '200':
-          description: 成功
 
-  /auth/{provider}/callback:
-    get:
-      summary: get response from provider
-      description: get response from provider
-      tags:
-        - auth
-      parameters:
-        - in: path
-          name: provider
-          schema:
-            type: string
-          required: true
-          example: google
-      responses:
-        '200':
-          description: 成功
-
-  /auth/verify/google:
+  /auth/verify:
     post:
-      summary: google 註冊登入
-      description: 前端提供token供後端驗證確認後進行註冊並交換token給前端
-      tags:
-        - auth
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                credential:
-                  type: string
-                  description: 前端拿到Google提供的token
-              required:
-                - token
-
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      token:
-                        type: string
-        '500':
-          description: 伺服器錯誤
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        example:  伺服器錯誤
-        '400':
-          description: 失敗
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        example:  驗證錯誤          
-
-  /auth/verify/facebook:
-    post:
-      summary: facebook 註冊登入
-      description: 前端提供token供後端驗證確認後進行註冊並交換token給前端
+      summary: 第三方註冊登入
+      description: 前端提供token及provider供後端驗證確認後進行註冊並交換token給前端
       tags:
         - auth
       requestBody:
@@ -4587,12 +4495,13 @@ paths:
               properties:
                 token:
                   type: string
-                  description: 前端拿到Facebook提供的token
-                url_scheme:
+                  description: 前端提供token
+                provider:
                   type: string
-                  description: 依照使用者使用裝置決定是否提供
+                  description: 依照provider設定( facebook || google )
               required:
                 - token
+                - provider
 
       responses:
         '200':
