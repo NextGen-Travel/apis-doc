@@ -1,0 +1,88 @@
+openapi: 3.0.1
+
+info:
+  title: SCRM FOR SSO API
+  version: 1.0.0
+
+servers:
+  - url: https://scrm-api-dev.cloudsatlas.com.hk/api
+    description: dev server
+
+components:
+  securitySchemes:
+    client_token:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: 驗證需要的 token, Bearer xxx
+
+paths:
+
+  # ====================
+  #
+  # Auth
+  #
+  /auth/verifySSO:
+    post:
+      summary: 第三方註冊登入
+      description: 前端提供token及provider供後端驗證確認後進行註冊並交換token給前端
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: 從SSO系統拿到的token
+                appId:
+                  type: string
+                  example: 77046e51-fd54-4749-b3ac-68e8a37f5e86
+                  description: 個別廠商的uuid
+              required:
+                - token
+                - appId
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+        '500':
+          description: 伺服器錯誤
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  伺服器錯誤
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  驗證錯誤                              
+  

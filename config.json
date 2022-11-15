@@ -21,8 +21,12 @@
             "value": "medicine-private"
         },
         {
-            "name": "Cas Auth",
+            "name": "Cas",
             "value": "cas-auth"
+        },
+        {
+            "name": "Scrm",
+            "value": "scrm"
         }
     ]
 }
