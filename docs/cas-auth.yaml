@@ -419,3 +419,7 @@ paths:
                         type: boolean
                       dispensing:
                         type: boolean
+                      nssCallback:
+                        type: string
+                      posCallback:
+                        type: string
