@@ -22,7 +22,7 @@ paths:
   #
   # Auth
   #
-  /auth/verifySSO:
+  /auth/sso/verify:
     post:
       summary: 第三方註冊登入
       description: 前端提供token及provider供後端驗證確認後進行註冊並交換token給前端
@@ -91,6 +91,93 @@ paths:
   #
   # User
   #
+
+  /admin/users/{id}:
+    put:
+      summary: 更新任一客服資料
+      description: 更新任一客服資料
+      tags:
+        - users
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: 123456789
+                  description: 客服密碼
+                confirmPassword:
+                  type: string
+                  example: 123456789
+                  description: 客服密碼
+                displayName:
+                  type: string
+                  example: TJ
+                  description: 客服前台顯示名稱
+                confirmed:
+                  type: string
+                  example: 1
+                  description: 1為啟用  ０為停用 
+                avatar  :  
+                  type: string
+                  format: binary
+                  description: 客服大頭貼                                                    
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      provider:
+                        type: string
+                      password:
+                        type: string
+                      resetPasswordToken:
+                        type: string
+                      confirmationToken:
+                        type: string
+                      confirmed:
+                        type: boolean
+                      blocked:
+                        type: boolean
+                      displayName:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      phone:
+                        type: string
+                      notes:
+                        type: string
+                      isDeleted:
+                        type: boolean
+                      avatar:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          url:
+                            type: string
+                  msg:
+                    type: string
 
   /users:
     get: 
@@ -283,7 +370,47 @@ paths:
                         type: string
                       isDeleted:
                         type: boolean
+   put:
+      summary: 更新客服資料（登入者自己）
+      description: 更新客服資料（登入者自己）
+      tags:
+        - users
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: 123456789
+                  description: 客服密碼
+                confirmPassword:
+                  type: string
+                  example: 123456789
+                  description: 客服密碼
+                displayName:
+                  type: string
+                  example: TJ
+                  description: 客服前台顯示名稱  
+                avatar  :  
+                  type: string
+                  format: binary
+                  description: 客服大頭貼                                                    
 
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
    delete:
       summary: 刪除特定客服資料
       description: 刪除特定客服資料（管理者權限才可使用）
