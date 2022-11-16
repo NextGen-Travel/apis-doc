@@ -195,3 +195,92 @@ paths:
                         type: string
                         example:  建立失敗                              
   
+
+  /users/{id}:
+   get:
+      summary: 查詢特定客服資料
+      description: 查詢特定客服資料
+      tags:
+        - users
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      provider:
+                        type: string
+                      password:
+                        type: string
+                      resetPasswordToken:
+                        type: object
+                      confirmationToken:
+                        type: object
+                      confirmed:
+                        type: boolean
+                      blocked:
+                        type: boolean
+                      displayName:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      phone:
+                        type: object
+                      notes:
+                        type: object
+                      isDeleted:
+                        type: boolean
+
+  /users/me:
+   get:
+      summary: 查詢特定客服資料
+      description: 查詢特定客服資料
+      tags:
+        - users
+      security:
+        - client: []
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            displayName:
+                              type: string
+                            avatar:
+                              type: string
+
