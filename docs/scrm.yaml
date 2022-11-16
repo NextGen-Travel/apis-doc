@@ -193,9 +193,9 @@ paths:
                   updatedAt:
                     type: string
                   phone:
-                    type: object
+                    type: string
                   notes:
-                    type: object
+                    type: string
                   isDeleted:
                     type: boolean
         '500':
@@ -264,9 +264,9 @@ paths:
                       password:
                         type: string
                       resetPasswordToken:
-                        type: object
+                        type: string
                       confirmationToken:
-                        type: object
+                        type: string
                       confirmed:
                         type: boolean
                       blocked:
@@ -278,12 +278,37 @@ paths:
                       updatedAt:
                         type: string
                       phone:
-                        type: object
+                        type: string
                       notes:
-                        type: object
+                        type: string
                       isDeleted:
                         type: boolean
 
+   delete:
+      summary: 刪除特定客服資料
+      description: 刪除特定客服資料（管理者權限才可使用）
+      tags:
+        - users
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+ 
   /users/me:
    get:
       summary: 查詢客服資料
