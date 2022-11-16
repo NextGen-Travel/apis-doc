@@ -93,6 +93,36 @@ paths:
   #
 
   /users:
+    get: 
+      summary: 取得所有與登入者同company的客服資料
+      description: 取得所有與登入者同company的客服資料
+      tags:
+        - users
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        username:
+                          type: string
+                        displayName:
+                          type: string
+                        avatar:
+                          type: string
     post:
       summary: 創建客服（管理者權限才可使用）
       description: 管理者創建新客服
@@ -256,8 +286,8 @@ paths:
 
   /users/me:
    get:
-      summary: 查詢特定客服資料
-      description: 查詢特定客服資料
+      summary: 查詢客服資料
+      description: 查詢客服資料
       tags:
         - users
       security:
