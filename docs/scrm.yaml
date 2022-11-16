@@ -10,7 +10,7 @@ servers:
 
 components:
   securitySchemes:
-    client_token:
+    client:
       in: header
       type: apiKey
       name: Authorization
@@ -35,7 +35,7 @@ paths:
             schema:
               type: object
               properties:
-                token:
+                accessToken:
                   type: string
                   description: 從SSO系統拿到的token
                 appId:
@@ -85,4 +85,113 @@ paths:
                       msg:
                         type: string
                         example:  驗證錯誤                              
+  
+
+  # ====================
+  #
+  # User
+  #
+
+  /users:
+    post:
+      summary: 創建客服（管理者權限才可使用）
+      description: 管理者創建新客服
+      tags:
+        - users
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: 客服帳號名稱
+                email:
+                  type: string
+                  example: 123@123.com
+                  description: 客服信箱
+                password:
+                  type: string
+                  example: 123456789
+                  description: 客服密碼
+                confirmPassword:
+                  type: string
+                  example: 123456789
+                  description: 客服密碼
+                displayName:
+                  type: string
+                  example: TJ
+                  description: 客服前台顯示名稱  
+                avatar  :  
+                  type: string
+                  format: binary
+                  description: 客服大頭貼                                                    
+              required:
+                - username
+                - email
+                - password
+                - confirmPassword
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  provider:
+                    type: string
+                  confirmed:
+                    type: boolean
+                  blocked:
+                    type: boolean
+                  displayName:
+                    type: string
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+                  phone:
+                    type: object
+                  notes:
+                    type: object
+                  isDeleted:
+                    type: boolean
+        '500':
+          description: 伺服器錯誤
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  伺服器錯誤
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  建立失敗                              
   
