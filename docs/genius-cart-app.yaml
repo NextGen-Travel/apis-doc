@@ -4542,3 +4542,108 @@ paths:
                       msg:
                         type: string
                         example:  驗證錯誤                              
+
+  /auth/verify/google:
+    post:
+      summary: 第三方註冊登入(google)
+      description: 前端提供token及provider供後端驗證確認後進行註冊並交換token給前端
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: 前端提供token
+              required:
+                - token
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+        '500':
+          description: 伺服器錯誤
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  伺服器錯誤
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  驗證錯誤        
+
+  /auth/verify/facebook:
+    get:
+      summary: 第三方註冊登入(facebook)
+      description: 前端呼叫第三方登入進行驗證後交換token給前端
+      tags:
+        - auth
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      token:
+                        type: string
+        '500':
+          description: 伺服器錯誤
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  伺服器錯誤
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  驗證錯誤                                
