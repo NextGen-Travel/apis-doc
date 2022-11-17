@@ -3241,9 +3241,11 @@ paths:
           multipart/form-data:
             schema:
               type: object
+              required:
+                - "name"
+                - "email"
               properties:
                 photo:
-                  nullable: true
                   type: string
                   format: binary
                   description: 使用者圖片
