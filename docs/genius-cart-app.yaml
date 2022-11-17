@@ -3242,8 +3242,8 @@ paths:
             schema:
               type: object
               required:
-                - "name"
-                - "email"
+                - name
+                - email
               properties:
                 photo:
                   type: string
