@@ -126,6 +126,92 @@ paths:
                               publishedAt:
                                 type: string
 
+  /users-permissions/auth/sso/verify:
+    post:
+      summary: 從 SSO 登入後要進到這個系統
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appId:
+                  type: string
+                  description: uuid
+                  example: "77046e51-fd54-4749-b3ac-68e8a37f5e86"
+                accessToken:
+                  type: string
+                  description: token
+                  example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6Ijc3MDQ2ZTUxLWZkNTQtNDc0OS1iM2FjLTY4ZThhMzdmNWU4NiIsImlzcyI6Iua4r-S5nea4r1RFU1QiLCJleHAiOjE2NzI0NDQ4MDAsImFjY291bnQiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AMTIzLmNvbSIsInBhc3N3b3JkIjoiQWRtaW4xMjMiLCJpYXQiOjE2NjgwNjMzOTd9.GFO_lF2gb3fKDC3UMR4aTyQvUI8W4gre4h1d21uacEA"
+      responses:
+        "200":
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          username:
+                            type: string
+                          email:
+                            type: string
+                          provider:
+                            type: string
+                          confirmed:
+                            type: boolean
+                          blocked:
+                            type: boolean
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          memo:
+                            type: string
+                          level:
+                            type: string
+                          startedAt:
+                            type: string
+                          finishedAt:
+                            type: string
+                          isPharmacist:
+                            type: boolean
+                          store:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              nameCn:
+                                type: string
+                              nameEn:
+                                type: string
+                              tel:
+                                type: string
+                              address:
+                                type: string
+                              district:
+                                type: string
+                              rxNo:
+                                type: string
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                              publishedAt:
+                                type: string
+
   # ====================
   #
   # hospitals
