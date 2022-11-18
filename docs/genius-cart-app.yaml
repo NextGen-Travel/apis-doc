@@ -1522,32 +1522,53 @@ paths:
                 type: object
                 properties:
                   data:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        name:
+                    type: object
+                    properties:
+                      images:
+                        type: array
+                        items:
                           type: string
-                        images:
-                          type: array
-                          items:
-                            type: string
-                        brand_name:
+                      name:
+                        type: string
+                      details:
+                        type: string
+                      policy:
+                        type: string
+                      sku:
+                        type: string
+                      stock:
+                        type: number
+                      specification:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            size:
+                              type: string
+                            color:
+                              type: string
+                            size_qty:
+                              type: number
+                            size_price:
+                              type: number
+                            total_price:
+                              type: number
+                      id:
+                        type: number
+                      brand_name:
+                        type: string
+                      max_price:
+                        type: number
+                      min_price:
+                        type: number
+                      tags:
+                        type: array
+                        items:
                           type: string
-                        details:
-                          type: string
-                        policy:
-                          type: string
-                        max_price:
-                          type: number
-                        min_price:
-                          type: number
-                        tags:
-                          type: string
-                        stock:
-                          type: number
-                        type:
-                          type: string
+                      type:
+                        type: string
+                      price:
+                        type: number
         '404':
           description: 失敗
           content:
