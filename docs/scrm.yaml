@@ -54,40 +54,37 @@ paths:
               schema:
                 type: object
                 properties:
+                  msg:
+                    type: string
                   data:
                     type: object
                     properties:
-                      msg:
+                      jwt:
                         type: string
-                      data:
+                      user:
                         type: object
                         properties:
-                          jwt:
+                          id:
+                            type: number
+                          displayName:
                             type: string
-                          user:
+                          avatar:
                             type: object
                             properties:
                               id:
                                 type: number
-                              displayName:
+                              url:
                                 type: string
-                              avatar:
-                                type: object
-                                properties:
-                                  id:
-                                    type: number
-                                  url:
-                                    type: string
-                              company:
-                                type: object
-                                properties:
-                                  id:
-                                    type: number
-                              role:
-                                type: object
-                                properties:
-                                  type:
-                                    type: string
+                          company:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                          role:
+                            type: object
+                            properties:
+                              type:
+                                type: string
         '500':
           description: 伺服器錯誤
           content:
