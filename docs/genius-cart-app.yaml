@@ -1543,6 +1543,9 @@ paths:
                         type: string
                       stock:
                         type: number
+                      specification_type:
+                        type: boolean
+                        description: true 表示有開啟多規格，反之則無                        
                       specification:
                         type: array
                         items:
@@ -1630,9 +1633,6 @@ paths:
                           type: string
                         stock:
                           type: number
-                        isOptions:
-                          type: boolean
-                          description: true 表示有開啟多規格，反之則無
                         previous_price:
                           type: number
                         discount:
