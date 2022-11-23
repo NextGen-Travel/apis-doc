@@ -43,14 +43,14 @@ paths:
                   type: string
                   example: 123456789
                   description: 登入密碼
-                company:
+                id:
                   type: number
                   example: 1
                   description: 屬於哪一間公司
               required:
                 - email
                 - password
-                - company
+                - id
 
       responses:
         '200':
