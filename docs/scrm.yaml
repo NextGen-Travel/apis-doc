@@ -7,6 +7,7 @@ info:
 servers:
   - url: https://scrm-api-dev.cloudsatlas.com.hk/api
     description: dev server
+  - url: http://localhost:11337/api
 
 components:
   securitySchemes:
@@ -43,14 +44,14 @@ paths:
                   type: string
                   example: 123456789
                   description: 登入密碼
-                companyId:
-                  type: number
-                  example: 1
+                appId:
+                  type: string
+                  example: 77046e51-fd54-4749-b3ac-68e8a37f5e86
                   description: 屬於哪一間公司
               required:
                 - email
                 - password
-                - companyId
+                - appId
 
       responses:
         '200':
@@ -88,6 +89,43 @@ paths:
                             properties:
                               type:
                                 type: string   
+  /auth/companies :
+    post:
+      summary: 登入取得companies appId
+      description: 登入取得companies appId
+      tags: 
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: jintian@nextgen.com.hk
+                  description: 登入email
+                password:
+                  type: string
+                  example: 123456789
+                  description: 登入密碼
+              required:
+                - email
+                - password
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
 
   /auth/sso/verify:
     post:
@@ -548,36 +586,6 @@ paths:
                 properties:
                   msg:
                     type: string
- 
-  /users/me:
-   get:
-      summary: 查詢客服資料
-      description: 查詢客服資料
-      tags:
-        - users
-      security:
-        - client: []
-
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      data:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            displayName:
-                              type: string
-                            avatar:
-                              type: string
 
   # ====================
   #
