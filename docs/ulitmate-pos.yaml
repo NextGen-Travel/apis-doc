@@ -8,7 +8,7 @@ info:
 servers:
   - url: http://localhost:8000/project/public/api
   - url: https://pos.cloudsatlas.com.hk/public/api
-
+  - url: https://erp-dev.cloudsatlas.com.hk/public/api
 tags:
   - name: Business
     description: 商店相關功能
@@ -182,6 +182,68 @@ components:
         purchase_identy_number:
           type: string
           description: 購買人身份證字號
+      # Both properties are required
+      required:  
+        - contact_name
+        - contact_custom_field1
+    SuspendTransaction:
+      type: object
+      properties:
+        contact_id:  # 病人ID
+          type: integer
+          description: 病人 ID
+        contact_name:
+          type: string
+          description: 病人姓名
+        doctor_name:
+          type: string
+          description: 醫生姓名
+        hospital_key:
+          type: integer
+        hospital_name:
+          type: string
+          description: 醫院名稱
+        prescription_sign_created_at:
+          type: string
+          description: 配藥日期
+        prescription_sign_message:
+          type: string
+          description: 處方簽症狀
+        products:
+          type: string
+          description: 藥品清單
+        contact_custom_field1:
+          type: string
+          description: 病人身分證字號
+        contact_mobile:
+          type: string
+          description: 病人手機
+        contact_custom_field2:
+          type: string
+          enum:
+            - F
+            - M
+          description: 病人性別
+        contact_dob:
+          type: string
+          description: 病人生日
+        contact_custom_field3:
+          type: string
+          description: 病人藥物忌諱
+        purchase_id:
+          type: integer
+          description: 購買人 id
+        purchase_name:
+          type: string
+          description: 購買人姓名
+        purchase_mobile:
+          type: string
+          description: 購買人電話
+        purchase_identy_number:
+          type: string
+          description: 購買人身份證字號
+        token:
+          type: string
       # Both properties are required
       required:  
         - contact_name
@@ -671,27 +733,28 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/CreateTransaction'
+              $ref: '#/components/schemas/SuspendTransaction'
             example:
               contact_id: 4
-              contact_name: 桂綸鎂
-              doctor_name: 王醫師
-              hospital_key: 8
-              hospital_name: 中九龍診所
-              prescription_sign_created_at: 2022-10-20
+              contact_name: Willy01
+              doctor_name: 
+              hospital_key: 
+              hospital_name: 
+              prescription_sign_created_at: 2022-11-23
               prescription_sign_message: 頭痛
-              products:
-              contact_custom_field1: A12345678
-              contact_mobile: 0962875124
-              contact_custom_field2: F
-              contact_dob: 1990/1/20
-              contact_custom_field3: 八角
-              purchase_id: 8
-              purchase_name: 戴立忍
-              purchase_mobile: 09937645284
-              purchase_identy_number: B8230185284
+              products: [{"days":6,"total":6,"dosage":1,"frequency":"take_in_morning","product_id":11,"cautions":[],"custom_caution":"","dosage_form":"tablet","unit":"ml","usage":"oral"}]
+              contact_custom_field1: A11111
+              contact_mobile: 09123456
+              contact_custom_field2: M
+              contact_dob: 
+              contact_custom_field3: 
+              purchase_id: null
+              purchase_name: 
+              purchase_mobile: 
+              purchase_identy_number: 
+              token:
       responses:
         '200':
           description: Created
@@ -715,7 +778,6 @@ paths:
       responses:
         '200':
           description: 成功
-
   /products:
     get:
       summary: 產品清單
