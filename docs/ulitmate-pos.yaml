@@ -663,6 +663,59 @@ paths:
                         type: number
                       total:
                         type: number
+  /transactions/suspend:
+    post:
+      summary: 暫存交易
+      tags:
+        - Transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransaction'
+            example:
+              contact_id: 4
+              contact_name: 桂綸鎂
+              doctor_name: 王醫師
+              hospital_key: 8
+              hospital_name: 中九龍診所
+              prescription_sign_created_at: 2022-10-20
+              prescription_sign_message: 頭痛
+              products:
+              contact_custom_field1: A12345678
+              contact_mobile: 0962875124
+              contact_custom_field2: F
+              contact_dob: 1990/1/20
+              contact_custom_field3: 八角
+              purchase_id: 8
+              purchase_name: 戴立忍
+              purchase_mobile: 09937645284
+              purchase_identy_number: B8230185284
+      responses:
+        '200':
+          description: Created
+  /transactions/{id}/checkout:
+    get:
+      summary: 結帳
+      description: 進入 ERP 結帳頁面
+      tags:
+        - Transaction
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: 交易ID
+          required: true
+          example: 126
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 成功
+
   /products:
     get:
       summary: 產品清單
