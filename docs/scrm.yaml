@@ -348,6 +348,9 @@ paths:
                           type: string
                         avatar:
                           type: string
+                        confirmed:
+                          type: boolean
+                          description: true表示啟用反之為停用
     post:
       summary: 創建客服（管理者權限才可使用）
       description: 管理者創建新客服
