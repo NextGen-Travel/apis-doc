@@ -43,9 +43,14 @@ paths:
                   type: string
                   example: 123456789
                   description: 登入密碼
+                company:
+                  type: number
+                  example: 1
+                  description: 屬於哪一間公司
               required:
                 - email
                 - password
+                - company
 
       responses:
         '200':
@@ -573,4 +578,53 @@ paths:
                               type: string
                             avatar:
                               type: string
+
+  # ====================
+  #
+  # Company
+  #
+  /companies:
+    get:
+      summary: 查詢公司資料
+      description: 查詢公司資料
+      tags:
+        - company
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            createdAt:
+                              type: string
+                            updatedAt:
+                              type: string
+                  meta:
+                    type: object
+                    properties:
+                      pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: number
+                          pageSize:
+                            type: number
+                          pageCount:
+                            type: number
+                          total:
+                            type: number
 
