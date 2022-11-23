@@ -604,27 +604,6 @@ paths:
                       properties:
                         id:
                           type: number
-                        attributes:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            createdAt:
-                              type: string
-                            updatedAt:
-                              type: string
-                  meta:
-                    type: object
-                    properties:
-                      pagination:
-                        type: object
-                        properties:
-                          page:
-                            type: number
-                          pageSize:
-                            type: number
-                          pageCount:
-                            type: number
-                          total:
-                            type: number
+                        name:
+                          type: string
 
