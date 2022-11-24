@@ -217,6 +217,39 @@ paths:
                         type: string
                         example:  驗證錯誤                              
   
+  /auth/forgot-password :
+    post:
+      summary: 忘記密碼
+      description: 忘記密碼
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 使用者email
+                appId:
+                  type: string
+                  example: 77046e51-fd54-4749-b3ac-68e8a37f5e86
+                  description: 個別廠商的uuid
+              required:
+                - email
+                - appId
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
 
   # ====================
   #
@@ -387,7 +420,13 @@ paths:
                 avatar  :  
                   type: string
                   format: binary
-                  description: 客服大頭貼                                                    
+                  description: 客服大頭貼
+                phone:
+                  type: string
+                  description: 電話
+                notes:
+                  type: string        
+                  description: 備註                                            
               required:
                 - username
                 - email
