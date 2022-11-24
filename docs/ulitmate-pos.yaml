@@ -191,6 +191,7 @@ components:
       properties:
         contact_id:  # 病人ID
           type: integer
+          nullable: true
           description: 病人 ID
         contact_name:
           type: string
@@ -199,7 +200,7 @@ components:
           type: string
           description: 醫生姓名
         hospital_key:
-          type: integer
+          type: string
         hospital_name:
           type: string
           description: 醫院名稱
@@ -232,6 +233,7 @@ components:
           description: 病人藥物忌諱
         purchase_id:
           type: integer
+          nullable: true
           description: 購買人 id
         purchase_name:
           type: string
@@ -413,6 +415,21 @@ components:
             created_at:
               type: string
               description: 建立日期
+    SuspendResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            success:
+              type: number
+              description: success code
+            msg:
+              type: string
+              description: response message
+            transaction_id:
+              type: number
+              description: 暫存交易 id
     ProductsResponse:
       type: object
       properties:
@@ -758,6 +775,10 @@ paths:
       responses:
         '200':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuspendResponse'
   /transactions/{id}/checkout:
     get:
       summary: 結帳
