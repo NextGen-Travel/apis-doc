@@ -307,48 +307,30 @@ paths:
               schema:
                 type: object
                 properties:
-                  user:
+                  msg:
+                    type: string
+                  data:
                     type: object
                     properties:
                       id:
                         type: number
-                      username:
-                        type: string
                       email:
                         type: string
-                      provider:
+                      displayName:
                         type: string
-                      password:
-                        type: string
-                      resetPasswordToken:
-                        type: string
-                      confirmationToken:
+                      username:
                         type: string
                       confirmed:
                         type: boolean
-                      blocked:
-                        type: boolean
-                      displayName:
-                        type: string
-                      createdAt:
-                        type: string
-                      updatedAt:
-                        type: string
                       phone:
                         type: string
                       notes:
                         type: string
-                      isDeleted:
-                        type: boolean
                       avatar:
                         type: object
                         properties:
-                          id:
-                            type: number
                           url:
                             type: string
-                  msg:
-                    type: string
 
   /users:
     get: 
