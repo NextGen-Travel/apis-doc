@@ -502,28 +502,25 @@ paths:
                   data:
                     type: object
                     properties:
-                      data:
+                      id:
+                        type: number
+                      email:
+                        type: string
+                      displayName:
+                        type: string
+                      username:
+                        type: string
+                      confirmed:
+                        type: boolean
+                      phone:
+                        type: string
+                      notes:
+                        type: string
+                      avatar:
                         type: object
                         properties:
-                          id:
-                            type: number
-                          email:
+                          url:
                             type: string
-                          displayName:
-                            type: string
-                          username:
-                            type: string
-                          confirmed:
-                            type: boolean
-                          phone:
-                            type: string
-                          notes:
-                            type: string
-                          avatar:
-                            type: object
-                            properties:
-                              url:
-                                type: string
 
    put:
       summary: 更新客服資料（登入者自己）
