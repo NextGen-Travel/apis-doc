@@ -512,36 +512,29 @@ paths:
                   data:
                     type: object
                     properties:
-                      id:
-                        type: number
-                      username:
-                        type: string
-                      email:
-                        type: string
-                      provider:
-                        type: string
-                      password:
-                        type: string
-                      resetPasswordToken:
-                        type: string
-                      confirmationToken:
-                        type: string
-                      confirmed:
-                        type: boolean
-                      blocked:
-                        type: boolean
-                      displayName:
-                        type: string
-                      createdAt:
-                        type: string
-                      updatedAt:
-                        type: string
-                      phone:
-                        type: string
-                      notes:
-                        type: string
-                      isDeleted:
-                        type: boolean
+                      data:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          email:
+                            type: string
+                          displayName:
+                            type: string
+                          username:
+                            type: string
+                          confirmed:
+                            type: boolean
+                          phone:
+                            type: string
+                          notes:
+                            type: string
+                          avatar:
+                            type: object
+                            properties:
+                              url:
+                                type: string
+
    put:
       summary: 更新客服資料（登入者自己）
       description: 更新客服資料（登入者自己）
