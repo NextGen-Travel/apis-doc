@@ -291,13 +291,21 @@ paths:
                   example: TJ
                   description: 客服前台顯示名稱
                 confirmed:
-                  type: string
+                  type: boolean
                   example: 1
-                  description: 1為啟用  ０為停用 
+                  description: 啟用 || 停用
                 avatar  :  
                   type: string
                   format: binary
-                  description: 客服大頭貼                                                    
+                  description: 客服大頭貼 
+                phone: 
+                  type: string
+                  example: 123456789
+                  description: 電話
+                notes:
+                  type: string
+                  example: test
+                  description: 備註
 
       responses:
         '200':
