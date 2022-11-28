@@ -598,7 +598,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/CreateTransaction'
             example:
@@ -775,30 +775,6 @@ paths:
       responses:
         '200':
           description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SuspendResponse'
-  /transactions/{id}/checkout:
-    get:
-      summary: 結帳
-      description: 進入 ERP 結帳頁面
-      tags:
-        - Transaction
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: id
-          in: path
-          description: 交易ID
-          required: true
-          example: 126
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: 成功
   /products:
     get:
       summary: 產品清單
@@ -990,7 +966,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/CreateContact'
       responses:
@@ -1065,7 +1041,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/CreateContact'
             example:
