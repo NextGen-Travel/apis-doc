@@ -626,10 +626,7 @@ paths:
                       notes:
                         type: string
                       avatar:
-                        type: object
-                        properties:
-                          url:
-                            type: string
+                        type: string
 
   # ====================
   #
