@@ -276,6 +276,7 @@ paths:
           multipart/form-data:
             schema:
               type: object
+              required: []
               properties:
                 password:
                   type: string
@@ -334,7 +335,10 @@ paths:
                       notes:
                         type: string
                       avatar:
-                        type: string
+                        type: object
+                        properties:
+                          url:
+                            type: string
 
   /admin/delete/users/{id}:
     put:
@@ -552,7 +556,10 @@ paths:
                       notes:
                         type: string
                       avatar:
-                        type: string
+                        type: object
+                        properties:
+                          url:
+                            type: string
 
    put:
       summary: 更新客服資料（登入者自己）
@@ -619,7 +626,10 @@ paths:
                       notes:
                         type: string
                       avatar:
-                        type: string
+                        type: object
+                        properties:
+                          url:
+                            type: string
 
   # ====================
   #
