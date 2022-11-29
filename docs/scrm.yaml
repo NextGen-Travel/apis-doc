@@ -251,6 +251,44 @@ paths:
                   msg:
                     type: string
 
+  /auth/reset-password :
+    post:
+      summary: 重設密碼
+      description: 重設密碼
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: strapi產的code,接在url中的query
+                password:
+                  type: string
+                  description: 使用者email
+                passwordConfirmation:
+                  type: string
+                  example: 77046e51-fd54-4749-b3ac-68e8a37f5e86
+                  description: 個別廠商的uuid
+              required:
+                - code
+                - password
+                - passwordConfirmation
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   # ====================
   #
   # User
