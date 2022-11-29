@@ -335,10 +335,7 @@ paths:
                       notes:
                         type: string
                       avatar:
-                        type: object
-                        properties:
-                          url:
-                            type: string
+                        type: string
 
   /admin/delete/users/{id}:
     put:
@@ -556,10 +553,7 @@ paths:
                       notes:
                         type: string
                       avatar:
-                        type: object
-                        properties:
-                          url:
-                            type: string
+                        type: string
 
    put:
       summary: 更新客服資料（登入者自己）
