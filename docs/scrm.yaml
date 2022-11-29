@@ -340,6 +340,45 @@ paths:
                           url:
                             type: string
 
+  /admin/delete/users/{id}:
+    put:
+      summary: 刪除特定客服資料
+      description: 刪除特定客服資料（管理者權限才可使用）
+      tags:
+        - users
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 刪除使用者需要輸入登入者的密碼驗證身份
+              required:
+                - password
+    
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   /users:
     get: 
       summary: 取得所有與登入者同company的客服資料
@@ -591,44 +630,6 @@ paths:
                         properties:
                           url:
                             type: string
-
-   delete:
-      summary: 刪除特定客服資料
-      description: 刪除特定客服資料（管理者權限才可使用）
-      tags:
-        - users
-      security:
-        - client: []
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: number
-          required: true
-          example: 1
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                password:
-                  type: string
-                  description: 刪除使用者需要輸入登入者的密碼驗證身份
-              required:
-                - password
-    
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
 
   # ====================
   #
