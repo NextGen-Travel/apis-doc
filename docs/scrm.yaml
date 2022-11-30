@@ -378,6 +378,8 @@ paths:
                         type: string
                       avatar:
                         type: string
+                      role: 
+                        type: string
 
   /admin/delete/users/{id}:
     put:
@@ -452,6 +454,8 @@ paths:
                         confirmed:
                           type: boolean
                           description: true表示啟用反之為停用
+                        role:
+                          type: string
     post:
       summary: 創建客服（管理者權限才可使用）
       description: 管理者創建新客服
@@ -494,12 +498,18 @@ paths:
                   description: 電話
                 notes:
                   type: string        
-                  description: 備註                                            
+                  description: 備註     
+                role:
+                  type: string
+                  example: Manager
+                  description: 員工權限（ Manager || Advanced-Staff || Staff )  
+
               required:
                 - username
                 - email
                 - password
                 - confirmPassword
+                - role
 
       responses:
         '200':
@@ -524,6 +534,8 @@ paths:
                         type: string
                       confirmed:
                         type: boolean
+                      role:
+                        type: string
 
         '500':
           description: 伺服器錯誤
@@ -596,6 +608,8 @@ paths:
                         type: string
                       avatar:
                         type: string
+                      role:
+                        type: string
 
    put:
       summary: 更新客服資料（登入者自己）
@@ -662,6 +676,8 @@ paths:
                       notes:
                         type: string
                       avatar:
+                        type: string
+                      role:
                         type: string
 
   # ====================
