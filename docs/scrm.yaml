@@ -63,6 +63,8 @@ paths:
                 properties:
                   msg:
                     type: string
+                  data:
+                    type: object
                     properties:
                       jwt:
                         type: string
