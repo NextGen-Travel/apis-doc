@@ -344,6 +344,10 @@ paths:
                   type: string
                   example: test
                   description: 備註
+                role:
+                  type: string
+                  example: Manager
+                  description: 員工權限（ Manager || Advanced-Staff || Staff )
 
       responses:
         '200':
