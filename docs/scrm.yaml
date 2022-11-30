@@ -269,11 +269,10 @@ paths:
                   description: strapi產的code,接在url中的query
                 password:
                   type: string
-                  description: 使用者email
+                  description: 重設的密碼
                 passwordConfirmation:
                   type: string
-                  example: 77046e51-fd54-4749-b3ac-68e8a37f5e86
-                  description: 個別廠商的uuid
+                  description: 重設密碼確認
               required:
                 - code
                 - password
