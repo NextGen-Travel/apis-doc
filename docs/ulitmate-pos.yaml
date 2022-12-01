@@ -483,18 +483,18 @@ components:
             name:
               type: string
               description: 藥品名稱
-            unit_id:
-              type: number
-              description: 單位 id
+            unit_key:
+              type: string
+              description: 單位 Key
+            unit_short_name:
+              type: string
+              description: 單位簡稱
             qty_available:
               type: number
               description: 庫存數量
             alert_quantity:
               type: string
               description: 庫存警告數量
-            unit_short_name:
-              type: string
-              description: 單位簡稱
             default_sell_price:
               type: string
               description: 售價
