@@ -709,3 +709,59 @@ paths:
                         name:
                           type: string
 
+  /companies/list:
+    get:
+      summary: superadmin查詢所有公司資料
+      description: superadmin查詢所有公司資料
+      tags:
+        - company
+      security:
+        - client: []  
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false   
+        - in: query
+          name: pageSize
+          schema:
+            type: number
+          required: false 
+        - in: query
+          name: keyword
+          required: false
+          description: 搜尋公司名稱
+          schema:
+            type: string                           
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        platform:
+                          type: array
+                          items:
+                            type: string
+                        accountCount:
+                          type: number
+                        accountLimit:
+                          type: number
+                        sso:
+                          type: boolean
+                        enable:
+                          type: boolean
+                  total:
+                    type: number
