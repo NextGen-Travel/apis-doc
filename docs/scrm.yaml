@@ -73,6 +73,8 @@ paths:
                         properties:
                           id:
                             type: number
+                          username:
+                            type: string 
                           displayName:
                             type: string
                           blocked:
