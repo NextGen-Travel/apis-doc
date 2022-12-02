@@ -92,10 +92,7 @@ components:
           type: string
           description: 電子郵件
           example: 'dev@nextgen.com.hk'
-        account:
-          type: string
-          description: 帳號
-          example: 'dev'
+
 
 paths:
 
