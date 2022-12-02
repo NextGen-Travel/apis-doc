@@ -198,7 +198,7 @@ paths:
         '200':
           description: 成功
 
-  /v1/auth/reset-password:
+  /auth/reset-password:
     post:
       summary: 修改密碼
       tags:
