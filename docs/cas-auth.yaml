@@ -472,7 +472,7 @@ paths:
 
   /v1/company/mail/deliver:
     post:
-      summary: 設定 company deliver(暫時不吃權限，使用前需要到後台開啟)
+      summary: 設定 company deliver(暫時不吃權限，使用前需要到後台開啟)，cc 跟 bcc 若有多個 mail 使用『,』做分隔
       tags:
         - company
       requestBody:
