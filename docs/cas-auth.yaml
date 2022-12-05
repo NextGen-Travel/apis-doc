@@ -420,3 +420,93 @@ paths:
                         type: string
                       erpCallback:
                         type: string
+
+  /v1/company/mail/template:
+    post:
+      summary: 設定 company mail template(暫時不吃權限，使用前需要到後台開啟)
+      tags:
+        - company
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - type
+                - subject
+                - template
+                - nextgen_template
+                - init
+              properties:
+                type:
+                  type: string
+                  description: 模板類型
+                  example: 'apply'
+                subject:
+                  type: string
+                  description: 模板標題
+                  example: ''
+                template:
+                  type: string
+                  description: 模板內容
+                  example: ''
+                nextgen_template:
+                  type: string
+                  description: 模板(nextgen)內容
+                  example: ''
+                init:
+                  type: boolean
+                  description: 初始化 數值 = 1 ，時 subject、template、nextgen_template，參數不生效
+                  example: 0
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /v1/company/mail/deliver:
+    post:
+      summary: 設定 company deliver(暫時不吃權限，使用前需要到後台開啟)
+      tags:
+        - company
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - from
+                - cc
+                - bcc
+                - nextgen_template
+                - init
+              properties:
+                from:
+                  type: string
+                  description: 預設寄件人
+                  example: 'CloudsAtlas 團隊<no-reply@cloudsatlas.com.hk>'
+                cc:
+                  type: string
+                  description: 副本
+                  example: 'nextgentw2022@gmail.com'
+                bcc:
+                  type: string
+                  description: 密件副本
+                  example: 'nextgentw2022@gmail.com'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
