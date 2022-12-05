@@ -446,7 +446,7 @@ paths:
                 subject:
                   type: string
                   description: 模板標題
-                  example: ''
+                  example: '恭喜成功申請 CloudsAtlas 開店平台！'
                 template:
                   type: string
                   description: 模板內容
