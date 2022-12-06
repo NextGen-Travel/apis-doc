@@ -502,8 +502,8 @@ paths:
                   description: 備註     
                 role:
                   type: string
-                  example: Manager
-                  description: 員工權限（ Manager || Advanced-Staff || Staff )  
+                  example: staff
+                  description: 員工權限（ superadmin || seniorStaff || staff )  
 
               required:
                 - username
@@ -749,19 +749,26 @@ paths:
                       properties:
                         id:
                           type: number
+                          description: 公司ID
                         name:
                           type: string
+                          description: 公司名稱
                         platform:
                           type: array
                           items:
                             type: string
+                            description: 公司社群平台（傳回已開啟的）
                         accountCount:
                           type: number
+                          description: 當前已開啟的客服數量
                         accountLimit:
                           type: number
+                          description: 公司的客服開啟上限
                         sso:
                           type: boolean
+                          description: sso設定是否開啟
                         enable:
                           type: boolean
+                          description: 公司狀態
                   total:
                     type: number
