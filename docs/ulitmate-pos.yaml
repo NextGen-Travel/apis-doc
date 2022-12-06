@@ -775,6 +775,10 @@ paths:
       responses:
         '200':
           description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuspendResponse'
   /products:
     get:
       summary: 產品清單
