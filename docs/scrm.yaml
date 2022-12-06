@@ -772,3 +772,107 @@ paths:
                           description: 公司狀態
                   total:
                     type: number
+                  
+  /companies/{id}:
+    get:
+      summary: 查詢特定公司資料
+      description: 查詢特定公司資料
+      tags:
+        - company
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      enable:
+                        type: boolean
+                      name:
+                        type: string
+                      accountLimit:
+                        type: number
+                      sso:
+                        type: object
+                        properties:
+                          appId:
+                            type: string
+                          secretKey:
+                            type: string
+                      keys:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            platform:
+                              type: string
+                            channelId:
+                              type: string
+
+  /companies/{id}/users:
+    get:
+      summary: 查詢特定公司底下所有使用者資料
+      description: 查詢特定公司底下所有使用者資料
+      tags:
+        - company
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 1
+        - in: query
+          name: page
+          schema:
+            type: number
+          required: false   
+        - in: query
+          name: pageSize
+          schema:
+            type: number
+          required: false 
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        username:
+                          type: string
+                        displayName:
+                          type: string
+                        phone:
+                          type: string
+                        notes:
+                          type: string
+                        avatar:
+                          type: string
+                        role:
+                          type: string
+                  total:
+                    type: number
