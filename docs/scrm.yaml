@@ -774,8 +774,14 @@ paths:
               schema:
                 type: object
                 properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
                   msg:
                     type: string      
+                    example: 建立成功
 
   /companies/list:
     get:
@@ -891,6 +897,70 @@ paths:
                             channelId:
                               type: string
 
+    put:
+      summary: 更新公司（superadmin權限才可使用）
+      description: 更新公司（superadmin權限才可使用）
+      tags:
+        - company
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enable:
+                  type: boolean
+                  description: 開啟與否
+                name:
+                  type: string
+                  example: nextgenTest
+                  description: 創建公司名稱（唯一值）
+                platform:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        example: 1
+                        description: 平台對應的ID
+                      name:
+                        type: string
+                        example: whatsapp
+                        description: 有開啟的社交平台名稱 (若有name則必須有channelId)
+                      channelId:
+                        type: string
+                        example: test123-wafds-vv654
+                sso:
+                  type: object
+                  items:
+                    properties:
+                      appId:
+                        type: string
+                        example: R546asd-+qwew
+                      secretKey:
+                        type: string
+                        example: as4d123xcv-as46gg
+                accountLimit:
+                  type: number
+                  example: 5
+                  description: 建立客服的數量限制
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string               
+                    example: 更新成功
+
   /companies/{id}/users:
     get:
       summary: 查詢特定公司底下所有使用者資料
@@ -982,4 +1052,5 @@ paths:
                 type: object
                 properties:
                   msg:
-                    type: string                    
+                    type: string                   
+                    example: 刪除成功！
