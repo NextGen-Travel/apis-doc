@@ -729,7 +729,7 @@ paths:
               properties:
                 enable:
                   type: boolean
-                  description: 開啟與否
+                  description: 開啟與否(預設為false)
                 name:
                   type: string
                   example: nextgenTest
@@ -759,12 +759,10 @@ paths:
                 accountLimit:
                   type: number
                   example: 5
-                  description: 建立客服的數量限制
+                  description: 建立客服的數量限制(預設是1)
 
               required:
-                - enable
                 - name
-                - accountLimit
 
       responses:
         '200':
