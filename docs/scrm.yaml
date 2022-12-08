@@ -507,7 +507,7 @@ paths:
                 companyId:
                   type: number
                   example: 5
-                  description: 隸屬公司ID(若沒帶則預設為登入者的公司ID)
+                  description: 隸屬公司ID(若沒帶則預設為登入者的公司ID, superadmin新建客服時必須要帶)
 
               required:
                 - username
