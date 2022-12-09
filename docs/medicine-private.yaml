@@ -305,8 +305,10 @@ components:
         packageImages:
           type: array
           items:
-            type: integer
-            nullable: true
+            type: array
+            items: 
+              type: integer
+          nullable: true
           description: 團檔 id
           example: [[1],[3]]
     drugUpdateResponse :
