@@ -338,7 +338,6 @@ components:
           example: [1]
         uuid:
           type: array
-          nullable: true
           items:
             type: string
           description: 審核的uuid
