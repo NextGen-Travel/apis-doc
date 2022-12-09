@@ -338,9 +338,9 @@ components:
           example: [1]
         uuid:
           type: array
+          nullable: true
           items:
             type: string
-          nullable: true
           description: 審核的uuid
           example: ['685cc162-b2bf-4fcc-879b-41e05c11d43d']
         sku:
