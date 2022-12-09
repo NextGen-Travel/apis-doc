@@ -241,7 +241,7 @@ components:
           type: string
         unit:
           type: string
-    drugUpdate :
+    drugUpdateApplyRevise :
       type: object
       properties:
         indication:
@@ -266,6 +266,82 @@ components:
             type: integer
           description: 團檔 id
           example: [1]
+        sku:
+          type: array
+          items:
+            type: string
+          description: 商品編碼
+          example: ['adasdasdsad', 'sdsdsd']
+        packageName:
+          type: array
+          items:
+            type: string
+          description: 包裝名稱
+          example: ['三十片裝', '十片裝']
+        dosageForm:
+          type: array
+          items:
+            type: string
+          description: 藥劑類型
+          example: ['tablet', 'capsule']
+        usage:
+          type: array
+          items:
+            type: string
+          description: 藥品使用方式
+          example: ['oral','external']
+        dosage:
+          type: array
+          items:
+            type: integer
+          description: 藥品劑量
+          example: [1,1]
+        unit:
+          type: array
+          items:
+            type: string
+          description: 藥品單位
+          example: ['tablet','tablet']
+        packageImages:
+          type: array
+          items:
+            type: array
+            items: 
+              type: integer
+          nullable: true
+          description: 團檔 id
+          example: [[1],[3]]
+    drugUpdateRevise :
+      type: object
+      properties:
+        indication:
+          type: string
+          description: 適應症狀
+          example: '頭痛、發燒'
+        precaution:
+          type: string
+          description: 預防措施(注意事項)
+          example: '服用後建議不要開車'
+        side_effect:
+          type: string
+          description: 副作用
+          example: '注意力不集中'
+        productName_zh:
+          type: string
+          description: 俗名
+          example: '退燒藥'
+        images:
+          type: array
+          items:
+            type: integer
+          description: 團檔 id
+          example: [1]
+        uuid:
+          type: array
+          items:
+            type: string
+          description: 審核的uuid
+          example: ['685cc162-b2bf-4fcc-879b-41e05c11d43d']
         sku:
           type: array
           items:
@@ -1406,7 +1482,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/drugUpdate'
+              $ref: '#/components/schemas/drugUpdateApplyRevise'
           application/x-www-form-urlencoded:
             encoding :
               sku :
@@ -1431,7 +1507,7 @@ paths:
                 style : form
                 explode : true
             schema:
-              $ref: '#/components/schemas/drugUpdate'
+              $ref: '#/components/schemas/drugUpdateApplyRevise'
 
       responses:
         '200':
@@ -1517,7 +1593,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/drugUpdate'
+              $ref: '#/components/schemas/drugUpdateRevise'
           application/x-www-form-urlencoded:
             encoding :
               sku :
@@ -1542,7 +1618,7 @@ paths:
                 style : form
                 explode : true
             schema:
-              $ref: '#/components/schemas/drugUpdate'
+              $ref: '#/components/schemas/drugUpdateRevise'
 
       responses:
         '200':
