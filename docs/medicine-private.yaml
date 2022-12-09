@@ -336,7 +336,7 @@ components:
             type: integer
           description: 團檔 id
           example: [1]
-        uuid:
+        uuidArr:
           type: array
           items:
             type: string
