@@ -1639,7 +1639,7 @@ paths:
   # other
   #
 
-  /upload:
+  /upload/files:
     post:
       summary: 上傳檔案
       tags:
