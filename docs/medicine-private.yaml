@@ -1639,7 +1639,7 @@ paths:
   # other
   #
 
-  /upload/files:
+  /upload:
     post:
       summary: 上傳檔案
       tags:
@@ -1651,7 +1651,7 @@ paths:
             schema:
               type: object
               properties:
-                images:
+                files:
                   type: string
                   format: binary
       responses:
