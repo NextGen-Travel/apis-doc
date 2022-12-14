@@ -814,12 +814,12 @@ paths:
         - in: query
           name: enable
           schema:
-            type: boolean
+            type: string
           required: false
         - in: query
           name: sso
           schema:
-            type: boolean
+            type: string
           required: false  
         - in: query
           name: offset
