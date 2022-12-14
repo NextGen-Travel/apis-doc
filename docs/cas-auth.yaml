@@ -38,6 +38,13 @@ components:
         type: string
       description: 'nss, erp, scrm, dispensing'
       example: 'nss'
+    channel:
+      in: query
+      name: channel
+      schema:
+        type: string
+      description: 'cas, nextgen'
+      example: 'cas'
     appId:
       in: path
       name: appId
@@ -142,6 +149,7 @@ paths:
         - auth
       parameters:
         - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/channel'
         - $ref: '#/components/parameters/MicroServices'
       requestBody:
         required: true
@@ -225,6 +233,7 @@ paths:
         - client_token: []
       parameters:
         - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/channel'
         - $ref: '#/components/parameters/MicroServices'
         - $ref: '#/components/parameters/UserExpand'
       responses:
@@ -278,6 +287,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/appId'
         - $ref: "#/components/parameters/accessToken"
+        - $ref: '#/components/parameters/channel'
         - $ref: '#/components/parameters/MicroServices'
         - $ref: '#/components/parameters/UserExpand'
       responses:
@@ -356,6 +366,7 @@ paths:
         - user
       parameters:
         - $ref: '#/components/parameters/appId'
+        - $ref: '#/components/parameters/channel'
         - $ref: '#/components/parameters/MicroServices'
       requestBody:
         required: true
@@ -408,6 +419,8 @@ paths:
                   data:
                     type: object
                     properties:
+                      channel:
+                        type: string
                       nss:
                         type: boolean
                       erp:
@@ -420,93 +433,3 @@ paths:
                         type: string
                       erpCallback:
                         type: string
-
-  /v1/company/mail/template:
-    post:
-      summary: 設定 company mail template(暫時不吃權限，使用前需要到後台開啟)
-      tags:
-        - company
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              required:
-                - type
-                - subject
-                - template
-                - nextgen_template
-                - init
-              properties:
-                type:
-                  type: string
-                  description: 模板類型
-                  example: 'apply'
-                subject:
-                  type: string
-                  description: 模板標題
-                  example: '恭喜成功申請 CloudsAtlas 開店平台！'
-                template:
-                  type: string
-                  description: 模板內容
-                  example: ''
-                nextgen_template:
-                  type: string
-                  description: 模板(nextgen)內容
-                  example: ''
-                init:
-                  type: boolean
-                  description: 初始化 數值 = 1 ，時 subject、template、nextgen_template，參數不生效
-                  example: 0
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-
-  /v1/company/mail/deliver:
-    post:
-      summary: 設定 company deliver(暫時不吃權限，使用前需要到後台開啟)，cc 跟 bcc 若有多個 mail 使用『,』做分隔
-      tags:
-        - company
-      requestBody:
-        required: true
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              type: object
-              required:
-                - from
-                - cc
-                - bcc
-                - nextgen_template
-                - init
-              properties:
-                from:
-                  type: string
-                  description: 預設寄件人
-                  example: 'CloudsAtlas 團隊<no-reply@cloudsatlas.com.hk>'
-                cc:
-                  type: string
-                  description: 副本
-                  example: 'nextgentw2022@gmail.com'
-                bcc:
-                  type: string
-                  description: 密件副本
-                  example: 'nextgentw2022@gmail.com'
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
