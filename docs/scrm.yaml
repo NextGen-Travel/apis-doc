@@ -73,24 +73,27 @@ paths:
                         properties:
                           id:
                             type: number
-                          username:
-                            type: string 
+                          email:
+                            type: string
                           displayName:
+                            type: string
+                          username:
+                            type: string
+                          confirmed:
+                            type: boolean
+                          phone:
+                            type: string
+                          notes:
                             type: string
                           blocked:
                             type: boolean
                           avatar:
                             type: string
-                          company:
-                            type: object
-                            properties:
-                              id:
-                                type: number
                           role:
-                            type: object
-                            properties:
-                              type:
-                                type: string   
+                            type: string
+                          company:
+                            type: number
+
   /auth/companies :
     post:
       summary: 登入取得companies appId
@@ -377,10 +380,14 @@ paths:
                         type: string
                       notes:
                         type: string
+                      blocked:
+                        type: boolean
                       avatar:
                         type: string
-                      role: 
+                      role:
                         type: string
+                      company:
+                        type: number
 
   /admin/delete/users/{id}:
     put:
@@ -531,16 +538,26 @@ paths:
                     properties:
                       id:
                         type: number
-                      username:
+                      email:
                         type: string
                       displayName:
                         type: string
-                      avatar:
+                      username:
                         type: string
                       confirmed:
                         type: boolean
+                      phone:
+                        type: string
+                      notes:
+                        type: string
+                      blocked:
+                        type: boolean
+                      avatar:
+                        type: string
                       role:
                         type: string
+                      company:
+                        type: number
 
         '500':
           description: 伺服器錯誤
@@ -611,10 +628,14 @@ paths:
                         type: string
                       notes:
                         type: string
+                      blocked:
+                        type: boolean
                       avatar:
                         type: string
                       role:
                         type: string
+                      company:
+                        type: number
 
    put:
       summary: 更新客服資料（登入者自己）
@@ -672,9 +693,9 @@ paths:
                         type: number
                       email:
                         type: string
-                      displayName:
-                        type: string
                       username:
+                        type: string
+                      displayName:
                         type: string
                       phone:
                         type: string
@@ -791,15 +812,30 @@ paths:
         - client: []  
       parameters:
         - in: query
-          name: page
+          name: enable
+          schema:
+            type: boolean
+          required: false
+        - in: query
+          name: sso
+          schema:
+            type: boolean
+          required: false  
+        - in: query
+          name: offset
           schema:
             type: number
           required: false   
         - in: query
-          name: pageSize
+          name: limit
           schema:
             type: number
           required: false 
+        - in: query
+          name: platform
+          schema:
+            type: string
+          required: false           
         - in: query
           name: keyword
           required: false
@@ -973,12 +1009,12 @@ paths:
           required: true
           example: 1
         - in: query
-          name: page
+          name: offset
           schema:
             type: number
           required: false   
         - in: query
-          name: pageSize
+          name: limit
           schema:
             type: number
           required: false 
