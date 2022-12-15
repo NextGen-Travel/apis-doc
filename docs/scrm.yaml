@@ -36,20 +36,20 @@ paths:
             schema:
               type: object
               properties:
-                email:
+                username:
                   type: string
-                  example: jintian@nextgen.com.hk
-                  description: 登入email
+                  example: jintian
+                  description: 登入account
                 password:
                   type: string
-                  example: 123456789
+                  example: 1234567890
                   description: 登入密碼
                 appId:
                   type: string
-                  example: 77046e51-fd54-4749-b3ac-68e8a37f5e86
+                  example: 6f046e51-fd54-4749-b3ac-68e8a37f5e86
                   description: 屬於哪一間公司
               required:
-                - email
+                - username
                 - password
                 - appId
 
@@ -107,13 +107,13 @@ paths:
             schema:
               type: object
               properties:
-                email:
+                username:
                   type: string
-                  example: jintian@nextgen.com.hk
-                  description: 登入email
+                  example: jintian
+                  description: 登入account
                 password:
                   type: string
-                  example: 123456789
+                  example: 1234567890
                   description: 登入密碼
               required:
                 - email
@@ -150,7 +150,7 @@ paths:
                   description: 從SSO系統拿到的token
                 appId:
                   type: string
-                  example: 77046e51-fd54-4749-b3ac-68e8a37f5e86
+                  example: 6f046e51-fd54-4749-b3ac-68e8a37f5e86
                   description: 個別廠商的uuid
               required:
                 - token
@@ -235,14 +235,18 @@ paths:
             schema:
               type: object
               properties:
+                username:
+                  type: string
+                  description: account
                 email:
                   type: string
-                  description: 使用者email
+                  description: email  
                 appId:
                   type: string
-                  example: 77046e51-fd54-4749-b3ac-68e8a37f5e86
+                  example: 6f046e51-fd54-4749-b3ac-68e8a37f5e86
                   description: 個別廠商的uuid
               required:
+                - username
                 - email
                 - appId
       responses:
