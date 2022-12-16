@@ -507,6 +507,16 @@ components:
               type: boolean
               description: 是否啟用
               example: true
+            SSO:
+              type: boolean
+              description: 是否啟用 SSO
+              example: true
+            appId:
+              type: string
+              description: 若 SSO=true 要有 appId
+            accessKey:
+              type: string
+              description: 若 SSO=true 要有 accessKey
     storeResponse :
       type: object
       properties:
@@ -616,6 +626,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/storeResponse'
+        '500':
+          description: 失敗，因為 SSO = true 卻沒有帶 accessKey, appId
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      error:
+                        type: object
+                        properties:
+                          status:
+                            type: number
+                          name:
+                            type: string
+                          message:
+                            type: string
 
   /stores/{id} :
     put:
