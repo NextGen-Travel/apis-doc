@@ -93,7 +93,19 @@ paths:
                             type: string
                           company:
                             type: number
-
+                      platform:
+                          type: array
+                          description: 該使用者所屬公司有開啟的社群平台帳號（superadmin不會有）
+                          items:
+                            type: object
+                            properties:
+                              platform:
+                                type: string
+                              account:
+                                type: object
+                                properties:
+                              enable:
+                                type: boolean
   /auth/companies :
     post:
       summary: 登入取得companies appId
@@ -876,7 +888,7 @@ paths:
                           type: array
                           items:
                             type: string
-                            description: 公司社群平台（傳回已開啟的）
+                            description: 公司社群平台
                         accountCount:
                           type: number
                           description: 當前已開啟的客服數量
@@ -932,16 +944,23 @@ paths:
                             type: string
                           secretKey:
                             type: string
+                          enable: 
+                            type: boolean
                       keys:
                         type: array
                         items:
                           type: object
                           properties:
+                            id:
+                              type: number
+                            account:
+                              type: string
                             platform:
                               type: string
                             channelId:
                               type: string
-
+                            enable: 
+                              type: boolean
     put:
       summary: 更新公司（superadmin權限才可使用）
       description: 更新公司（superadmin權限才可使用）
