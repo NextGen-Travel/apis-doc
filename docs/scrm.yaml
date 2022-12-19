@@ -767,10 +767,17 @@ paths:
                       name:
                         type: string
                         example: whatsapp
-                        description: 有開啟的社交平台名稱 (若有name則必須有channelId)
+                        description: 社交平台名稱 (若有name則必須有account & channelId)
+                      account:
+                        type: string
+                        example: whatsappId123456
+                        description: 該社交平台的帳號 (account 必須與 channelId同時存在)
                       channelId:
                         type: string
                         example: test123-wafds-vv654
+                      enable:
+                        type: boolean
+                        example: true
                 sso:
                   type: object
                   items:
@@ -968,10 +975,17 @@ paths:
                       name:
                         type: string
                         example: whatsapp
-                        description: 有開啟的社交平台名稱 (若有name則必須有channelId)
+                        description: 開啟的社交平台名稱 (若有name則必須有account & channelId)
+                      account:
+                        type: string
+                        example: whatsappId123456
+                        description: 該社交平台的帳號 (account 必須與 channelId同時存在)
                       channelId:
                         type: string
                         example: test123-wafds-vv654
+                      enable:
+                        type: boolean
+                        example: true
                 sso:
                   type: object
                   items:
