@@ -1082,6 +1082,8 @@ paths:
                           type: string
                         role:
                           type: string
+                        enable:
+                          type: boolean
                   total:
                     type: number
 
