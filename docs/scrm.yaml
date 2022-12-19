@@ -103,7 +103,6 @@ paths:
                                 type: string
                               account:
                                 type: object
-                                properties:
                               enable:
                                 type: boolean
   /auth/companies :
@@ -1125,3 +1124,38 @@ paths:
                   msg:
                     type: string                   
                     example: 刪除成功！
+
+  /companies/sync: 
+    post:
+      summary: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)
+      description: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)
+      tags:
+        - company
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appId:
+                  type: string
+                  description: 該公司appId
+              required:
+                - appId
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enable:
+                    type: boolean
+                  secretKey:
+                    type: string
+     
