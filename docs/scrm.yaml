@@ -1013,14 +1013,13 @@ paths:
                         example: true
                 sso:
                   type: object
-                  items:
-                    properties:
-                      appId:
-                        type: string
-                        example: R546asd-+qwew
-                      secretKey:
-                        type: string
-                        example: as4d123xcv-as46gg
+                  properties:
+                    appId:
+                      type: string
+                      example: R546asd-+qwew
+                    secretKey:
+                      type: string
+                      example: as4d123xcv-as46gg
                 accountLimit:
                   type: number
                   example: 5
