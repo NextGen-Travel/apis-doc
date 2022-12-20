@@ -1163,8 +1163,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  enable:
-                    type: boolean
-                  secretKey:
-                    type: string
-     
+                  data:
+                    type: object
+                    properties:
+                      enable:
+                        type: boolean
+                      secretKey:
+                        type: string
