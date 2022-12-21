@@ -1184,12 +1184,10 @@ paths:
 
   /companies/sync/cas: 
     post:
-      summary: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)client端
-      description: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)client端
+      summary: 供cas中控系統同步之api (server端)
+      description: 供cas中控系統同步之api (server端)
       tags:
         - company
-      security:
-        - client: []
       requestBody:
         required: true
         content:
@@ -1197,24 +1195,12 @@ paths:
             schema:
               type: object
               properties:
-                appId:
+                code:
                   type: string
-                  description: 該公司appId
+                  description: 加密過後的資料
               required:
-                - appId
+                - code
 
       responses:
         '200':
           description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      enable:
-                        type: boolean
-                      secretKey:
-                        type: string
