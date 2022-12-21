@@ -363,7 +363,7 @@ paths:
                   type: string
                   example: test
                   description: 備註
-                role:
+                roleName:
                   type: string
                   example: Manager
                   description: 員工權限（ Manager || Advanced-Staff || Staff )
@@ -1147,8 +1147,45 @@ paths:
 
   /companies/sync: 
     post:
-      summary: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)
-      description: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)
+      summary: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)client端
+      description: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)client端
+      tags:
+        - company
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appId:
+                  type: string
+                  description: 該公司appId
+              required:
+                - appId
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      enable:
+                        type: boolean
+                      secretKey:
+                        type: string
+
+  /companies/sync/cas: 
+    post:
+      summary: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)client端
+      description: 創建公司時驗證appId取得secretKey及是否開啟sso(enable)client端
       tags:
         - company
       security:
