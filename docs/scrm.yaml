@@ -1011,6 +1011,11 @@ paths:
                       enable:
                         type: boolean
                         example: true
+                    required:
+                      - name
+                      - account
+                      - channelId
+                      - enable
                 sso:
                   type: object
                   properties:
@@ -1020,6 +1025,9 @@ paths:
                     secretKey:
                       type: string
                       example: as4d123xcv-as46gg
+                    enable:
+                      type: boolean
+                      example: true
                 accountLimit:
                   type: number
                   example: 5
@@ -1091,6 +1099,10 @@ paths:
                         enable:
                           type: boolean
                   total:
+                    type: number
+                  enableQty:
+                    type: number
+                  disableQty:
                     type: number
 
   /companies/{id}/delete:
