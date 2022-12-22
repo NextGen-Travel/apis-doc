@@ -1,0 +1,159 @@
+openapi: 3.0.1
+
+info:
+  title: POS 新 Layout
+  version: 1.0.0
+  description: POS新Layout相關API
+
+servers:
+  - url: http://localhost:8000/project/public
+  - url: https://erp-dev.cloudsatlas.com.hk/public
+
+components:
+  parameters:
+    language:
+      in: header
+      name: accept-language
+      schema:
+        type: string
+      required: false
+      example: 'en'
+  schemas:
+    CustomersResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: 客戶ID
+          text:
+            type: string
+            description: 客戶名稱及ID
+          mobile:
+            type: string
+            description: 手機
+          address_line_1:
+            type: string
+            description: 地址1
+          address_line_2:
+            type: string
+            description: 地址2
+          city:
+            type: string
+          state:
+            type: string
+          country:
+            type: string
+          zip_code:
+            type: string
+          shipping_address:
+            type: string
+            description: 收件地址
+          pay_term_number:
+            type: string
+          pay_term_type:
+            type: string
+          balance:
+            type: string
+          supplier_business_name:
+            type: string
+            description: 供應商名稱
+          discount_percent:
+            type: string
+          price_calculation_type:
+            type: string
+          selling_price_group_id:
+            type: string
+          shipping_custom_field_details:
+            type: string
+          is_export:
+            type: number
+          export_custom_field_1:
+            type: string
+          export_custom_field_2:
+            type: string
+          export_custom_field_3:
+            type: string
+          export_custom_field_4:
+            type: string
+          export_custom_field_5:
+            type: string
+          export_custom_field_6:
+            type: string
+
+
+paths:
+  /contacts/customers:
+    get:
+      summary: 會員清單
+      description: 取得會員清單
+      # tags:
+        # - Contact
+      # security:
+      #   - bearerAuth: []
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: keyword
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersResponse'
+              example:
+                data:
+                  - id: 1
+                    text: Walk-in (CO0001)
+                    mobile: 0934987146
+                    address_line_1:
+                    address_line_2:
+                    city:
+                    state:
+                    country:
+                    zip_code:
+                    shipping_address:
+                    pay_term_number:
+                    pay_term_type:
+                    balance:
+                    supplier_business_name:
+                    discount_percent:
+                    price_calculation_type:
+                    selling_price_group_id:
+                    shipping_custom_field_details:
+                    is_export: 0
+                    export_custom_field_1:
+                    export_custom_field_2:
+                    export_custom_field_3:
+                    export_custom_field_4:
+                    export_custom_field_5:
+                    export_custom_field_6:
+                  - id: 2
+                    text: Miss jojo Lin (CO0002)
+                    mobile: 0966123458
+                    address_line_1:
+                    address_line_2:
+                    city:
+                    state:
+                    country:
+                    zip_code:
+                    shipping_address:
+                    pay_term_number:
+                    pay_term_type:
+                    balance: 0.0000
+                    supplier_business_name:
+                    discount_percent:
+                    price_calculation_type:
+                    selling_price_group_id:
+                    shipping_custom_field_details:
+                    is_export: 0
+                    export_custom_field_1:
+                    export_custom_field_2:
+                    export_custom_field_3:
+                    export_custom_field_4:
+                    export_custom_field_5:
+                    export_custom_field_6:
