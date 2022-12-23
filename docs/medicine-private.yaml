@@ -243,6 +243,7 @@ components:
           type: string
     drugUpdateApplyRevise :
       type: object
+      required: ['']
       properties:
         indication:
           type: string
