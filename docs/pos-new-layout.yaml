@@ -81,7 +81,47 @@ components:
             type: string
           export_custom_field_6:
             type: string
-
+    ProductsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          product_id:
+            type: number
+            description: 產品ID
+          name:
+            type: string
+            description: 產品名稱
+          type:
+            type: string
+            description: 產品類型
+          enable_stock:
+            type: boolean
+            description: 是否啟用庫存管理
+          variation_id:
+            type: integer
+            description: 產品衍生規格ID
+          variation:
+            type: string
+            description: 衍生規格名稱
+          selling_price:
+            type: string
+            description: 售價
+          sub_sku:
+            type: string
+            description: Sub SKU
+          unit:
+            type: string
+            description: 單位
+          purchase_line_id:
+            type: string
+            description: 採購單ID
+          lot_number:
+            type: string
+            description: 批號
+          image_url:
+            type: string
+            description: 圖片URL
 
 paths:
   /contacts/customers:
@@ -91,7 +131,7 @@ paths:
       # tags:
         # - Contact
       # security:
-      #   - bearerAuth: []
+      #   - basicAuth: []
       parameters:
         - in: query
           name: q
@@ -106,54 +146,125 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomersResponse'
               example:
-                data:
-                  - id: 1
-                    text: Walk-in (CO0001)
-                    mobile: 0934987146
-                    address_line_1:
-                    address_line_2:
-                    city:
-                    state:
-                    country:
-                    zip_code:
-                    shipping_address:
-                    pay_term_number:
-                    pay_term_type:
-                    balance:
-                    supplier_business_name:
-                    discount_percent:
-                    price_calculation_type:
-                    selling_price_group_id:
-                    shipping_custom_field_details:
-                    is_export: 0
-                    export_custom_field_1:
-                    export_custom_field_2:
-                    export_custom_field_3:
-                    export_custom_field_4:
-                    export_custom_field_5:
-                    export_custom_field_6:
-                  - id: 2
-                    text: Miss jojo Lin (CO0002)
-                    mobile: 0966123458
-                    address_line_1:
-                    address_line_2:
-                    city:
-                    state:
-                    country:
-                    zip_code:
-                    shipping_address:
-                    pay_term_number:
-                    pay_term_type:
-                    balance: 0.0000
-                    supplier_business_name:
-                    discount_percent:
-                    price_calculation_type:
-                    selling_price_group_id:
-                    shipping_custom_field_details:
-                    is_export: 0
-                    export_custom_field_1:
-                    export_custom_field_2:
-                    export_custom_field_3:
-                    export_custom_field_4:
-                    export_custom_field_5:
-                    export_custom_field_6:
+                - id: 1
+                  text: Walk-in (CO0001)
+                  mobile: 0934987146
+                  address_line_1:
+                  address_line_2:
+                  city:
+                  state:
+                  country:
+                  zip_code:
+                  shipping_address:
+                  pay_term_number:
+                  pay_term_type:
+                  balance:
+                  supplier_business_name:
+                  discount_percent:
+                  price_calculation_type:
+                  selling_price_group_id:
+                  shipping_custom_field_details:
+                  is_export: 0
+                  export_custom_field_1:
+                  export_custom_field_2:
+                  export_custom_field_3:
+                  export_custom_field_4:
+                  export_custom_field_5:
+                  export_custom_field_6:
+                - id: 2
+                  text: Miss jojo Lin (CO0002)
+                  mobile: 0966123458
+                  address_line_1:
+                  address_line_2:
+                  city:
+                  state:
+                  country:
+                  zip_code:
+                  shipping_address:
+                  pay_term_number:
+                  pay_term_type:
+                  balance: 0.0000
+                  supplier_business_name:
+                  discount_percent:
+                  price_calculation_type:
+                  selling_price_group_id:
+                  shipping_custom_field_details:
+                  is_export: 0
+                  export_custom_field_1:
+                  export_custom_field_2:
+                  export_custom_field_3:
+                  export_custom_field_4:
+                  export_custom_field_5:
+                  export_custom_field_6:
+
+  /products/list:
+    get:
+      summary: 產品清單
+      description: 取得產品清單
+      # tags:
+        # - Contact
+      # security:
+      #   - bearerAuth: []
+      parameters:
+        - in: query
+          name: price_group
+          schema:
+            type: integer
+          description: 價格群組ID
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 搜尋關鍵字
+        - in: query
+          name: not_for_selling
+          schema:
+            type: boolean
+            default: false
+          description: 是否為非賣品
+        - in: query
+          name: search_fields
+          schema:
+            type: array
+            items:
+              type: string
+          description:  搜尋欄位名稱
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsResponse'
+              example:
+                - product_id: 70
+                  name: 可樂
+                  type: single
+                  enable_stock: 1
+                  variation_id: 119
+                  variation: DUMMY
+                  qty_available: 2232.0000
+                  selling_price: 125.0000
+                  sub_sku: 0070
+                  unit: Pc(s)
+                  purchase_line_id: 70
+                  lot_number:
+                  image_url: http://localhost:8000/project/public/img/default.png
+                - product_id: 71
+                  name: 黑松沙士
+                  type: single
+                  enable_stock: 1
+                  variation_id: 120
+                  variation: DUMMY
+                  qty_available: 1010.0000
+                  selling_price: 250.0000
+                  sub_sku: 0071
+                  unit: Pc(s)
+                  purchase_line_id: 68
+                  lot_number: Batch111
+                  image_url: http://localhost:8000/project/public/img/default.png
