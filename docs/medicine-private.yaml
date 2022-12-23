@@ -647,6 +647,36 @@ paths:
                           message:
                             type: string
 
+  /stores/sync :
+    post:
+      summary: 新增藥房時跟 CAS 拿 accessKey
+      tags:
+        - stores
+      security:
+        - client_token: []
+      parameters:
+        - in: query
+          name: appId
+          schema:
+            type: string
+          description: 藥房的 appId
+          example: '6f046e51-fd54-4749-b3ac-68e8a37f5e8'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      SSO:
+                        type: boolean
+                      accessKey:
+                        type: string
+
   /stores/{id} :
     put:
       summary: 修改 藥房
