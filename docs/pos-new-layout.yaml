@@ -122,6 +122,255 @@ components:
           image_url:
             type: string
             description: 圖片URL
+    SuspendTxnResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+          transaction_date:
+            type: string
+          type:
+            type: string
+          is_direct_sale:
+            type: number
+          invoice_no:
+            type: string
+          invoice_no_text:
+            type: string
+          name:
+            type: string
+          mobile:
+            type: string
+          contact_id:
+            type: string
+          supplier_business_name:
+            type: string
+            description: xxx
+          status:
+            type: string
+          payment_status:
+            type: string
+          final_total:
+            type: string
+          tax_amount:
+            type: string
+          discount_amount:
+            type: string
+          discount_type:
+            type: string
+          total_before_tax:
+            type: string
+          rp_redeemed:
+            type: number
+          rp_redeemed_amount:
+            type: string
+          rp_earned:
+            type: number
+          types_of_service_id:
+            type: integer
+            description: xxx
+          shipping_status:
+            type: string
+            description: xxxx
+          pay_term_number:
+            type: integer
+            description: xxx
+          pay_term_type:
+            type: string
+            description: xxx
+          additional_notes:
+            type: string
+            description: xxx
+          staff_note:
+            type: string
+            description: xxx
+          shipping_details:
+            type: string
+            description: xxx
+          document:
+            type: string
+            description: xxx
+          shipping_custom_field_1:
+            type: string
+            description: xxx
+          shipping_custom_field_2:
+            type: string
+            description: xxx
+          shipping_custom_field_3:
+            type: string
+            description: xxx
+          shipping_custom_field_4:
+            type: string
+            description: xxx
+          shipping_custom_field_5:
+            type: string
+            description: xxx
+          custom_field_1:
+            type: string
+            description: xxx
+          custom_field_2:
+            type: string
+            description: xxx
+          custom_field_3:
+            type: string
+            description: xxx
+          custom_field_4:
+            type: string
+            description: xxx
+          sale_date:
+            type: string
+          added_by:
+            type: string
+          total_paid:
+            type: integer
+            description: xxxx
+          business_location:
+            type: string
+          return_exists:
+            type: number
+          return_paid:
+            type: integer
+            description: xxx
+          amount_return:
+            type: string
+          return_transaction_id:
+            type: integer
+            description: xxx
+          types_of_service_name:
+            type: string
+            description: xxx
+          service_custom_field_1:
+            type: string
+            description: xxx
+          total_items:
+            type: number
+          waiter:
+            type: string
+          table_name:
+            type: string
+            description: xxx
+          so_qty_remaining:
+            type: string
+          is_export:
+            type: number
+          shipping_location_to:
+            type: string
+            description: xxx
+          shipping_etd:
+            type: string
+            description: xxx
+          shipping_eta:
+            type: string
+            description: xxx
+          shipping_atd:
+            type: string
+            description: xxx
+          shipping_ata:
+            type: string
+            description: xxx
+          shipping_round_trip:
+            type: string
+            description: xxx
+          driver_id:
+            type: integer
+            description: xxx
+          transporter_id:
+            type: integer
+            description: xxx
+          shipping_address:
+            type: string
+            description: xxx
+          delivered_to:
+            type: string
+            description: xxx
+          is_medicine:
+            type: number
+          crm_is_order_request:
+            type: number
+          is_suspend:
+            type: number
+          res_table_id:
+            type: integer
+            description: xxx
+          res_waiter_id:
+            type: integer
+            description: xxx
+          sell_lines:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: number
+                transaction_id:
+                  type: number
+                product_id:
+                  type: number
+                variation_id:
+                  type: number
+                quantity:
+                  type: number
+                mfg_waste_percent:
+                  type: string
+                mfg_ingredient_group_id:
+                  type: integer
+                  description: xxx
+                quantity_returned:
+                  type: string
+                unit_price_before_discount:
+                  type: string
+                unit_price:
+                  type: string
+                line_discount_type:
+                  type: string
+                line_discount_amount:
+                  type: string
+                unit_price_inc_tax:
+                  type: string
+                item_tax:
+                  type: string
+                tax_id:
+                  type: integer
+                  description: xxx
+                discount_id:
+                  type: integer
+                  description: xxx
+                lot_no_line_id:
+                  type: integer
+                  description: xxx
+                sell_line_note:
+                  type: string
+                so_line_id:
+                  type: integer
+                  description: xxx
+                so_quantity_invoiced:
+                  type: string
+                res_service_staff_id:
+                  type: integer
+                  description: xxx
+                res_line_order_status:
+                  type: string
+                  description: xxx
+                parent_sell_line_id:
+                  type: string
+                  description: xxx
+                children_type:
+                  type: string
+                sub_unit_id:
+                  type: integer
+                  description: xxx
+                created_at:
+                  type: string
+                updated_at:
+                  type: string
+          table:
+            type: string
+            description: xxx
+          service_staff:
+            type: string
+            description: xxx
 
 paths:
   /contacts/customers:
@@ -196,7 +445,6 @@ paths:
                   export_custom_field_4:
                   export_custom_field_5:
                   export_custom_field_6:
-
   /products/list:
     get:
       summary: 產品清單
@@ -268,3 +516,80 @@ paths:
                   purchase_line_id: 68
                   lot_number: Batch111
                   image_url: http://localhost:8000/project/public/img/default.png
+  /sells:
+    get:
+      summary: 暫存訂單列表
+      description: 取得暫存訂單列表
+      # tags:
+        # - Contact
+      # security:
+      #   - basicAuth: []
+      parameters:
+        - in: query
+          name: suspended
+          schema:
+            type: boolean
+          description: 是否為暫存訂單
+        - in: query
+          name: pos_v2
+          schema:
+            type: boolean
+          description: 是否為新版POS頁面
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuspendTxnResponse'
+              example:
+                - id: 1
+                  text: Walk-in (CO0001)
+                  mobile: 0934987146
+                  address_line_1:
+                  address_line_2:
+                  city:
+                  state:
+                  country:
+                  zip_code:
+                  shipping_address:
+                  pay_term_number:
+                  pay_term_type:
+                  balance:
+                  supplier_business_name:
+                  discount_percent:
+                  price_calculation_type:
+                  selling_price_group_id:
+                  shipping_custom_field_details:
+                  is_export: 0
+                  export_custom_field_1:
+                  export_custom_field_2:
+                  export_custom_field_3:
+                  export_custom_field_4:
+                  export_custom_field_5:
+                  export_custom_field_6:
+                - id: 2
+                  text: Miss jojo Lin (CO0002)
+                  mobile: 0966123458
+                  address_line_1:
+                  address_line_2:
+                  city:
+                  state:
+                  country:
+                  zip_code:
+                  shipping_address:
+                  pay_term_number:
+                  pay_term_type:
+                  balance: 0.0000
+                  supplier_business_name:
+                  discount_percent:
+                  price_calculation_type:
+                  selling_price_group_id:
+                  shipping_custom_field_details:
+                  is_export: 0
+                  export_custom_field_1:
+                  export_custom_field_2:
+                  export_custom_field_3:
+                  export_custom_field_4:
+                  export_custom_field_5:
+                  export_custom_field_6:
