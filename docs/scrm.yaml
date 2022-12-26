@@ -187,25 +187,26 @@ paths:
                         properties:
                           id:
                             type: number
+                          email:
+                            type: string
                           displayName:
                             type: string
+                          username:
+                            type: string
+                          confirmed:
+                            type: boolean
+                          phone:
+                            type: string
+                          notes:
+                            type: string
+                          blocked:
+                            type: boolean
                           avatar:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                              url:
-                                type: string
-                          company:
-                            type: object
-                            properties:
-                              id:
-                                type: number
+                            type: string
                           role:
-                            type: object
-                            properties:
-                              type:
-                                type: string
+                            type: string
+                          company:
+                            type: number
         '500':
           description: 伺服器錯誤
           content:
