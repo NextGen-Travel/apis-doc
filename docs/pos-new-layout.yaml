@@ -6,8 +6,14 @@ info:
   description: POS新Layout相關API
 
 servers:
-  - url: http://localhost:8000/project/public
+  - url: http://localhost:8000/project/public/pos-v2
   - url: https://erp-dev.cloudsatlas.com.hk/public
+
+tags:
+  - name: POS V2
+    description: 新版POS相關API
+  - name: POS V1
+    description: 原生POS相關API
 
 components:
   parameters:
@@ -371,94 +377,40 @@ components:
           service_staff:
             type: string
             description: xxx
-
+    CustomTagsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        msg:
+          type: string
+        data:
+          type: object
+          properties:
+            1:
+              type: string
+              description: 自訂產品標籤1
+            2:
+              type: string
+              description: 自訂產品標籤2
+            3:
+              type: string
+              description: 自訂產品標籤3
+            4:
+              type: string
+              description: 自訂產品標籤4
+            5:
+              type: string
+              description: 自訂產品標籤5
 paths:
-  /contacts/customers:
-    get:
-      summary: 會員清單
-      description: 取得會員清單
-      # tags:
-        # - Contact
-      # security:
-      #   - basicAuth: []
-      parameters:
-        - in: query
-          name: q
-          schema:
-            type: string
-          description: keyword
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomersResponse'
-              example:
-                - id: 1
-                  text: Walk-in (CO0001)
-                  mobile: 0934987146
-                  address_line_1:
-                  address_line_2:
-                  city:
-                  state:
-                  country:
-                  zip_code:
-                  shipping_address:
-                  pay_term_number:
-                  pay_term_type:
-                  balance:
-                  supplier_business_name:
-                  discount_percent:
-                  price_calculation_type:
-                  selling_price_group_id:
-                  shipping_custom_field_details:
-                  is_export: 0
-                  export_custom_field_1:
-                  export_custom_field_2:
-                  export_custom_field_3:
-                  export_custom_field_4:
-                  export_custom_field_5:
-                  export_custom_field_6:
-                - id: 2
-                  text: Miss jojo Lin (CO0002)
-                  mobile: 0966123458
-                  address_line_1:
-                  address_line_2:
-                  city:
-                  state:
-                  country:
-                  zip_code:
-                  shipping_address:
-                  pay_term_number:
-                  pay_term_type:
-                  balance: 0.0000
-                  supplier_business_name:
-                  discount_percent:
-                  price_calculation_type:
-                  selling_price_group_id:
-                  shipping_custom_field_details:
-                  is_export: 0
-                  export_custom_field_1:
-                  export_custom_field_2:
-                  export_custom_field_3:
-                  export_custom_field_4:
-                  export_custom_field_5:
-                  export_custom_field_6:
-  /products/list:
+  
+  /products:
     get:
       summary: 產品清單
       description: 取得產品清單
-      # tags:
-        # - Contact
-      # security:
-      #   - bearerAuth: []
+      tags:
+        - POS V2
       parameters:
-        - in: query
-          name: price_group
-          schema:
-            type: integer
-          description: 價格群組ID
         - in: query
           name: location_id
           schema:
@@ -470,18 +422,12 @@ paths:
             type: string
           description: 搜尋關鍵字
         - in: query
-          name: not_for_selling
+          name: tag_id
           schema:
-            type: boolean
-            default: false
-          description: 是否為非賣品
-        - in: query
-          name: search_fields
-          schema:
-            type: array
-            items:
-              type: string
-          description:  搜尋欄位名稱
+            type: integer
+            minimum: 1
+            maximum: 5
+          description: 客戶自訂產品標籤ID
       responses:
         '200':
           description: 成功
@@ -516,14 +462,34 @@ paths:
                   purchase_line_id: 68
                   lot_number: Batch111
                   image_url: http://localhost:8000/project/public/img/default.png
+  /custom-tags:
+    get:
+      summary: 客戶自訂產品標籤
+      description: 取得客戶自訂產品標籤
+      tags:
+        - POS V2
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomTagsResponse'
+              example:
+                success: 1
+                msg: "Success"
+                data: 
+                  1: 熱銷
+                  2: 促銷
+                  3: 打折
+                  4: 清倉
+                  5: 週年慶
   /sells:
     get:
       summary: 暫存訂單列表
       description: 取得暫存訂單列表
-      # tags:
-        # - Contact
-      # security:
-      #   - basicAuth: []
+      tags:
+        - POS V1
       parameters:
         - in: query
           name: suspended
@@ -593,3 +559,183 @@ paths:
                   export_custom_field_4:
                   export_custom_field_5:
                   export_custom_field_6:
+  /contacts/customers:
+    get:
+      summary: 會員清單
+      description: 取得會員清單
+      tags:
+        - POS V1
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: keyword
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersResponse'
+              example:
+                - id: 1
+                  text: Walk-in (CO0001)
+                  mobile: 0934987146
+                  address_line_1:
+                  address_line_2:
+                  city:
+                  state:
+                  country:
+                  zip_code:
+                  shipping_address:
+                  pay_term_number:
+                  pay_term_type:
+                  balance:
+                  supplier_business_name:
+                  discount_percent:
+                  price_calculation_type:
+                  selling_price_group_id:
+                  shipping_custom_field_details:
+                  is_export: 0
+                  export_custom_field_1:
+                  export_custom_field_2:
+                  export_custom_field_3:
+                  export_custom_field_4:
+                  export_custom_field_5:
+                  export_custom_field_6:
+                - id: 2
+                  text: Miss jojo Lin (CO0002)
+                  mobile: 0966123458
+                  address_line_1:
+                  address_line_2:
+                  city:
+                  state:
+                  country:
+                  zip_code:
+                  shipping_address:
+                  pay_term_number:
+                  pay_term_type:
+                  balance: 0.0000
+                  supplier_business_name:
+                  discount_percent:
+                  price_calculation_type:
+                  selling_price_group_id:
+                  shipping_custom_field_details:
+                  is_export: 0
+                  export_custom_field_1:
+                  export_custom_field_2:
+                  export_custom_field_3:
+                  export_custom_field_4:
+                  export_custom_field_5:
+                  export_custom_field_6:
+  /products/list:
+    get:
+      summary: 取得產品列表
+      description: 在POS頁面的搜尋產品欄輸入關鍵字便會搜尋符合的產品
+      tags:
+        - POS V1
+      parameters:
+        - in: query
+          name: price_group
+          schema:
+            type: integer
+          description: 價格群組ID
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 搜尋關鍵字
+        - in: query
+          name: not_for_selling
+          schema:
+            type: boolean
+            default: false
+          description: 是否為非賣品
+        - in: query
+          name: search_fields
+          schema:
+            type: array
+            items:
+              type: string
+          description:  搜尋欄位名稱
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsResponse'
+              example:
+                - product_id: 70
+                  name: 可樂
+                  type: single
+                  enable_stock: 1
+                  variation_id: 119
+                  variation: DUMMY
+                  qty_available: 2232.0000
+                  selling_price: 125.0000
+                  sub_sku: 0070
+                  unit: Pc(s)
+                  purchase_line_id: 70
+                  lot_number:
+                  image_url: http://localhost:8000/project/public/img/default.png
+                - product_id: 71
+                  name: 黑松沙士
+                  type: single
+                  enable_stock: 1
+                  variation_id: 120
+                  variation: DUMMY
+                  qty_available: 1010.0000
+                  selling_price: 250.0000
+                  sub_sku: 0071
+                  unit: Pc(s)
+                  purchase_line_id: 68
+                  lot_number: Batch111
+                  image_url: http://localhost:8000/project/public/img/default.png
+  /sells/pos/get-product-suggestion:
+    get:
+      summary: 取得建議產品列表
+      description: 在POS首頁會顯示建議產品的清單
+      tags:
+        - POS V1
+      parameters:
+        - in: query
+          name: category_id
+          schema:
+            type: integer
+          description: 類別ID
+        - in: query
+          name: brand_id
+          schema:
+            type: integer
+          description: 品牌ID
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+            minimum: 1
+          description: 營業地點ID
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 分頁頁數
+        - in: query
+          name: is_enabled_stock
+          schema:
+            type: integer
+          description:  是否有啟用庫存管理
+        - in: query
+          name: repair_model_id
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功，回傳HTML
