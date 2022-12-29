@@ -4207,6 +4207,8 @@ paths:
                         type: number
                       tax:
                         type: number
+                      status:
+                        type: string
                       payment_status:
                         type: string
                       created_at:
