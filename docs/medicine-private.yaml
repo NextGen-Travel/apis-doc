@@ -74,6 +74,10 @@ components:
           type: string
           description: 電話號碼
           example: '12221222'
+        language:
+          type: string
+          description: 客人的慣用語言
+          example: 'zh'
         drugTaboo:
           type: string
           description: 禁忌
