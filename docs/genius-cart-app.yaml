@@ -2167,6 +2167,8 @@ paths:
                           type: number
                         shipping_fee:
                           type: number
+                        status:
+                          type: string
                         payment_status:
                           type: string
                         created_at:
@@ -2273,9 +2275,13 @@ paths:
                           type: number
                           description: 訂單金額
                           example: 140
-                        payment_status:
+                        status:
                           type: string
                           description: 訂單狀態
+                          example: pending
+                        payment_status:
+                          type: string
+                          description: 訂單付款狀態
                           example: pending
                         created_at: 
                           type: string
