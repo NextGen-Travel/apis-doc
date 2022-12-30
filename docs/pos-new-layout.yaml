@@ -362,7 +362,7 @@ components:
             type: string
           supplier_business_name:
             type: string
-            description: xxx
+            description: 供應商公司名稱
           status:
             type: string
           payment_status:
@@ -385,133 +385,114 @@ components:
             type: number
           types_of_service_id:
             type: integer
-            description: xxx
           shipping_status:
             type: string
-            description: xxxx
+            description: 運輸狀態
           pay_term_number:
             type: integer
-            description: xxx
           pay_term_type:
             type: string
-            description: xxx
           additional_notes:
             type: string
-            description: xxx
+            description: 額外註記
           staff_note:
             type: string
-            description: xxx
+            description: 員工註記
           shipping_details:
             type: string
-            description: xxx
+            description: 運輸細節
           document:
             type: string
-            description: xxx
           shipping_custom_field_1:
             type: string
-            description: xxx
           shipping_custom_field_2:
             type: string
-            description: xxx
           shipping_custom_field_3:
             type: string
-            description: xxx
           shipping_custom_field_4:
             type: string
-            description: xxx
           shipping_custom_field_5:
             type: string
-            description: xxx
           custom_field_1:
             type: string
-            description: xxx
           custom_field_2:
             type: string
-            description: xxx
           custom_field_3:
             type: string
-            description: xxx
           custom_field_4:
             type: string
-            description: xxx
           sale_date:
             type: string
           added_by:
             type: string
           total_paid:
             type: integer
-            description: xxxx
+            description: 已支付金額
           business_location:
             type: string
           return_exists:
             type: number
           return_paid:
             type: integer
-            description: xxx
+            description: 退款金額
           amount_return:
             type: string
           return_transaction_id:
             type: integer
-            description: xxx
+            description: 退款交易ID
           types_of_service_name:
             type: string
-            description: xxx
           service_custom_field_1:
             type: string
-            description: xxx
           total_items:
             type: number
           waiter:
             type: string
           table_name:
             type: string
-            description: xxx
           so_qty_remaining:
             type: string
           is_export:
             type: number
           shipping_location_to:
             type: string
-            description: xxx
           shipping_etd:
             type: string
-            description: xxx
+            description: 預計發貨時間
           shipping_eta:
             type: string
-            description: xxx
+            description: 預計抵達時間
           shipping_atd:
             type: string
-            description: xxx
+            description: 實際發貨時間
           shipping_ata:
             type: string
-            description: xxx
+            description: 實際抵達時間
           shipping_round_trip:
             type: string
-            description: xxx
+            description: 趟次
           driver_id:
             type: integer
-            description: xxx
+            description: 司機ID
           transporter_id:
             type: integer
-            description: xxx
+            description: 貨車ID
           shipping_address:
             type: string
-            description: xxx
+            description: 收貨地址
           delivered_to:
             type: string
-            description: xxx
           is_medicine:
             type: number
+            description: 是否為藥品
           crm_is_order_request:
             type: number
           is_suspend:
             type: number
           res_table_id:
             type: integer
-            description: xxx
           res_waiter_id:
             type: integer
-            description: xxx
           sell_lines:
             type: array
             items:
@@ -531,7 +512,6 @@ components:
                   type: string
                 mfg_ingredient_group_id:
                   type: integer
-                  description: xxx
                 quantity_returned:
                   type: string
                 unit_price_before_discount:
@@ -548,44 +528,37 @@ components:
                   type: string
                 tax_id:
                   type: integer
-                  description: xxx
+                  description: 稅ID
                 discount_id:
                   type: integer
-                  description: xxx
+                  description: 折扣ID
                 lot_no_line_id:
                   type: integer
-                  description: xxx
                 sell_line_note:
                   type: string
                 so_line_id:
                   type: integer
-                  description: xxx
                 so_quantity_invoiced:
                   type: string
                 res_service_staff_id:
                   type: integer
-                  description: xxx
                 res_line_order_status:
                   type: string
-                  description: xxx
                 parent_sell_line_id:
                   type: string
-                  description: xxx
                 children_type:
                   type: string
                 sub_unit_id:
                   type: integer
-                  description: xxx
+                  description: 子單位ID
                 created_at:
                   type: string
                 updated_at:
                   type: string
           table:
             type: string
-            description: xxx
           service_staff:
             type: string
-            description: xxx
     CustomTagsResponse:
       type: object
       properties:
@@ -649,6 +622,55 @@ components:
           type: string
         products:
           type: array
+          items:
+            type: object
+            properties:
+              product_type:
+                type: string
+                description: 產品類別
+              unit_price:
+                type: integer
+                description: 單位價錢
+              line_discount_type: 
+                type: string
+                description: 折扣類別
+              line_discount_amount:
+                type: integer
+                description: 折扣金額
+              item_tax:
+                type: integer
+              tax_id:
+                type: integer
+                description: 稅ID
+              sell_line_note:
+                type: string
+                description: 銷售註記
+              lot_no_line_id:
+                type: integer
+              product_id:
+                type: integer
+                description: 產品ID
+              variation_id:
+                type: integer
+                description: 規格ID
+              enable_stock:
+                type: integer
+                description: 是否有啟用庫存管理
+              quantity:
+                type: integer
+                description: 數量
+              product_unit_id:
+                type: integer
+                description: 產品單位ID
+              sub_unit_id:
+                type: integer
+                description: 產品子單位ID
+              base_unit_multiplier:
+                type: integer
+                description: 基本單位倍數
+              unit_price_inc_tax:
+                type: integer
+                description: 含稅單位價錢
         discount_type:
           type: string
         discount_amount:
@@ -675,6 +697,48 @@ components:
           type: integer
         payment:
           type: array
+          items:
+            type: object
+            properties:
+              amount:
+                type: integer
+                description: 交易總金額
+              account_id:
+                type: integer
+              card_number:
+                type: string
+              card_holder_name:
+                type: string
+              card_transaction_number:
+                type: string
+              card_type:
+                type: string
+              card_month:
+                type: integer
+              card_year:
+                type: integer
+              card_security:
+                type: string
+              cheque_number:
+                type: string
+              bank_account_number:
+                type: string
+              transaction_no_1:
+                type: string
+              transaction_no_2:
+                type: string
+              transaction_no_3:
+                type: string
+              transaction_no_4:
+                type: string
+              transaction_no_5:
+                type: string
+              transaction_no_6:
+                type: string
+              transaction_no_7:
+                type: string
+              note:
+                type: string
         sale_note:
           type: string
         staff_note:
@@ -983,13 +1047,52 @@ paths:
       requestBody:
         required: true
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               $ref: '#/components/schemas/CreateContact'
             example:
-              is_medicine: 0
-              location_id: 1
-              contact_id: 1
+              type: 'customer' 
+              contact_type_radio: 'individual'
+              contact_id: ''
+              customer_group_id: ''
+              supplier_business_name: ''
+              prefix: 'Mr'
+              first_name: 'aaaa'
+              middle_name: 'hahaha'
+              last_name: 'Lin'
+              mobile: '0938145265'
+              alternate_number: ''
+              landline: ''
+              email: '12345@nextgen.com.hk'
+              dob: '12/06/2022'
+              crm_source: ''
+              crm_life_stage: ''
+              position: ''
+              tax_number: ''
+              opening_balance: 0
+              pay_term_number: ''
+              pay_term_type: ''
+              credit_limit: ''
+              address_line_1: ''
+              address_line_2: ''
+              city: ''
+              state: ''
+              country: ''
+              zip_code: ''
+              custom_field1: ''
+              custom_field2: ''
+              custom_field3: ''
+              custom_field4: ''
+              custom_field5: ''
+              custom_field6: ''
+              custom_field7: ''
+              custom_field8: ''
+              custom_field9: ''
+              custom_field10: ''
+              shipping_address: ''
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateContact'
       responses:
         '200':
           description: 成功
@@ -1163,27 +1266,25 @@ paths:
           name: product_row
           schema:
             type: integer
-          description: xxxx
         - in: query
           name: customer_id
           schema:
             type: integer
-          description: xxxx
+          description: 客戶ID
         - in: query
           name: is_direct_sell
           schema:
             type: boolean
-          description: xxxxx
+          description: 是否是POS銷售(0=POS銷售, 1=直接銷售)
         - in: query
           name: price_group
           schema:
             type: integer
-          description: xxxx
+          description: 價格群組
         - in: query
           name: purchase_line_id
           schema:
             type: integer
-          description:  xxxx
         - in: query
           name: weighing_scale_barcode
           schema:
@@ -1197,7 +1298,6 @@ paths:
           name: is_sales_order
           schema:
             type: boolean
-          description: xxxx
       responses:
         '200':
           description: 成功
@@ -1232,26 +1332,23 @@ paths:
               transporter_id: 
               driver_id: 
               sell_price_tax: "includes"
-              # products:[
-              #     {
-              #         product_type: "single",
-              #         unit_price: 125.00,
-              #         line_discount_type: "fixed",
-              #         line_discount_amount: 0.00,
-              #         item_tax: 0.00,
-              #         tax_id: '',
-              #         sell_line_note: '',
-              #         lot_no_line_id: '',
-              #         product_id: 70,
-              #         variation_id: 119,
-              #         enable_stock: 1,
-              #         quantity: 5.00,
-              #         product_unit_id: 1,
-              #         sub_unit_id: 1,
-              #         base_unit_multiplier: 1,
-              #         unit_price_inc_tax: 125.00
-              #     }
-              # ],
+              products:
+                - product_type: "single"
+                  unit_price: 125.00
+                  line_discount_type: "fixed"
+                  line_discount_amount: 0.00
+                  item_tax: 0.00
+                  tax_id:
+                  sell_line_note:
+                  lot_no_line_id:
+                  product_id: 70
+                  variation_id: 119
+                  enable_stock: 1
+                  quantity: 5.00
+                  product_unit_id: 1
+                  sub_unit_id: 1
+                  base_unit_multiplier: 1
+                  unit_price_inc_tax: 125.0
               discount_type: "percentage"
               discount_amount: 0.00
               rp_redeemed: 0
@@ -1264,29 +1361,26 @@ paths:
               delivered_to: 
               shipping_charges: 0.00
               advance_balance: 0.0000
-              # payment:[
-              #     {
-              #         amount: 625.00,
-              #         account_id: '',
-              #         card_number: '',
-              #         card_holder_name: '',
-              #         card_transaction_number: '',
-              #         card_type: 'credit',
-              #         card_month: '',
-              #         card_year: '',
-              #         card_security: '',
-              #         cheque_number: '',
-              #         bank_account_number:'',
-              #         transaction_no_1:'',
-              #         transaction_no_2:'',
-              #         transaction_no_3:'',
-              #         transaction_no_4:'',
-              #         transaction_no_5:'',
-              #         transaction_no_6:'',
-              #         transaction_no_7:'',
-              #         note:'',
-              #     }
-              # ],
+              payment:
+                - amount: 625.00
+                  account_id: 
+                  card_number: 
+                  card_holder_name: 
+                  card_transaction_number: 
+                  card_type: 'credit'
+                  card_month: 
+                  card_year: 
+                  card_security: 
+                  cheque_number:
+                  bank_account_number: 
+                  transaction_no_1:
+                  transaction_no_2:
+                  transaction_no_3:
+                  transaction_no_4:
+                  transaction_no_5:
+                  transaction_no_6:
+                  transaction_no_7:
+                  note:
               sale_note: 
               staff_note: 
               change_return: 0.00
@@ -1312,10 +1406,6 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/CreateTransaction'
-            example:
-              is_medicine: 0
-              location_id: 1
-              contact_id: 1
       responses:
         '200':
           description: 成功
