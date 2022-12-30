@@ -87,6 +87,215 @@ components:
             type: string
           export_custom_field_6:
             type: string
+    CreateContact:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 類型
+        contact_type_radio: 
+          type: string
+          description: 類型類別
+        contact_id:
+          type: string
+        customer_group_id:
+          type: integer
+        supplier_business_name:
+          type: string
+          description: 供應商公司名稱
+        prefix:
+          type: string
+          description: 稱謂
+        first_name:
+          type: string
+          description: 名字
+        middle_name:
+          type: string
+          description: 中間名
+        last_name:
+          type: string
+          description: 姓氏
+        mobile:
+          type: string
+          description: 行動電話號碼
+        alternate_number:
+          type: string
+        landline:
+          type: string
+          description: 市話
+        email:
+          type: string
+          description: 信箱
+        dob:
+          type: string
+          description: 生日
+        crm_source:
+          type: string
+        crm_life_stage:
+          type: string
+        position:
+          type: string
+        tax_number:
+          type: string
+        opening_balance:
+          type: integer
+        pay_term_number:
+          type: string
+        pay_term_type:
+          type: string
+        credit_limit:
+          type: string
+        address_line_1:
+          type: string
+          description: 地址1
+        address_line_2:
+          type: string
+          description: 地址2
+        city:
+          type: string
+          description: 縣市
+        state:
+          type: string
+          description: 州
+        country:
+          type: string
+          description: 國家
+        zip_code:
+          type: string
+          description: 郵遞區號
+        custom_field1:
+          type: string
+        custom_field2:
+          type: string
+        custom_field3:
+          type: string
+        custom_field4:
+          type: string
+        custom_field5:
+          type: string
+        custom_field6:
+          type: string
+        custom_field7:
+          type: string
+        custom_field8:
+          type: string
+        custom_field9:
+          type: string
+        custom_field10:
+          type: string
+        shipping_address:
+          type: string
+          description: 收件地址
+      # Both properties are required
+      required:  
+        - type
+    CreateContactResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            type:
+              type: string
+              description: 類型
+            supplier_business_name:
+              type: string
+              description: 供應商公司名稱
+            prefix:
+              type: string
+              description: 稱謂
+            first_name:
+              type: string
+              description: 名字
+            middle_name:
+              type: string
+              description: 中間名
+            last_name:
+              type: string
+              description: 姓氏
+            tax_number:
+              type: string
+            pay_term_number:
+              type: string
+            pay_term_type:
+              type: string
+            mobile:
+              type: string
+              description: 行動電話號碼
+            landline:
+              type: string
+              description: 市話
+            alternate_number:
+              type: string
+            city:
+              type: string
+              description: 縣市
+            state:
+              type: string
+              description: 州
+            country:
+              type: string
+              description: 國家
+            address_line_1:
+              type: string
+              description: 地址1
+            address_line_2:
+              type: string
+              description: 地址2
+            customer_group_id:
+              type: integer
+            zip_code:
+              type: string
+              description: 郵遞區號
+            contact_id:
+              type: string
+            custom_field1:
+              type: string
+            custom_field2:
+              type: string
+            custom_field3:
+              type: string
+            custom_field4:
+              type: string
+            custom_field5:
+              type: string
+            custom_field6:
+              type: string
+            custom_field7:
+              type: string
+            custom_field8:
+              type: string
+            custom_field9:
+              type: string
+            custom_field10:
+              type: string
+            email:
+              type: string
+              description: 信箱
+            shipping_address:
+              type: string
+              description: 收件地址
+            position:
+              type: string
+            dob:
+              type: string
+              description: 生日
+            name:
+              type: string
+            business_id:
+              type: integer
+            created_by:
+              type: integer
+            credit_limit:
+              type: integer
+            updated_at:
+              type: string
+            created_at:
+              type: string
+        msg:
+          type: string
+        success:
+          type: boolean
     ProductsResponse:
       type: array
       items:
@@ -402,6 +611,133 @@ components:
             5:
               type: string
               description: 自訂產品標籤5
+    CreateTransaction:
+      type: object
+      properties:
+        is_medicine:
+          type: boolean
+          description: 是否為配藥訂單
+        location_id: 
+          type: integer
+          description: 營業地點ID
+        sub_type:
+          type: string
+        contact_id:
+          type: integer
+          description: 客戶ID
+        search_product:
+          type: string
+        pay_term_number:
+          type: integer
+        pay_term_type:
+          type: string
+        price_group:
+          type: integer
+        types_of_service_id:
+          type: integer
+        types_of_service_price_group:
+          type: integer
+        res_table_id:
+          type: integer
+        res_waiter_id:
+          type: integer
+        transporter_id:
+          type: integer
+        driver_id:
+          type: integer
+        sell_price_tax:
+          type: string
+        products:
+          type: array
+        discount_type:
+          type: string
+        discount_amount:
+          type: integer
+        rp_redeemed:
+          type: integer
+        rp_redeemed_amount:
+          type: integer
+        tax_rate_id:
+          type: integer
+        tax_calculation_amount:
+          type: integer
+        shipping_details:
+          type: string
+        shipping_address:
+          type: string
+        shipping_status:
+          type: string
+        delivered_to:
+          type: string
+        shipping_charges:
+          type: integer
+        advance_balance:
+          type: integer
+        payment:
+          type: array
+        sale_note:
+          type: string
+        staff_note:
+          type: string
+        change_return:
+          type: integer
+        additional_notes:
+          type: string
+        is_suspend:
+          type: boolean
+          description: 是否為暫存訂單
+        recur_interval:
+          type: integer
+        recur_interval_type:
+          type: string
+        recur_repetitions:
+          type: integer
+        subscription_repeat_on:
+          type: string
+        size:
+          type: string
+        is_enabled_stock:
+          type: boolean
+        is_credit_sale:
+          type: boolean
+        final_total:
+          type: integer
+        discount_type_modal:
+          type: string
+        discount_amount_modal:
+          type: integer
+        order_tax_modal:
+          type: string
+        shipping_details_modal:
+          type: string
+        shipping_address_modal:
+          type: string
+        shipping_charges_modal:
+          type: integer
+        shipping_status_modal:
+          type: integer
+        delivered_to_modal:
+          type: integer
+        status:
+          type: string
+          description: 訂單狀態
+      # Both properties are required
+      required:  
+        - location_id
+        - contact_id
+    TransactionsResponse:
+      type: object
+      properties:
+        sussess:
+          type: boolean
+          description: 是否成功
+        msg:
+          type: string
+          description: 訊息
+        receipt:
+          type: string
+          description: 發票
+
 paths:
   
   /products:
@@ -487,7 +823,12 @@ paths:
   /sells:
     get:
       summary: 暫存訂單列表
-      description: 取得暫存訂單列表
+      description: | 
+        取得暫存訂單列表
+
+        pos_v2=1時會以Json格式回傳資料
+
+        pos_v2=0時會以HTML格式回傳資料
       tags:
         - POS V1
       parameters:
@@ -495,12 +836,16 @@ paths:
           name: suspended
           schema:
             type: boolean
+            default: true
           description: 是否為暫存訂單
+          required: true
         - in: query
           name: pos_v2
           schema:
             type: boolean
+            default: true
           description: 是否為新版POS頁面
+          required: true
       responses:
         '200':
           description: 成功
@@ -629,6 +974,74 @@ paths:
                   export_custom_field_4:
                   export_custom_field_5:
                   export_custom_field_6:
+  /contacts:
+    post:
+      summary: 新增會員
+      description: 新增會員
+      tags:
+        - POS V1
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateContact'
+            example:
+              is_medicine: 0
+              location_id: 1
+              contact_id: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContactResponse'
+              example:
+                data:
+                  type: customer
+                  supplier_business_name:
+                  prefix: Mr
+                  first_name: "Stock"
+                  middle_name: "haha"
+                  last_name: "Liu"
+                  tax_number:
+                  pay_term_number:
+                  pay_term_type:
+                  mobile: 0963254789
+                  landline:
+                  alternate_number:
+                  city:
+                  state:
+                  country:
+                  address_line_1:
+                  address_line_2:
+                  customer_group_id:
+                  zip_code:
+                  contact_id: CO0066
+                  custom_field1:
+                  custom_field2:
+                  custom_field3:
+                  custom_field4:
+                  custom_field5:
+                  custom_field6:
+                  custom_field7:
+                  custom_field8:
+                  custom_field9:
+                  custom_field10:
+                  email: qqq.gmail.com
+                  shipping_address:
+                  position:
+                  dob: 2022-12-06
+                  name: Mr Stock haha Liu
+                  business_id: 1
+                  created_by: 1
+                  credit_limit:
+                  updated_at: 2022/12/16 12:15:00
+                  created_at: 2022/12/16 12:15:00
+                success: 1
+                msg: Contact added successfully
+                
   /products/list:
     get:
       summary: 取得產品列表
@@ -739,3 +1152,178 @@ paths:
       responses:
         '200':
           description: 成功，回傳HTML
+  /sells/pos/get_product_row:
+    get:
+      summary: 取得產品詳細資訊
+      description: 取得產品詳細資訊(回傳格式為HTML)
+      tags:
+        - POS V1
+      parameters:
+        - in: query
+          name: product_row
+          schema:
+            type: integer
+          description: xxxx
+        - in: query
+          name: customer_id
+          schema:
+            type: integer
+          description: xxxx
+        - in: query
+          name: is_direct_sell
+          schema:
+            type: boolean
+          description: xxxxx
+        - in: query
+          name: price_group
+          schema:
+            type: integer
+          description: xxxx
+        - in: query
+          name: purchase_line_id
+          schema:
+            type: integer
+          description:  xxxx
+        - in: query
+          name: weighing_scale_barcode
+          schema:
+            type: string
+        - in: query
+          name: quantity
+          schema:
+            type: integer
+          description: 數量
+        - in: query
+          name: is_sales_order
+          schema:
+            type: boolean
+          description: xxxx
+      responses:
+        '200':
+          description: 成功
+  /pos:
+    post:
+      summary: 建立訂單
+      description: | 
+        建立POS訂單.
+
+        當is_suspend=1則會儲存為暫存訂單.
+      tags:
+        - POS V1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTransaction'
+            example:
+              is_medicine: 0
+              location_id: 1
+              sub_type:
+              contact_id: 1
+              search_product:
+              pay_term_number:
+              pay_term_type: 
+              price_group: 0,
+              types_of_service_id: 
+              types_of_service_price_group: 
+              res_table_id: 
+              res_waiter_id: 
+              transporter_id: 
+              driver_id: 
+              sell_price_tax: "includes"
+              # products:[
+              #     {
+              #         product_type: "single",
+              #         unit_price: 125.00,
+              #         line_discount_type: "fixed",
+              #         line_discount_amount: 0.00,
+              #         item_tax: 0.00,
+              #         tax_id: '',
+              #         sell_line_note: '',
+              #         lot_no_line_id: '',
+              #         product_id: 70,
+              #         variation_id: 119,
+              #         enable_stock: 1,
+              #         quantity: 5.00,
+              #         product_unit_id: 1,
+              #         sub_unit_id: 1,
+              #         base_unit_multiplier: 1,
+              #         unit_price_inc_tax: 125.00
+              #     }
+              # ],
+              discount_type: "percentage"
+              discount_amount: 0.00
+              rp_redeemed: 0
+              rp_redeemed_amount: 0
+              tax_rate_id:
+              tax_calculation_amount: 0.00
+              shipping_details: 
+              shipping_address: 
+              shipping_status: 
+              delivered_to: 
+              shipping_charges: 0.00
+              advance_balance: 0.0000
+              # payment:[
+              #     {
+              #         amount: 625.00,
+              #         account_id: '',
+              #         card_number: '',
+              #         card_holder_name: '',
+              #         card_transaction_number: '',
+              #         card_type: 'credit',
+              #         card_month: '',
+              #         card_year: '',
+              #         card_security: '',
+              #         cheque_number: '',
+              #         bank_account_number:'',
+              #         transaction_no_1:'',
+              #         transaction_no_2:'',
+              #         transaction_no_3:'',
+              #         transaction_no_4:'',
+              #         transaction_no_5:'',
+              #         transaction_no_6:'',
+              #         transaction_no_7:'',
+              #         note:'',
+              #     }
+              # ],
+              sale_note: 
+              staff_note: 
+              change_return: 0.00
+              additional_notes: 'axios post test'
+              is_suspend: 1  # 1 = 暫存訂單, 0 = 一般訂單
+              recur_interval: 
+              recur_interval_type: "days"
+              recur_repetitions: 
+              subscription_repeat_on: 
+              size: 'all'
+              is_enabled_stock: 
+              is_credit_sale: 0
+              final_total: 625.00
+              discount_type_modal: 'percentage'
+              discount_amount_modal: 0.00
+              order_tax_modal: 
+              shipping_details_modal:
+              shipping_address_modal:
+              shipping_charges_modal: 0
+              shipping_status_modal: 
+              delivered_to_modal: 
+              status: 'final'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateTransaction'
+            example:
+              is_medicine: 0
+              location_id: 1
+              contact_id: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponse'
+              example:
+                success: 1
+                msg: Sale added successfully
+                receipt: null
