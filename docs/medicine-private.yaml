@@ -1130,6 +1130,12 @@ paths:
               unit[] :
                 style : form
                 explode : true
+              packageCount[] :
+                style : form
+                explode : true
+              packageUnit[]:
+                style: form
+                explode: true
               customCaution[] :
                 style : form
                 explode : true
@@ -1141,7 +1147,7 @@ paths:
               properties:
                 customerUuid:
                   type: string
-                  description:  顧客身份 uuid
+                  description: 顧客身份 uuid
                   example: 'c764f34b-dd29-454d-9fa0-db9a08e04607'
                 signAt:
                   type: string
@@ -1211,6 +1217,18 @@ paths:
                     type: string
                   description: 藥品單位
                   example: ['tablet','tablet']
+                packageCount[]:
+                  type: array
+                  items:
+                    type: string
+                  description: 該包裝數量
+                  example: [1,1]
+                packageUnit[]:
+                  type: array
+                  items:
+                    type: string
+                  description: 包裝單位
+                  example: ['支','盒']
                 customCaution[]:
                   type: array
                   items:
