@@ -780,6 +780,30 @@ components:
         receipt:
           type: string
           description: 發票
+    LocationInfoResponse:
+      type: object
+      properties:
+        business_id:
+          type: number
+          description: 總店ID
+        default_location_id:
+          type: number
+          description: 預設分店ID
+        location_list:
+          type: object
+          properties:
+            location_id:
+              type: integer
+              description: 分店ID
+            location_name:
+              type: string
+              description: 分店名稱
+        employee_id:
+          type: number
+          description: 店員ID
+        employee_name:
+          type: string
+          description: 店員名稱
 
 paths:
   
@@ -860,6 +884,29 @@ paths:
                 - 打折
                 - 清倉
                 - 週年慶
+  /location-info:
+    get:
+      summary: 取得店家資訊
+      description: 取得全部店家資訊以及預設店家及營業員
+      tags:
+        - POS V2
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationInfoResponse'
+              example:
+                business_id: 1
+                default_location_id: 1
+                location_list: 
+                  1: "分店A (BL0001)"
+                  2: "分店B (BL0002)"
+                  3: "分店C (BL0003)"
+                employee_id: 1
+                employee_name: "Laplace chen"
+  
   /sells:
     get:
       summary: 暫存訂單列表
