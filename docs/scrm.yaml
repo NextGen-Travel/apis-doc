@@ -602,11 +602,68 @@ paths:
                         type: string
                         example:  建立失敗                              
   
+  /users/me:
+    get:
+      description: 取得使用者個人資料
+      security:
+        - client: []
+      tags: 
+        - users
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          email:
+                            type: string
+                          displayName:
+                            type: string
+                          username:
+                            type: string
+                          confirmed:
+                            type: boolean
+                          phone:
+                            type: string
+                          notes:
+                            type: string
+                          blocked:
+                            type: boolean
+                          avatar:
+                            type: string
+                          role:
+                            type: string
+                          company:
+                            type: number
+                      platform:
+                          type: array
+                          description: 該使用者所屬公司有開啟的社群平台帳號（superadmin不會有）
+                          items:
+                            type: object
+                            properties:
+                              platform:
+                                type: string
+                              account:
+                                type: object
+                              enable:
+                                type: boolean
 
   /users/{id}:
    get:
       summary: 查詢特定客服資料
-      description: 查詢特定客服資料
+      description: 查詢特定客服資料(僅superadmin及admin可使用該api)
       tags:
         - users
       security:
