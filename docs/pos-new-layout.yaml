@@ -560,30 +560,9 @@ components:
           service_staff:
             type: string
     CustomTagsResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        msg:
-          type: string
-        data:
-          type: object
-          properties:
-            1:
-              type: string
-              description: 自訂產品標籤1
-            2:
-              type: string
-              description: 自訂產品標籤2
-            3:
-              type: string
-              description: 自訂產品標籤3
-            4:
-              type: string
-              description: 自訂產品標籤4
-            5:
-              type: string
-              description: 自訂產品標籤5
+      type: array
+      items:
+        type: string
     CreateTransaction:
       type: object
       properties:
@@ -876,14 +855,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomTagsResponse'
               example:
-                success: 1
-                msg: "Success"
-                data: 
-                  1: 熱銷
-                  2: 促銷
-                  3: 打折
-                  4: 清倉
-                  5: 週年慶
+                - 熱銷
+                - 促銷
+                - 打折
+                - 清倉
+                - 週年慶
   /sells:
     get:
       summary: 暫存訂單列表
