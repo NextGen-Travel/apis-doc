@@ -1167,6 +1167,10 @@ paths:
                   example: '治療發燒、喉嚨痛'
                 lang:
                   type: string
+                  enum:
+                    - zh
+                    - en
+                    - zh-en
                   description: 紀錄語系 zh、en
                   example: 'zh'
                 drug[]:
