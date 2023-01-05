@@ -1199,7 +1199,7 @@ paths:
                   example: ['oral','external']
                 total[]:
                   type: array
-                  nullable: true
+                  required: ['']
                   items:
                     type: integer
                   description: 藥品數量
