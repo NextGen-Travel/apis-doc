@@ -1118,9 +1118,6 @@ paths:
               usage[] :
                 style : form
                 explode : true
-              total[] :
-                style : form
-                explode : true
               dosageForm[] :
                 style : form
                 explode : true
