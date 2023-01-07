@@ -2929,32 +2929,11 @@ paths:
                   msg:
                     type: string                   
                     example: Success
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        lastMsg:
-                          type: string
-                        status:
-                          type: string
-                        timestamp:
-                          type: string
-                        unreadCount:
-                          type: number
-                        customer:
-                          type: object
-                          properties:
-                            customerUuid:
-                              type: string
-                            id:
-                              type: number
-                            phone:
-                              type: string
-                            remark:
-                              type: string
+                  id:
+                    type: number
+                  tagName:
+                    type: string
+                  
   /tags/{id}:
     delete:
       summary: 刪除全域標籤
