@@ -16,7 +16,316 @@ components:
       type: apiKey
       name: Authorization
       description: 驗證需要的 token, Bearer xxx
+  schemas:
+    AutoReplies:
+      type: object
+      required:
+        - id
+        - replyText
+        - keyword
+        - children
+      properties:
+        id:
+          type: number
+        replyText:
+          type: string
+        keyword:
+          type: string
+        isEnd:
+          type: boolean
+        isActive:
+          type: boolean
+    QuickReplies:
+      type: object
+      required:
+        - group
+        - isActive
+        - children
+      properties:
+        id:
+          type: number
+        group:
+          type: string
+        isActive:
+          type: boolean
+        children:
+          type: array
+          items:
+            type: object
+            required:
+              - "replyText"
+            properties:
+              id:
+                type: number
+              replyText:
+                type: string
+    ButtonItem:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum: ['QUICK_REPLY', 'PHONE_NUMBER', 'URL']
+        text:
+          type: string
+        url:
+          type: string
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+    TemplateMessageComponent:
+      type: object
+      required:
+        - type
+        - text
+      properties:
+        type:
+          type: string
+          enum: ['HEADER', 'BODY', 'FOOTER', 'BUTTONS']
+        text:
+          type: string
+        format:
+          type: string
+          enum: ['TEXT', 'IMAGE', 'DOCUMENT', 'VIDEO']
+          nullable: true
+        example:
+          type: object
+          nullable: true
+          oneOf:
+            - type: object
+              properties:
+                header_url:
+                  type: array
+                  items:
+                    type: string
+            - type: object
+              properties:
+                body_text:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: string
+            - type: array
+              items:
+                type: string
+        buttons:
+          nullable: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ButtonItem'
 
+    Languages:
+      type: object
+      additionalProperties:
+        type: string
+  
+    Language:
+      type: object
+      required:
+        - id
+        - language
+        - rejectedReason
+        - status
+        - createdAt
+        - updatedAt
+        - components
+      properties:
+        id:
+          type: string
+        language:
+          $ref: '#/components/schemas/Languages'
+        rejectedReason:
+          type: string
+        status:
+          type: string
+          enum: ['NEW','APPROVED','PENDING','REJECTED','PENDING_DELETION','DELETED']
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        components:
+          type: array
+          $ref: '#/components/schemas/TemplateMessageComponent'
+        namespace:
+          type: string
+        wabaId:
+          type: string
+        category:
+          type: string
+          enum: ['OTP','TRANSACTIONAL','MARKETING']
+        name:
+          type: string
+    TemplateMessageItems:
+      type: object
+      properties:
+        category:
+          type: string
+          enum: [OTP,TRANSACTIONAL,MARKETING]
+        name:
+          type: string
+        namespace:
+          type: string
+        wabaId:
+          type: string
+        languages:
+          type: array
+          $ref: '#/components/schemas/Language'
+    TemplateMessage:
+      type: object
+      properties:
+        count:
+          type: number
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateMessageItems'
+        limit:
+          type: number
+        offset: 
+          type: number
+        totalCount: 
+          type: number
+    NSS:
+      type: object
+      properties:
+        name:
+          type: string
+        currency:
+          type: string
+        price:
+          type: string
+        slug:
+          type: string
+        stock:
+          type: boolean
+        url:
+          type: string
+        image:
+          type: string
+    UserProcessStatus:
+      type: object
+      required:
+        - averageProcessTime
+        - averageWaitingTime
+        - completed
+        - processing
+        - shoppingLinkEventCount
+        - username
+        - waiting
+      properties:
+        averageProcessTime:
+          type: number
+        averageWaitingTime:
+          type: number
+        completed:
+          type: number
+        processing:
+          type: number
+        shoppingLinkEventCount:
+          type: number
+        username:
+          type: string
+        waiting:
+          type: number
+        tbColor:
+          type: string
+    UserProcessStatusFields:
+      type: object
+      properties:
+        key:
+          type: string
+          enum:
+            - averageProcessTime
+            - averageWaitingTime
+            - completed
+            - processing
+            - shoppingLinkEventCount
+            - username
+            - waiting
+            - tbColor
+        label:
+          type: string
+    Fields:
+      type: object
+      properties:
+        key:
+          type: string
+        label:
+          type: string
+    UserProcessList:
+      type: object
+      required:
+        - customer
+        - date
+        - startedAt
+        - phone
+        - processTime
+        - status
+        - username
+      properties:
+        customer:
+          type: string
+        date:
+          type: string
+        startedAt:
+          type: string
+        endedAt:
+          type: string
+        tag:
+          type: string
+        shoppingLinkCnt:
+          type: number
+        phone:
+          type: string
+        processTime:
+          type: number
+        status:
+          type: string
+        username:
+          type: string
+        tbColor:
+          type: string
+    UserProcessListFields:
+      type: object
+      properties:
+        key:
+          type: string
+          enum:
+            - customer
+            - date
+            - startedAt
+            - endedAt
+            - tag
+            - shoppingLinkCnt
+            - phone
+            - processTime
+            - status
+            - username
+            - tbColor
+        label:
+          type: string
+    QuestionType:
+      type: object
+      properties:
+        totalCount:
+          type: string
+    QuestionTypeFields:
+      type: object
+      properties:
+        key:
+          type: string
+          enum:
+            - totalCount
+        label:
+          type: string
+    
+
+        
+    
 paths:
 
   # ====================
@@ -105,6 +414,68 @@ paths:
                                 type: object
                               enable:
                                 type: boolean
+  /auth/cloudsatlas :
+    post:
+      summary: nss登入
+      description: nss登入
+      tags: 
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                crm-token:
+                  type: string
+                companyUuid:
+                  type: string
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          blocked:
+                            type: boolean
+                          confirmed:
+                            type: boolean
+                          createdAt:
+                            type: string
+                          email:
+                            type: string
+                          updatedAt:
+                            type: string
+                          username:
+                            type: string
+                          displayName:
+                            nullable: true
+                            type: string
+                          provider:
+                            nullable: true
+                            type: string
+                          avatar:
+                            nullable: true
+                            type: string
+                            
+
+
   /auth/companies :
     post:
       summary: 登入取得companies appId
@@ -1264,3 +1635,1568 @@ paths:
       responses:
         '200':
           description: 成功
+  # ====================
+  #
+  # 自動回覆設定
+  #
+  /auto-replies:
+    get: 
+      summary: 取得自動回覆整顆樹
+      description: 取得自動回覆整顆樹
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/AutoReplies'
+    post:
+      summary: 儲存自動回覆
+      description: 儲存自動回覆
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - parent
+              properties:
+                parent:
+                  type: number
+                keyword:
+                  type: string
+                replyText:
+                  type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+                  data:
+                    type: array
+                    items: 
+                      $ref: '#/components/schemas/AutoReplies'
+
+  /auto-replies/all:
+    put:
+      summary: 編輯樹根或樹葉用的
+      description: 編輯樹根或樹葉用的
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items: 
+                type: object
+                properties:
+                  id:
+                    type: number
+                  replyText:
+                    type: string
+                  keyword:
+                    type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+                  data:
+                    type: array
+                    items: 
+                      $ref: '#/components/schemas/AutoReplies'
+
+  /auto-reply/welcome:
+    get: 
+      summary: 取得歡迎訊息
+      description: 取得歡迎訊息
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      replyText:
+                        type: string
+    put:
+      summary: 更新歡迎訊息
+      description: 取得歡迎訊息
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                replyText:
+                  type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+  /auto-replies/{id}:
+    put:
+      summary: 更新該樹節點是否啟用
+      description: 更新該樹節點是否啟用
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isActive:
+                  type: boolean
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+    delete:
+      summary: 刪除該樹節點
+      description: 刪除該樹節點
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+                  data:
+                    type: array
+                    items: 
+                      $ref: '#/components/schemas/AutoReplies'
+  # ====================
+  #
+  # 快捷回覆
+  #
+  /quick-replies:
+    get: 
+      summary: 取得快捷回覆
+      description: 取得快捷回覆
+      tags:
+        - quick-replies
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/QuickReplies'
+  /quick-replies/groups:
+    post:
+      summary: 新增群組名稱
+      description: 新增群組名稱
+      tags:
+        - quick-replies
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                group:
+                  type: string
+                children:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      replyText:
+                        type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+                  data:
+                    $ref: '#/components/schemas/QuickReplies'
+  /quick-replies/groups/{groupId}:
+    put:
+      summary: 更新該群組名稱底下快捷訊息
+      description: 新增群組名稱
+      tags:
+        - quick-replies
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                group:
+                  type: string
+                children:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      replyText:
+                        type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+                  data:
+                    $ref: '#/components/schemas/QuickReplies'
+  /quick-replies/{id}:
+    put:
+      summary: 更新群組名稱是否啟用
+      description: 更新群組名稱是否啟用
+      tags:
+        - quick-replies
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                isActive:
+                  type: boolean
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+    delete:
+      summary: 刪除群組名稱或快捷訊息
+      description: 刪除該樹節點
+      tags:
+        - quick-replies
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+  # ====================
+  #
+  # 設定範本
+  # 有串了messagebird
+  /messagebird/templates:
+    get: 
+      summary: 取得範本
+      description: 取得範本
+      tags:
+        - templates
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                      $ref: '#/components/schemas/TemplateMessage'
+    post:
+      summary: 新增範本
+      description: 新增範本
+      tags:
+        - templates
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                language:
+                  $ref: '#/components/schemas/Languages'
+                name:
+                  type: string
+                category:
+                  type: string
+                  enum:
+                    - OTP
+                    - TRANSACTIONAL
+                    - MARKETING
+                components:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/TemplateMessageComponent'
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      language:
+                        $ref: '#/components/schemas/Languages'
+                      status:
+                        type: string
+                        enum: ['NEW','APPROVED','PENDING','REJECTED','PENDING_DELETION','DELETED']
+                      wabaId:
+                        type: string
+                      namespace:
+                        type: string
+                      components:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TemplateMessageComponent'
+  /messagebird/templates/{templateName}:
+    get: 
+      summary: 取得特定範本
+      description: 取得特定範本
+      tags:
+        - templates
+      security:
+        - client: []
+      parameters:
+        - in: query
+          name: wabaId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                      $ref: '#/components/schemas/Language'
+    delete:
+      summary: 刪除範本
+      description: 刪除範本
+      tags:
+        - templates
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+  # ====================
+  #
+  # 導購商品的api
+  # 串nss系統
+  /category:
+    get: 
+      summary: 取得nss商品目錄
+      description: 取得nss商品目錄
+      tags:
+        - nss
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    total:
+                      type: number
+                    title:
+                      type: number
+                    items:
+                      type: array
+                      items: 
+                        $ref: '#/components/schemas/NSS'
+  /category/{type}:
+    get: 
+      summary: 取得nss特定類型的商品
+      description: 取得nss特定類型的商品
+      tags:
+        - nss
+      security:
+        - client: []
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: number
+        - in: query
+          name: rows
+          schema:
+            type: number
+        - in: query
+          name: search
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    total:
+                      type: number
+                    title:
+                      type: number
+                    items:
+                      type: array
+                      items: 
+                        $ref: '#/components/schemas/NSS'
+  # ====================
+  #
+  # 分析報表
+  # 
+  /report/overview:
+    get: 
+      summary: 取得報表分析資料
+      description: 取得報表分析資料
+      tags:
+        - report
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      fields:
+                        type: array
+                        items:
+                          type: string
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties:
+                            type: number
+  /report/user-process-status:
+    get: 
+      summary: 取得各客服人員處理狀況資料
+      description: 取得各客服人員處理狀況資料
+      tags:
+        - report
+      security:
+        - client: []
+      parameters:
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: selectedUsers
+          in: query
+          schema:
+            type: string
+            example: 1,2,3
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      table:
+                        type: object
+                        properties:
+                          fullCount:
+                            type: string
+                          fields:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/UserProcessStatusFields'
+                          items:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/UserProcessStatus'
+                      total:
+                        type: object
+                        properties:
+                          fields:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/UserProcessStatusFields'
+                          items:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/UserProcessStatus'
+                  msg:
+                    type: string
+                    example: Success
+  /report/tags:
+    get: 
+      summary: 取得客戶標籤歸類資料
+      description: 取得客戶標籤歸類資料
+      tags:
+        - report
+      security:
+        - client: []
+      parameters:
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: selectedTags
+          in: query
+          schema:
+            type: string
+            example: 1,2,3
+        - name: selectedUsers
+          in: query
+          schema:
+            type: string
+            example: 1,2,3
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      table:
+                        type: object
+                        properties:
+                          fields:
+                            type: array
+                            items: 
+                              $ref: '#/components/schemas/Fields'
+                          fullCount:
+                            type: string 
+                          items:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                customer:
+                                  type: string
+                                date:
+                                  type: string
+                                phone:
+                                  type: string
+                                tag:
+                                  type: string
+                                username:
+                                  type: string
+                      chartData:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: number
+                  msg:
+                    type: string
+                    example: Success
+  /report/user-process-list:
+    get: 
+      summary: 取得客服的分析資料資料
+      description: 取得客服的分析資料資料
+      tags:
+        - report
+      security:
+        - client: []
+      parameters:
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: selectedUsers
+          in: query
+          schema:
+            type: string
+            example: 1,2,3
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      table:
+                        type: object
+                        properties:
+                          fullCount:
+                            type: string
+                          fields:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/UserProcessListFields'
+                          items:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/UserProcessList'
+                      total:
+                        type: object
+                        properties:
+                          fields:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/UserProcessListFields'
+                          items:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/UserProcessList'
+                  msg:
+                    type: string
+                    example: Success
+  /question-types:
+    get: 
+      summary: 客服問題歸類-select框的選項
+      description: 客服問題歸類-select框的選項
+      tags:
+        - report
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+               type: object
+               properties:
+                msg:
+                  type: string
+                  example: Success
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      keyword:
+                        type: string
+  /report/question-type:
+    get: 
+      summary: 取得客服問題歸類資料
+      description: 取得客服問題歸類資料
+      tags:
+        - report
+      security:
+        - client: []
+      parameters:
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: offset
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: selectedQuestionTypes
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      table:
+                        type: object
+                        properties:
+                          fullCount:
+                            type: string
+                          fields:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/Fields'
+                          items:
+                            type: array 
+                            items:
+                              type: object
+                              required:
+                                - name
+                                - count
+                              properties:
+                                name:
+                                  type: string
+                                count:
+                                  type: string
+                                tbColor:
+                                  type: string 
+                      chartData:
+                        type: array 
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: number
+                      total:
+                        type: object
+                        properties:
+                          fields:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/QuestionTypeFields'
+                          items:
+                            type: array 
+                            items:
+                              $ref: '#/components/schemas/QuestionType'
+  /question-types/others:
+    get: 
+      summary: 取得客服問題歸類-其他類
+      description: 取得客服問題歸類-其他類
+      tags:
+        - report
+      security:
+        - client: []
+      parameters:
+        - name: startDate
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      fields:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Fields'
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            count:
+                              type: string
+                            name:
+                              type: string
+                      detailFields:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Fields'
+                      detailItems:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                            note:
+                              type: string
+                            username:
+                              type: string
+  # ====================
+  #
+  # 訊息
+  # 
+  /customers/{customerUuid}/messages:
+    get: 
+      summary: 取得對話紀錄
+      description: 取得對話紀錄
+      tags:
+        - customers
+      security:
+        - client: []
+      parameters:
+        - name: start
+          in: query
+          required: true
+          schema:
+            type: number
+            example: 0
+        - name: limit
+          in: query
+          required: true
+          schema:
+            type: number
+            example: 100
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      isCaseOpened:
+                        description: '用來判斷此次對話是否結束，以便分析報表資料用途'
+                        type: boolean
+                      messages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            customerUuid:
+                              type: string
+                            direction:
+                              type: string
+                              enum: ['received','sent']
+                            id:
+                              type: number
+                            status:
+                              type: string
+                              enum: ['sent' , 'read' , 'delivered' , 'failed']
+                            text:
+                              type: string
+                            timestamp:
+                              type: string
+                            type:
+                              type: string
+                              enum: ['text' , 'hsm' , 'image' , 'file' , 'audio' , 'video' , 'whatsappSticker']
+                            user:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                displayName:
+                                  type: string
+                                avatar:
+                                  type: string
+                            file:
+                              nullable: true
+                              type: object
+                              properties:
+                                url:
+                                  nullable: true
+                                  type: string
+                                caption:
+                                  nullable: true
+                                  type: string
+                                size:
+                                  nullable: true
+                                  type: string
+                                extension:
+                                  nullable: true
+                                  type: string
+                            components:
+                              nullable: true
+                              type: array
+                              items:
+                                $ref: '#/components/schemas/TemplateMessageComponent'
+    post:
+      summary: 傳送聊天訊息，包含錄音,圖片,文件,範本
+      description: 儲存自動回覆
+      tags:
+        - customers
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - userId
+                - type
+              properties:
+                userId:
+                  type: number
+                type:
+                  type: string
+                  enum: ['audio','image','file','text','hsm']
+                  description: hsm是傳送範本類型的型態
+                text:
+                  type: string
+                  oneOf:
+                    - type: string
+                    - type: object
+                      properties:
+                        components:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/TemplateMessageComponent'
+                caption: 
+                  type: string
+                files:
+                  type: string
+                  format: binary
+                  description: The file to be uploaded
+                templateName:
+                  type: string
+                languageCode:
+                  type: string
+                isShoppingLink:
+                  type: boolean
+                  description: 導購紀錄
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+  /chats:
+    get: 
+      summary: 取得左邊列表
+      description: 取得左邊列表
+      tags:
+        - customers
+      security:
+        - client: []
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        lastMsg:
+                          type: string
+                        status:
+                          type: string
+                          enum: ['sent' , 'read' , 'delivered' , 'failed']
+                        timestamp:
+                          type: string
+                        unreadCount:
+                          type: number
+                        isPin:
+                          type: boolean
+                        customer:
+                          type: object
+                          properties:
+                            customerUuid:
+                              type: string
+                            id:
+                              type: number
+                            phone:
+                              type: string
+                            remark:
+                              type: string
+                            active:
+                              type: string
+                            colorCode:
+                              type: number
+                            tags:
+                              type: array
+                              items:
+                                type: number
+                            platform:
+                              type: string
+                              enum: ['whatsapp','wechat','facebook','instagram','telegram']
+  /groups:
+    get: 
+      summary: 取得頭像的顏色
+      description: 用來設定客人頭像的顏色
+      tags:
+        - customers
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        colorCode:
+                          type: string
+  /tags:
+    get: 
+      summary: 取得所有標籤
+      description: 用來mapping全域標籤
+      tags:
+        - customers
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        tagName:
+                          type: string
+    post:
+      summary: 更新全域標籤
+      description: 更新全域標籤
+      tags:
+        - customers
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tagName
+              properties:
+                tagName:
+                  type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        lastMsg:
+                          type: string
+                        status:
+                          type: string
+                        timestamp:
+                          type: string
+                        unreadCount:
+                          type: number
+                        customer:
+                          type: object
+                          properties:
+                            customerUuid:
+                              type: string
+                            id:
+                              type: number
+                            phone:
+                              type: string
+                            remark:
+                              type: string
+  /tags/{id}:
+    delete:
+      summary: 刪除全域標籤
+      description: 刪除全域標籤
+      tags:
+        - customers
+      security:
+        - client: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+  /customers/messages:
+    post:
+      summary: 群發
+      description: 群發
+      tags:
+        - customers
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - type
+                - customerUuid
+                - text
+              properties:
+                customerUuid:
+                  type: number
+                userId:
+                  type: number
+                type:
+                  type: string
+                  example: text
+                  description: 群發只會有text型態
+                text:
+                  type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        lastMsg:
+                          type: string
+                        status:
+                          type: string
+                        timestamp:
+                          type: string
+                        unreadCount:
+                          type: number
+                        customer:
+                          type: object
+                          properties:
+                            customerUuid:
+                              type: string
+                            id:
+                              type: number
+                            phone:
+                              type: string
+                            remark:
+                              type: string
+  /customers/{customerUuid}/pin:
+    put:
+      summary: 更新置頂
+      description: 更新置頂
+      tags:
+        - customers
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - isPin
+              properties:
+                isPin:
+                  type: boolean
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        lastMsg:
+                          type: string
+                        status:
+                          type: string
+                        timestamp:
+                          type: string
+                        unreadCount:
+                          type: number
+                        customer:
+                          type: object
+                          properties:
+                            customerUuid:
+                              type: string
+                            id:
+                              type: number
+                            phone:
+                              type: string
+                            remark:
+                              type: string
+  /customers/{customerUuid}:
+    put:
+      summary: 更新客人資訊
+      description: 更新客人資訊
+      tags:
+        - customers
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - isPin
+                - remark
+                - colorCode
+              properties:
+                tags:
+                  type: array
+                  items:
+                    type: number
+                remark:
+                  type: string
+                colorCode:
+                  type: number
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        lastMsg:
+                          type: string
+                        status:
+                          type: string
+                        timestamp:
+                          type: string
+                        unreadCount:
+                          type: number
+                        customer:
+                          type: object
+                          properties:
+                            customerUuid:
+                              type: string
+                            id:
+                              type: number
+                            phone:
+                              type: string
+                            remark:
+                              type: string
+  /customers/{customerUuid}/process-status:
+    put:
+      summary: 結束事件
+      description: 結束事件
+      tags:
+        - customers
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+                - msgId
+                - questionType
+              properties:
+                status:
+                  type: string
+                  example: completed
+                msgId:
+                  type: number
+                questionType:
+                  type: number
+                others:
+                  type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
