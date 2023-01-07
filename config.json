@@ -25,8 +25,12 @@
             "value": "cas-auth"
         },
         {
-            "name": "Scrm",
-            "value": "scrm"
+            "name": "Scrm Public",
+            "value": "scrm-public"
+        },
+        {
+            "name": "Scrm Private",
+            "value": "scrm-private"
         }
     ]
 }
