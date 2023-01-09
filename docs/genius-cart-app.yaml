@@ -277,6 +277,9 @@ paths:
                       is_affilate:
                         type: number
                         description: 是否有使用二次行銷
+                      is_guest_checkout:
+                        type: number
+                        description: 是否開啟訪客結帳
   
   /forgot:
     post:
