@@ -8,6 +8,9 @@ servers:
   - url: https://scrm-api-dev.cloudsatlas.com.hk/api
     description: dev server
   - url: http://localhost:11338/api
+  - url: https://nss-dev.cloudsatlas.com.hk/api
+    description: nss 導購用api
+
 
 components:
   securitySchemes:
@@ -18,23 +21,28 @@ components:
       description: 驗證需要的 token, Bearer xxx
   schemas:
     AutoReplies:
-      type: object
-      required:
-        - id
-        - replyText
-        - keyword
-        - children
-      properties:
-        id:
-          type: number
-        replyText:
-          type: string
-        keyword:
-          type: string
-        isEnd:
-          type: boolean
-        isActive:
-          type: boolean
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - replyText
+          - keyword
+          - children
+        properties:
+          id:
+            type: number
+          replyText:
+            type: string
+          keyword:
+            type: string
+          isEnd:
+            type: boolean
+          isActive:
+            type: boolean
+          children:
+            $ref: '#/components/schemas/AutoReplies'
+            
     QuickReplies:
       type: object
       required:
@@ -1301,9 +1309,13 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items: 
-                  $ref: '#/components/schemas/AutoReplies'
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Suucess
+                  data:
+                    $ref: '#/components/schemas/AutoReplies'
     post:
       summary: 儲存自動回覆
       description: 儲存自動回覆
@@ -1338,8 +1350,6 @@ paths:
                     type: string                   
                     example: Success
                   data:
-                    type: array
-                    items: 
                       $ref: '#/components/schemas/AutoReplies'
 
   /auto-replies/all:
@@ -1439,6 +1449,12 @@ paths:
         - auto-replies
       security:
         - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -1466,6 +1482,12 @@ paths:
         - auto-replies
       security:
         - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: 成功
@@ -1553,6 +1575,12 @@ paths:
         - quick-replies
       security:
         - client: []
+      parameters:
+        - in: path
+          name: groupId
+          schema:
+            type: number
+          required: true
       requestBody:
         required: true
         content:
@@ -1590,6 +1618,12 @@ paths:
         - quick-replies
       security:
         - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
       requestBody:
         required: true
         content:
@@ -1617,6 +1651,12 @@ paths:
         - quick-replies
       security:
         - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
       responses:
         '200':
           description: 成功
@@ -1713,7 +1753,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/TemplateMessageComponent'
-  /messagebird/templates/{templateName}:
+  /messagebird/templates/{templateName}/:
     get: 
       summary: 取得特定範本
       description: 取得特定範本
@@ -1722,6 +1762,11 @@ paths:
       security:
         - client: []
       parameters:
+        - in: path
+          name: templateName
+          schema:
+            type: string
+          required: true
         - in: query
           name: wabaId
           schema:
@@ -1747,6 +1792,12 @@ paths:
         - templates
       security:
         - client: []
+      parameters:
+        - in: path
+          name: templateName
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: 成功
@@ -1786,7 +1837,7 @@ paths:
                       type: number
                     title:
                       type: number
-                    items:
+                    products:
                       type: array
                       items: 
                         $ref: '#/components/schemas/NSS'
@@ -1804,11 +1855,12 @@ paths:
           schema:
             type: number
         - in: query
-          name: rows
-          schema:
-            type: number
-        - in: query
           name: search
+          schema:
+            type: string
+        - in: path
+          name: type
+          required: true
           schema:
             type: string
       responses:
@@ -1827,7 +1879,7 @@ paths:
                       type: number
                     title:
                       type: number
-                    items:
+                    products:
                       type: array
                       items: 
                         $ref: '#/components/schemas/NSS'
@@ -2289,6 +2341,12 @@ paths:
       security:
         - client: []
       parameters:
+        - name: customerUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 0816a550-f53e-42a1-880d-c23b054cbe23
         - name: start
           in: query
           required: true
@@ -2377,6 +2435,13 @@ paths:
         - customers
       security:
         - client: []
+      parameters:
+        - name: customerUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 0816a550-f53e-42a1-880d-c23b054cbe23
       requestBody:
         required: true
         content:
@@ -2471,12 +2536,6 @@ paths:
         - customers
       security:
         - client: []
-      parameters:
-        - name: status
-          in: query
-          required: false
-          schema:
-            type: string
       responses:
         '200':
           description: 成功
@@ -2511,8 +2570,6 @@ paths:
                           properties:
                             customerUuid:
                               type: string
-                            id:
-                              type: number
                             phone:
                               type: string
                             remark:
@@ -2521,13 +2578,14 @@ paths:
                               type: string
                             colorCode:
                               type: number
+                            platform:
+                              type: string
+                              enum: ['whatsapp','wechat','facebook','instagram','telegram']
                             tags:
                               type: array
                               items:
                                 type: number
-                            platform:
-                              type: string
-                              enum: ['whatsapp','wechat','facebook','instagram','telegram']
+                            
   /groups:
     get: 
       summary: 取得頭像的顏色
@@ -2626,6 +2684,12 @@ paths:
         - customers
       security:
         - client: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
       responses:
         '200':
           description: 成功
@@ -2658,7 +2722,8 @@ paths:
                 - text
               properties:
                 customerUuid:
-                  type: number
+                  type: string
+                  example: customerUuid,customerUuid
                 userId:
                   type: number
                 type:
@@ -2712,6 +2777,13 @@ paths:
         - customers
       security:
         - client: []
+      parameters:
+        - name: customerUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 0816a550-f53e-42a1-880d-c23b054cbe23
       requestBody:
         required: true
         content:
@@ -2734,32 +2806,6 @@ paths:
                   msg:
                     type: string
                     example: Success
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        lastMsg:
-                          type: string
-                        status:
-                          type: string
-                        timestamp:
-                          type: string
-                        unreadCount:
-                          type: number
-                        customer:
-                          type: object
-                          properties:
-                            customerUuid:
-                              type: string
-                            id:
-                              type: number
-                            phone:
-                              type: string
-                            remark:
-                              type: string
   /customers/{customerUuid}:
     put:
       summary: 更新客人資訊
@@ -2768,6 +2814,13 @@ paths:
         - customers
       security:
         - client: []
+      parameters:
+        - name: customerUuid
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 0816a550-f53e-42a1-880d-c23b054cbe23
       requestBody:
         required: true
         content:
@@ -2783,10 +2836,12 @@ paths:
                   type: array
                   items:
                     type: number
+                    example: 5,3
                 remark:
                   type: string
                 colorCode:
                   type: number
+                  example: 6
       responses:
         '200':
           description: 成功
