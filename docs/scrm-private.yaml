@@ -20,6 +20,7 @@ components:
       name: Authorization
       description: 驗證需要的 token, Bearer xxx
   schemas:
+
     AutoReplies:
       type: array
       items:
@@ -29,6 +30,7 @@ components:
           - replyText
           - keyword
           - children
+          - isActive
         properties:
           id:
             type: number
@@ -41,7 +43,33 @@ components:
           isActive:
             type: boolean
           children:
-            $ref: '#/components/schemas/AutoReplies'
+            type: array
+            description: 遞迴
+            items: 
+              type: object
+              required:
+                - id
+                - replyText
+                - keyword
+                - children
+                - isActive
+              properties:
+                id:
+                  type: number
+                replyText:
+                  type: string
+                keyword:
+                  type: string
+                isEnd:
+                  type: boolean
+                isActive:
+                  type: boolean
+                children: 
+                  type: array
+                  items:
+                    type: object
+                    description: 遞迴
+                
             
     QuickReplies:
       type: object
