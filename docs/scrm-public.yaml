@@ -164,6 +164,8 @@ paths:
                           avatar:
                             nullable: true
                             type: string
+                          role:
+                            type: string
   /auth/companies :
     post:
       summary: 登入取得companies appId

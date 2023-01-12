@@ -2595,9 +2595,18 @@ paths:
                           type: boolean
                         customer:
                           type: object
+                          required:
+                            - customerUuid
+                            - id
+                            - phone
+                            - remark
+                            - tags
+                            - platform
                           properties:
                             customerUuid:
                               type: string
+                            id:
+                              type: number
                             phone:
                               type: string
                             remark:
