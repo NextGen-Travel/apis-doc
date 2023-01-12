@@ -2472,43 +2472,7 @@ paths:
             example: 0816a550-f53e-42a1-880d-c23b054cbe23
       requestBody:
         required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - userId
-                - type
-              properties:
-                userId:
-                  type: number
-                type:
-                  type: string
-                  enum: ['audio','image','file','text','hsm']
-                  description: hsm是傳送範本類型的型態
-                text:
-                  type: string
-                  oneOf:
-                    - type: string
-                    - type: object
-                      properties:
-                        components:
-                          type: array
-                          items:
-                            $ref: '#/components/schemas/TemplateMessageComponent'
-                caption: 
-                  type: string
-                files:
-                  type: string
-                  format: binary
-                  description: The file to be uploaded
-                templateName:
-                  type: string
-                languageCode:
-                  type: string
-                isShoppingLink:
-                  type: boolean
-                  description: 導購紀錄
+        content: 
           multipart/form-data:
             schema:
               type: object
