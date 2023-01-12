@@ -2471,8 +2471,7 @@ paths:
             type: string
             example: 0816a550-f53e-42a1-880d-c23b054cbe23
       requestBody:
-        required: true
-        content:         
+        content:
           multipart/form-data:
             schema:
               type: object
