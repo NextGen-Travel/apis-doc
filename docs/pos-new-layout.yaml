@@ -337,6 +337,60 @@ components:
           image_url:
             type: string
             description: 圖片URL
+    SingleProductResponse:
+      type: object
+      properties:
+        product_name:
+          type: string
+          description: 產品名稱
+        product_id:
+          type: integer
+          description: 產品ID
+        brand_id:
+          type: integer
+          description: 品牌ID
+        sub_sku:
+          type: string
+          description: Sub SKU
+        sell_price_inc_tax:
+          type: string
+          description: 售價(含稅)
+        variation_id:
+          type: integer
+          description: 產品衍生規格ID
+        qty_available:
+          type: integer
+          description: 庫存總量
+        unit:
+          type: string
+          description: 單位
+        unit_id:
+          type: integer
+          description: 單位ID
+        brand:
+          type: string
+          description: 品牌名稱
+        lot_numbers:
+          description: 批號詳細資訊
+          type: array
+          items:
+            type: object
+            properties:
+              purchase_line_id:
+                type: integer
+                description: 採購單ID
+              lot_number:
+                type: string
+                description: 批號
+              exp_date:
+                type: string
+                description: 過期日
+              qty_available:
+                type: integer
+                description: 可用數量
+              qty_formated:
+                type: integer
+                description: 格式化後的可用數量
     SuspendTxnResponse:
       type: array
       items:
@@ -865,6 +919,51 @@ paths:
                   purchase_line_id: 68
                   lot_number: Batch111
                   image_url: http://localhost:8000/project/public/img/default.png
+  /products/{variation_id}:
+    get:
+      summary: 取得單一產品詳細資訊
+      description: | 
+        取得單一產品詳細資訊
+      tags:
+        - POS V2
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 分店ID
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleProductResponse'
+              example:
+                product_name: "百事可樂"
+                product_id: 103
+                brand_id: 2
+                sub_sku: 0103
+                sell_price_inc_tax: 25.0000
+                variation_id: 155
+                qty_available: 54
+                unit: Pc(s)
+                unit_id: 4
+                brand: Adidas
+                lot_numbers:
+                  - exp_date: "2023-08-31"
+                    lot_number: "batch111"
+                    purchase_line_id: 114
+                    qty_available: "27.0000"
+                    qty_formated: "27.00"
+                  - exp_date:
+                    lot_number: "batch222"
+                    purchase_line_id: 115
+                    qty_available: "26.0000"
+                    qty_formated: "26.00"
+                
+                
   /custom-tags:
     get:
       summary: 客戶自訂產品標籤
@@ -906,7 +1005,9 @@ paths:
                   3: "分店C (BL0003)"
                 employee_id: 1
                 employee_name: "Laplace chen"
-  
+
+
+
   /sells:
     get:
       summary: 暫存訂單列表
