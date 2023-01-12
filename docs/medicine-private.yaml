@@ -76,6 +76,10 @@ components:
           example: '12221222'
         language:
           type: string
+          enum:
+            - zh
+            - en
+            - zh-en
           description: 客人的慣用語言
           example: 'zh'
         drugTaboo:
@@ -574,8 +578,12 @@ components:
           type: string
         orderNo:
           type: string
-        lang:
+        language:
           type: string
+          enum:
+            - zh
+            - en
+            - zh-en
 
 paths:
   # ====================
@@ -1118,6 +1126,9 @@ paths:
               usage[] :
                 style : form
                 explode : true
+              total[] :
+                style : form
+                explode : true
               dosageForm[] :
                 style : form
                 explode : true
@@ -1194,6 +1205,12 @@ paths:
                     type: string
                   description: 藥品使用方式
                   example: ['oral','external']
+                total[]:
+                  type: array
+                  items:
+                    type: integer
+                  description: 藥品數量
+                  example: [6,9]
                 dosageForm[]:
                   type: array
                   items:
@@ -1320,8 +1337,12 @@ paths:
                   type: string
                   description: 處方簽症狀
                   example: '治療發燒、喉嚨痛'
-                lang:
+                language:
                   type: string
+                  enum:
+                    - zh
+                    - en
+                    - zh-en
                   description: 紀錄語系 zh、en
                   example: 'zh'
                 drug[]:
