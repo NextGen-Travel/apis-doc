@@ -20,7 +20,6 @@ components:
       name: Authorization
       description: 驗證需要的 token, Bearer xxx
   schemas:
-
     AutoReplies:
       type: array
       items:
@@ -69,8 +68,23 @@ components:
                   items:
                     type: object
                     description: 遞迴
-                
-            
+    Node:
+      type: object
+      properties:
+        id:
+          type: integer
+        replyText:
+          type: string
+        keyword:
+          type: string
+        isEnd:
+          type: boolean
+        isActive:
+          type: boolean
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/Node'
     QuickReplies:
       type: object
       required:
@@ -1343,7 +1357,7 @@ paths:
                     type: string
                     example: Suucess
                   data:
-                    $ref: '#/components/schemas/AutoReplies'
+                    $ref: '#/components/schemas/Node'
     post:
       summary: 儲存自動回覆
       description: 儲存自動回覆
