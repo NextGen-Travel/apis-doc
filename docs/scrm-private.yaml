@@ -69,18 +69,6 @@ components:
                   items:
                     type: object
                     description: 遞迴
-                    properties:
-                      id:
-                        type: number
-                      replyText:
-                        type: string
-                      keyword:
-                        type: string
-                      isEnd:
-                        type: boolean
-                      isActive:
-                        type: boolean
-                
             
     QuickReplies:
       type: object
