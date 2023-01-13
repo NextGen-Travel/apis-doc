@@ -905,32 +905,37 @@ paths:
               schema:
                 $ref: '#/components/schemas/ProductsResponse'
               example:
-                - product_id: 70
+                - variation_id: 119
+                  product_id: 70
                   name: 可樂
                   type: single
                   enable_stock: 1
-                  variation_id: 119
-                  variation: DUMMY
-                  qty_available: 2232.0000
-                  selling_price: 125.0000
+                  product_image: http://localhost:8000/project/public/img/default.png
+                  variation: ""
+                  sell_price_inc_tax: 125
                   sub_sku: 0070
-                  unit: Pc(s)
-                  purchase_line_id: 70
-                  lot_number:
-                  image_url: http://localhost:8000/project/public/img/default.png
-                - product_id: 71
+                  qty_available: 2232
+                  stock:
+                    - purchase_line_id: 70
+                      lot_number: 
+                      exp_date: 
+                      qty_available: 2232
+                - variation_id: 120
+                  product_id: 71
                   name: 黑松沙士
                   type: single
                   enable_stock: 1
-                  variation_id: 120
-                  variation: DUMMY
-                  qty_available: 1010.0000
-                  selling_price: 250.0000
+                  product_image: http://localhost:8000/project/public/img/default.png
+                  variation: ""
+                  sell_price_inc_tax: 250
                   sub_sku: 0071
-                  unit: Pc(s)
-                  purchase_line_id: 68
-                  lot_number: Batch111
-                  image_url: http://localhost:8000/project/public/img/default.png
+                  qty_available: 1010
+                  stock:
+                    - purchase_line_id: 68
+                      lot_number: Batch111
+                      exp_date: 
+                      qty_available: 1010                  
+                  
   /products/{variation_id}:
     get:
       summary: 取得單一產品詳細資訊
@@ -957,24 +962,21 @@ paths:
                 product_id: 103
                 brand_id: 2
                 sub_sku: 0103
-                sell_price_inc_tax: 25.0000
+                sell_price_inc_tax: 25
                 variation_id: 155
                 qty_available: 54
                 unit: Pc(s)
                 unit_id: 4
                 brand: Adidas
-                lot_numbers:
-                  - exp_date: "2023-08-31"
+                stock:
+                  - purchase_line_id: 114
                     lot_number: "batch111"
-                    purchase_line_id: 114
-                    qty_available: "27.0000"
-                    qty_formated: "27.00"
-                  - exp_date:
+                    exp_date: "2023-08-31"
+                    qty_available: 27
+                  - purchase_line_id: 115
                     lot_number: "batch222"
-                    purchase_line_id: 115
-                    qty_available: "26.0000"
-                    qty_formated: "26.00"
-                
+                    exp_date:
+                    qty_available: 26
                 
   /custom-tags:
     get:
