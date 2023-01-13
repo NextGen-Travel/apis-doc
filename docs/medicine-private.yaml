@@ -1167,7 +1167,7 @@ paths:
                   enum:
                     - zh
                     - en
-                    - zh-en
+                    - zh_en
                   description: 紀錄語系 zh、en
                   example: 'zh'
                 drug[]:
