@@ -1162,7 +1162,7 @@ paths:
                   type: string
                   description: 處方簽症狀
                   example: '治療發燒、喉嚨痛'
-                lang:
+                language:
                   type: string
                   enum:
                     - zh
