@@ -948,12 +948,12 @@ paths:
         - in: query
           name: enable
           schema:
-            type: string
+            type: boolean
           required: false
         - in: query
           name: sso
           schema:
-            type: string
+            type: boolean
           required: false  
         - in: query
           name: offset
@@ -1392,16 +1392,14 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items: 
-                type: object
-                properties:
-                  id:
-                    type: number
-                  replyText:
-                    type: string
-                  keyword:
-                    type: string
+              type: object
+              properties:
+                id:
+                  type: number
+                replyText:
+                  type: string
+                keyword:
+                  type: string
       responses:
         '200':
           description: 成功
