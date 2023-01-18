@@ -128,3 +128,77 @@ paths:
       responses:
         '200':
           description: 成功
+
+  /booking/customers/{customer_id}:
+    get:
+      summary: 服務
+      description: 取得
+      parameters:
+        - name: customer_id
+          in: path
+          required: true
+          description: The ID of the user to return.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      # 分類
+      tags:
+        - booking
+      responses:
+        '200':
+          description: 成功
+  /booking/{booking_id}/customers/{customer_id}:
+    put:
+      summary: 更新顧客預約
+      description: 更新顧客預約
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          description: The ID of the booking.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+        - name: customer_id
+          in: path
+          required: true
+          description: The ID of the customer.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      # 分類
+      tags:
+        - booking
+      responses:
+        '200':
+          description: 成功
+    delete:
+      summary: 刪除顧客預約
+      description: 刪除顧客預約
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          description: The ID of the booking.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+        - name: customer_id
+          in: path
+          required: true
+          description: The ID of the customer.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      # 分類
+      tags:
+        - booking
+      responses:
+        '200':
+          description: 成功
+
