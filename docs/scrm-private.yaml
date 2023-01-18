@@ -2008,7 +2008,7 @@ paths:
                         type: object
                         properties:
                           fullCount:
-                            type: string
+                            type: number
                           fields:
                             type: array 
                             items:
@@ -2089,7 +2089,7 @@ paths:
                             items: 
                               $ref: '#/components/schemas/Fields'
                           fullCount:
-                            type: string 
+                            type: number 
                           items:
                             type: array
                             items:
@@ -2166,7 +2166,7 @@ paths:
                         type: object
                         properties:
                           fullCount:
-                            type: string
+                            type: number
                           fields:
                             type: array 
                             items:
@@ -2268,7 +2268,7 @@ paths:
                         type: object
                         properties:
                           fullCount:
-                            type: string
+                            type: number
                           fields:
                             type: array 
                             items:
