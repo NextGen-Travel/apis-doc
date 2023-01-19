@@ -60,6 +60,10 @@ paths:
                   type: string
                   description: 密碼
                   example: 'nextgen123'
+                channel:
+                  type: string
+                  description: 頻道
+                  example: 'cas'
       responses:
         '200':
           description: 成功
