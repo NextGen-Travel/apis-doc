@@ -131,24 +131,23 @@ paths:
 
   /booking/customers/{customer_id}:
     get:
-      summary: 服務
-      description: 取得
+      summary: 取得預約列表
+      description: 取得預約列表
       parameters:
         - name: customer_id
           in: path
           required: true
-          description: The ID of the user to return.
+          description: The ID of the user.
           schema:
             type: integer
             format: int64
             minimum: 1
-      # 分類
       tags:
         - booking
       responses:
         '200':
           description: 成功
-  /booking/{booking_id}/customers/{customer_id}:
+  /booking/{booking_id}:
     put:
       summary: 更新顧客預約
       description: 更新顧客預約
@@ -169,7 +168,41 @@ paths:
             type: integer
             format: int64
             minimum: 1
-      # 分類
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                business_id:
+                  type: integer
+                  description: 總店ID
+                  example: 1
+                location_id:
+                  type: integer
+                  description: 分店ID
+                  example: 1
+                contact_id:
+                  type: integer
+                  description: 顧客ID
+                  example: 40
+                contact_uuid:
+                  type: string
+                  description: 顧客 UUID
+                  example: "dsgcydsgv-2t78dtcg8-dshcsd89y"
+                res_waiter_id:
+                  type: integer
+                  description: 服務生ID
+                  example: 5
+                booking_start:
+                  type: string
+                  description: 預約開始時間
+                  example: "01/24/2023 15:40"
+                booking_end:
+                  type: string
+                  description: 預約結束時間
+                  example: "01/25/2023 15:45"
       tags:
         - booking
       responses:
