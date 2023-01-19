@@ -7,7 +7,7 @@ info:
 
 tags:
   - name: booking
-    description: 新版POS相關API
+    description: 預約系統相關API
 
 # 這裡可以選擇網域
 servers:
@@ -35,6 +35,8 @@ paths:
 
   /booking/new:
     post:
+      summary: 新增預約
+      description: 新增預約
       tags:
         - booking
       requestBody:
