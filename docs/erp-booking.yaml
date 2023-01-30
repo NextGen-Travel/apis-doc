@@ -131,14 +131,14 @@ paths:
         '200':
           description: 成功
 
-  /booking/customers/{customer_id}:
+  /booking:
     get:
       summary: 取得預約列表
       description: 取得預約列表
       parameters:
         - name: customer_id
-          in: path
-          required: true
+          in: query
+          # required: true
           description: The ID of the user.
           schema:
             type: integer
@@ -158,14 +158,6 @@ paths:
           in: path
           required: true
           description: The ID of the booking.
-          schema:
-            type: integer
-            format: int64
-            minimum: 1
-        - name: customer_id
-          in: path
-          required: true
-          description: The ID of the customer.
           schema:
             type: integer
             format: int64
@@ -218,14 +210,6 @@ paths:
           in: path
           required: true
           description: The ID of the booking.
-          schema:
-            type: integer
-            format: int64
-            minimum: 1
-        - name: customer_id
-          in: path
-          required: true
-          description: The ID of the customer.
           schema:
             type: integer
             format: int64
