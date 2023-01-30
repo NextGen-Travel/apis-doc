@@ -79,7 +79,7 @@ components:
           enum:
             - zh
             - en
-            - zh-en
+            - zh_en
           description: 客人的慣用語言
           example: 'zh'
         drugTaboo:
@@ -583,7 +583,7 @@ components:
           enum:
             - zh
             - en
-            - zh-en
+            - zh_en
 
 paths:
   # ====================
@@ -1205,12 +1205,6 @@ paths:
                     type: string
                   description: 藥品使用方式
                   example: ['oral','external']
-                total[]:
-                  type: array
-                  items:
-                    type: integer
-                  description: 藥品數量
-                  example: [6,9]
                 dosageForm[]:
                   type: array
                   items:
@@ -1342,7 +1336,7 @@ paths:
                   enum:
                     - zh
                     - en
-                    - zh-en
+                    - zh_en
                   description: 紀錄語系 zh、en
                   example: 'zh'
                 drug[]:
