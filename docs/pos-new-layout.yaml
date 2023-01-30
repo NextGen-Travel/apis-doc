@@ -10,8 +10,16 @@ servers:
   - url: https://erp-dev.cloudsatlas.com.hk/public
 
 tags:
-  - name: POS V2
-    description: 新版POS相關API
+  - name: POS V2 - Sale
+    description: 新版 POS 銷售相關 API
+  - name: POS V2 - Order
+    description: 新版 POS 訂單相關 API
+  - name: POS V2 - Warehouse
+    description: 新版 POS 倉管相關 API
+  - name: POS V2 - Member
+    description: 新版 POS 客戶相關 API
+  - name: POS V2 - Clock In/Out
+    description: 新版 POS 打卡相關 API
   - name: POS V1
     description: 原生POS相關API
 
@@ -878,7 +886,7 @@ paths:
       summary: 產品清單
       description: 取得產品清單
       tags:
-        - POS V2
+        - POS V2 - Sale
       parameters:
         - in: query
           name: location_id
@@ -942,7 +950,7 @@ paths:
       description: | 
         取得單一產品詳細資訊
       tags:
-        - POS V2
+        - POS V2 - Sale
       parameters:
         - in: query
           name: location_id
@@ -983,7 +991,7 @@ paths:
       summary: 客戶自訂產品標籤
       description: 取得客戶自訂產品標籤
       tags:
-        - POS V2
+        - POS V2 - Sale
       responses:
         '200':
           description: 成功
@@ -1002,7 +1010,7 @@ paths:
       summary: 取得店家資訊
       description: 取得全部店家資訊以及預設店家及營業員
       tags:
-        - POS V2
+        - POS V2 - Sale
       responses:
         '200':
           description: 成功
@@ -1283,162 +1291,7 @@ paths:
                 success: 1
                 msg: Contact added successfully
                 
-  /products/list:
-    get:
-      summary: 取得產品列表
-      description: 在POS頁面的搜尋產品欄輸入關鍵字便會搜尋符合的產品
-      tags:
-        - POS V1
-      parameters:
-        - in: query
-          name: price_group
-          schema:
-            type: integer
-          description: 價格群組ID
-        - in: query
-          name: location_id
-          schema:
-            type: integer
-          description: 營業地點ID
-        - in: query
-          name: term
-          schema:
-            type: string
-          description: 搜尋關鍵字
-        - in: query
-          name: not_for_selling
-          schema:
-            type: boolean
-            default: false
-          description: 是否為非賣品
-        - in: query
-          name: search_fields
-          schema:
-            type: array
-            items:
-              type: string
-          description:  搜尋欄位名稱
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductsResponse'
-              example:
-                - product_id: 70
-                  name: 可樂
-                  type: single
-                  enable_stock: 1
-                  variation_id: 119
-                  variation: DUMMY
-                  qty_available: 2232.0000
-                  selling_price: 125.0000
-                  sub_sku: 0070
-                  unit: Pc(s)
-                  purchase_line_id: 70
-                  lot_number:
-                  image_url: http://localhost:8000/project/public/img/default.png
-                - product_id: 71
-                  name: 黑松沙士
-                  type: single
-                  enable_stock: 1
-                  variation_id: 120
-                  variation: DUMMY
-                  qty_available: 1010.0000
-                  selling_price: 250.0000
-                  sub_sku: 0071
-                  unit: Pc(s)
-                  purchase_line_id: 68
-                  lot_number: Batch111
-                  image_url: http://localhost:8000/project/public/img/default.png
-  /sells/pos/get-product-suggestion:
-    get:
-      summary: 取得建議產品列表
-      description: 在POS首頁會顯示建議產品的清單
-      tags:
-        - POS V1
-      parameters:
-        - in: query
-          name: category_id
-          schema:
-            type: integer
-          description: 類別ID
-        - in: query
-          name: brand_id
-          schema:
-            type: integer
-          description: 品牌ID
-        - in: query
-          name: location_id
-          schema:
-            type: integer
-            minimum: 1
-          description: 營業地點ID
-        - in: query
-          name: page
-          schema:
-            type: integer
-            minimum: 1
-          description: 分頁頁數
-        - in: query
-          name: is_enabled_stock
-          schema:
-            type: integer
-          description:  是否有啟用庫存管理
-        - in: query
-          name: repair_model_id
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: 成功，回傳HTML
-  /sells/pos/get_product_row:
-    get:
-      summary: 取得產品詳細資訊
-      description: 取得產品詳細資訊(回傳格式為HTML)
-      tags:
-        - POS V1
-      parameters:
-        - in: query
-          name: product_row
-          schema:
-            type: integer
-        - in: query
-          name: customer_id
-          schema:
-            type: integer
-          description: 客戶ID
-        - in: query
-          name: is_direct_sell
-          schema:
-            type: boolean
-          description: 是否是POS銷售(0=POS銷售, 1=直接銷售)
-        - in: query
-          name: price_group
-          schema:
-            type: integer
-          description: 價格群組
-        - in: query
-          name: purchase_line_id
-          schema:
-            type: integer
-        - in: query
-          name: weighing_scale_barcode
-          schema:
-            type: string
-        - in: query
-          name: quantity
-          schema:
-            type: integer
-          description: 數量
-        - in: query
-          name: is_sales_order
-          schema:
-            type: boolean
-      responses:
-        '200':
-          description: 成功
+  
   /pos:
     post:
       summary: 建立訂單
