@@ -10,18 +10,16 @@ servers:
   - url: https://erp-dev.cloudsatlas.com.hk/public
 
 tags:
-  - name: POS V2 - Sale
+  - name: Sale
     description: 新版 POS 銷售相關 API
-  - name: POS V2 - Order
+  - name: Order
     description: 新版 POS 訂單相關 API
-  - name: POS V2 - Warehouse
+  - name: Warehouse
     description: 新版 POS 倉管相關 API
-  - name: POS V2 - Member
+  - name: Member
     description: 新版 POS 客戶相關 API
-  - name: POS V2 - Clock In/Out
+  - name: Clock In/Out
     description: 新版 POS 打卡相關 API
-  - name: POS V1
-    description: 原生POS相關API
 
 components:
   parameters:
@@ -710,7 +708,7 @@ paths:
       summary: 產品清單
       description: 取得產品清單
       tags:
-        - POS V2 - Sale
+        - Sale
       parameters:
         - in: query
           name: location_id
@@ -774,7 +772,7 @@ paths:
       description: | 
         取得單一產品詳細資訊
       tags:
-        - POS V2 - Sale
+        - Sale
       parameters:
         - in: query
           name: location_id
@@ -815,7 +813,7 @@ paths:
       summary: 客戶自訂產品標籤
       description: 取得客戶自訂產品標籤
       tags:
-        - POS V2 - Sale
+        - Sale
       responses:
         '200':
           description: 成功
@@ -834,7 +832,7 @@ paths:
       summary: 取得店家資訊
       description: 取得全部店家資訊以及預設店家及營業員
       tags:
-        - POS V2 - Sale
+        - Sale
       responses:
         '200':
           description: 成功
@@ -858,7 +856,7 @@ paths:
       description: | 
         取得暫存訂單列表
       tags:
-        - POS V1
+        - Sale
       parameters:
         - in: query
           name: suspended
@@ -953,7 +951,7 @@ paths:
       summary: 會員清單
       description: 取得會員清單
       tags:
-        - POS V2 - Member
+        - Member
       parameters:
         - in: query
           name: q
@@ -980,9 +978,12 @@ paths:
   /contacts:
     post:
       summary: 新增會員
-      description: 新增會員
+      description: | 
+        新增會員
+
+        Note: POS原生API
       tags:
-        - POS V2 - Member
+        - Member
       requestBody:
         required: true
         content:
@@ -1083,8 +1084,7 @@ paths:
                   created_at: 2022/12/16 12:15:00
                 success: 1
                 msg: Contact added successfully
-                
-  
+
   /pos:
     post:
       summary: 建立訂單
@@ -1092,8 +1092,10 @@ paths:
         建立POS訂單.
 
         當is_suspend=1則會儲存為暫存訂單.
+
+        Note: POS原生API
       tags:
-        - POS V1
+        - Sale
       requestBody:
         required: true
         content:
