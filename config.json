@@ -31,6 +31,10 @@
         {
             "name": "Scrm Private",
             "value": "scrm-private"
+        },
+        {
+            "name": "Pos New Layout",
+            "value": "pos-new-layout"
         }
     ]
 }
