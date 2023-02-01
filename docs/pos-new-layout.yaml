@@ -746,6 +746,17 @@ components:
           type: string
           description: 店員名稱
 
+    TransportStatusResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: 翻譯後的顯示文字
+          value:
+            type: string
+            description: 下拉選單的value
 paths:
   
   /api/products:
@@ -1014,11 +1025,11 @@ paths:
                 - id: 1
                   name: Walk-in (CO0001)
                   mobile: 0934987146
-                  total_rp:
+                  total_rp: 0
                 - id: 2
                   name: Miss jojo Lin (CO0002)
                   mobile: 0966123458
-                  total_rp:
+                  total_rp: 0
 
   /contacts:
     post:
@@ -1155,9 +1166,18 @@ paths:
               search_product:
               pay_term_number:
               pay_term_type: 
-              price_group: 0,
-              types_of_service_id: 
+              price_group: 0
+              types_of_service_id: 2
               types_of_service_price_group: 
+              packing_charge: 10.00
+              packing_charge_type: "fixed"
+              service_custom_field_1: aaaa
+              service_custom_field_2: bbbb
+              service_custom_field_3: cccc
+              service_custom_field_4: dddd
+              service_custom_field_5: eeee
+              service_custom_field_6: ffff
+              is_recurring: 1
               res_table_id: 
               res_waiter_id: 
               transporter_id: 
@@ -1180,10 +1200,10 @@ paths:
                   sub_unit_id: 1
                   base_unit_multiplier: 1
                   unit_price_inc_tax: 125.0
-              discount_type: "percentage"
-              discount_amount: 0.00
-              rp_redeemed: 0
-              rp_redeemed_amount: 0
+              discount_type: "fixed"
+              discount_amount: 11.00
+              rp_redeemed: 321
+              rp_redeemed_amount: 321
               tax_rate_id:
               tax_calculation_amount: 0.00
               shipping_details: 
@@ -1217,9 +1237,9 @@ paths:
               change_return: 0.00
               additional_notes: 'axios post test'
               is_suspend: 1  # 1 = 暫存訂單, 0 = 一般訂單
-              recur_interval: 
+              recur_interval:  3
               recur_interval_type: "days"
-              recur_repetitions: 
+              recur_repetitions: 1
               subscription_repeat_on: 
               size: 'all'
               is_enabled_stock: 
@@ -1248,3 +1268,30 @@ paths:
                 success: 1
                 msg: Sale added successfully
                 receipt: null
+
+  /api/transport-status:
+    get:
+      summary: 取得運輸狀態列表
+      description: 取得運輸狀態列表
+      tags:
+        - Sale
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransportStatusResponse'
+              example:
+                - value: ordered
+                  name: 已訂購
+                - value: packed
+                  name: 包裝中
+                - value: shipped
+                  name: 已發貨
+                - value: delivered
+                  name: 已送達
+                - value: cancelled
+                  name: 已取消
+
+
