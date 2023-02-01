@@ -41,7 +41,10 @@ components:
             description: 客戶ID
           name:
             type: string
-            description: 客戶名稱及ID
+            description: 客戶名稱
+          member_id:
+            type: string
+            description: 客戶自訂ID
           mobile:
             type: string
             description: 手機
@@ -745,6 +748,40 @@ components:
         employee_name:
           type: string
           description: 店員名稱
+        enable_rp:
+          type: boolean
+          description: 是否啟用積分(1=啟用, 0=關閉)
+        rp_name:
+          type: string
+          description: 積分顯示名稱
+        amount_for_unit_rp:
+          type: integer
+          description: 每一積分需要的消費金額
+        min_order_total_for_rp:
+          type: integer
+          description: 可獲獎勵的最低消費金額
+        max_rp_per_order:
+          type: integer
+          description: 每個訂單的最大積分額
+        redeem_amount_per_unit_rp:
+          type: integer
+          description: 每一積分的兌換金額
+        min_order_total_for_redeem:
+          type: integer
+          description: 可兌換積分的最低消費額
+        min_redeem_point:
+          type: integer
+          description: 最低兌換積分
+        max_redeem_point:
+          type: integer
+          description: 每個訂單的最大兌換積分
+        rp_expiry_period:
+          type: integer
+          description: 獎勵積分有效期限
+        rp_expiry_type:
+          type: string
+          description: 獎勵積分有效期限單位(年/月)
+
 
     TransportStatusResponse:
       type: array
@@ -905,6 +942,18 @@ paths:
                   3: "分店C (BL0003)"
                 employee_id: 1
                 employee_name: "Laplace chen"
+                enable_rp: 1
+                rp_name: "會員積分"
+                amount_for_unit_rp: "10.0000"
+                min_order_total_for_rp: "1.0000"
+                max_rp_per_order: null
+                redeem_amount_per_unit_rp: "1.0000"
+                min_order_total_for_redeem: "1.0000"
+                min_redeem_point: null
+                max_redeem_point: null
+                rp_expiry_period: null
+                rp_expiry_type: "year"
+
 
   /api/sells:
     get:
@@ -1023,11 +1072,13 @@ paths:
                 $ref: '#/components/schemas/CustomersResponse'
               example:
                 - id: 1
-                  name: Walk-in (CO0001)
+                  name: Walk-in
+                  member_id: CO0001
                   mobile: 0934987146
                   total_rp: 0
                 - id: 2
-                  name: Miss jojo Lin (CO0002)
+                  name: Miss jojo Lin
+                  member_id: CO0002
                   mobile: 0966123458
                   total_rp: 0
 
