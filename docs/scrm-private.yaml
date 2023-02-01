@@ -2483,6 +2483,20 @@ paths:
       requestBody:
         required: true
         content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - type
+                - text
+              properties:
+                userId:
+                  type: number
+                type:
+                  type: string
+                text:
+                  type: string
           multipart/form-data:
             schema:
               type: object
