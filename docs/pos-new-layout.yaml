@@ -794,6 +794,25 @@ components:
           value:
             type: string
             description: 下拉選單的value
+
+    InvoiceResponse:
+      type: object
+      properties:
+        default_invoice_id:
+          type: integer
+          description: 預設發票ID
+        invoices:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 發票名稱
+              value:
+                type: string
+                description: 下拉選單的value
+
 paths:
   
   /api/products:
@@ -1345,4 +1364,25 @@ paths:
                 - value: cancelled
                   name: 已取消
 
+
+  /api/invoices:
+    get:
+      summary: 取得發票清單
+      description: 取得發票清單
+      tags:
+        - Sale
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvoiceResponse'
+              example:
+                default_invoice_id: 1
+                invoices:
+                  - value: 1
+                    name: Default
+                  - value: 3
+                    name: 2023發票
 
