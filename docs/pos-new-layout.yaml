@@ -483,8 +483,39 @@ components:
           type: integer
         types_of_service_id:
           type: integer
+          description: 服務類型ID
         types_of_service_price_group:
           type: integer
+        is_recurring:
+          type: boolean
+          description: 是否為預定發票
+        packing_charge:
+          type: integer
+          description: 包裝支出
+        packing_charge_type:
+          type: string
+          enum:
+            - "fixed"
+            - "percent"
+          description: 包裝支出的類型(固定 or 百分比)
+        service_custom_field_1:
+          type: string
+          description: 服務自定欄１
+        service_custom_field_2:
+          type: string
+          description: 服務自定欄2
+        service_custom_field_3:
+          type: string
+          description: 服務自定欄3
+        service_custom_field_4:
+          type: string
+          description: 服務自定欄4
+        service_custom_field_5:
+          type: string
+          description: 服務自定欄5
+        service_custom_field_6:
+          type: string
+          description: 服務自定欄6
         res_table_id:
           type: integer
         res_waiter_id:
@@ -548,8 +579,13 @@ components:
                 description: 含稅單位價錢
         discount_type:
           type: string
+          enum:
+            - "fixed"
+            - "percentage"
+          description: 折扣類型
         discount_amount:
           type: integer
+          description: 折扣金額
         rp_redeemed:
           type: integer
         rp_redeemed_amount:
@@ -627,12 +663,20 @@ components:
           description: 是否為暫存訂單
         recur_interval:
           type: integer
+          description: 預定發票間隔
         recur_interval_type:
           type: string
+          enum:
+            - "days"
+            - "months"
+            - "years"
+          description: 預定發票間隔類型
         recur_repetitions:
           type: integer
+          description: 預定發票重複次數
         subscription_repeat_on:
           type: string
+          description: 預定發票重複日期 (當預定發票間隔類型為 months 時才需要)
         size:
           type: string
         is_enabled_stock:
@@ -641,6 +685,7 @@ components:
           type: boolean
         final_total:
           type: integer
+          description: 總金額
         discount_type_modal:
           type: string
         discount_amount_modal:
