@@ -154,6 +154,8 @@ components:
       # Both properties are required
       required:  
         - type
+        - first_name
+        - mobile
     CreateContactResponse:
       type: object
       properties:
@@ -813,6 +815,18 @@ components:
                 type: string
                 description: 下拉選單的value
 
+    ContactGroupResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: 客戶群顯示文字
+          value:
+            type: string
+            description: 下拉選單的value
+
 paths:
   
   /api/products:
@@ -1385,4 +1399,25 @@ paths:
                     name: Default
                   - value: 3
                     name: 2023發票
+
+  /api/contact-group:
+    get:
+      summary: 取得客戶群清單
+      description: 取得客戶群清單
+      tags:
+        - Sale
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContactGroupResponse'
+              example:
+                - value: 1
+                  name: A公司
+                - value: 2
+                  name: B公司
+                - value: 3
+                  name: C公司
 
