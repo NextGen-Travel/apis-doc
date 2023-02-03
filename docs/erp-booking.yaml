@@ -30,77 +30,156 @@ components:
         type: string
       required: false
       example: 'en'
-
+  schemas:
+    CreateBooking:
+      type: object
+      properties:
+        business_id:
+          type: integer
+          description: 總店ID
+        location_id:
+          type: integer
+          description: 分店ID
+        contact_id:
+          type: integer
+          description: 顧客ID
+        contact_name:
+          type: string
+          description: 顧客姓名
+        contact_mobile:
+          type: string
+          description: 顧客手機
+        contact_email:
+          type: string
+          description: 顧客 email
+        contact_uuid:
+          type: string
+          description: 顧客 UUID
+        res_waiter_id:
+          type: integer
+          description: 服務生ID
+        booking_start:
+          type: string
+          description: 預約開始時間
+        booking_end:
+          type: string
+          description: 預約結束時間
+        booking_note:
+          type: string
+          description: 預約備註
+        product_id:
+          type: integer
+          description: 產品ID
+        product_specific_sys_activities_id:
+          type: integer
+          description: 活動相關ID
+        payment_status:
+          type: string
+          description: 付款狀態
+    CreateBookingResp:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: 執行結果(1=成功, 0=失敗)
+        msg:
+          type: string
+          description: 結果訊息
+    UpdateBooking:
+      type: object
+      properties:
+        location_id:
+          type: integer
+          description: 分店ID
+        res_waiter_id:
+          type: integer
+          description: 服務生ID
+        booking_start:
+          type: string
+          description: 預約開始時間
+        booking_end:
+          type: string
+          description: 預約結束時間
+        product_id:
+          type: integer
+          description: 產品ID
+        product_specific_sys_activities_id:
+          type: integer
+          description: 活動相關ID
+    UpdateBookingResp:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: 執行結果(1=成功, 0=失敗)
+        msg:
+          type: string
+          description: 結果訊息
+    DeleteBookingResp:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: 執行結果(1=成功, 0=失敗)
+        msg:
+          type: string
+          description: 結果訊息
+    ServiceStaffResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        date:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: 服務人員ID
+              full_name:
+                type: string
+                description: 服務人員名稱
+              email:
+                type: string
+                description: 服務人員email
+    SingleServiceStaffResp:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 服務人員ID
+        full_name:
+          type: string
+          description: 服務人員名稱
+        email:
+          type: string
+          description: 服務人員 email
+        product_specific_sys_activities:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: 活動ID
+              user_id:
+                type: integer
+                description: 服務人員ID
+              start_time:
+                type: string
+                description: 活動開始時間
+              end_time:
+                type: string
+                description: 活動結束時間
+              max_contacts:
+                type: integer
+                description: 人數上限
+              signed_up_contacts:
+                type: integer
+                description: 已預約人數
+    
 paths:
-
-  /booking/new:
-    post:
-      summary: 新增預約
-      description: 新增預約
-      tags:
-        - booking
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                business_id:
-                  type: integer
-                  description: 總店ID
-                  example: 1
-                location_id:
-                  type: integer
-                  description: 分店ID
-                  example: 1
-                contact_id:
-                  type: integer
-                  description: 顧客ID
-                  example: 40
-                contact_name:
-                  type: string
-                  description: 顧客姓名
-                  example: 王小明
-                contact_mobile:
-                  type: string
-                  description: 顧客手機
-                  example: 0912654987
-                contact_email:
-                  type: string
-                  description: 顧客 email
-                  example: "wangming@nextgen.com.hk"
-                contact_uuid:
-                  type: string
-                  description: 顧客 UUID
-                  example: "dsgcydsgv-2t78dtcg8-dshcsd89y"
-                correspondent:
-                  type: integer
-                  description: 接線生ID
-                  example: 1
-                res_table_id:
-                  type: integer
-                  description: 餐桌ID
-                  example: 3
-                res_waiter_id:
-                  type: integer
-                  description: 服務生ID
-                  example: 5
-                booking_start:
-                  type: string
-                  description: 預約開始時間
-                  example: "01/24/2023 15:40"
-                booking_end:
-                  type: string
-                  description: 預約結束時間
-                  example: "01/25/2023 15:45"
-                booking_note:
-                  type: string
-                  description: 預約備註
-                  example: "海景第一排"
-      responses:
-        '200':
-          description: 成功
   /booking/service-staff:
     get:
       summary: 取得服務人員列表
@@ -111,6 +190,22 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceStaffResponse'
+              example:
+                success: 1
+                data:
+                  - id: 1
+                    full_name: Service Staff A
+                    email: waiter1@nextgen.com.hk
+                  - id: 2
+                    full_name: Service Staff B
+                    email: waiter2@nextgen.com.hk
+
+
+
   /booking/service-staff/{id}:
     get:
       summary: 服務人員詳細資訊及可預約場次
@@ -130,8 +225,67 @@ paths:
       responses:
         '200':
           description: 成功
-
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleServiceStaffResp'
+              example:
+                success: 1
+                data:
+                - id: 1
+                  full_name: Service Staff A
+                  email: waiter1@nextgen.com.hk
+                  product_specific_sys_activities_id:
+                    - id: 1
+                      user_id: 5
+                      start_time: 2023-01-23 12:00:00
+                      end_time: 2023-01-23 13:00:00
+                      max_contacts: 1
+                      signed_up_contacts: 1
+                    - id: 2
+                      user_id: 5
+                      start_time: 2023-01-23 13:00:00
+                      end_time: 2023-01-23 14:00:00
+                      max_contacts: 1
+                      signed_up_contacts: 1
   /booking:
+    post:
+      summary: 新增預約
+      description: 新增預約
+      tags:
+        - booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBooking'
+            example:
+              business_id: 1
+              location_id: 1
+              contact_id: 40
+              contact_name: 王小明
+              contact_mobile: 0912654987
+              contact_email: "wangming@nextgen.com.hk"
+              contact_uuid: dsgcydsgv-2t78dtcg8-dshcsd89y
+              res_waiter_id: 5
+              booking_start: "02/8/2023 15:40"
+              booking_end: "02/9/2023 15:45"
+              booking_note: "海景第一排"
+              product_id: 118
+              product_specific_sys_activities_id: 8
+              payment_status: unpaid
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBookingResp'
+              example:
+                success: 1
+                msg: Added success
     get:
       summary: 取得預約列表
       description: 取得預約列表
@@ -167,41 +321,27 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                business_id:
-                  type: integer
-                  description: 總店ID
-                  example: 1
-                location_id:
-                  type: integer
-                  description: 分店ID
-                  example: 1
-                contact_id:
-                  type: integer
-                  description: 顧客ID
-                  example: 40
-                contact_uuid:
-                  type: string
-                  description: 顧客 UUID
-                  example: "dsgcydsgv-2t78dtcg8-dshcsd89y"
-                res_waiter_id:
-                  type: integer
-                  description: 服務生ID
-                  example: 5
-                booking_start:
-                  type: string
-                  description: 預約開始時間
-                  example: "01/24/2023 15:40"
-                booking_end:
-                  type: string
-                  description: 預約結束時間
-                  example: "01/25/2023 15:45"
+              $ref: '#/components/schemas/UpdateBooking'
+            example:
+              location_id: 1
+              res_waiter_id: 5
+              booking_start: "02/10/2023 15:40"
+              booking_end: "02/10/2023 15:45"
+              product_id: 118
+              product_specific_sys_activities_id: 8
       tags:
         - booking
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBookingResp'
+              example:
+                success: 1
+                msg: update success
+
     delete:
       summary: 刪除顧客預約
       description: 刪除顧客預約
@@ -214,10 +354,16 @@ paths:
             type: integer
             format: int64
             minimum: 1
-      # 分類
       tags:
         - booking
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBookingResp'
+              example:
+                success: 1
+                msg: delete success
 
