@@ -35,6 +35,10 @@
         {
             "name": "Pos New Layout",
             "value": "pos-new-layout"
+        },
+        {
+            "name": "ERP booking",
+            "value": "erp-booking"
         }
     ]
 }

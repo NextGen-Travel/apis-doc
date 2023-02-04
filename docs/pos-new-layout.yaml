@@ -829,6 +829,17 @@ components:
           value:
             type: string
             description: 下拉選單的value
+    PaymentTypeResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            description: 付款類型顯示文字
+          value:
+            type: string
+            description: 下拉選單的value
 
 paths:
   
@@ -1430,4 +1441,32 @@ paths:
                   name: B公司
                 - value: 3
                   name: C公司
+
+  /api/payment-type:
+    get:
+      summary: 取得付款類型清單
+      description: 取得付款類型清單
+      tags:
+        - Sale
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: string
+          description: location id
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTypeResponse'
+              example:
+                - value: cash
+                  name: 現金
+                - value: card
+                  name: 訊用卡
+                - value: bank_transfer
+                  name: 銀行轉帳
 
