@@ -1470,3 +1470,569 @@ paths:
                 - value: bank_transfer
                   name: 銀行轉帳
 
+  /api/warehouse/stocks:
+    get:
+      summary: 庫存管理
+      description: 取得產品清單
+      tags:
+        - Warehouse
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 搜尋關鍵字
+        - in: query
+          name: category_id
+          schema:
+            type: integer
+          description: 主分類 ID
+        - in: query
+          name: sub_category_id
+          schema:
+            type: integer
+          description: 次分類 ID
+        - in: query
+          name: is_only_alert
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+          description: 僅檢視低於警示庫存量
+        - in: query
+          name: is_uncategorized
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+          description: 顯示未分類
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recordsTotal:
+                    type: integer
+                    description: 總筆數
+                  recordsFiltered:
+                    type: integer
+                    description: 筆數
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        position:
+                          type: string
+                          description: 區域
+                        row:
+                          type: string
+                          description: 排
+                        rack:
+                          type: string
+                          description: 貨架
+                        category:
+                          type: string
+                          description: 主分類
+                        sub_category:
+                          type: string
+                          description: 子分類
+                        product_name:
+                          type: string
+                          description: 產品名稱
+                        sku:
+                          type: string
+                          description: sku
+                        alert_quantity:
+                          type: integer
+                          description: 警示數量
+                        current_stock:
+                          type: integer
+                          description: 本地庫存
+                        offsite_stock:
+                          type: integer
+                          description: 異地庫存量
+                        unit:
+                          type: string
+                          description: 庫存單位
+                        base_unit:
+                          type: string
+                          description: 包裝單位
+                        base_unit_multiplier:
+                          type: string
+                          description: 每包幾入
+                        max_price:
+                          type: integer
+                          description: 單位售價(最大)
+                        min_price:
+                          type: integer
+                          description: 單位售價(最小)
+                        max_purchase_price:
+                          type: integer
+                          description: 單位成本(最大)
+                        min_purchase_price:
+                          type: integer
+                          description: 單位成本(最小)
+
+              example:
+                recordsTotal: 2
+                recordsFiltered: 2
+                data:
+                  - position: A區
+                    row: 3
+                    rack: 6
+                    product_name: 可樂
+                    category: 飲料
+                    sub_category: 含氣泡
+                    sku: adasdasdsad
+                    alert_quantity: 100
+                    current_stock: 70
+                    offsite_stock: 300
+                    unit: 罐
+                    base_unit: 箱
+                    base_unit_multiplier: 24
+                    max_price: 20
+                    min_price: 20
+                    max_purchase_price: 12
+                    min_purchase_price: 12
+                  - position: A區
+                    row: 3
+                    rack: 5
+                    product_name: 雪碧
+                    category: 飲料
+                    sub_category: 含氣泡
+                    sku: bbasdasdas
+                    alert_quantity: 100
+                    current_stock: 70
+                    offsite_stock: 300
+                    unit: 罐
+                    base_unit: 箱
+                    base_unit_multiplier: 24
+                    max_price: 20
+                    min_price: 20
+                    max_purchase_price: 11
+                    min_purchase_price: 11
+
+  /api/warehouse/purchases_or_transfers:
+    get:
+      summary: 採購/庫存轉移
+      description: 取得產品清單
+      tags:
+        - Warehouse
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum:
+              - "purchase"
+              - "purchase_transfer"
+          description: 類型
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 搜尋關鍵字
+        - in: query
+          name: start_date
+          schema:
+            type: string
+          description: 起始時間
+        - in: query
+          name: end_date
+          schema:
+            type: string
+          description: 結束時間
+        - in: query
+          name: length
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recordsTotal:
+                    type: integer
+                    description: 總筆數
+                  recordsFiltered:
+                    type: integer
+                    description: 筆數
+                  data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          type:
+                            type: string
+                            description: 類型
+                          ref_no:
+                            type: string
+                            description: 參考號
+                          transaction_date:
+                            type: string
+                            description: 建立日期
+                          DT_RowId:
+                            type: number
+                          location_from:
+                            type: string
+                            description: 地點(由)
+                          location_to:
+                            type: string
+                            description: 接收地點
+                          additional_notes:
+                            type: object
+                            description: 銷售註記
+                          status:
+                            type: string
+                            description: 狀態
+                          received_not_allowed:
+                            type: number
+                            description: 允許接收
+                          shipping_etd:
+                            type: string
+                            description: 預計出發日
+                          shipping_eta:
+                            type: string
+                            description: 預計到達日
+                          shipping_atd:
+                            type: string
+                            description: 實際出發日
+                          shipping_ata:
+                            type: string
+                            description: 實際到達日
+                          inventory_transaction_id:
+                            type: object
+                            description: 盤點Id 尚未盤點時 為 null
+                          inventory_transaction_date:
+                            type: object
+                            description: 盤點日
+                          inventory_staff:
+                            type: string
+                            description: 盤點人員
+                          item_count:
+                            type: number
+                            description: 總項目
+              example:
+                recordsTotal: 2
+                recordsFiltered: 2
+                data:
+                  - id: 130
+                    type: purchase_transfer
+                    ref_no: ST2023/0001
+                    transaction_date: '2023-01-30 12:00:00'
+                    location_from: Nextgen
+                    location_to: 港九
+                    additional_notes: 庫存轉移
+                    received_not_allowed: 0
+                    shipping_etd: '2023-02-01 12:00:00'
+                    shipping_eta: '2023-02-03 12:00:00'
+                    shipping_atd: '2023-02-01 12:02:00'
+                    shipping_ata: '2023-02-03 09:00:00'
+                    item_count: 2
+                    inventory_transaction_id: null
+                    inventory_transaction_date: null
+                    inventory_staff: null
+                  - id: 139
+                    type: purchase
+                    ref_no: 'PO2023/0002'
+                    transaction_date: '2023-01-30 12:00:00'
+                    location_from: BenQ
+                    location_to: 港九
+                    additional_notes: '採買螢幕 * 10'
+                    received_not_allowed: 0
+                    shipping_etd: '2023-02-01 12:00:00'
+                    shipping_eta: '2023-02-03 12:00:00'
+                    shipping_atd: '2023-02-01 12:02:00'
+                    shipping_ata: '2023-02-03 09:00:00'
+                    item_count: 1
+                    inventory_transaction_id: null
+                    inventory_transaction_date: null
+                    inventory_staff: null
+
+  /api/warehouse/detail/{id}:
+    get:
+      summary: 取得詳細資訊
+      description: | 
+        取得單一產品詳細資訊
+      tags:
+        - Warehouse
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      detail:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          type:
+                            type: string
+                            description: 類型
+                          ref_no:
+                            type: string
+                            description: 參考號
+                          transaction_date:
+                            type: string
+                            description: 建立日期
+                          location_from:
+                            type: string
+                            description: 地點(由)
+                          location_to:
+                            type: string
+                            description: 接收地點
+                          final_total:
+                            type: string
+                          additional_notes:
+                            type: object
+                            description: 銷售註記
+                          staff_note:
+                            type: object
+                            description: 員工註記
+                          status:
+                            type: string
+                            description: 狀態
+                          payment_status:
+                            type: string
+                            description: 付款狀態
+                          shipping_etd:
+                            type: string
+                            description: 預計出發日
+                          shipping_eta:
+                            type: string
+                            description: 預計到達日
+                          shipping_atd:
+                            type: string
+                            description: 實際出發日
+                          shipping_ata:
+                            type: string
+                            description: 實際到達日
+                          staff:
+                            type: string
+                            description: 處理人員
+                          inventory_transaction_id:
+                            type: object
+                            description: 盤點Id 尚未盤點時 為 null
+                          inventory_transaction_date:
+                            type: object
+                            description: 盤點日
+                          inventory_staff:
+                            type: string
+                            description: 盤點人員
+                      products:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            purchase_line_id:
+                              type: number
+                              description: 採購單ID
+                            product_id:
+                              type: number
+                            variation_id:
+                              type: number
+                            sku:
+                              type: string
+                              description: sku
+                            product_name:
+                              type: string
+                              description: 商品名稱
+                            product_description:
+                              type: string
+                              description: 商品描述
+                            quantity:
+                              type: number
+                              description: 入庫量
+                            unit_price:
+                              type: string
+                              description: 每單位價格
+                            unit:
+                              type: string
+                              description: 庫存單位
+                            base_unit:
+                              type: string
+                              description: 包裝單位
+                            base_unit_multiplier:
+                              type: string
+                              description: 每包幾入
+                            inventory_transaction_id:
+                              type: number
+                              description: 盤點事件 id
+                            inventory_transaction_date:
+                              type: string
+                              description: 盤點時間
+                            inventory_staff:
+                              type: string
+                              description: 盤點人員
+                            adjust_quantity:
+                              type: string
+                              description: 調節量
+
+              example:
+                success: 1
+                msg: success
+                data:
+                  detail:
+                    id: 130
+                    type: purchase_transfer
+                    ref_no: ST2023/0001
+                    transaction_date: '2023-01-30 12:00:00'
+                    location_from: Nextgen
+                    location_to: 港九
+                    additional_notes: 庫存轉移
+                    staff_note: 已接收等待盤點
+                    status: received
+                    shipping_etd: '2023-02-01 12:00:00'
+                    shipping_eta: '2023-02-03 12:00:00'
+                    shipping_atd: '2023-02-01 12:02:00'
+                    shipping_ata: '2023-02-03 09:00:00'
+                    staff: 處理人員
+                    inventory_transaction_id: null
+                    inventory_transaction_date: null
+                    inventory_staff: null
+                  products:
+                    - purchase_line_id: 1
+                      product_id: 6
+                      variation_id: 9
+                      sku: adasdasdsad
+                      product_name: 可樂
+                      product_description : 肥宅快樂水
+                      quantity: 100
+                      unit_price: 10
+                      unit: 罐
+                      base_unit: 箱
+                      base_unit_multiplier: 24
+                      inventory_transaction_id: null
+                      inventory_transaction_date: null
+                      inventory_staff: null
+                      adjust_quantity: null
+                    - purchase_line_id: 2
+                      product_id: 7
+                      variation_id: 10
+                      sku: bbasdasdas
+                      product_name: 雪碧
+                      product_description : 商品備註
+                      quantity: 100
+                      unit_price: 10
+                      unit: 罐
+                      base_unit: 箱
+                      base_unit_multiplier: 24
+                      inventory_transaction_id: null
+                      inventory_transaction_date: null
+                      inventory_staff: null
+                      adjust_quantity: null
+
+  /api/warehouse/receive/{id}:
+    post:
+      summary: 收貨
+      description: 標示『採購/庫存轉移』已接受，並執行商品入庫
+      tags:
+        - Warehouse
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                  msg:
+                    type: string
+
+  /api/warehouse/inventory/{id}:
+    post:
+      summary: 執行盤點
+      description: 盤點採購＆轉移商品 入庫數量是否正確，
+        若貨品數量與收貨單不符，系統將自動建立庫存調整單
+      tags:
+        - Warehouse
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                inventory_quantity:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      purchase_line_id:
+                        type: integer
+                        example: 6
+                      quantity:
+                        type: integer
+                        description: 貨品數量
+                        example: 10
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                  msg:
+                    type: string
