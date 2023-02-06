@@ -1511,6 +1511,29 @@ paths:
             minimum: 0
             maximum: 1
           description: 顯示未分類
+        - in: query
+          name: sort
+          description: 排序
+          schema:
+            type: object
+            properties:
+              rack :
+                description: 位置
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+        - in: query
+          name: length
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁
       responses:
         '200':
           description: 成功
@@ -1656,6 +1679,42 @@ paths:
           schema:
             type: string
           description: 結束時間
+        - in: query
+          name: sort
+          description: 排序
+          schema:
+            type: object
+            properties:
+              ref_no :
+                description: 參考號
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              status :
+                description: 訂單狀態
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              eta :
+                description: 預計到達日
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              ata :
+                description: 實際到達日
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              inventory_date :
+                description: 盤點日
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
         - in: query
           name: length
           schema:
