@@ -6,7 +6,7 @@ info:
   description: POS新Layout相關API
 
 servers:
-  - url: http://localhost:8000/project/public/pos-v2
+  - url: http://localhost:8000/project/public
   - url: https://erp-dev.cloudsatlas.com.hk/public
 
 tags:
@@ -843,7 +843,7 @@ components:
 
 paths:
   
-  /api/products:
+  /pos-v2/api/products:
     get:
       summary: 產品清單
       description: 取得產品清單
@@ -906,7 +906,7 @@ paths:
                       exp_date: 
                       qty_available: 1010                  
                   
-  /api/products/{variation_id}:
+  /pos-v2/api/products/{variation_id}:
     get:
       summary: 取得單一產品詳細資訊
       description: | 
@@ -948,7 +948,7 @@ paths:
                     exp_date:
                     qty_available: 26
                 
-  /api/custom-tags:
+  /pos-v2/api/custom-tags:
     get:
       summary: 客戶自訂產品標籤
       description: 取得客戶自訂產品標籤
@@ -967,7 +967,7 @@ paths:
                 - 打折
                 - 清倉
                 - 週年慶
-  /api/location-info:
+  /pos-v2/api/location-info:
     get:
       summary: 取得店家資訊
       description: 取得全部店家資訊以及預設店家及營業員
@@ -1002,7 +1002,7 @@ paths:
                 rp_expiry_type: "year"
 
 
-  /api/sells:
+  /pos-v2/api/sells:
     get:
       summary: 暫存訂單列表
       description: | 
@@ -1105,7 +1105,7 @@ paths:
                       sub_unit_id: null
                       created_at: "2022-12-28 15:16:56"
                       updated_at: "2022-12-28 15:16:56"
-  /api/contacts:
+  /pos-v2/api/contacts:
     get:
       summary: 會員清單
       description: 取得會員清單
@@ -1374,7 +1374,7 @@ paths:
                 msg: Sale added successfully
                 receipt: null
 
-  /api/transport-status:
+  /pos-v2/api/transport-status:
     get:
       summary: 取得運輸狀態列表
       description: 取得運輸狀態列表
@@ -1400,7 +1400,7 @@ paths:
                   name: 已取消
 
 
-  /api/invoices:
+  /pos-v2/api/invoices:
     get:
       summary: 取得發票清單
       description: 取得發票清單
@@ -1421,7 +1421,7 @@ paths:
                   - value: 3
                     name: 2023發票
 
-  /api/contact-group:
+  /pos-v2/api/contact-group:
     get:
       summary: 取得客戶群清單
       description: 取得客戶群清單
@@ -1442,7 +1442,7 @@ paths:
                 - value: 3
                   name: C公司
 
-  /api/payment-type:
+  /pos-v2/api/payment-type:
     get:
       summary: 取得付款類型清單
       description: 取得付款類型清單
