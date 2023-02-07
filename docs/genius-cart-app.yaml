@@ -2216,6 +2216,91 @@ paths:
                       total:
                         type: number
   
+  /client/confrimDelete:
+    post:
+      tags:
+        - user
+      security:
+        - client: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                confirm:
+                  type: string
+                  description: 確認是否刪除
+                  example: DELETE
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+
+  /client/{clientId}:
+    delete:
+      tags:
+        - user
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: wishclientIdId
+          schema:
+            type: number
+          required: true
+          example: 3
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 成功刪除！!               
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 查無使用者資料！
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: 禁止刪除他人資料！                                            
+
   /client/dashboard:
     get:
       tags:
