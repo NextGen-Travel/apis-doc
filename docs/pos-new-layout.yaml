@@ -2261,6 +2261,12 @@ paths:
       summary: 商品位置
       tags:
         - Warehouse
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: number
+          description: 營業地點ID
       responses:
         '200':
           description: 成功
