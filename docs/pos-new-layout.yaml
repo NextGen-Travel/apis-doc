@@ -1809,6 +1809,7 @@ paths:
                     location_to: 港九
                     additional_notes: 庫存轉移
                     received_not_allowed: 0
+                    status: received
                     shipping_etd: '2023-02-01 12:00:00'
                     shipping_eta: '2023-02-03 12:00:00'
                     shipping_atd: '2023-02-01 12:02:00'
@@ -1825,6 +1826,7 @@ paths:
                     location_to: 港九
                     additional_notes: '採買螢幕 * 10'
                     received_not_allowed: 0
+                    status: received
                     shipping_etd: '2023-02-01 12:00:00'
                     shipping_eta: '2023-02-03 12:00:00'
                     shipping_atd: '2023-02-01 12:02:00'
@@ -2095,3 +2097,51 @@ paths:
                     type: number
                   msg:
                     type: string
+
+  /api/product/categories:
+    get:
+      summary: 分類和次分類
+      description: 分類和次分類
+      tags:
+        - Warehouse
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: 主分類
+                    value:
+                      type: string
+                      description: 產品名稱
+                    subCategories:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          title:
+                            type: string
+                            description: 主分類
+                          value:
+                            type: string
+                            description: 產品名稱
+              example:
+                  - title: 所有類別
+                    value: all
+                    subCategories: []
+                  - title: 未分類
+                    value: unCategorized
+                    subCategories: []
+                  - title: 氣泡飲料
+                    value: 1
+                    subCategories:
+                        - title: 可樂
+                          value: 2
+                        - title: 雪碧
+                          value: 3
