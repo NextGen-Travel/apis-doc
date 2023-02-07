@@ -557,12 +557,16 @@ components:
           description: 服務自定欄6
         res_table_id:
           type: integer
+          description: 餐桌ID
         res_waiter_id:
           type: integer
+          description: 服務生ID
         transporter_id:
           type: integer
+          description: 車輛ID
         driver_id:
           type: integer
+          description: 司機ID
         sell_price_tax:
           type: string
         products:
@@ -627,25 +631,33 @@ components:
           description: 折扣金額
         rp_redeemed:
           type: integer
+          description: 已兌換積分
         rp_redeemed_amount:
           type: integer
+          description: 已兌換積分轉換後的金額
         tax_rate_id:
           type: integer
         tax_calculation_amount:
           type: integer
         shipping_details:
           type: string
+          description: 運輸詳情
         shipping_address:
           type: string
+          description: 送貨地址
         shipping_status:
           type: string
+          description: 發貨狀態
         delivered_to:
           type: string
+          description: 已送達至
         shipping_charges:
           type: integer
+          description: 運費
         advance_balance:
           type: integer
         payment:
+          description: 付款資訊
           type: array
           items:
             type: object
@@ -653,6 +665,9 @@ components:
               amount:
                 type: integer
                 description: 交易總金額
+              method:
+                type: string
+                description: 付款方式
               account_id:
                 type: integer
               card_number:
@@ -689,14 +704,19 @@ components:
                 type: string
               note:
                 type: string
+                description: 付款註記
         sale_note:
           type: string
+          description: 銷售備註
         staff_note:
           type: string
+          description: 員工備註
         change_return:
           type: integer
+          description: 退費金額
         additional_notes:
           type: string
+          description: 額外備註
         is_suspend:
           type: boolean
           description: 是否為暫存訂單
@@ -720,6 +740,7 @@ components:
           type: string
         is_enabled_stock:
           type: boolean
+          description: 是否有啟用庫存
         is_credit_sale:
           type: boolean
         final_total:
