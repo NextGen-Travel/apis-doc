@@ -505,7 +505,7 @@ components:
           type: boolean
           description: 是否為配藥訂單
         location_id: 
-          type: integer
+          type: number
           description: 營業地點ID
         sub_type:
           type: string
@@ -773,7 +773,7 @@ components:
           type: object
           properties:
             location_id:
-              type: integer
+              type: number
               description: 分店ID
             location_name:
               type: string
@@ -785,7 +785,7 @@ components:
           type: string
           description: 店員名稱
         enable_rp:
-          type: boolean
+          type: number
           description: 是否啟用積分(1=啟用, 0=關閉)
         rp_name:
           type: string
@@ -884,7 +884,7 @@ paths:
         - in: query
           name: location_id
           schema:
-            type: integer
+            type: number
           description: 營業地點ID
         - in: query
           name: term
@@ -967,7 +967,7 @@ paths:
         - in: query
           name: location_id
           schema:
-            type: integer
+            type: number
           description: 分店ID
           required: true
       responses:
@@ -1070,7 +1070,7 @@ paths:
         - in: query
           name: location_id
           schema:
-            type: integer
+            type: number
           description: 營業地點ID
       responses:
         '200':
@@ -1502,7 +1502,7 @@ paths:
         - in: query
           name: location_id
           schema:
-            type: string
+            type: number
           description: location id
           required: true
       responses:
@@ -1530,7 +1530,7 @@ paths:
         - in: query
           name: location_id
           schema:
-            type: integer
+            type: number
           description: 營業地點ID
         - in: query
           name: term
@@ -1704,7 +1704,7 @@ paths:
         - in: query
           name: location_id
           schema:
-            type: integer
+            type: number
           description: 營業地點ID
         - in: query
           name: type
