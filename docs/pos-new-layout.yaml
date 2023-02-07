@@ -893,6 +893,218 @@ components:
             type: string
             description: 下拉選單的value
 
+    OrdersResponse:
+      type: object
+      properties:
+        data:
+          description: 訂單資料
+          type: array
+          items:
+            type: object
+            properties:
+              order_id:
+                type: integer
+                description: 訂單ID
+              order_num:
+                type: string
+                description: 訂單編號
+              order_date:
+                type: string
+                description: 訂單日期
+              is_return:
+                type: boolean
+                description: 是否為退貨
+              contact_name:
+                type: string
+                description: 客戶名稱
+              total_items:
+                type: integer
+                description: 項目總數
+              total_paid:
+                type: string
+                description: 金額
+              payment_method:
+                type: string
+                description: 付費方式
+              return_paid:
+                type: string
+                description: 退款金額
+              return_not_refund:
+                type: string
+                description: 待退金額
+              creator_name:
+                type: string
+                description: 服務人員
+              additional_note:
+                type: string
+                description: 銷售備註
+        links:
+          description: LazyLoading資料
+          type: object
+          properties:
+            first:
+              type: string
+              description: 最初頁網址
+            last:
+              type: string
+              description: 最末頁網址
+            prev:
+              type: string
+              description: 上一頁網址
+            next:
+              type: string
+              description: 下一頁網址
+        meta:
+          description: 分頁資料
+          type: object
+          properties:
+            current_page:
+              type: integer
+              description: 當前頁碼
+            last_page:
+              type: integer
+              description: 最末頁碼
+            path:
+              type: string
+              description: API網址
+            per_page:
+              type: integer
+              description: 每頁筆數
+            from:
+              type: integer
+              description: 本次資料開始筆數
+            to:
+              type: integer
+              description: 本次資料結束筆數
+            total:
+              type: integer
+              description: 總筆數
+
+    OrdersDetailResponse:
+      type: object
+      properties:
+        order_id:
+          type: integer
+          description: 訂單ID
+        order_num:
+          type: string
+          description: 訂單編號
+        order_date:
+          type: string
+          description: 訂單日期
+        order_status:
+          type: string
+          description: 訂單狀態
+        creator_name:
+          type: string
+          description: 訂單ID
+        contact_name:
+          type: string
+          description: 客戶名稱
+        additional_note:
+          type: string
+          description: 銷售備註
+        staff_note:
+          type: string
+          description: 員工備註
+        payment_method:
+          type: string
+          description: 付費方式
+        payment_status:
+          type: string
+          description: 付費狀態
+        shipping_status:
+          type: string
+          description: 運輸狀態
+        shipping_address:
+          type: string
+          description: 送貨地址
+        shipping_details:
+          type: string
+          description: 送貨詳情
+        products:
+          description: 訂單產品
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 產品名稱
+              sku:
+                type: string
+                description: 產品SKU
+              qty:
+                type: integer
+                description: 數量
+              price:
+                type: integer
+                description: 價格
+              subtotal:
+                type: integer
+                description: 小計
+              sell_line_id:
+                type: integer
+                description: 商品販售id
+              qty_returned:
+                type: integer
+                description: 退貨數量
+        total_price:
+          type: string
+          description: 商品原價
+        total_paid:
+          type: string
+          description: 商品總計
+        product_discount_amount:
+          type: string
+          description: 商品折扣
+        tax_amount:
+          type: string
+          description: 稅金
+        shipping_amount:
+          type: string
+          description: 運費
+        packing_amount:
+          type: string
+          description: 包裝
+        discount_amount:
+          type: string
+          description: 全單折扣
+        redeemed_amount:
+          type: string
+          description: 紅利折扣
+        other_amount:
+          description: 其他費用
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 費用名稱
+              amount:
+                type: string
+                description: 費用金額
+        redeem:
+          description: 紅利資料
+          type: object
+          properties:
+            enable:
+              type: boolean
+              description: 是否啟用
+            point:
+              type: integer
+              description: 紅利點數
+            cost:
+              type: integer
+              description: 本次使用
+            earned:
+              type: integer
+              description: 本次增加
+            final:
+              type: integer
+              description: 總計
+
 paths:
   
   /pos-v2/api/products:
@@ -2313,3 +2525,246 @@ paths:
                     value: 2
                   - title: Ｂ-3-5
                     value: 1
+
+  /api/orders:
+    get:
+      summary: 訂單清單
+      description: 取得訂單清單
+      tags:
+        - Order
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+        - in: query
+          name: st
+          schema:
+            type: string
+          description: 起始時間
+        - in: query
+          name: et
+          schema:
+            type: string
+          description: 結束時間
+        - in: query
+          name: payment_status
+          schema:
+            type: string
+            enum: [all, paid, due, partial]
+          description: 付款方式
+        - in: query
+          name: term_type
+          schema:
+            type: string
+            enum: [order_num, sku, contacter, servicer]
+          description: 搜尋類別
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 搜尋關鍵
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+          description: 每頁筆數
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdersResponse'
+              example:
+                  data:
+                  - order_id: 3
+                    order_num: 0001
+                    order_date: "2022-09-12 14:12:42"
+                    is_return: false
+                    contact_name: 訪客
+                    total_items: 1
+                    total_paid: $ 100.00
+                    payment_method: cash
+                    return_paid: ""
+                    return_not_refund: ""
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 4
+                    order_num: 0002
+                    order_date: "2022-09-12 17:05:11"
+                    is_return: false
+                    contact_name: 訪客
+                    total_items: 1
+                    total_paid: $ 100.00
+                    payment_method: cash
+                    return_paid: ""
+                    return_not_refund: ""
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 7
+                    order_num: 0003
+                    order_date: "2022-09-13 09:41:27"
+                    contact_name: 訪客
+                    total_items: 1
+                    total_paid: $ 999.00
+                    payment_method: cash
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 10
+                    order_num: 0004
+                    order_date: "2022-09-13 11:03:15"
+                    is_return: false
+                    contact_name: 訪客
+                    total_items: 1
+                    total_paid: $ 500.00
+                    payment_method: cash
+                    return_paid: ""
+                    return_not_refund: ""
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 11
+                    order_num: 0005
+                    order_date: "2022-09-13 11:16:26"
+                    is_return: false
+                    contact_name: 訪客
+                    total_items: 1
+                    total_paid: $ 999.00
+                    payment_method: card
+                    return_paid: ""
+                    return_not_refund: ""
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 12
+                    order_num: 0006
+                    order_date: "2022-10-31 15:09:24"
+                    is_return: false
+                    contact_name: 訪客
+                    total_items: 1
+                    total_paid: $ 100.00
+                    payment_method: cash
+                    return_paid: ""
+                    return_not_refund: ""
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 14
+                    order_num: 0007
+                    order_date: "2022-11-07 11:28:38"
+                    is_return: false
+                    contact_name: 訪客
+                    total_items: 2
+                    total_paid: $ 225.00
+                    payment_method: card
+                    return_paid: ""
+                    return_not_refund: ""
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 15
+                    order_num: 0008
+                    order_date: "2022-11-07 11:51:21"
+                    is_return: false
+                    contact_name: 訪客
+                    total_items: 3
+                    total_paid: $ 1,224.00
+                    payment_method: cash
+                    return_paid: ""
+                    return_not_refund: ""
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 16
+                    order_num: 0009
+                    order_date: "2022-11-07 11:54:02"
+                    is_return: false
+                    contact_name: 訪客
+                    total_items: 2
+                    total_paid: $ 1,099.00
+                    payment_method: card
+                    return_paid: ""
+                    return_not_refund: ""
+                    creator_name: JackYeh
+                    additional_note: ""
+                  - order_id: 17
+                    order_num: 0010
+                    order_date: "2022-11-07 12:42:50"
+                    is_return: true
+                    contact_name: 訪客
+                    total_items: 2
+                    total_paid: $ 600.00
+                    payment_method: cash
+                    return_paid: $ 300.00
+                    return_not_refund: $ 110.00
+                    creator_name: JackYeh
+                    additional_note: ""
+                  links:
+                    first: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/orders?page=1
+                    last: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/orders?page=4
+                    prev: ""
+                    next: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/orders?page=2"
+                  meta:
+                    current_page: 1
+                    from: 1
+                    last_page: 4
+                    path: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/orders
+                    per_page: 10
+                    to: 10
+                    total: 40
+
+  /api/orders/{id}:
+    get:
+      summary: 訂單詳細資料
+      description: 取得訂單詳細資料
+      tags:
+        - Order
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdersDetailResponse'
+              example:
+                  order_id: 73
+                  order_num: "0028"
+                  order_date: 2023-02-07 09:09:00
+                  order_status: final
+                  creator_name: JackYeh
+                  contact_name: Jack
+                  additional_note: ""
+                  staff_note: ""
+                  payment_method: ""
+                  payment_status: due
+                  shipping_status: ""
+                  shipping_address: ""
+                  shipping_details: ""
+                  products:
+                    name: 產品名稱
+                    sku: 20220008-2
+                    qty: 3
+                    price: 121.5000
+                    subtotal: 364.5
+                    sell_line_id: 69
+                    qty_returned: 0.00
+                  total_price: $ 450.00
+                  total_paid: $ 346.28
+                  product_discount_amount: $ 85.50
+                  tax_amount: $ 0.00
+                  shipping_amount: $ 0.00
+                  packing_amount: $ 0.00
+                  discount_amount: $ 18.21
+                  redeemed_amount: $ 0.00
+                  other_amount:
+                  - name: 自取點費用
+                    amount: $ 0.01
+                  redeem:
+                    enable: false
+                    point: 0
+                    cost: 0
+                    earned: 0
+                    final: 0
