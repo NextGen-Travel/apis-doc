@@ -2744,7 +2744,7 @@ paths:
                   shipping_address: ""
                   shipping_details: ""
                   products:
-                    name: 產品名稱
+                  - name: 產品名稱
                     sku: 20220008-2
                     qty: 3
                     price: 121.5000
