@@ -2148,7 +2148,7 @@ paths:
                   msg:
                     type: string
 
-  /api/product/categories:
+  /api/warehouse/product/categories:
     get:
       summary: 分類和次分類
       description: 分類和次分類
@@ -2195,3 +2195,94 @@ paths:
                           value: 2
                         - title: 雪碧
                           value: 3
+
+  /api/warehouse/stock/state:
+    get:
+      summary: 訂單狀態
+      tags:
+        - Warehouse
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: 標題
+                    value:
+                      type: string
+                      description: 內容
+              example:
+                  - title: 全部
+                    value: all
+                  - title: 待辦的
+                    value: pending
+                  - title: 在途中
+                    value: in_transit
+                  - title: 已收到
+                    value: received
+
+  /api/warehouse/product/state:
+    get:
+      summary: 商品狀態
+      tags:
+        - Warehouse
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: 標題
+                    value:
+                      type: string
+                      description: 內容
+              example:
+                  - title: 全部
+                    value: all
+                  - title: 啟用
+                    value: active
+                  - title: 停用
+                    value: inactive
+
+  /api/warehouse/product/racks:
+    get:
+      summary: 商品位置
+      tags:
+        - Warehouse
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: 標題
+                    value:
+                      type: string
+                      description: 內容
+              example:
+                  - title: 所有類別
+                    value: all
+                  - title: 未分類
+                    value: unCategorized
+                  - title: Ｂ-3-6
+                    value: 2
+                  - title: Ｂ-3-5
+                    value: 1
