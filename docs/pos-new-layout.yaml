@@ -32,25 +32,59 @@ components:
       example: 'en'
   schemas:
     CustomersResponse:
-      type: array
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-            description: 客戶ID
-          name:
-            type: string
-            description: 客戶名稱
-          member_id:
-            type: string
-            description: 客戶自訂ID
-          mobile:
-            type: string
-            description: 手機
-          total_rp:
-            type: string
-            description: 客戶積分
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: 客戶ID
+              name:
+                type: string
+                description: 客戶名稱
+              member_id:
+                type: string
+                description: 客戶自訂ID
+              mobile:
+                type: string
+                description: 手機
+              total_rp:
+                type: string
+                description: 客戶積分
+              customer_group_name:
+                type: string
+                description: 客戶群名稱
+        links:
+          type: object
+          properties:
+            first:
+              type: string
+            last:
+              type: string
+            prev:
+              type: string
+            next:
+              type: string
+        meta:
+          type: object
+          properties:
+            current_page:
+              type: number
+            from:
+              type: number
+            last_page:
+              type: number
+            path:
+              type: string
+            per_page:
+              type: number
+            to:
+              type: number
+            total:
+              type: number
           
     CreateContact:
       type: object
@@ -402,102 +436,161 @@ components:
                 type: integer
                 description: 可用數量
     SuspendTxnResponse:
-      type: array
-      items:
-        type: object
-        properties:
-          id:
-            type: number
-          transaction_date:
-            type: string
-            description: 交易日期
-          name:
-            type: string
-            description: 客戶姓名
-          final_total:
-            type: string
-            description: 總金額
-          additional_notes:
-            type: string
-            description: 額外註記
-          sale_date:
-            type: string
-            description: 銷售日期
-          business_location:
-            type: string
-            description: 分店名稱
-          total_items:
-            type: number
-            description: 商品項目總數
-          invoice_no:
-            type: string
-            description: 訂單編號
-          sell_lines:
-            type: array
-            items:
-              type: object
-              properties:
-                id:
-                  type: number
-                transaction_id:
-                  type: number
-                product_id:
-                  type: number
-                variation_id:
-                  type: number
-                quantity:
-                  type: number
-                mfg_waste_percent:
-                  type: string
-                mfg_ingredient_group_id:
-                  type: integer
-                quantity_returned:
-                  type: string
-                unit_price_before_discount:
-                  type: string
-                unit_price:
-                  type: string
-                line_discount_type:
-                  type: string
-                line_discount_amount:
-                  type: string
-                unit_price_inc_tax:
-                  type: string
-                item_tax:
-                  type: string
-                tax_id:
-                  type: integer
-                  description: 稅ID
-                discount_id:
-                  type: integer
-                  description: 折扣ID
-                lot_no_line_id:
-                  type: integer
-                sell_line_note:
-                  type: string
-                so_line_id:
-                  type: integer
-                so_quantity_invoiced:
-                  type: string
-                res_service_staff_id:
-                  type: integer
-                res_line_order_status:
-                  type: string
-                parent_sell_line_id:
-                  type: string
-                children_type:
-                  type: string
-                sub_unit_id:
-                  type: integer
-                  description: 子單位ID
-                created_at:
-                  type: string
-                updated_at:
-                  type: string
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+              transaction_date:
+                type: string
+                description: 交易日期
+              name:
+                type: string
+                description: 客戶姓名
+              final_total:
+                type: string
+                description: 總金額
+              additional_notes:
+                type: string
+                description: 額外註記
+              sale_date:
+                type: string
+                description: 銷售日期
+              business_location:
+                type: string
+                description: 分店名稱
+              total_items:
+                type: number
+                description: 商品項目總數
+              invoice_no:
+                type: string
+                description: 訂單編號
+              sell_lines:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    transaction_id:
+                      type: number
+                    product_id:
+                      type: number
+                    variation_id:
+                      type: number
+                    quantity:
+                      type: number
+                    mfg_waste_percent:
+                      type: string
+                    mfg_ingredient_group_id:
+                      type: integer
+                    quantity_returned:
+                      type: string
+                    unit_price_before_discount:
+                      type: string
+                    unit_price:
+                      type: string
+                    line_discount_type:
+                      type: string
+                    line_discount_amount:
+                      type: string
+                    unit_price_inc_tax:
+                      type: string
+                    item_tax:
+                      type: string
+                    tax_id:
+                      type: integer
+                      description: 稅ID
+                    discount_id:
+                      type: integer
+                      description: 折扣ID
+                    lot_no_line_id:
+                      type: integer
+                    sell_line_note:
+                      type: string
+                    so_line_id:
+                      type: integer
+                    so_quantity_invoiced:
+                      type: string
+                    res_service_staff_id:
+                      type: integer
+                    res_line_order_status:
+                      type: string
+                    parent_sell_line_id:
+                      type: string
+                    children_type:
+                      type: string
+                    sub_unit_id:
+                      type: integer
+                      description: 子單位ID
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+        links:
+          type: object
+          properties:
+            first:
+              type: string
+            last:
+              type: string
+            prev:
+              type: string
+            next:
+              type: string
+        meta:
+          type: object
+          properties:
+            current_page:
+              type: number
+            from:
+              type: number
+            last_page:
+              type: number
+            path:
+              type: string
+            per_page:
+              type: number
+            to:
+              type: number
+            total:
+              type: number
+      
     CustomTagsResponse:
-      type: array
-      items:
-        type: string
+      type: object
+      properties:
+        current_page:
+          type: number
+        data:  
+          type: array
+          items:
+            type: string
+
+        first_page_url:
+          type: string
+        from:
+          type: number
+        last_page:
+          type: number
+        last_page_url:
+          type: string
+        next_page_url:
+          type: string
+        path:
+          type: string
+        per_page:
+          type: number
+        prev_page_url:
+          type: string
+        to:
+          type: number
+        total:
+          type: number
+
     CreateTransaction:
       type: object
       properties:
@@ -569,6 +662,9 @@ components:
           description: 司機ID
         sell_price_tax:
           type: string
+        invoice_scheme_id:
+          type: integer
+          description: 發票計畫ID
         products:
           type: array
           items:
@@ -579,12 +675,15 @@ components:
                 description: 產品類別
               unit_price:
                 type: integer
-                description: 單位價錢
+                description: 單位價錢(不含稅)
               line_discount_type: 
                 type: string
                 description: 折扣類別
+                enum:
+                  - percentage
+                    fixed
               line_discount_amount:
-                type: integer
+                type: number
                 description: 折扣金額
               item_tax:
                 type: integer
@@ -855,10 +954,9 @@ components:
     InvoiceResponse:
       type: object
       properties:
-        default_invoice_id:
-          type: integer
-          description: 預設發票ID
-        invoices:
+        current_page:
+          type: number
+        data:  
           type: array
           items:
             type: object
@@ -869,29 +967,109 @@ components:
               value:
                 type: string
                 description: 下拉選單的value
+        first_page_url:
+          type: string
+        from:
+          type: number
+        last_page:
+          type: number
+        last_page_url:
+          type: string
+        next_page_url:
+          type: string
+        path:
+          type: string
+        per_page:
+          type: number
+        prev_page_url:
+          type: string
+        to:
+          type: number
+        total:
+          type: number
 
     ContactGroupResponse:
-      type: array
-      items:
-        type: object
-        properties:
-          name:
-            type: string
-            description: 客戶群顯示文字
-          value:
-            type: string
-            description: 下拉選單的value
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 客戶群顯示文字
+              value:
+                type: string
+                description: 下拉選單的value
+        links:
+          type: object
+          properties:
+            first:
+              type: string
+            last:
+              type: string
+            prev:
+              type: string
+            next:
+              type: string
+        meta:
+          type: object
+          properties:
+            current_page:
+              type: number
+            from:
+              type: number
+            last_page:
+              type: number
+            path:
+              type: string
+            per_page:
+              type: number
+            to:
+              type: number
+            total:
+              type: number
+
+
+
+
     PaymentTypeResponse:
-      type: array
-      items:
-        type: object
-        properties:
-          name:
-            type: string
-            description: 付款類型顯示文字
-          value:
-            type: string
-            description: 下拉選單的value
+      type: object
+      properties:
+        current_page:
+          type: number
+        data:  
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 發票名稱
+              value:
+                type: string
+                description: 下拉選單的value
+        first_page_url:
+          type: string
+        from:
+          type: number
+        last_page:
+          type: number
+        last_page_url:
+          type: string
+        next_page_url:
+          type: string
+        path:
+          type: string
+        per_page:
+          type: number
+        prev_page_url:
+          type: string
+        to:
+          type: number
+        total:
+          type: number
 
     OrdersResponse:
       type: object
@@ -1279,11 +1457,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomTagsResponse'
               example:
-                - 熱銷
-                - 促銷
-                - 打折
-                - 清倉
-                - 週年慶
+                current_page: 1
+                data:
+                  - 自訂標籤1
+                  - 自訂標籤2
+                  - 自訂標籤3
+                  - 自訂標籤4
+                  - 自訂標籤5
+                first_page_url: http://localhost:9999/project/public/pos-v2/api/custom-tags?page=1
+                from: 1
+                last_page: 1
+                last_page_url: http://localhost:9999/project/public/pos-v2/api/custom-tags?page=1
+                next_page_url: null
+                path: http://localhost:9999/project/public/pos-v2/api/custom-tags
+                per_page: 10
+                prev_page_url: null
+                to: 5
+                total: 5
+
   /pos-v2/api/location-info:
     get:
       summary: 取得店家資訊
@@ -1347,81 +1538,96 @@ paths:
               schema:
                 $ref: '#/components/schemas/SuspendTxnResponse'
               example:
-                - id: 1
-                  transaction_date: 2022-12-21 17:30:00
-                  name: Walk-in
-                  final_total: 150.0000
-                  additional_notes: Temp
-                  sale_date: 2022/12/21
-                  business_location: 藥局A
-                  total_items: 1
-                  invoice_no: 0153
-                  sell_lines:
-                    - id: 176
-                      transaction_id: 391
-                      product_id: 71
-                      variation_id: 120
-                      quantity: 3
-                      mfg_waste_percent: "0.0000"
-                      mfg_ingredient_group_id: null
-                      quantity_returned: "0.0000"
-                      unit_price_before_discount: "250.0000"
-                      unit_price: "250.0000"
-                      line_discount_type: "fixed"
-                      line_discount_amount: "0.0000"
-                      unit_price_inc_tax: "250.0000"
-                      item_tax: "0.0000"
-                      tax_id: null
-                      discount_id: null
-                      lot_no_line_id: null
-                      sell_line_note: ""
-                      so_line_id: null
-                      so_quantity_invoiced: "0.0000"
-                      res_service_staff_id: null
-                      res_line_order_status: null
-                      parent_sell_line_id: null
-                      children_type: ""
-                      sub_unit_id: null
-                      created_at: "2022-12-21 17:43:28"
-                      updated_at: "2022-12-21 17:43:28"
+                data:
+                  - id: 1
+                    transaction_date: 2022-12-21 17:30:00
+                    name: Walk-in
+                    final_total: 150.0000
+                    additional_notes: Temp
+                    sale_date: 2022/12/21
+                    business_location: 藥局A
+                    total_items: 1
+                    invoice_no: 0153
+                    sell_lines:
+                      - id: 176
+                        transaction_id: 391
+                        product_id: 71
+                        variation_id: 120
+                        quantity: 3
+                        mfg_waste_percent: "0.0000"
+                        mfg_ingredient_group_id: null
+                        quantity_returned: "0.0000"
+                        unit_price_before_discount: "250.0000"
+                        unit_price: "250.0000"
+                        line_discount_type: "fixed"
+                        line_discount_amount: "0.0000"
+                        unit_price_inc_tax: "250.0000"
+                        item_tax: "0.0000"
+                        tax_id: null
+                        discount_id: null
+                        lot_no_line_id: null
+                        sell_line_note: ""
+                        so_line_id: null
+                        so_quantity_invoiced: "0.0000"
+                        res_service_staff_id: null
+                        res_line_order_status: null
+                        parent_sell_line_id: null
+                        children_type: ""
+                        sub_unit_id: null
+                        created_at: "2022-12-21 17:43:28"
+                        updated_at: "2022-12-21 17:43:28"
 
-                - id: 2
-                  transaction_date: 2022-12-25 20:30:00
-                  name: Miss jojo Lin
-                  final_total: 375.0000
-                  additional_notes: Wait a minute
-                  sale_date: 2022/12/21
-                  business_location: 藥局A
-                  total_items: 1
-                  invoice_no: 0154
-                  sell_lines:
-                    - id: 179
-                      transaction_id: 393
-                      product_id: 70
-                      variation_id: 119
-                      quantity: 3
-                      mfg_waste_percent: "0.0000"
-                      mfg_ingredient_group_id: null
-                      quantity_returned: "0.0000"
-                      unit_price_before_discount: "125.0000"
-                      unit_price: "125.0000"
-                      line_discount_type: "fixed"
-                      line_discount_amount: "0.0000"
-                      unit_price_inc_tax: "125.0000"
-                      item_tax: "0.0000"
-                      tax_id: null
-                      discount_id: null
-                      lot_no_line_id: null
-                      sell_line_note: ""
-                      so_line_id: null
-                      so_quantity_invoiced: "0.0000"
-                      res_service_staff_id: null
-                      res_line_order_status: null
-                      parent_sell_line_id: null
-                      children_type: ""
-                      sub_unit_id: null
-                      created_at: "2022-12-28 15:16:56"
-                      updated_at: "2022-12-28 15:16:56"
+                  - id: 2
+                    transaction_date: 2022-12-25 20:30:00
+                    name: Miss jojo Lin
+                    final_total: 375.0000
+                    additional_notes: Wait a minute
+                    sale_date: 2022/12/21
+                    business_location: 藥局A
+                    total_items: 1
+                    invoice_no: 0154
+                    sell_lines:
+                      - id: 179
+                        transaction_id: 393
+                        product_id: 70
+                        variation_id: 119
+                        quantity: 3
+                        mfg_waste_percent: "0.0000"
+                        mfg_ingredient_group_id: null
+                        quantity_returned: "0.0000"
+                        unit_price_before_discount: "125.0000"
+                        unit_price: "125.0000"
+                        line_discount_type: "fixed"
+                        line_discount_amount: "0.0000"
+                        unit_price_inc_tax: "125.0000"
+                        item_tax: "0.0000"
+                        tax_id: null
+                        discount_id: null
+                        lot_no_line_id: null
+                        sell_line_note: ""
+                        so_line_id: null
+                        so_quantity_invoiced: "0.0000"
+                        res_service_staff_id: null
+                        res_line_order_status: null
+                        parent_sell_line_id: null
+                        children_type: ""
+                        sub_unit_id: null
+                        created_at: "2022-12-28 15:16:56"
+                        updated_at: "2022-12-28 15:16:56"
+                links:
+                  first: http://localhost:8000/project/public/pos-v2/api/sells?page=1
+                  last: http://localhost:8000/project/public/pos-v2/api/sells?page=1
+                  prev: null
+                  next: null
+                meta:
+                  current_page: 1
+                  from: 1
+                  last_page: 1
+                  path: http://localhost:8000/project/public/pos-v2/api/sells
+                  per_page: 10
+                  to: 4
+                  total: 4
+
   /pos-v2/api/contacts:
     get:
       summary: 會員清單
@@ -1442,16 +1648,38 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomersResponse'
               example:
-                - id: 1
-                  name: Walk-in
-                  member_id: CO0001
-                  mobile: 0934987146
-                  total_rp: 0
-                - id: 2
-                  name: Miss jojo Lin
-                  member_id: CO0002
-                  mobile: 0966123458
-                  total_rp: 0
+                data:
+                  - id: 1
+                    name: "Walk-in"
+                    member_id: "CO0001"
+                    mobile: ""
+                    total_rp: 0
+                    customer_group_name: null
+                  - id: 2
+                    name: "Miss jojo Lin"
+                    member_id: "CO0002"
+                    mobile: "0966123458"
+                    total_rp: 0
+                    customer_group_name: null
+                  - id: 6
+                    name: "魏如萱"
+                    member_id: "CO0006"
+                    mobile: "0988666444"
+                    total_rp: 0
+                    customer_group_name: null
+                links:
+                  first: http://localhost:8000/project/public/pos-v2/api/contacts?page=1
+                  last: http://localhost:8000/project/public/pos-v2/api/contacts?page=2
+                  prev: null
+                  next: http://localhost:8000/project/public/pos-v2/api/contacts?page=2
+                meta:
+                  current_page: 1
+                  from: 1
+                  last_page: 2
+                  path: "http://localhost:8000/project/public/pos-v2/api/contacts"
+                  per_page: 10
+                  to: 10
+                  total: 16
 
   /contacts:
     post:
@@ -1731,12 +1959,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvoiceResponse'
               example:
-                default_invoice_id: 1
-                invoices:
+                current_page: 1
+                data: 
                   - value: 1
                     name: Default
                   - value: 3
                     name: 2023發票
+                first_page_url: http://localhost:9999/project/public/pos-v2/api/invoices?page=1
+                from: 1
+                last_page: 1
+                last_page_url: http://localhost:9999/project/public/pos-v2/api/invoices?page=1
+                next_page_url: null
+                path: http://localhost:9999/project/public/pos-v2/api/invoices
+                per_page: 10
+                prev_page_url: null
+                to: 2
+                total: 2
+                
 
   /pos-v2/api/contact-group:
     get:
@@ -1752,12 +1991,26 @@ paths:
               schema:
                 $ref: '#/components/schemas/ContactGroupResponse'
               example:
-                - value: 1
-                  name: A公司
-                - value: 2
-                  name: B公司
-                - value: 3
-                  name: C公司
+                data:
+                  - value: 1
+                    name: Patient
+                  - value: 2
+                    name: AAA
+                  - value: 3,
+                    name: BBB
+                links:
+                  first: http://localhost:8000/project/public/pos-v2/api/contact-group?page=1
+                  last: http://localhost:8000/project/public/pos-v2/api/contact-group?page=1
+                  prev: null
+                  next: null
+                meta:
+                  current_page: 1
+                  from: 1
+                  last_page: 1
+                  path: http://localhost:8000/project/public/pos-v2/api/contact-group
+                  per_page: 10
+                  to: 3
+                  total: 3
 
   /pos-v2/api/payment-type:
     get:
@@ -1780,12 +2033,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/PaymentTypeResponse'
               example:
-                - value: cash
-                  name: 現金
-                - value: card
-                  name: 訊用卡
-                - value: bank_transfer
-                  name: 銀行轉帳
+                current_page: 1,
+                data:
+                  - value: advance
+                    name: 預付
+                  - value: "cash"
+                    name: "現金"
+                  - value: "card"
+                    name: "訊用卡"
+                  - value: "cheque"
+                    name: "支票"
+                  - value: "bank_transfer"
+                    name: "銀行轉賬"
+                  - value: "other"
+                    name: "其他"
+                  - value: "custom_pay_1"
+                    name: "p1"
+                  - value: "custom_pay_2"
+                    name: "p2"
+                  - value: "custom_pay_3"
+                    name: "p3"
+                  - value: "custom_pay_4"
+                    name: "自定付款欄 4"
+                first_page_url: http://localhost:8000/project/public/pos-v2/api/payment-type?page=1
+                from: 1
+                last_page: 2
+                last_page_url: http://localhost:8000/project/public/pos-v2/api/payment-type?page=2
+                next_page_url: http://localhost:8000/project/public/pos-v2/api/payment-type?page=2
+                path: http://localhost:8000/project/public/pos-v2/api/payment-type
+                per_page: 10
+                prev_page_url: null
+                to: 10
+                total: 13
+              
 
   /api/warehouse/stocks:
     get:
