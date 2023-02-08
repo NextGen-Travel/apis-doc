@@ -502,7 +502,7 @@ components:
       type: object
       properties:
         is_medicine:
-          type: boolean
+          type: number
           description: 是否為配藥訂單
         location_id: 
           type: number
@@ -526,7 +526,7 @@ components:
         types_of_service_price_group:
           type: integer
         is_recurring:
-          type: boolean
+          type: number
           description: 是否為預定發票
         packing_charge:
           type: integer
@@ -718,7 +718,7 @@ components:
           type: string
           description: 額外備註
         is_suspend:
-          type: boolean
+          type: number
           description: 是否為暫存訂單
         recur_interval:
           type: integer
@@ -739,10 +739,10 @@ components:
         size:
           type: string
         is_enabled_stock:
-          type: boolean
+          type: number
           description: 是否有啟用庫存
         is_credit_sale:
-          type: boolean
+          type: number
         final_total:
           type: integer
           description: 總金額
