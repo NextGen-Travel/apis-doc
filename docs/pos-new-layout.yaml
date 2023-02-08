@@ -1105,6 +1105,40 @@ components:
               type: integer
               description: 總計
 
+    EmployeeDutyResponse:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          description: 員工id
+        user_name:
+          type: string
+          description: 員工姓名
+        shift_name:
+          type: string
+          description: 班次
+        essentials_shift_id: 
+          type: integer
+          description: 班次 id
+        shift_type:
+          type: string
+          description: 班次類型
+        start_time:
+          type: string
+          description: 上班時間
+        end_time:
+          type: string
+          description: 下班時間
+        essentials_attendances_id:
+          type: integer
+          description: 出勤紀錄 id
+        clock_in_note:
+          type: string
+          description: 上班打卡紀錄
+        clock_out_note:
+          type: string
+          description: 下班打卡記錄
+
 paths:
   
   /pos-v2/api/products:
@@ -2788,3 +2822,278 @@ paths:
                     cost: 0
                     earned: 0
                     final: 0
+
+  /api/employee/shifts:
+    get:
+      summary: 班次類型
+      tags:
+        - Clock In/Out
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                      description: 標題
+                    value:
+                      type: string
+                      description: 內容
+              example:
+                  - title: 全部
+                    value: all
+                  - title: 彈性班表
+                    value: 1
+                  - title: 平日班
+                    value: 2
+                  - title: 假日班
+                    value: 3
+
+  /api/employee/attendances:
+    get:
+      summary: 出勤紀錄
+      description: 取得產品清單
+      tags:
+        - Clock In/Out
+      parameters:
+        - in: query
+          name: start_date
+          schema:
+            type: string
+          description: 起始時間
+        - in: query
+          name: end_date
+          schema:
+            type: string
+          description: 結束時間
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 搜尋關鍵字
+        - in: query
+          name: shift_id
+          schema:
+            type: integer
+          description: 班次 ID
+        - in: query
+          name: is_only_alert
+          schema:
+            type: integer
+            minimum: 0
+            maximum: 1
+          description: 僅顯示異常狀態
+        - in: query
+          name: sort
+          description: 排序
+          schema:
+            type: object
+            properties:
+              rack :
+                description: 位置
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+        - in: query
+          name: length
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  recordsTotal:
+                    type: integer
+                    description: 總筆數
+                  recordsFiltered:
+                    type: integer
+                    description: 筆數
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        date:
+                          type: string
+                          description: 日期
+                        shift_name:
+                          type: string
+                          description: 班表
+                        full_name:
+                          type: string
+                          description: 員工姓名
+                        clock_in_time:
+                          type: string
+                          description: 上班卡
+                        clock_out_time:
+                          type: string
+                          description: 下班卡
+                        end_time:
+                          type: string
+                          description: 結算時間
+                        ip_address:
+                          type: string
+                          description: IP 位置
+                        clock_in_note:
+                          type: string
+                          description: 上班打卡紀錄
+                        clock_out_note:
+                          type: string
+                          description: 下班打卡記錄
+
+              example:
+                recordsTotal: 2
+                recordsFiltered: 2
+                data:
+                  - id: 1
+                    clock_in_time: '2023-02-06 09:00:00'
+                    clock_out_time: '2023-02-06 18:00:00'
+                    ip_address: '172.18.0.1'
+                    clock_in_note: adasdasdsad
+                    clock_out_note: adasdasdsad
+                    end_time: '2023-02-06 18:00:00'
+                    full_name: employee
+                    shift_name: 平日班
+                    work_duration : 8
+                  - id: 2
+                    clock_in_time: '2023-02-06 09:30:00'
+                    clock_out_time: null
+                    ip_address: '172.18.0.1'
+                    clock_in_note: 上班
+                    clock_out_note: null
+                    end_time: '2023-02-07 00:00:00'
+                    full_name: employee
+                    shift_name: 平日班
+                    work_duration : 8
+
+  /api/employee/duties:
+    get:
+      summary: 本日值班
+      description: 本日值班
+      tags:
+        - Clock In/Out
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: 總筆數
+                  msg:
+                    type: string
+                    description: 訊息
+                  data:
+                    type: object
+                    properties:
+                      duties:
+                        type: array
+                        items:
+                          type: object
+                          $ref: '#/components/schemas/EmployeeDutyResponse'
+                      leaves:
+                        type: array
+                        items:
+                          type: object
+                          $ref: '#/components/schemas/EmployeeDutyResponse'
+
+              example:
+                recordsTotal: 2
+                recordsFiltered: 2
+                data:
+                  duties:
+                    - user_id: 113
+                      user_name : 員工一號
+                      essentials_shift_id: 1
+                      shift_name: 平日班
+                      shift_type: fixed_shift
+                      start_time: "09:00:00"
+                      end_time: "18:00:00"
+                      essentials_attendances_id: 2
+                      clock_in_note: 已上班
+                      clock_out_note: null
+                    - user_id: 114
+                      user_name : 員工二號
+                      essentials_shift_id: null
+                      shift_name: 彈性班表
+                      shift_type: flexible_shift
+                      start_time: null
+                      end_time: null
+                      essentials_attendances_id: 6
+                      clock_in_note: 臨時支援
+                      clock_out_note: 已下班
+                    - user_id: 115
+                      user_name : 員工三號
+                      essentials_shift_id: 2
+                      shift_name: 平日下午班
+                      shift_type: fixed_shift
+                      start_time: "13:00:00"
+                      end_time: "21:00:00"
+                      essentials_attendances_id: null
+                      clock_in_note: null
+                      clock_out_note: null
+                  leaves:
+                    - user_id: 222
+                      user_name : 員工四號
+                      essentials_shift_id: null
+                      shift_name: null
+                      shift_type: null
+                      start_time: null
+                      end_time: null
+                      essentials_attendances_id: null
+                      clock_in_note: null
+                      clock_out_note: null
+
+  /api/warehouse/clock:
+    post:
+      summary: 打卡上下班
+      description: 標示『採購/庫存轉移』已接受，並執行商品入庫
+      tags:
+        - Clock In/Out
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: 員工id
+                note: 
+                  type: string
+                  description: 備註
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                  msg:
+                    type: string
