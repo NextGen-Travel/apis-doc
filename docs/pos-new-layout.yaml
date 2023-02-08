@@ -2227,6 +2227,9 @@ paths:
                             product_description:
                               type: string
                               description: 商品描述
+                            product_url:
+                              type: string
+                              description: 商品圖片
                             quantity:
                               type: number
                               description: 入庫量
@@ -2284,6 +2287,7 @@ paths:
                       sku: adasdasdsad
                       product_name: 可樂
                       product_description : 肥宅快樂水
+                      product_url: https://erp.tw/img/default.png
                       quantity: 100
                       unit_price: 10
                       unit: 罐
@@ -2299,6 +2303,7 @@ paths:
                       sku: bbasdasdas
                       product_name: 雪碧
                       product_description : 商品備註
+                      product_url: https://erp.tw/img/default.png
                       quantity: 100
                       unit_price: 10
                       unit: 罐
