@@ -280,6 +280,15 @@ paths:
                       is_guest_checkout:
                         type: number
                         description: 是否開啟訪客結帳
+                      is_packaging:
+                        type: number
+                        description: 購物車是否顯示包裝方式
+                      is_shipping:
+                        type: number
+                        description: 購物車是否顯示運送方式
+                      is_tax:
+                        type: number
+                        description: 購物車是否顯示稅項
   
   /forgot:
     post:
