@@ -2665,6 +2665,9 @@ paths:
                       reward_point:
                         type: number
                         description: 用來轉換的獎勵點數   
+                      msg:
+                        type: string
+                        description: Success
 
   # ==================
   # affilate_income
