@@ -502,7 +502,7 @@ components:
       type: object
       properties:
         is_medicine:
-          type: number
+          type: integer
           description: 是否為配藥訂單
         location_id: 
           type: number
