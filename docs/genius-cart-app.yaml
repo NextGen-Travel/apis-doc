@@ -3375,7 +3375,6 @@ paths:
               type: object
               required:
                 - name
-                - email
               properties:
                 photo:
                   type: string
@@ -3409,6 +3408,9 @@ paths:
                   type: string
                   description: 住址
                   example: 信義區大安路
+                email:
+                  type: string
+                  description: 信箱
                 
       responses:
         '200':
