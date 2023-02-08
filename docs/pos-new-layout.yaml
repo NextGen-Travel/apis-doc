@@ -296,7 +296,7 @@ components:
         msg:
           type: string
         success:
-          type: boolean
+          type: number
     ProductsResponse:
       type: object
       properties:
@@ -318,7 +318,7 @@ components:
                 type: string
                 description: 產品類型
               enable_stock:
-                type: boolean
+                type: number
                 description: 是否啟用庫存管理
               product_image:
                 type: string
@@ -872,7 +872,7 @@ components:
       type: object
       properties:
         sussess:
-          type: boolean
+          type: number
           description: 是否成功
         msg:
           type: string
@@ -1090,7 +1090,7 @@ components:
                 type: string
                 description: 訂單日期
               is_return:
-                type: boolean
+                type: number
                 description: 是否為退貨
               contact_name:
                 type: string
@@ -1268,7 +1268,7 @@ components:
           type: object
           properties:
             enable:
-              type: boolean
+              type: number
               description: 是否啟用
             point:
               type: integer
@@ -1521,7 +1521,7 @@ paths:
         - in: query
           name: suspended
           schema:
-            type: boolean
+            type: number
             default: true
           description: 是否為暫存訂單
           required: true
