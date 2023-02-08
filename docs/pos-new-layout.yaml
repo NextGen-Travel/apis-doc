@@ -2575,6 +2575,21 @@ paths:
           schema:
             type: integer
           description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
+        - in: query
+          name: return_order
+          schema:
+            type: integer
+          description: 是否只顯示退貨
+        - in: query
+          name: pre_sale
+          schema:
+            type: integer
+          description: 是否為預售
       responses:
         '200':
           description: 成功
