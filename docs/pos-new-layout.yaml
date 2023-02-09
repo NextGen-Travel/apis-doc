@@ -3151,6 +3151,65 @@ paths:
                     earned: 0
                     final: 0
 
+  /pos-v2/api/orders/return/{id}:
+    post:
+      summary: 訂單詳細資料
+      description: 取得訂單詳細資料
+      tags:
+        - Order
+      parameters:
+        - in: path
+          name: id
+          description: order id
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+        - in: query
+          name: products
+          description: One or more return products
+          required: true
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                sell_line_id:
+                  type: integer
+                  description: sell_line_id by order product
+                qty:
+                  type: integer
+                  description: return product quantity
+          examples:
+            products:
+              summary: Example of products
+              value: [{"sell_line_id":69, "qty": 3},{"sell_line_id":68, "qty": 3}]
+        - in: query
+          name: discount_type
+          schema:
+            type: string
+            enum:
+              - "fixed"
+              - "percentage"
+          description: 折舊類型
+        - in: query
+          name: discount_amount
+          schema:
+            type: number
+          description: 折舊數量
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                  success: 1
+                  msg: 成功
+
   /api/employee/shifts:
     get:
       summary: 班次類型
