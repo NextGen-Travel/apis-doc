@@ -1304,7 +1304,7 @@ components:
         shift_name:
           type: string
           description: 班次
-        essentials_shift_id: 
+        shift_id:
           type: integer
           description: 班次 id
         shift_type:
@@ -2125,6 +2125,30 @@ paths:
             properties:
               rack :
                 description: 位置
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              product_name :
+                description: 商品名稱
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              purchase_price :
+                description: 採買金額
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              offsite_stock :
+                description: 異地庫存
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              current_stock :
+                description: 本地庫存
                 type: string
                 enum:
                   - "ASC"
@@ -3186,8 +3210,14 @@ paths:
           schema:
             type: object
             properties:
-              rack :
-                description: 位置
+              start_date :
+                description: 時間
+                type: string
+                enum:
+                  - "ASC"
+                  - "DESC"
+              shift :
+                description: 班次
                 type: string
                 enum:
                   - "ASC"
@@ -3318,7 +3348,7 @@ paths:
                   duties:
                     - user_id: 113
                       user_name : 員工一號
-                      essentials_shift_id: 1
+                      shift_id: 1
                       shift_name: 平日班
                       shift_type: fixed_shift
                       start_time: "09:00:00"
@@ -3328,7 +3358,7 @@ paths:
                       clock_out_note: null
                     - user_id: 114
                       user_name : 員工二號
-                      essentials_shift_id: null
+                      shift_id: null
                       shift_name: 彈性班表
                       shift_type: flexible_shift
                       start_time: null
@@ -3338,7 +3368,7 @@ paths:
                       clock_out_note: 已下班
                     - user_id: 115
                       user_name : 員工三號
-                      essentials_shift_id: 2
+                      shift_id: 2
                       shift_name: 平日下午班
                       shift_type: fixed_shift
                       start_time: "13:00:00"
@@ -3349,7 +3379,7 @@ paths:
                   leaves:
                     - user_id: 222
                       user_name : 員工四號
-                      essentials_shift_id: null
+                      shift_id: null
                       shift_name: null
                       shift_type: null
                       start_time: null
@@ -3358,7 +3388,7 @@ paths:
                       clock_in_note: null
                       clock_out_note: null
 
-  /api/warehouse/clock:
+  /api/warehouse/duty/clockInOrOut:
     post:
       summary: 打卡上下班
       description: 標示『採購/庫存轉移』已接受，並執行商品入庫
@@ -3374,6 +3404,9 @@ paths:
                 user_id:
                   type: integer
                   description: 員工id
+                shift_id:
+                  type: integer
+                  description: 班次id
                 note: 
                   type: string
                   description: 備註
