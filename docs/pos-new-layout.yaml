@@ -2076,7 +2076,7 @@ paths:
                 total: 13
               
 
-  /api/warehouse/stocks:
+  /pos-v2/api/warehouse/stocks:
     get:
       summary: 庫存管理
       description: 取得產品清單
@@ -2275,7 +2275,7 @@ paths:
                     max_purchase_price: 11
                     min_purchase_price: 11
 
-  /api/warehouse/purchases_or_transfers:
+  /pos-v2/api/warehouse/purchases_or_transfers:
     get:
       summary: 採購/庫存轉移
       description: 取得產品清單
@@ -2468,7 +2468,7 @@ paths:
                     inventory_transaction_date: null
                     inventory_staff: null
 
-  /api/warehouse/detail/{id}:
+  /pos-v2/api/warehouse/detail/{id}:
     get:
       summary: 取得詳細資訊
       description: | 
@@ -2673,7 +2673,7 @@ paths:
                       inventory_staff: null
                       adjust_quantity: null
 
-  /api/warehouse/receive/{id}:
+  /pos-v2/api/warehouse/receive/{id}:
     post:
       summary: 收貨
       description: 標示『採購/庫存轉移』已接受，並執行商品入庫
@@ -2699,7 +2699,7 @@ paths:
                   msg:
                     type: string
 
-  /api/warehouse/inventory/{id}:
+  /pos-v2/api/warehouse/inventory/{id}:
     post:
       summary: 執行盤點
       description: 盤點採購＆轉移商品 入庫數量是否正確，
@@ -2745,7 +2745,7 @@ paths:
                   msg:
                     type: string
 
-  /api/warehouse/product/categories:
+  /pos-v2/api/warehouse/product/categories:
     get:
       summary: 分類和次分類
       description: 分類和次分類
@@ -2793,7 +2793,7 @@ paths:
                         - title: 雪碧
                           value: 3
 
-  /api/warehouse/stock/state:
+  /pos-v2/api/warehouse/stock/state:
     get:
       summary: 訂單狀態
       tags:
@@ -2824,7 +2824,7 @@ paths:
                   - title: 已收到
                     value: received
 
-  /api/warehouse/product/state:
+  /pos-v2/api/warehouse/product/state:
     get:
       summary: 商品狀態
       tags:
@@ -2853,7 +2853,7 @@ paths:
                   - title: 停用
                     value: inactive
 
-  /api/warehouse/product/racks:
+  /pos-v2/api/warehouse/product/racks:
     get:
       summary: 商品位置
       tags:
