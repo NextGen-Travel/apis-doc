@@ -1227,6 +1227,12 @@ components:
               qty_returned:
                 type: integer
                 description: 退貨數量
+              lot:
+                type: string
+                description: 採購批號
+              exp:
+                type: string
+                description: EXP
         total_price:
           type: string
           description: 商品原價
@@ -3085,6 +3091,8 @@ paths:
                     subtotal: 364.5
                     sell_line_id: 69
                     qty_returned: 0.00
+                    exp: ""
+                    lot: ""
                   total_price: $ 450.00
                   total_paid: $ 346.28
                   product_discount_amount: $ 85.50
