@@ -1206,6 +1206,9 @@ components:
           items:
             type: object
             properties:
+              image:
+                type: string
+                description: 產品圖片
               name:
                 type: string
                 description: 產品名稱
@@ -3084,7 +3087,8 @@ paths:
                   shipping_address: ""
                   shipping_details: ""
                   products:
-                  - name: 產品名稱
+                  - image: "http://localhost:8000/cloudsatlas/project/public/img/default.png"
+                    name: 產品名稱
                     sku: 20220008-2
                     qty: 3
                     price: 121.5000
