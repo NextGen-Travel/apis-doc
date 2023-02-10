@@ -1514,7 +1514,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/CustomTagsResponse'
               example:
-                current_page: 1
                 data:
                   - 自訂標籤1
                   - 自訂標籤2
