@@ -1135,12 +1135,14 @@ components:
               total_items:
                 type: integer
                 description: 項目總數
-              total_paid:
+              final_total:
                 type: string
                 description: 金額
               payment_method:
-                type: string
+                type: array
                 description: 付費方式
+                items:
+                  type: string
               return_paid:
                 type: string
                 description: 退款金額
@@ -1223,8 +1225,10 @@ components:
           type: string
           description: 員工備註
         payment_method:
-          type: string
+          type: array
           description: 付費方式
+          items:
+            type: string
         payment_status:
           type: string
           description: 付費狀態
@@ -1276,9 +1280,12 @@ components:
         total_price:
           type: string
           description: 商品原價
-        total_paid:
+        final_total:
           type: string
           description: 商品總計
+        unpaid_amonut:
+          type: string
+          description: 未付金額
         product_discount_amount:
           type: string
           description: 商品折扣
@@ -3023,6 +3030,18 @@ paths:
           schema:
             type: integer
           description: 是否為預售
+        - in: query
+          name: sort_column
+          schema:
+            type: string
+            enum: [order_num, contact_name, creator_name]
+          description: 排序欄位
+        - in: query
+          name: sort_direction
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: 排序方式
       responses:
         '200':
           description: 成功
@@ -3038,8 +3057,9 @@ paths:
                     is_return: false
                     contact_name: 訪客
                     total_items: 1
-                    total_paid: $ 100.00
-                    payment_method: cash
+                    final_total: $ 100.00
+                    payment_method:
+                    - cash
                     return_paid: ""
                     return_not_refund: ""
                     creator_name: JackYeh
@@ -3050,8 +3070,9 @@ paths:
                     is_return: false
                     contact_name: 訪客
                     total_items: 1
-                    total_paid: $ 100.00
-                    payment_method: cash
+                    final_total: $ 100.00
+                    payment_method:
+                    - cash
                     return_paid: ""
                     return_not_refund: ""
                     creator_name: JackYeh
@@ -3061,8 +3082,9 @@ paths:
                     order_date: "2022-09-13 09:41:27"
                     contact_name: 訪客
                     total_items: 1
-                    total_paid: $ 999.00
-                    payment_method: cash
+                    final_total: $ 999.00
+                    payment_method:
+                    - cash
                     creator_name: JackYeh
                     additional_note: ""
                   - order_id: 10
@@ -3071,8 +3093,9 @@ paths:
                     is_return: false
                     contact_name: 訪客
                     total_items: 1
-                    total_paid: $ 500.00
-                    payment_method: cash
+                    final_total: $ 500.00
+                    payment_method:
+                    - cash
                     return_paid: ""
                     return_not_refund: ""
                     creator_name: JackYeh
@@ -3083,8 +3106,9 @@ paths:
                     is_return: false
                     contact_name: 訪客
                     total_items: 1
-                    total_paid: $ 999.00
-                    payment_method: card
+                    final_total: $ 999.00
+                    payment_method:
+                    - card
                     return_paid: ""
                     return_not_refund: ""
                     creator_name: JackYeh
@@ -3095,8 +3119,9 @@ paths:
                     is_return: false
                     contact_name: 訪客
                     total_items: 1
-                    total_paid: $ 100.00
-                    payment_method: cash
+                    final_total: $ 100.00
+                    payment_method:
+                    - cash
                     return_paid: ""
                     return_not_refund: ""
                     creator_name: JackYeh
@@ -3107,8 +3132,9 @@ paths:
                     is_return: false
                     contact_name: 訪客
                     total_items: 2
-                    total_paid: $ 225.00
-                    payment_method: card
+                    final_total: $ 225.00
+                    payment_method:
+                    - card
                     return_paid: ""
                     return_not_refund: ""
                     creator_name: JackYeh
@@ -3119,8 +3145,9 @@ paths:
                     is_return: false
                     contact_name: 訪客
                     total_items: 3
-                    total_paid: $ 1,224.00
-                    payment_method: cash
+                    final_total: $ 1,224.00
+                    payment_method:
+                    - cash
                     return_paid: ""
                     return_not_refund: ""
                     creator_name: JackYeh
@@ -3131,8 +3158,9 @@ paths:
                     is_return: false
                     contact_name: 訪客
                     total_items: 2
-                    total_paid: $ 1,099.00
-                    payment_method: card
+                    final_total: $ 1,099.00
+                    payment_method:
+                    - card
                     return_paid: ""
                     return_not_refund: ""
                     creator_name: JackYeh
@@ -3143,8 +3171,9 @@ paths:
                     is_return: true
                     contact_name: 訪客
                     total_items: 2
-                    total_paid: $ 600.00
-                    payment_method: cash
+                    final_total: $ 600.00
+                    payment_method:
+                    - cash
                     return_paid: $ 300.00
                     return_not_refund: $ 110.00
                     creator_name: JackYeh
@@ -3191,7 +3220,7 @@ paths:
                   contact_name: Jack
                   additional_note: ""
                   staff_note: ""
-                  payment_method: ""
+                  payment_method: []
                   payment_status: due
                   shipping_status: ""
                   shipping_address: ""
@@ -3208,7 +3237,8 @@ paths:
                     exp: ""
                     lot: ""
                   total_price: $ 450.00
-                  total_paid: $ 346.28
+                  final_total: $ 346.28
+                  unpaid_amonut: $ 346.28
                   product_discount_amount: $ 85.50
                   tax_amount: $ 0.00
                   shipping_amount: $ 0.00
