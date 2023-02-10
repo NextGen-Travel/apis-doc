@@ -2287,13 +2287,13 @@ paths:
                           type: string
                           description: sku
                         alert_quantity:
-                          type: integer
+                          type: string
                           description: 警示數量
                         current_stock:
-                          type: integer
+                          type: string
                           description: 本地庫存
                         offsite_stock:
-                          type: integer
+                          type: string
                           description: 異地庫存量
                         unit:
                           type: string
@@ -2302,19 +2302,19 @@ paths:
                           type: string
                           description: 包裝單位
                         base_unit_multiplier:
-                          type: integer
+                          type: string
                           description: 每包幾入
                         max_price:
-                          type: integer
+                          type: string
                           description: 單位售價(最大)
                         min_price:
                           type: integer
                           description: 單位售價(最小)
                         max_purchase_price:
-                          type: integer
+                          type: string
                           description: 單位成本(最大)
                         min_purchase_price:
-                          type: integer
+                          type: string
                           description: 單位成本(最小)
 
               example:
