@@ -2283,6 +2283,12 @@ paths:
                         product_name:
                           type: string
                           description: 產品名稱
+                        is_inactive:
+                          type: integer
+                          description: 是否啟用
+                        active_state:
+                          type: string
+                          description: 是否啟用
                         sku:
                           type: string
                           description: sku
@@ -2325,6 +2331,8 @@ paths:
                     row: 3
                     rack: 6
                     product_name: 可樂
+                    is_inactive: 0
+                    active_state: active
                     category: 飲料
                     sub_category: 含氣泡
                     sku: adasdasdsad
@@ -2342,6 +2350,8 @@ paths:
                     row: 3
                     rack: 5
                     product_name: 雪碧
+                    is_inactive: 1
+                    active_state: inactive
                     category: 飲料
                     sub_category: 含氣泡
                     sku: bbasdasdas
