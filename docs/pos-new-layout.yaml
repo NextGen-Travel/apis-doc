@@ -2178,6 +2178,14 @@ paths:
             maximum: 1
           description: 僅檢視低於警示庫存量
         - in: query
+          name: active_state
+          schema:
+            type: string
+            enum:
+              - "all"
+              - "active"
+              - "inactive"
+        - in: query
           name: is_uncategorized
           schema:
             type: integer
