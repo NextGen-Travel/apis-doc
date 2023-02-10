@@ -2097,12 +2097,16 @@ paths:
         - in: query
           name: category_id
           schema:
-            type: integer
+            anyOf:
+              - type: integer
+              - type: string
           description: 主分類 ID
         - in: query
           name: sub_category_id
           schema:
-            type: integer
+            anyOf:
+                - type: integer
+                - type: string
           description: 次分類 ID
         - in: query
           name: is_only_alert
