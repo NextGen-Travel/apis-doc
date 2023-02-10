@@ -2302,7 +2302,7 @@ paths:
                           type: string
                           description: 包裝單位
                         base_unit_multiplier:
-                          type: string
+                          type: integer
                           description: 每包幾入
                         max_price:
                           type: integer
