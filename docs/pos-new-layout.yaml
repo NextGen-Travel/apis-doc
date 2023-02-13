@@ -2275,6 +2275,13 @@ paths:
             type: number
           description: 營業地點ID
         - in: query
+          name: product_rack_id
+          schema:
+            anyOf:
+              - type: integer
+              - type: string
+          description: 商品位置 ID
+        - in: query
           name: term
           schema:
             type: string
@@ -2372,10 +2379,13 @@ paths:
                 properties:
                   recordsTotal:
                     type: integer
-                    description: 總筆數
-                  recordsFiltered:
+                    description: 本頁筆數
+                  total:
                     type: integer
-                    description: 筆數
+                    description: 總筆數
+                  pages:
+                    type: integer
+                    description: 總頁數
                   data:
                     type: array
                     items:
@@ -2441,7 +2451,8 @@ paths:
 
               example:
                 recordsTotal: 2
-                recordsFiltered: 2
+                total: 2
+                pages: 1
                 data:
                   - position: A區
                     row: 3
@@ -2575,10 +2586,13 @@ paths:
                 properties:
                   recordsTotal:
                     type: integer
-                    description: 總筆數
-                  recordsFiltered:
+                    description: 本頁筆數
+                  total:
                     type: integer
-                    description: 筆數
+                    description: 總筆數
+                  pages:
+                    type: integer
+                    description: 總頁數
                   data:
                       type: array
                       items:
@@ -2638,7 +2652,8 @@ paths:
                             description: 總項目
               example:
                 recordsTotal: 2
-                recordsFiltered: 2
+                total: 2
+                pages: 1
                 data:
                   - id: 130
                     type: purchase_transfer
@@ -3544,10 +3559,13 @@ paths:
                 properties:
                   recordsTotal:
                     type: integer
-                    description: 總筆數
-                  recordsFiltered:
+                    description: 本頁筆數
+                  total:
                     type: integer
-                    description: 筆數
+                    description: 總筆數
+                  pages:
+                    type: integer
+                    description: 總頁數
                   data:
                     type: array
                     items:
@@ -3585,7 +3603,8 @@ paths:
 
               example:
                 recordsTotal: 2
-                recordsFiltered: 2
+                total: 2
+                pages: 1
                 data:
                   - id: 1
                     clock_in_time: '2023-02-06 09:00:00'
