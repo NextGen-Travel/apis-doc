@@ -702,12 +702,14 @@ components:
                     fixed
               line_discount_amount:
                 type: number
-                description: 折扣金額
+                description: 折扣金額(使用者輸入的折扣數字)
               item_tax:
-                type: integer
+                type: number
+                default: 0.00
               tax_id:
                 type: integer
                 description: 稅ID
+                default: ''
               sell_line_note:
                 type: string
                 description: 銷售註記
@@ -737,6 +739,16 @@ components:
               unit_price_inc_tax:
                 type: integer
                 description: 含稅單位價錢
+            required:
+              - product_type
+              - unit_price
+              - item_tax
+              - tax_id
+              - product_id
+              - variation_id
+              - enable_stock
+              - unit_price_inc_tax
+              - quantity
         discount_type:
           type: string
           enum:
@@ -754,6 +766,7 @@ components:
           description: 已兌換積分轉換後的金額
         tax_rate_id:
           type: integer
+          default: ''
         tax_calculation_amount:
           type: integer
         shipping_details:
@@ -831,6 +844,7 @@ components:
         change_return:
           type: integer
           description: 退費金額
+          default: 0.00
         additional_notes:
           type: string
           description: 額外備註
@@ -886,6 +900,11 @@ components:
       required:  
         - location_id
         - contact_id
+        - tax_rate_id
+        - change_return
+        - products
+        - final_total
+        - status
     TransactionsResponse:
       type: object
       properties:
