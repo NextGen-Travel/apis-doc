@@ -681,6 +681,10 @@ components:
           description: 司機ID
         sell_price_tax:
           type: string
+          enum:
+            - includes
+            - excludes
+          default: includes
         invoice_scheme_id:
           type: integer
           description: 發票計畫ID
@@ -716,6 +720,7 @@ components:
                 description: 銷售註記
               lot_no_line_id:
                 type: integer
+                description: 批號及過期日的ID (Table名稱 -> purchase_lines)
               product_id:
                 type: integer
                 description: 產品ID
@@ -875,6 +880,7 @@ components:
           description: 是否有啟用庫存
         is_credit_sale:
           type: number
+          description: 是否為借記銷售
         final_total:
           type: integer
           description: 總金額
