@@ -615,6 +615,7 @@ components:
         is_medicine:
           type: integer
           description: 是否為配藥訂單
+          default: 0
         location_id: 
           type: number
           description: 營業地點ID
@@ -646,7 +647,7 @@ components:
           type: string
           enum:
             - "fixed"
-            - "percent"
+            - "percentage"
           description: 包裝支出的類型(固定 or 百分比)
         service_custom_field_1:
           type: string
@@ -698,8 +699,8 @@ components:
                 type: string
                 description: 折扣類別
                 enum:
+                  - fixed
                   - percentage
-                    fixed
               line_discount_amount:
                 type: number
                 description: 折扣金額(使用者輸入的折扣數字)
@@ -908,7 +909,7 @@ components:
     TransactionsResponse:
       type: object
       properties:
-        sussess:
+        success:
           type: number
           description: 是否成功
         msg:
