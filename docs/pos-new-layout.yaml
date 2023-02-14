@@ -712,7 +712,9 @@ components:
                 type: number
                 default: 0.00
               tax_id:
-                type: integer
+                oneOf:
+                  - type: integer
+                  - type: string
                 description: 稅ID
                 default: ''
               sell_line_note:
@@ -771,7 +773,9 @@ components:
           type: integer
           description: 已兌換積分轉換後的金額
         tax_rate_id:
-          type: integer
+          oneOf:
+            - type: integer
+            - type: string
           default: ''
         tax_calculation_amount:
           type: integer
@@ -1685,7 +1689,7 @@ paths:
   /pos-v2/api/business-info:
     get:
       summary: 取得店家資訊
-      description: 取得全部店家資訊以及預設店家及營業員
+      description: 取得總店資訊以及預設店家及營業員
       tags:
         - Sale
       responses:
