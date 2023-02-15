@@ -1965,11 +1965,14 @@ paths:
                 $ref: '#/components/schemas/LocationListResponse'
               example:
                 data:
-                  - 藥局 A (BL0001)
-                  - 藥局 B (BL0002)
-                  - 藥局 C (BL0003)
-                  - eeded (BL0006)
-                  - 虛擬倉庫 (VirtualStorehouse)
+                  - value: 1
+                    name: "藥局 A (BL0001)"
+                  - value: 2
+                    name: "藥局 B (BL0002)"
+                  - value: 3
+                    name: "藥局 C (BL0003)"
+                  - value: 6
+                    name: "eeded (BL0006)"
                 links:
                   first: "http://localhost:8000/project/public/pos-v2/api/business-locations?page=1"
                   last: "http://localhost:8000/project/public/pos-v2/api/business-locations?page=1"
