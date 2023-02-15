@@ -57,6 +57,9 @@ components:
               customer_group_name:
                 type: string
                 description: 客戶群名稱
+              contact_due:
+                type: number
+                description: 客戶未付金額
         links:
           type: object
           properties:
@@ -560,6 +563,244 @@ components:
             total:
               type: number
       
+    SingleTxnResponse:
+      type: object
+      properties:
+        transaction_id:
+          type: integer
+          description: 交易ID
+        location_id:
+          type: integer
+          description: 分店ID
+        invoice_no:
+          type: string
+          description: 發票編號
+        transaction_date:
+          type: string
+          description: 交易日期
+        creator_name:
+          type: string
+          description: 建立者姓名
+        additional_notes:
+          type: string
+          description: 額外註記
+        staff_note:
+          type: string
+          description: 員工備註
+        payment_status:
+          type: string
+          description: 付款狀態
+        products:
+          description: 產品列表
+          type: array
+          items:
+            type: object
+            properties:
+              variation_id:
+                type: integer
+                description: 產品衍生規格ID
+              product_id:
+                type: number
+                description: 產品ID
+              name:
+                type: string
+                description: 產品名稱
+              type:
+                type: string
+                description: 產品類型
+              enable_stock:
+                type: number
+                description: 是否啟用庫存管理
+              product_image:
+                type: string
+                description: 圖片URL
+              variation:
+                type: string
+                description: 衍生規格名稱
+              sell_price_inc_tax:
+                type: string
+                description: 售價
+              sub_sku:
+                type: string
+                description: Sub SKU
+              qty_available:
+                type: integer
+                description: 庫存總數量
+              qty:
+                type: integer
+                description: 購買數量
+              sell_line_id:
+                type: integer
+                description: sell line ID
+              stock:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    purchase_line_id:
+                      type: integer
+                      description: 採購單ID
+                    lot_number:
+                      type: string
+                      description: 批號
+                    exp_date:
+                      type: string
+                      description: 到期日
+                    qty_available:
+                      type: integer
+                      description: 數量
+
+        final_total:
+          type: string
+          description: 總金額
+        discount:
+          description: 全單折扣資訊
+          type: object
+          properties:
+            type: 
+              type: string
+              description: 折扣類型
+            amount: 
+              type: number
+              description: 折扣數量
+        customer:
+          description: 會員資訊
+          type: object
+          properties:
+            id:
+              type: number
+              description: 客戶ID
+            name:
+              type: string
+              description: 客戶名稱
+            member_id:
+              type: string
+              description: 客戶自訂ID
+            mobile:
+              type: string
+              description: 手機
+            total_rp:
+              type: string
+              description: 客戶積分
+            customer_group_name:
+              type: string
+              description: 客戶群名稱
+        transport:
+          description: 運輸資訊
+          type: object
+          properties:
+            shipping_address:
+              type: string
+              description: 送貨地址
+            shipping_charges:
+              type: integer
+              description: 運費
+            shipping_details:
+              type: string
+              description: 運輸詳情
+            shipping_status:
+              type: string
+              description: 發貨狀態
+            delivered_to:
+              type: string
+              description: 已送達至
+        service:
+          description: 服務資訊
+          type: object
+          properties:
+            packing_charge:
+              type: integer
+              description: 包裝支出
+            packing_charge_type:
+              type: string
+              enum:
+                - "fixed"
+                - "percentage"
+              description: 包裝支出的類型(固定 or 百分比)
+            service_custom_field_1:
+              type: string
+              description: 服務自定欄１
+            service_custom_field_2:
+              type: string
+              description: 服務自定欄2
+            service_custom_field_3:
+              type: string
+              description: 服務自定欄3
+            service_custom_field_4:
+              type: string
+              description: 服務自定欄4
+            service_custom_field_5:
+              type: string
+              description: 服務自定欄5
+            service_custom_field_6:
+              type: string
+              description: 服務自定欄6
+        recurring:
+          description: 預定資訊
+          type: object
+          properties:
+            recur_interval:
+              type: integer
+              description: 預定發票間隔
+            recur_interval_type:
+              type: string
+              enum:
+              - "days"
+              - "months"
+              - "years"
+              description: 預定發票間隔類型
+            recur_repetitions:
+              type: integer
+              description: 預定發票間隔類型
+        rp_info:
+          description: 積分資訊
+          type: object
+          properties:
+            rp_redeemed:
+              type: integer
+              description: 已兌換積分
+            rp_redeemed_amount:
+              type: string
+              description: 已兌換積分轉換後的金額
+            rp_earned:
+              type: integer
+              description: 獲取的積分
+        payment:
+          description: 付款資訊
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                type: integer
+                description: 付款金額
+              method:
+                type: string
+                description: 付款方式
+              account_id:
+                type: integer
+              card_number:
+                type: string
+              card_holder_name:
+                type: string
+              card_transaction_number:
+                type: string
+              card_type: 
+                type: string
+              card_month:
+                type: string
+              card_year:
+                type: string
+              card_security:
+                type: string
+              cheque_number:
+                type: string
+              bank_account_number:
+                type: string
+              note:
+                type: string
+            
+
     CustomTagsResponse:
       type: object
       properties:
@@ -801,6 +1042,9 @@ components:
           type: array
           items:
             type: object
+            required:
+              - amount
+              - method
             properties:
               amount:
                 type: integer
@@ -985,10 +1229,10 @@ components:
           items:
             type: object
             properties:
-              location_id:
+              value:
                 type: number
-                description: 分店ID
-              location_name:
+                description: 下拉選單的value
+              name:
                 type: string
                 description: 分店名稱
         links:
@@ -1731,11 +1975,14 @@ paths:
                 $ref: '#/components/schemas/LocationListResponse'
               example:
                 data:
-                  - 藥局 A (BL0001)
-                  - 藥局 B (BL0002)
-                  - 藥局 C (BL0003)
-                  - eeded (BL0006)
-                  - 虛擬倉庫 (VirtualStorehouse)
+                  - value: 1
+                    name: "藥局 A (BL0001)"
+                  - value: 2
+                    name: "藥局 B (BL0002)"
+                  - value: 3
+                    name: "藥局 C (BL0003)"
+                  - value: 6
+                    name: "eeded (BL0006)"
                 links:
                   first: "http://localhost:8000/project/public/pos-v2/api/business-locations?page=1"
                   last: "http://localhost:8000/project/public/pos-v2/api/business-locations?page=1"
@@ -1762,7 +2009,7 @@ paths:
           name: suspended
           schema:
             type: number
-            default: true
+            default: 1
           description: 是否為暫存訂單
           required: true
         - in: query
@@ -1770,6 +2017,16 @@ paths:
           schema:
             type: number
           description: 營業地點ID
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
       responses:
         '200':
           description: 成功
@@ -1868,6 +2125,105 @@ paths:
                   to: 4
                   total: 4
 
+  /pos-v2/api/sells/{transaction_id}:
+    get:
+      summary: 取得單一訂單詳細資訊
+      description: | 
+        取得單一訂單詳細資訊
+      tags:
+        - Sale
+      parameters:
+        - in: path
+          name: transaction_id
+          schema:
+            type: number
+            default: true
+          description: 訂單ID
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleTxnResponse'
+              example:
+                transaction_id: 492
+                location_id: 1
+                invoice_no: 0238
+                transaction_date: "2023-02-14 11:48:00"
+                transaction_status: "final"
+                creator_name: "Laplace"
+                additional_note: "asdfg"
+                staff_note: ""
+                payment_status: "due"
+                products: 
+                  variation_id: 119
+                  product_id: 70
+                  name: "DUMMY"
+                  type: "single"
+                  enable_stock: 1
+                  product_image: "http://localhost:8000/project/public/img/default.png"
+                  variation: null
+                  sell_price_inc_tax: 125
+                  sub_sku: "0070"
+                  qty_available: 2156
+                  qty: 1
+                  sell_line_id: 270
+                  stock:
+                    - purchase_line_id: 70
+                      lot_number: 
+                      exp_date: 
+                      qty_available: 2232
+                final_total: 125
+                discount: 
+                  type: "percentage"
+                  amount: 0
+                customer:
+                  id: 15
+                  name: "Mr Oscar"
+                  member_id: "CO0016"
+                  mobile: "0956874213"
+                  total_rp: 5021
+                  customer_group_name: ""
+                transport: 
+                  shipping_address: ""
+                  shipping_charges: 0
+                  shipping_details: ""
+                  shipping_status: ""
+                  delivered_to: ""
+                service: 
+                  packing_charge: 0
+                  packing_charge_type: ""
+                  service_custom_field_1: ""
+                  service_custom_field_2: ""
+                  service_custom_field_3: ""
+                  service_custom_field_4: ""
+                  service_custom_field_5: ""
+                  service_custom_field_6: ""
+                recurring: 
+                  recur_interval: 3
+                  recur_interval_type: "days"
+                  recur_repetitions: 1
+                rp_info: 
+                  rp_redeemed: 0
+                  rp_redeemed_amount: 0
+                  rp_earned: 12
+                payment:
+                  amount: 400
+                  method: "cash"
+                  account_id: ""
+                  card_number: ""
+                  card_holder_name: ""
+                  card_transaction_number: ""
+                  card_type: "credit"
+                  card_month: ""
+                  card_year: ""
+                  card_security: ""
+                  cheque_number: ""
+                  bank_account_number: ""
+                  note: ""
+
   /pos-v2/api/contacts:
     get:
       summary: 會員清單
@@ -1905,18 +2261,21 @@ paths:
                     mobile: ""
                     total_rp: 0
                     customer_group_name: null
+                    contact_due: 0
                   - id: 2
                     name: "Miss jojo Lin"
                     member_id: "CO0002"
                     mobile: "0966123458"
                     total_rp: 0
                     customer_group_name: null
+                    contact_due: 100
                   - id: 6
                     name: "魏如萱"
                     member_id: "CO0006"
                     mobile: "0988666444"
                     total_rp: 0
                     customer_group_name: null
+                    contact_due: 1200
                 links:
                   first: http://localhost:8000/project/public/pos-v2/api/contacts?page=1
                   last: http://localhost:8000/project/public/pos-v2/api/contacts?page=2
