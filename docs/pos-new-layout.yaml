@@ -57,6 +57,9 @@ components:
               customer_group_name:
                 type: string
                 description: 客戶群名稱
+              contact_due:
+                type: number
+                description: 客戶未付金額
         links:
           type: object
           properties:
@@ -2241,18 +2244,21 @@ paths:
                     mobile: ""
                     total_rp: 0
                     customer_group_name: null
+                    contact_due: 0
                   - id: 2
                     name: "Miss jojo Lin"
                     member_id: "CO0002"
                     mobile: "0966123458"
                     total_rp: 0
                     customer_group_name: null
+                    contact_due: 100
                   - id: 6
                     name: "魏如萱"
                     member_id: "CO0006"
                     mobile: "0988666444"
                     total_rp: 0
                     customer_group_name: null
+                    contact_due: 1200
                 links:
                   first: http://localhost:8000/project/public/pos-v2/api/contacts?page=1
                   last: http://localhost:8000/project/public/pos-v2/api/contacts?page=2
