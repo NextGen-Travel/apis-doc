@@ -2119,7 +2119,7 @@ paths:
       tags:
         - Sale
       parameters:
-        - in: query
+        - in: path
           name: transaction_id
           schema:
             type: number
