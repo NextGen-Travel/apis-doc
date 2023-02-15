@@ -596,40 +596,61 @@ components:
           items:
             type: object
             properties:
+              product_type:
+                type: string
+                description: 產品類別
+              unit_price:
+                type: integer
+                description: 單位價錢(不含稅)
+              line_discount_type: 
+                type: string
+                description: 折扣類別
+                enum:
+                  - fixed
+                  - percentage
+              line_discount_amount:
+                type: number
+                description: 折扣金額(使用者輸入的折扣數字)
+              item_tax:
+                type: number
+                default: 0.00
+              tax_id:
+                oneOf:
+                  - type: integer
+                  - type: string
+                description: 稅ID
+                default: ''
+              sell_line_note:
+                type: string
+                description: 銷售註記
+              lot_no_line_id:
+                type: integer
+                description: 批號及過期日的ID (Table名稱 -> purchase_lines)
+              product_id:
+                type: integer
+                description: 產品ID
               variation_id:
                 type: integer
-                description: 產品衍生規格ID
-              product_id:
-                type: number
-                description: 產品ID
-              name:
-                type: string
-                description: 產品名稱
-              type:
-                type: string
-                description: 產品類型
+                description: 規格ID
               enable_stock:
-                type: number
-                description: 是否啟用庫存管理
-              product_image:
-                type: string
-                description: 圖片URL
-              variation:
-                type: string
-                description: 衍生規格名稱
-              sell_price_inc_tax:
-                type: string
-                description: 售價
-              sub_sku:
-                type: string
-                description: Sub SKU
-              qty_available:
                 type: integer
-                description: 庫存總數量
-              qty:
+                description: 是否有啟用庫存管理
+              quantity:
                 type: integer
-                description: 購買數量
-              sell_line_id:
+                description: 數量
+              product_unit_id:
+                type: integer
+                description: 產品單位ID
+              sub_unit_id:
+                type: integer
+                description: 產品子單位ID
+              base_unit_multiplier:
+                type: integer
+                description: 基本單位倍數
+              unit_price_inc_tax:
+                type: integer
+                description: 含稅單位價錢
+              transaction_sell_line_id:
                 type: integer
                 description: sell line ID
               stock:
