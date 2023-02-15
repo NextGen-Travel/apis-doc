@@ -1937,6 +1937,11 @@ paths:
             type: number
           description: 分店ID
           required: true
+        - in: query
+          name: price_group_id
+          schema:
+            type: number
+          description: 售價群組ID
       responses:
         '200':
           description: 成功
