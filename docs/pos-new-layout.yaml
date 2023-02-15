@@ -706,6 +706,10 @@ components:
             customer_group_name:
               type: string
               description: 客戶群名稱
+            contact_due:
+              type: number
+              description: 客戶未付金額
+
         transport:
           description: 運輸資訊
           type: object
