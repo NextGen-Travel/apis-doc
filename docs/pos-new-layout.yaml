@@ -1222,10 +1222,10 @@ components:
           items:
             type: object
             properties:
-              location_id:
+              value:
                 type: number
-                description: 分店ID
-              location_name:
+                description: 下拉選單的value
+              name:
                 type: string
                 description: 分店名稱
         links:
