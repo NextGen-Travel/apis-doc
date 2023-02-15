@@ -2064,7 +2064,7 @@ paths:
           name: suspended
           schema:
             type: number
-            default: true
+            default: 1
           description: 是否為暫存訂單
           required: true
         - in: query
