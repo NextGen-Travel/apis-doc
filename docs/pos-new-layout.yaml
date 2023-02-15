@@ -744,6 +744,10 @@ components:
               description: 預定發票間隔
             recur_interval_type:
               type: string
+              enum:
+              - "days"
+              - "months"
+              - "years"
               description: 預定發票間隔類型
             recur_repetitions:
               type: integer
