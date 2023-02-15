@@ -571,7 +571,7 @@ components:
           description: 分店ID
         invoice_no:
           type: string
-          description: 訂單編號
+          description: 發票編號
         transaction_date:
           type: string
           description: 交易日期
@@ -766,8 +766,10 @@ components:
             properties:
               amount:
                 type: integer
+                description: 付款金額
               method:
                 type: string
+                description: 付款方式
               account_id:
                 type: integer
               card_number:
