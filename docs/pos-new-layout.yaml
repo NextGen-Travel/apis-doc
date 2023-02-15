@@ -420,6 +420,9 @@ components:
         brand:
           type: string
           description: 品牌名稱
+        variation_group_price:
+          type: number
+          description: 售價群組價錢
         stock:
           description: 批號及過期日詳細資訊
           type: array
