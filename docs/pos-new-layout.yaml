@@ -885,6 +885,9 @@ components:
         location_id: 
           type: number
           description: 營業地點ID
+        price_group:
+          type: integer
+          description: 售價群組ID
         sub_type:
           type: string
         contact_id:
