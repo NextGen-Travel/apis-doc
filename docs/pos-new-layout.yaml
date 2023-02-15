@@ -2732,16 +2732,16 @@ paths:
                           received_not_allowed:
                             type: number
                             description: 允許接收
-                          shipping_etd:
+                          transaction_etd:
                             type: string
                             description: 預計出發日
-                          shipping_eta:
+                          transaction_eta:
                             type: string
                             description: 預計到達日
-                          shipping_atd:
+                          transaction_atd:
                             type: string
                             description: 實際出發日
-                          shipping_ata:
+                          transaction_ata:
                             type: string
                             description: 實際到達日
                           inventory_transaction_id:
