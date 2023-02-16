@@ -805,6 +805,9 @@ components:
           items:
             type: object
             properties:
+              payment_id:
+                type: integer
+                description: payment table id
               amount:
                 type: integer
                 description: 付款金額
