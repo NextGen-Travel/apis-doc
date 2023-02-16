@@ -684,6 +684,9 @@ components:
             amount: 
               type: number
               description: 折扣數量
+            price_group: 
+              type: number
+              description: 售價群組
         customer:
           description: 會員資訊
           type: object
@@ -885,9 +888,6 @@ components:
         location_id: 
           type: number
           description: 營業地點ID
-        price_group:
-          type: integer
-          description: 售價群組ID
         sub_type:
           type: string
         contact_id:
