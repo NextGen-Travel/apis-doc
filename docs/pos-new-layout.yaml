@@ -312,7 +312,7 @@ components:
                 type: integer
                 description: 產品衍生規格ID
               product_id:
-                type: number
+                type: integer
                 description: 產品ID
               name:
                 type: string
@@ -321,7 +321,7 @@ components:
                 type: string
                 description: 產品類型
               enable_stock:
-                type: number
+                type: integer
                 description: 是否啟用庫存管理
               product_image:
                 type: string
@@ -329,9 +329,12 @@ components:
               variation:
                 type: string
                 description: 衍生規格名稱
+              default_sell_price:
+                type: string
+                description: 售價(不含稅)
               sell_price_inc_tax:
                 type: string
-                description: 售價
+                description: 售價(含稅)
               sub_sku:
                 type: string
                 description: Sub SKU
@@ -402,6 +405,9 @@ components:
         sub_sku:
           type: string
           description: Sub SKU
+        default_sell_price:
+          type: string
+          description: 售價(不含稅)
         sell_price_inc_tax:
           type: string
           description: 售價(含稅)
@@ -631,10 +637,10 @@ components:
                 description: 產品ID
               variation_id:
                 type: integer
-                description: 規格ID
+                description: 產品衍生規格ID
               enable_stock:
                 type: integer
-                description: 是否有啟用庫存管理
+                description: 是否啟用庫存管理
               quantity:
                 type: integer
                 description: 數量
@@ -655,10 +661,10 @@ components:
                 description: sell line ID
               default_sell_price:
                 type: number
-                description: 產品售價 (不含稅) 
+                description: 售價(不含稅) 
               sell_price_inc_tax:
                 type: number
-                description: 產品售價 (含稅) 
+                description: 售價(含稅) 
               stock:
                 type: array
                 items:
