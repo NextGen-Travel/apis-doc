@@ -3093,6 +3093,20 @@ paths:
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 銷售更新成功
+                receipt: 
+                  is_enabled: true
+                  print_type: "browser"
+                  html_content: "<!-- business information here -->"
+                  printer_config: []
+                  data: []
+                  print_title: "0261"
+                  
+                
 
   /pos-v2/api/transport-status:
     get:
