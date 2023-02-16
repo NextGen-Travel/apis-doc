@@ -653,6 +653,12 @@ components:
               transaction_sell_line_id:
                 type: integer
                 description: sell line ID
+              default_sell_price:
+                type: number
+                description: 產品售價 (不含稅) 
+              sell_price_inc_tax:
+                type: number
+                description: 產品售價 (含稅) 
               stock:
                 type: array
                 items:
@@ -899,8 +905,6 @@ components:
           type: integer
         pay_term_type:
           type: string
-        price_group:
-          type: integer
         types_of_service_id:
           type: integer
           description: 服務類型ID
@@ -1218,6 +1222,9 @@ components:
         enable_rp:
           type: number
           description: 是否啟用積分(1=啟用, 0=關閉)
+        enable_inline_tax:
+          type: integer
+          description: 是否啟用內聯稅於採購及銷售(1=啟用, 0=關閉)
         rp_name:
           type: string
           description: 積分顯示名稱
@@ -2037,6 +2044,7 @@ paths:
                 employee_id: 1
                 employee_name: "Laplace chen"
                 enable_rp: 1
+                enable_inline_tax: 0
                 rp_name: "會員積分"
                 amount_for_unit_rp: "10.0000"
                 min_order_total_for_rp: "1.0000"
@@ -2246,23 +2254,25 @@ paths:
                 staff_note: ""
                 payment_status: "due"
                 products: 
-                  variation_id: 119
+                  product_type: "single"
+                  unit_price: 125
+                  line_discount_type: "fixed"
+                  line_discount_amount: 0
+                  item_tax: 0
+                  tax_id: null
+                  sell_line_note: ""
+                  transaction_sell_line_id: 279
                   product_id: 70
-                  name: "DUMMY"
-                  type: "single"
+                  variation_id: 119
                   enable_stock: 1
-                  product_image: "http://localhost:8000/project/public/img/default.png"
-                  variation: null
+                  quantity: 3
+                  product_unit_id: 1
+                  base_unit_multiplier: 0
+                  unit_price_inc_tax: 125
+                  sub_unit_id: null
+                  lot_no_line_id: 124
+                  default_sell_price: 125
                   sell_price_inc_tax: 125
-                  sub_sku: "0070"
-                  qty_available: 2156
-                  qty: 1
-                  sell_line_id: 270
-                  stock:
-                    - purchase_line_id: 70
-                      lot_number: 
-                      exp_date: 
-                      qty_available: 2232
                 final_total: 125
                 discount: 
                   type: "percentage"
