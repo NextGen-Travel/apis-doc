@@ -1529,7 +1529,7 @@ components:
                 type: string
                 description: 售價群組名稱
               value:
-                type: string
+                type: number
                 description: 下拉選單的value
         links:
           description: LazyLoading資料
