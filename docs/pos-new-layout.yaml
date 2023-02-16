@@ -2919,6 +2919,14 @@ paths:
         當is_suspend=1則會儲存為暫存訂單.
 
         Note: POS原生API
+      parameters:
+        - in: path
+          name: transaction_id
+          schema:
+            type: number
+            default: true
+          description: 訂單ID
+          required: true
       tags:
         - Sale
       requestBody:
