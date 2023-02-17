@@ -20,6 +20,8 @@ tags:
     description: 新版 POS 客戶相關 API
   - name: Clock In/Out
     description: 新版 POS 打卡相關 API
+  - name: Cash Register
+    description: 新版 POS 收銀機管理相關 API
 
 components:
   parameters:
@@ -2095,6 +2097,77 @@ components:
             final:
               type: integer
               description: 總計
+
+    CashRegisterDetailResponse:
+      type: object
+      properties:
+        open_time:
+          type: string
+          description: 訂單ID
+        close_time:
+          type: string
+          description: 訂單編號
+        cash_in_hand:
+          type: number
+          description: 開機現金結餘
+        total_sell:
+          type: number
+          description: 總銷售金額
+        total_expense:
+          type: number
+          description: 總出支金額
+        total_refund:
+          type: number
+          description: 總退回金額
+        sell:
+          type: array
+          description: 銷售
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 付費方式
+              amount:
+                type: string
+                description: 金額
+        expense:
+          type: array
+          description: 出支
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 付費方式
+              amount:
+                type: string
+                description: 金額
+        refund:
+          type: array
+          description: 退回
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 付費方式
+              amount:
+                type: string
+                description: 金額
+
+    CashRegisterStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 狀態
+          enum:
+          - open
+          - close
+        opened_at:
+          type: string
+          description: 開機時間
 
     EmployeeDutyResponse:
       type: object
@@ -4451,6 +4524,16 @@ paths:
           schema:
             type: number
           description: 折舊數量
+        - in: query
+          name: method
+          schema:
+            type: string
+          description: 付費方式
+        - in: query
+          name: amount
+          schema:
+            type: number
+          description: 退費金額（折舊後
       responses:
         '200':
           description: 成功
@@ -4459,6 +4542,294 @@ paths:
               example:
                   success: 1
                   msg: 成功
+
+  /pos-v2/api/cash-register:
+    get:
+      summary: 取得收銀機詳細內容
+      description: 取得收銀機詳細內容
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashRegisterDetailResponse'
+              example:
+                open_time: 02/15/2023 18:38
+                close_time: 02/17/2023 09:29
+                cash_in_hand: 0
+                total_sell: 200
+                total_expense: 0
+                total_refund: 0
+                sell:
+                  - key: cash_in_hand
+                    value: 0
+                  - key: cash
+                    value: 200
+                  - key: cheque
+                    value: 0
+                  - key: card
+                    value: 0
+                  - key: bank_transfer
+                    value: 0
+                  - key: advance
+                    value: 0
+                  - key: other
+                    value: 0
+                  - key: custom_pay_1
+                    value: 0
+                  - key: custom_pay_2
+                    value: 0
+                  - key: custom_pay_3
+                    value: 0
+                  - key: custom_pay_4
+                    value: 0
+                  - key: custom_pay_5
+                    value: 0
+                  - key: custom_pay_6
+                    value: 0
+                  - key: custom_pay_7
+                    value: 0
+                expense:
+                  - key: cash_in_hand
+                    value: 0
+                  - key: cash
+                    value: 200
+                  - key: cheque
+                    value: 0
+                  - key: card
+                    value: 0
+                  - key: bank_transfer
+                    value: 0
+                  - key: advance
+                    value: 0
+                  - key: other
+                    value: 0
+                  - key: custom_pay_1
+                    value: 0
+                  - key: custom_pay_2
+                    value: 0
+                  - key: custom_pay_3
+                    value: 0
+                  - key: custom_pay_4
+                    value: 0
+                  - key: custom_pay_5
+                    value: 0
+                  - key: custom_pay_6
+                    value: 0
+                  - key: custom_pay_7
+                    value: 0
+                refund:
+                  - key: cash_in_hand
+                    value: 0
+                  - key: cash
+                    value: 200
+                  - key: cheque
+                    value: 0
+                  - key: card
+                    value: 0
+                  - key: bank_transfer
+                    value: 0
+                  - key: advance
+                    value: 0
+                  - key: other
+                    value: 0
+                  - key: custom_pay_1
+                    value: 0
+                  - key: custom_pay_2
+                    value: 0
+                  - key: custom_pay_3
+                    value: 0
+                  - key: custom_pay_4
+                    value: 0
+                  - key: custom_pay_5
+                    value: 0
+                  - key: custom_pay_6
+                    value: 0
+                  - key: custom_pay_7
+                    value: 0
+
+  /pos-v2/api/cash-register/status:
+    get:
+      summary: 取得收銀機狀態
+      description: 取得收銀機狀態
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashRegisterStatusResponse'
+              example:
+                status: open
+                opened_at: 02/15/2023 18:38
+
+  /pos-v2/api/cash-register/open:
+    post:
+      summary: 啟動收銀機
+      description: 啟動收銀機
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 成功
+
+  /pos-v2/api/cash-register/close:
+    post:
+      summary: 關閉收銀機
+      description: 關閉收銀機
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+          required: true
+        - in: query
+          name: cash
+          schema:
+            type: integer
+          description: 最終現金金額
+          required: true
+        - in: query
+          name: card_qty
+          schema:
+            type: integer
+          description: 信用卡收單總張數
+          required: true
+        - in: query
+          name: cheque_qty
+          schema:
+            type: integer
+          description: 支票總張數
+          required: true
+        - in: query
+          name: denominations
+          schema:
+            type: object
+            properties:
+              面額: 
+                type: integer
+                description: 面額數量
+          description: 營業地點ID
+          examples:
+            denominations:
+              summary: 面額張數
+              value: {10:5,20:0,50:30,100:3,500:1,1000:1}
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 成功
+
+  /pos-v2/api/cash-register/expense:
+    post:
+      summary: 收銀機支出
+      description: 收銀機支出
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+          required: true
+        - in: query
+          name: date
+          schema:
+            type: string
+          description: 支付時間
+          required: true
+        - in: query
+          name: amount
+          schema:
+            type: number
+          description: 支出金額
+          required: true
+        - in: query
+          name: method
+          schema:
+            type: string
+          description: 付費方式
+          required: true
+        - in: query
+          name: expense_id
+          schema:
+            type: integer
+          description: 支出類別ID
+        - in: query
+          name: ref_no
+          schema:
+            type: string
+          description: 參考號
+        - in: query
+          name: employee_id
+          schema:
+            type: integer
+          description: 相關用戶id
+        - in: query
+          name: tax_id
+          schema:
+            type: integer
+          description: 適用稅ID
+        - in: query
+          name: tax_amount
+          schema:
+            type: number
+          description: 稅項金額
+        - in: query
+          name: additional_notes
+          schema:
+            type: string
+          description: 支出說明
+        - in: query
+          name: payment_notes
+          schema:
+            type: string
+          description: 付費說明
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 成功
 
   /api/employee/shifts:
     get:
