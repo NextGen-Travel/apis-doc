@@ -20,6 +20,8 @@ tags:
     description: 新版 POS 客戶相關 API
   - name: Clock In/Out
     description: 新版 POS 打卡相關 API
+  - name: Cash Register
+    description: 新版 POS 收銀機管理相關 API
 
 components:
   parameters:
@@ -329,9 +331,12 @@ components:
               variation:
                 type: string
                 description: 衍生規格名稱
+              default_sell_price:
+                type: number
+                description: 產品售價 (不含稅) 
               sell_price_inc_tax:
-                type: string
-                description: 售價
+                type: number
+                description: 產品售價 (含稅) 
               sub_sku:
                 type: string
                 description: Sub SKU
@@ -402,9 +407,9 @@ components:
         sub_sku:
           type: string
           description: Sub SKU
-        sell_price_inc_tax:
-          type: string
-          description: 售價(含稅)
+        default_sell_price:
+          type: number
+          description: 產品售價 (不含稅) 
         variation_id:
           type: integer
           description: 產品衍生規格ID
@@ -596,42 +601,72 @@ components:
           items:
             type: object
             properties:
-              variation_id:
-                type: integer
-                description: 產品衍生規格ID
-              product_id:
-                type: number
-                description: 產品ID
-              name:
-                type: string
-                description: 產品名稱
               type:
                 type: string
-                description: 產品類型
-              enable_stock:
+                description: 產品類別
+              unit_price_before_discount:
+                type: integer
+                description: 折扣前單位價錢(不含稅)
+              unit_price:
+                type: integer
+                description: 單位價錢(不含稅)
+              line_discount_type: 
+                type: string
+                description: 折扣類別
+                enum:
+                  - fixed
+                  - percentage
+              line_discount_amount:
                 type: number
-                description: 是否啟用庫存管理
-              product_image:
+                description: 折扣金額(使用者輸入的折扣數字)
+              item_tax:
+                type: number
+                default: 0.00
+              tax_id:
+                oneOf:
+                  - type: integer
+                  - type: string
+                description: 稅ID
+                default: ''
+              sell_line_note:
                 type: string
-                description: 圖片URL
-              variation:
-                type: string
-                description: 衍生規格名稱
-              sell_price_inc_tax:
-                type: string
-                description: 售價
-              sub_sku:
-                type: string
-                description: Sub SKU
-              qty_available:
+                description: 銷售註記
+              lot_no_line_id:
                 type: integer
-                description: 庫存總數量
-              qty:
+                description: 批號及過期日的ID (Table名稱 -> purchase_lines)
+              product_id:
                 type: integer
-                description: 購買數量
-              sell_line_id:
+                description: 產品ID
+              variation_id:
+                type: integer
+                description: 規格ID
+              enable_stock:
+                type: integer
+                description: 是否有啟用庫存管理
+              quantity:
+                type: integer
+                description: 數量
+              product_unit_id:
+                type: integer
+                description: 產品單位ID
+              sub_unit_id:
+                type: integer
+                description: 產品子單位ID
+              base_unit_multiplier:
+                type: integer
+                description: 基本單位倍數
+              unit_price_inc_tax:
+                type: integer
+                description: 含稅單位價錢
+              transaction_sell_line_id:
                 type: integer
                 description: sell line ID
+              default_sell_price:
+                type: number
+                description: 產品售價 (不含稅) 
+              sell_price_inc_tax:
+                type: number
+                description: 產品售價 (含稅) 
               stock:
                 type: array
                 items:
@@ -649,6 +684,18 @@ components:
                     qty_available:
                       type: integer
                       description: 數量
+              product_image:
+                type: string
+                description: 產品圖片
+              variation:
+                type: string
+                description: 規格名稱
+              qty_available: 
+                type: integer
+                description: 庫存總數量
+              name:
+                type: string
+                description: 產品名稱
 
         final_total:
           type: string
@@ -663,6 +710,9 @@ components:
             amount: 
               type: number
               description: 折扣數量
+            price_group: 
+              type: number
+              description: 售價群組
         customer:
           description: 會員資訊
           type: object
@@ -685,6 +735,10 @@ components:
             customer_group_name:
               type: string
               description: 客戶群名稱
+            contact_due:
+              type: number
+              description: 客戶未付金額
+
         transport:
           description: 運輸資訊
           type: object
@@ -771,6 +825,9 @@ components:
           items:
             type: object
             properties:
+              payment_id:
+                type: integer
+                description: payment table id
               amount:
                 type: integer
                 description: 付款金額
@@ -871,8 +928,6 @@ components:
           type: integer
         pay_term_type:
           type: string
-        price_group:
-          type: integer
         types_of_service_id:
           type: integer
           description: 服務類型ID
@@ -1132,25 +1187,305 @@ components:
         final_total:
           type: integer
           description: 總金額
-        discount_type_modal:
-          type: string
-        discount_amount_modal:
-          type: integer
-        order_tax_modal:
-          type: string
-        shipping_details_modal:
-          type: string
-        shipping_address_modal:
-          type: string
-        shipping_charges_modal:
-          type: integer
-        shipping_status_modal:
-          type: integer
-        delivered_to_modal:
-          type: integer
         status:
           type: string
           description: 訂單狀態
+      # Both properties are required
+      required:  
+        - location_id
+        - contact_id
+        - tax_rate_id
+        - change_return
+        - products
+        - final_total
+        - status
+
+
+    UpdateTransaction:
+      type: object
+      properties:
+        location_id: 
+          type: number
+          description: 營業地點ID
+        sub_type:
+          type: string
+        contact_id:
+          type: integer
+          description: 客戶ID
+        search_product:
+          type: string
+        pay_term_number:
+          type: integer
+        pay_term_type:
+          type: string
+        res_table_id:
+          type: integer
+          description: 餐桌ID
+        res_waiter_id:
+          type: integer
+          description: 服務生ID
+        is_recurring:
+          type: integer
+          description: 是否為預定發票
+        transporter_id:
+          type: integer
+          description: 車輛ID
+        driver_id:
+          type: integer
+          description: 司機ID
+        sell_price_tax:
+          type: string
+          enum:
+            - includes
+            - excludes
+          default: includes
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              product_type:
+                type: string
+                description: 產品類別
+              unit_price:
+                type: integer
+                description: 單位價錢(不含稅)
+              line_discount_amount:
+                type: number
+                description: 折扣金額(使用者輸入的折扣數字)
+              line_discount_type: 
+                type: string
+                description: 折扣類別
+                enum:
+                  - fixed
+                  - percentage
+              item_tax:
+                type: number
+                default: 0.00
+              tax_id:
+                oneOf:
+                  - type: integer
+                  - type: string
+                description: 稅ID
+                default: ''
+              sell_line_note:
+                type: string
+                description: 銷售註記
+              transaction_sell_line_id:
+                type: integer
+                description: sell line table ID
+              product_id:
+                type: integer
+                description: 產品ID
+              variation_id:
+                type: integer
+                description: 規格ID
+              enable_stock:
+                type: integer
+                description: 是否有啟用庫存管理
+              quantity:
+                type: integer
+                description: 數量
+              product_unit_id:
+                type: integer
+                description: 產品單位ID
+              sub_unit_id:
+                type: integer
+                description: 產品子單位ID
+              base_unit_multiplier:
+                type: integer
+                description: 基本單位倍數
+              unit_price_inc_tax:
+                type: integer
+                description: 含稅單位價錢
+              lot_no_line_id:
+                type: integer
+                description: 批號及過期日的ID (Table名稱 -> purchase_lines)
+            required:
+              - product_type
+              - unit_price
+              - item_tax
+              - tax_id
+              - product_id
+              - variation_id
+              - enable_stock
+              - unit_price_inc_tax
+              - quantity
+        discount_type:
+          type: string
+          enum:
+            - "fixed"
+            - "percentage"
+          description: 折扣類型
+        discount_amount:
+          type: integer
+          description: 折扣金額
+        rp_redeemed:
+          type: integer
+          description: 已兌換積分
+        rp_redeemed_amount:
+          type: integer
+          description: 已兌換積分轉換後的金額
+        tax_rate_id:
+          oneOf:
+            - type: integer
+            - type: string
+          default: ''
+        tax_calculation_amount:
+          type: integer
+        shipping_details:
+          type: string
+          description: 運輸詳情
+        shipping_address:
+          type: string
+          description: 送貨地址
+        shipping_status:
+          type: string
+          description: 發貨狀態
+        delivered_to:
+          type: string
+          description: 已送達至
+        shipping_charges:
+          type: integer
+          description: 運費
+        advance_balance:
+          type: integer
+        payment:
+          description: 付款資訊
+          type: array
+          items:
+            type: object
+            required:
+              - amount
+              - method
+            properties:
+              payment_id:
+                type: integer
+                description: Payment table id
+              amount:
+                type: integer
+                description: 交易總金額
+              method:
+                type: string
+                description: 付款方式
+              account_id:
+                type: integer
+              card_number:
+                type: string
+              card_holder_name:
+                type: string
+              card_transaction_number:
+                type: string
+              card_type:
+                type: string
+              card_month:
+                type: integer
+              card_year:
+                type: integer
+              card_security:
+                type: string
+              cheque_number:
+                type: string
+              bank_account_number:
+                type: string
+              transaction_no_1:
+                type: string
+              transaction_no_2:
+                type: string
+              transaction_no_3:
+                type: string
+              transaction_no_4:
+                type: string
+              transaction_no_5:
+                type: string
+              transaction_no_6:
+                type: string
+              transaction_no_7:
+                type: string
+              note:
+                type: string
+                description: 付款註記
+        sale_note:
+          type: string
+          description: 銷售備註
+        staff_note:
+          type: string
+          description: 員工備註
+        change_return:
+          type: integer
+          description: 退費金額
+          default: 0.00
+        additional_notes:
+          type: string
+          description: 額外備註
+        is_suspend:
+          type: number
+          description: 是否為暫存訂單
+        recur_interval:
+          type: integer
+          description: 預定發票間隔
+        recur_interval_type:
+          type: string
+          enum:
+            - "days"
+            - "months"
+            - "years"
+          description: 預定發票間隔類型
+        recur_repetitions:
+          type: integer
+          description: 預定發票重複次數
+        subscription_repeat_on:
+          type: string
+          description: 預定發票重複日期 (當預定發票間隔類型為 months 時才需要)
+        size:
+          type: string
+        is_enabled_stock:
+          type: number
+          description: 是否有啟用庫存
+        is_credit_sale:
+          type: number
+          description: 是否為借記銷售
+        final_total:
+          type: integer
+          description: 總金額
+        status:
+          type: string
+          description: 訂單狀態
+        types_of_service_id:
+          type: integer
+          description: 服務類型ID
+        types_of_service_price_group:
+          type: integer
+        packing_charge:
+          type: integer
+          description: 包裝支出
+        packing_charge_type:
+          type: string
+          enum:
+            - "fixed"
+            - "percentage"
+          description: 包裝支出的類型(固定 or 百分比)
+        service_custom_field_1:
+          type: string
+          description: 服務自定欄１
+        service_custom_field_2:
+          type: string
+          description: 服務自定欄2
+        service_custom_field_3:
+          type: string
+          description: 服務自定欄3
+        service_custom_field_4:
+          type: string
+          description: 服務自定欄4
+        service_custom_field_5:
+          type: string
+          description: 服務自定欄5
+        service_custom_field_6:
+          type: string
+          description: 服務自定欄6
+        invoice_scheme_id:
+          type: integer
+          description: 發票計畫ID
       # Both properties are required
       required:  
         - location_id
@@ -1190,6 +1525,9 @@ components:
         enable_rp:
           type: number
           description: 是否啟用積分(1=啟用, 0=關閉)
+        enable_inline_tax:
+          type: integer
+          description: 是否啟用內聯稅於採購及銷售(1=啟用, 0=關閉)
         rp_name:
           type: string
           description: 積分顯示名稱
@@ -1433,9 +1771,6 @@ components:
             total:
               type: number
 
-
-
-
     PaymentTypeResponse:
       type: object
       properties:
@@ -1491,6 +1826,64 @@ components:
             total:
               type: integer
               description: 總筆數
+
+    PriceGroupsResponse:
+      type: object
+      properties:
+        data:  
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: 售價群組名稱
+              value:
+                type: number
+                description: 下拉選單的value
+        links:
+          description: LazyLoading資料
+          type: object
+          properties:
+            first:
+              type: string
+              description: 最初頁網址
+            last:
+              type: string
+              description: 最末頁網址
+            prev:
+              type: string
+              description: 上一頁網址
+            next:
+              type: string
+              description: 下一頁網址
+        meta:
+          description: 分頁資料
+          type: object
+          properties:
+            current_page:
+              type: integer
+              description: 當前頁碼
+            last_page:
+              type: integer
+              description: 最末頁碼
+            path:
+              type: string
+              description: API網址
+            per_page:
+              type: integer
+              description: 每頁筆數
+            from:
+              type: integer
+              description: 本次資料開始筆數
+            to:
+              type: integer
+              description: 本次資料結束筆數
+            total:
+              type: integer
+              description: 總筆數
+
+
 
     OrdersResponse:
       type: object
@@ -1720,6 +2113,80 @@ components:
               type: integer
               description: 總計
 
+    CashRegisterDetailResponse:
+      type: object
+      properties:
+        open_time:
+          type: string
+          description: 訂單ID
+        close_time:
+          type: string
+          description: 訂單編號
+        cash_in_hand:
+          type: number
+          description: 開機現金結餘
+        total_sell:
+          type: number
+          description: 總銷售金額
+        total_expense:
+          type: number
+          description: 總出支金額
+        total_refund:
+          type: number
+          description: 總退回金額
+        total_unpaid:
+          type: number
+          description: 總未付金額
+        sell:
+          type: array
+          description: 銷售
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 付費方式
+              amount:
+                type: string
+                description: 金額
+        expense:
+          type: array
+          description: 出支
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 付費方式
+              amount:
+                type: string
+                description: 金額
+        refund:
+          type: array
+          description: 退回
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 付費方式
+              amount:
+                type: string
+                description: 金額
+
+    CashRegisterStatusResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: 狀態
+          enum:
+          - open
+          - close
+        opened_at:
+          type: string
+          description: 開機時間
+
     EmployeeDutyResponse:
       type: object
       properties:
@@ -1857,6 +2324,11 @@ paths:
             type: number
           description: 分店ID
           required: true
+        - in: query
+          name: price_group_id
+          schema:
+            type: number
+          description: 售價群組ID
       responses:
         '200':
           description: 成功
@@ -1949,6 +2421,7 @@ paths:
                 employee_id: 1
                 employee_name: "Laplace chen"
                 enable_rp: 1
+                enable_inline_tax: 0
                 rp_name: "會員積分"
                 amount_for_unit_rp: "10.0000"
                 min_order_total_for_rp: "1.0000"
@@ -2158,23 +2631,25 @@ paths:
                 staff_note: ""
                 payment_status: "due"
                 products: 
-                  variation_id: 119
+                  product_type: "single"
+                  unit_price: 125
+                  line_discount_type: "fixed"
+                  line_discount_amount: 0
+                  item_tax: 0
+                  tax_id: null
+                  sell_line_note: ""
+                  transaction_sell_line_id: 279
                   product_id: 70
-                  name: "DUMMY"
-                  type: "single"
+                  variation_id: 119
                   enable_stock: 1
-                  product_image: "http://localhost:8000/project/public/img/default.png"
-                  variation: null
+                  quantity: 3
+                  product_unit_id: 1
+                  base_unit_multiplier: 0
+                  unit_price_inc_tax: 125
+                  sub_unit_id: null
+                  lot_no_line_id: 124
+                  default_sell_price: 125
                   sell_price_inc_tax: 125
-                  sub_sku: "0070"
-                  qty_available: 2156
-                  qty: 1
-                  sell_line_id: 270
-                  stock:
-                    - purchase_line_id: 70
-                      lot_number: 
-                      exp_date: 
-                      qty_available: 2232
                 final_total: 125
                 discount: 
                   type: "percentage"
@@ -2399,16 +2874,30 @@ paths:
                   created_at: 2022/12/16 12:15:00
                 success: 1
                 msg: Contact added successfully
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: integer
+                    description: 0=失敗, 1=成功
+                  msg:
+                    type: string
+                    description: 失敗訊息
+                  receipt:
+                    type: string
+                    description: 發票HTML
 
-  /pos:
+  /pos-v2/api/pos:
     post:
       summary: 建立訂單
       description: | 
         建立POS訂單.
 
         當is_suspend=1則會儲存為暫存訂單.
-
-        Note: POS原生API
       tags:
         - Sale
       requestBody:
@@ -2527,6 +3016,156 @@ paths:
                 success: 1
                 msg: Sale added successfully
                 receipt: null
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: integer
+                    description: 0=失敗, 1=成功
+                  msg:
+                    type: string
+                    description: 失敗訊息
+                  receipt:
+                    type: string
+                    description: 發票HTML
+              example:
+                success: 0
+                msg: "系統暫未能運作，請稍後再試"
+                receipt: ""
+              
+
+
+  /pos-v2/api/pos/{transaction_id}:
+    put:
+      summary: 更新訂單
+      description: | 
+        更新POS訂單.
+
+        當is_suspend=1則會儲存為暫存訂單.
+      parameters:
+        - in: path
+          name: transaction_id
+          schema:
+            type: number
+            default: true
+          description: 訂單ID
+          required: true
+      tags:
+        - Sale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTransaction'
+            example:
+              location_id: 1
+              sub_type: 
+              contact_id: 15
+              search_product: 
+              pay_term_number: 
+              pay_term_type: 
+              res_table_id: 
+              res_waiter_id: 
+              transporter_id: 
+              driver_id: 
+              sell_price_tax: includes
+              products:
+                - product_type: single
+                  unit_price: 250.00
+                  line_discount_type: fixed
+                  line_discount_amount: 0.00
+                  item_tax: 0.00
+                  tax_id: 
+                  sell_line_note: 
+                  lot_no_line_id: 132
+                  product_id: 103
+                  variation_id: 155
+                  enable_stock: 1
+                  quantity: 2.00
+                  product_unit_id: 4
+                  sub_unit_id: 173
+                  base_unit_multiplier: 10
+                  unit_price_inc_tax: 250.00
+              discount_type: percentage
+              discount_amount:  0.00 
+              rp_redeemed: 0
+              rp_redeemed_amount: 0
+              tax_rate_id:   
+              tax_calculation_amount:  0.00 
+              shipping_details: 
+              shipping_address: 
+              shipping_status: 
+              delivered_to: 
+              shipping_charges: 0.00 
+              advance_balance: 0.0000
+              payment:
+                - amount: 500.00
+                  method: cash
+                  account_id: 
+                  card_number: 
+                  card_holder_name: 
+                  card_transaction_number: 
+                  card_type: credit
+                  card_month: 
+                  card_year: 
+                  card_security: 
+                  cheque_number: 
+                  bank_account_number: 
+                  transaction_no_1: 
+                  transaction_no_2: 
+                  transaction_no_3: 
+                  transaction_no_4: 
+                  transaction_no_5: 
+                  transaction_no_6: 
+                  transaction_no_7: 
+                  note: 
+              sale_note: zxcvbnm,
+              staff_note: 
+              change_return: 0.00
+              additional_notes: zxcvbnm,
+              is_suspend: 0
+              recur_interval: 1
+              recur_interval_type: days
+              recur_repetitions: 
+              subscription_repeat_on: 
+              size: all
+              is_enabled_stock: 
+              is_credit_sale: 0
+              final_total: 500.00
+              status: final
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateTransaction'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 銷售更新成功
+                receipt: 
+                  is_enabled: true
+                  print_type: "browser"
+                  html_content: "<!-- business information here -->"
+                  printer_config: []
+                  data: []
+                  print_title: "0261"
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              example:
+                success: 0
+                msg: "系統暫未能運作，請稍後再試"
+                receipt: ""
+                  
+                
 
   /pos-v2/api/transport-status:
     get:
@@ -2725,6 +3364,53 @@ paths:
                   to: 10
                   total: 13
               
+  /pos-v2/api/price-groups:
+    get:
+      summary: 取得售價群組清單
+      description: 取得售價群組清單
+      tags:
+        - Sale
+      parameters:
+        - in: query
+          name: per_page
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceGroupsResponse'
+              example:
+                data:
+                  - value: 0
+                    name: 預設售價
+                  - value: 1
+                    name: Group 1
+                  - value: 2
+                    name: Group 2
+
+                links:
+                  first: http://localhost:8000/project/public/pos-v2/api/price-groups?page=1
+                  last: http://localhost:8000/project/public/pos-v2/api/price-groups?page=1
+                  prev: ""
+                  next: ""
+                meta:
+                  current_page: 1
+                  from: 1
+                  last_page: 1
+                  path: http://localhost:8000/project/public/pos-v2/api/price-groups
+                  per_page: 10
+                  to: 3
+                  total: 3
+
 
   /pos-v2/api/warehouse/stocks:
     get:
@@ -3911,6 +4597,16 @@ paths:
           schema:
             type: number
           description: 折舊數量
+        - in: query
+          name: method
+          schema:
+            type: string
+          description: 付費方式
+        - in: query
+          name: amount
+          schema:
+            type: number
+          description: 退費金額（折舊後
       responses:
         '200':
           description: 成功
@@ -3919,6 +4615,295 @@ paths:
               example:
                   success: 1
                   msg: 成功
+
+  /pos-v2/api/cash-register:
+    get:
+      summary: 取得收銀機詳細內容
+      description: 取得收銀機詳細內容
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashRegisterDetailResponse'
+              example:
+                open_time: 02/15/2023 18:38
+                close_time: 02/17/2023 09:29
+                cash_in_hand: 0
+                total_sell: 200
+                total_expense: 0
+                total_refund: 0
+                total_unpaid: 100
+                sell:
+                  - key: cash_in_hand
+                    value: 0
+                  - key: cash
+                    value: 200
+                  - key: cheque
+                    value: 0
+                  - key: card
+                    value: 0
+                  - key: bank_transfer
+                    value: 0
+                  - key: advance
+                    value: 0
+                  - key: other
+                    value: 0
+                  - key: custom_pay_1
+                    value: 0
+                  - key: custom_pay_2
+                    value: 0
+                  - key: custom_pay_3
+                    value: 0
+                  - key: custom_pay_4
+                    value: 0
+                  - key: custom_pay_5
+                    value: 0
+                  - key: custom_pay_6
+                    value: 0
+                  - key: custom_pay_7
+                    value: 0
+                expense:
+                  - key: cash_in_hand
+                    value: 0
+                  - key: cash
+                    value: 200
+                  - key: cheque
+                    value: 0
+                  - key: card
+                    value: 0
+                  - key: bank_transfer
+                    value: 0
+                  - key: advance
+                    value: 0
+                  - key: other
+                    value: 0
+                  - key: custom_pay_1
+                    value: 0
+                  - key: custom_pay_2
+                    value: 0
+                  - key: custom_pay_3
+                    value: 0
+                  - key: custom_pay_4
+                    value: 0
+                  - key: custom_pay_5
+                    value: 0
+                  - key: custom_pay_6
+                    value: 0
+                  - key: custom_pay_7
+                    value: 0
+                refund:
+                  - key: cash_in_hand
+                    value: 0
+                  - key: cash
+                    value: 200
+                  - key: cheque
+                    value: 0
+                  - key: card
+                    value: 0
+                  - key: bank_transfer
+                    value: 0
+                  - key: advance
+                    value: 0
+                  - key: other
+                    value: 0
+                  - key: custom_pay_1
+                    value: 0
+                  - key: custom_pay_2
+                    value: 0
+                  - key: custom_pay_3
+                    value: 0
+                  - key: custom_pay_4
+                    value: 0
+                  - key: custom_pay_5
+                    value: 0
+                  - key: custom_pay_6
+                    value: 0
+                  - key: custom_pay_7
+                    value: 0
+
+  /pos-v2/api/cash-register/status:
+    get:
+      summary: 取得收銀機狀態
+      description: 取得收銀機狀態
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CashRegisterStatusResponse'
+              example:
+                status: open
+                opened_at: 02/15/2023 18:38
+
+  /pos-v2/api/cash-register/open:
+    post:
+      summary: 啟動收銀機
+      description: 啟動收銀機
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 成功
+
+  /pos-v2/api/cash-register/close:
+    post:
+      summary: 關閉收銀機
+      description: 關閉收銀機
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+          required: true
+        - in: query
+          name: cash
+          schema:
+            type: integer
+          description: 最終現金金額
+          required: true
+        - in: query
+          name: card_qty
+          schema:
+            type: integer
+          description: 信用卡收單總張數
+          required: true
+        - in: query
+          name: cheque_qty
+          schema:
+            type: integer
+          description: 支票總張數
+          required: true
+        - in: query
+          name: denominations
+          schema:
+            type: object
+            properties:
+              面額: 
+                type: integer
+                description: 面額數量
+          description: 營業地點ID
+          examples:
+            denominations:
+              summary: 面額張數
+              value: {"10":5,"20":0,"50":30,"100":3,"500":1,"1000":1}
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 成功
+
+  /pos-v2/api/cash-register/expense:
+    post:
+      summary: 收銀機支出
+      description: 收銀機支出
+      tags:
+        - Cash Register
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
+          required: true
+        - in: query
+          name: date
+          schema:
+            type: string
+          description: 支付時間
+          required: true
+        - in: query
+          name: amount
+          schema:
+            type: number
+          description: 支出金額
+          required: true
+        - in: query
+          name: method
+          schema:
+            type: string
+          description: 付費方式
+          required: true
+        - in: query
+          name: expense_id
+          schema:
+            type: integer
+          description: 支出類別ID
+        - in: query
+          name: ref_no
+          schema:
+            type: string
+          description: 參考號
+        - in: query
+          name: employee_id
+          schema:
+            type: integer
+          description: 相關用戶id
+        - in: query
+          name: tax_id
+          schema:
+            type: integer
+          description: 適用稅ID
+        - in: query
+          name: tax_amount
+          schema:
+            type: number
+          description: 稅項金額
+        - in: query
+          name: additional_notes
+          schema:
+            type: string
+          description: 支出說明
+        - in: query
+          name: payment_notes
+          schema:
+            type: string
+          description: 付費說明
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 成功
 
   /pos-v2/api/employee/shifts:
     get:
