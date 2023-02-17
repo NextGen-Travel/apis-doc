@@ -3920,7 +3920,7 @@ paths:
                   success: 1
                   msg: 成功
 
-  /api/employee/shifts:
+  /pos-v2/api/employee/shifts:
     get:
       summary: 班次類型
       tags:
@@ -3951,7 +3951,7 @@ paths:
                   - title: 假日班
                     value: 3
 
-  /api/employee/attendances:
+  /pos-v2/api/employee/attendances:
     get:
       summary: 出勤紀錄
       description: 取得產品清單
@@ -4092,7 +4092,7 @@ paths:
                     shift_name: 平日班
                     work_duration : 8
 
-  /api/employee/duties:
+  /pos-v2/api/employee/duties:
     get:
       summary: 本日值班
       description: 本日值班
@@ -4173,7 +4173,7 @@ paths:
                       clock_in_note: null
                       clock_out_note: null
 
-  /api/warehouse/duty/clockInOrOut:
+  /pos-v2/api/warehouse/duty/clockInOrOut:
     post:
       summary: 打卡上下班
       description: 標示『採購/庫存轉移』已接受，並執行商品入庫
