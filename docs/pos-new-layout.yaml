@@ -2134,6 +2134,9 @@ components:
         total_refund:
           type: number
           description: 總退回金額
+        total_unpaid:
+          type: number
+          description: 總未付金額
         sell:
           type: array
           description: 銷售
@@ -4640,6 +4643,7 @@ paths:
                 total_sell: 200
                 total_expense: 0
                 total_refund: 0
+                total_unpaid: 100
                 sell:
                   - key: cash_in_hand
                     value: 0
