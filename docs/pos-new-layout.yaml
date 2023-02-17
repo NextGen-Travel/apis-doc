@@ -3146,6 +3146,31 @@ paths:
           description: 成功
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: integer
+                    description: 0=失敗, 1=成功
+                  msg:
+                    type: string
+                    description: 成功訊息
+                  receipt:
+                    type: object
+                    properties:
+                      is_enabled:
+                        type: integer
+                      print_type:
+                        type: string
+                      html_content:
+                        type: string
+                      printer_config:
+                        type: array
+                      data:
+                        type: array
+                      print_title:
+                        type: string
+                    description: 發票HTML
               example:
                 success: 1
                 msg: 銷售更新成功
@@ -3160,12 +3185,23 @@ paths:
           description: 失敗
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: integer
+                    description: 0=失敗, 1=成功
+                  msg:
+                    type: string
+                    description: 失敗訊息
+                  receipt:
+                    type: string
+                    description: 發票HTML
               example:
                 success: 0
                 msg: "系統暫未能運作，請稍後再試"
                 receipt: ""
                   
-                
 
   /pos-v2/api/transport-status:
     get:
