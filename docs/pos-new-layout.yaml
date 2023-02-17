@@ -4746,7 +4746,7 @@ paths:
           examples:
             denominations:
               summary: 面額張數
-              value: {10:5,20:0,50:30,100:3,500:1,1000:1}
+              value: {"10":5,"20":0,"50":30,"100":3,"500":1,"1000":1}
       responses:
         '200':
           description: 成功
