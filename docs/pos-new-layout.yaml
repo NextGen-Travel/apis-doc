@@ -601,9 +601,12 @@ components:
           items:
             type: object
             properties:
-              product_type:
+              type:
                 type: string
                 description: 產品類別
+              unit_price_before_discount:
+                type: integer
+                description: 折扣前單位價錢(不含稅)
               unit_price:
                 type: integer
                 description: 單位價錢(不含稅)
@@ -681,6 +684,18 @@ components:
                     qty_available:
                       type: integer
                       description: 數量
+              product_image:
+                type: string
+                description: 產品圖片
+              variation:
+                type: string
+                description: 規格名稱
+              qty_available: 
+                type: integer
+                description: 庫存總數量
+              name:
+                type: string
+                description: 產品名稱
 
         final_total:
           type: string
