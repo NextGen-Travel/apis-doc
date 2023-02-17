@@ -2856,6 +2856,22 @@ paths:
                   created_at: 2022/12/16 12:15:00
                 success: 1
                 msg: Contact added successfully
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: integer
+                    description: 0=失敗, 1=成功
+                  msg:
+                    type: string
+                    description: 失敗訊息
+                  receipt:
+                    type: string
+                    description: 發票HTML
 
   /pos-v2/api/pos:
     post:
@@ -2986,6 +3002,18 @@ paths:
           description: 失敗
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: integer
+                    description: 0=失敗, 1=成功
+                  msg:
+                    type: string
+                    description: 失敗訊息
+                  receipt:
+                    type: string
+                    description: 發票HTML
               example:
                 success: 0
                 msg: "系統暫未能運作，請稍後再試"
