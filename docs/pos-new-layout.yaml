@@ -2857,15 +2857,13 @@ paths:
                 success: 1
                 msg: Contact added successfully
 
-  /pos:
+  /pos-v2/api/pos:
     post:
       summary: 建立訂單
       description: | 
         建立POS訂單.
 
         當is_suspend=1則會儲存為暫存訂單.
-
-        Note: POS原生API
       tags:
         - Sale
       requestBody:
@@ -2984,17 +2982,24 @@ paths:
                 success: 1
                 msg: Sale added successfully
                 receipt: null
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              example:
+                success: 0
+                msg: "系統暫未能運作，請稍後再試"
+                receipt: ""
+              
 
 
-  /pos/{transaction_id}:
+  /pos-v2/api/pos/{transaction_id}:
     put:
       summary: 更新訂單
       description: | 
         更新POS訂單.
 
         當is_suspend=1則會儲存為暫存訂單.
-
-        Note: POS原生API
       parameters:
         - in: path
           name: transaction_id
@@ -3105,6 +3110,14 @@ paths:
                   printer_config: []
                   data: []
                   print_title: "0261"
+        '404':
+          description: 失敗
+          content:
+            application/json:
+              example:
+                success: 0
+                msg: "系統暫未能運作，請稍後再試"
+                receipt: ""
                   
                 
 
