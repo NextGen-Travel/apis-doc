@@ -1502,6 +1502,70 @@ components:
         - products
         - final_total
         - status
+
+    AddNewTransactionPayment:
+      type: object
+      properties:
+        location_id:
+          type: number
+          description: 營業地點ID
+        payment:
+          description: 付款資訊
+          type: array
+          items:
+            type: object
+            required:
+              - amount
+              - method
+            properties:
+              amount:
+                type: number
+                description: 交易總金額
+              method:
+                type: string
+                description: 付款方式
+              card_number:
+                type: string
+                description: 信用卡號碼
+              card_holder_name:
+                type: string
+                description: 信用卡持有人
+              card_transaction_number:
+                type: string
+                description: 信用卡交易號碼
+              card_type:
+                type: string
+                description: 信用卡種類
+                enum:
+                - credit
+                - debit
+                - visa
+                - master
+              card_month:
+                type: integer
+                description: 月
+              card_year:
+                type: integer
+                description: 年
+              card_security:
+                type: string
+                description: 安全碼
+              cheque_number:
+                type: string
+                description: 支票號碼
+              bank_account_number:
+                type: string
+                description: 銀行賬號
+              transaction_no:
+                type: string
+                description: 銷售備註
+              note:
+                type: string
+                description: 銷售備註
+      required:
+        - location_id
+        - payment
+
     TransactionsResponse:
       type: object
       properties:
@@ -4656,6 +4720,95 @@ paths:
           schema:
             type: number
           description: 退費金額（折舊後
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                  success: 1
+                  msg: 成功
+
+  /pos-v2/api/orders/add-payment/{id}:
+    post:
+      summary: 訂單詳細資料
+      description: 取得訂單詳細資料
+      tags:
+        - Order
+      parameters:
+        - in: path
+          name: id
+          description: order id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddNewTransactionPayment'
+            example:
+              location_id: 1
+              payment:
+              - method: cash
+                amount: 10
+                note: This is note
+              - method: other
+                amount: 10
+                note: This is note
+              - method: advance
+                amount: 10
+                note: This is note
+              - method: cheque
+                amount: 10
+                cheque_number: ch1234567
+                note: This is note
+              - method: bank_transfer
+                amount: 10
+                bank_account_number: "1021023568741236595"
+                note: This is note
+              - method: card
+                amount: 10
+                card_number: "4485174148740953"
+                card_holder_name: "User Name"
+                card_transaction_number: "s1564797"
+                card_type: visa
+                card_month: 06
+                card_year: 2027
+                card_security: 975
+                note: This is note
+              - method: custom_pay_1
+                amount: 10
+                transaction_no: XXXXXXXX
+                note: This is note
+              - method: custom_pay_2
+                amount: 10
+                transaction_no: XXXXXXXX
+                note: This is note
+              - method: custom_pay_3
+                amount: 10
+                transaction_no: XXXXXXXX
+                note: This is note
+              - method: custom_pay_4
+                amount: 10
+                transaction_no: XXXXXXXX
+                note: This is note
+              - method: custom_pay_5
+                amount: 10
+                transaction_no: XXXXXXXX
+                note: This is note
+              - method: custom_pay_6
+                amount: 10
+                transaction_no: XXXXXXXX
+                note: This is note
+              - method: custom_pay_7
+                amount: 10
+                transaction_no: XXXXXXXX
+                note: This is note
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddNewTransactionPayment'
       responses:
         '200':
           description: 成功
