@@ -1558,6 +1558,18 @@ components:
         rp_expiry_type:
           type: string
           description: 獎勵積分有效期限單位(年/月)
+        currency_symbol:
+          type: string
+          description: 貨幣符號
+        currency_symbol_placement:
+          type: string
+          description: 貨幣符號位置
+          enum:
+          - before
+          - after
+        date_format:
+          type: string
+          description: 全站日期格式
 
     LocationListResponse:
       type: object
@@ -2432,6 +2444,9 @@ paths:
                 max_redeem_point: null
                 rp_expiry_period: null
                 rp_expiry_type: "year"
+                currency_symbol: $
+                currency_symbol_placement: before
+                date_format: m/d/Y H:i
 
   /pos-v2/api/business-locations:
     get:
