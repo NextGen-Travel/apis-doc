@@ -1570,6 +1570,11 @@ components:
         date_format:
           type: string
           description: 全站日期格式
+        denominations:
+          type: array
+          description: 貨幣面額
+          items:
+            type: integer
 
     LocationListResponse:
       type: object
@@ -2447,6 +2452,7 @@ paths:
                 currency_symbol: $
                 currency_symbol_placement: before
                 date_format: m/d/Y H:i
+                denominations: [10, 20, 50, 100, 500, 1000]
 
   /pos-v2/api/business-locations:
     get:
