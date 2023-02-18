@@ -4731,8 +4731,8 @@ paths:
 
   /pos-v2/api/orders/add-payment/{id}:
     post:
-      summary: 訂單詳細資料
-      description: 取得訂單詳細資料
+      summary: 繼續結帳
+      description: 繼續結帳
       tags:
         - Order
       parameters:
