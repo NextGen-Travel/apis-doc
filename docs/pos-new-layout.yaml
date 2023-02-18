@@ -861,10 +861,17 @@ components:
     CustomTagsResponse:
       type: object
       properties:
-        data:  
+        data:
           type: array
           items:
-            type: string
+            type: object
+            properties:
+              value:
+                type: number
+                description: id
+              name:
+                type: string
+                description: 名稱
         links:
           description: LazyLoading資料
           type: object
@@ -2400,11 +2407,10 @@ paths:
                 $ref: '#/components/schemas/CustomTagsResponse'
               example:
                 data:
-                  - 自訂標籤1
-                  - 自訂標籤2
-                  - 自訂標籤3
-                  - 自訂標籤4
-                  - 自訂標籤5
+                  - value: 1
+                    name: 自訂標籤1
+                  - value: 2
+                    name: 自訂標籤2
                 links:
                   first: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/custom-tags?page=1
                   last: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/custom-tags?page=4
