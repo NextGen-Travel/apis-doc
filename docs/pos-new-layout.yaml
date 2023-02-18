@@ -3171,21 +3171,7 @@ paths:
                     type: string
                     description: 成功訊息
                   receipt:
-                    type: object
-                    properties:
-                      is_enabled:
-                        type: integer
-                      print_type:
-                        type: string
-                      html_content:
-                        type: string
-                      printer_config:
-                        type: array
-                      data:
-                        type: array
-                      print_title:
-                        type: string
-                    description: 發票HTML
+                    type: string
               example:
                 success: 1
                 msg: 銷售更新成功
