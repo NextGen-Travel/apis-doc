@@ -710,7 +710,7 @@ components:
             amount: 
               type: number
               description: 折扣數量
-            price_group: 
+            price_group_id: 
               type: number
               description: 售價群組
         customer:
@@ -2749,6 +2749,7 @@ paths:
                 discount: 
                   type: "percentage"
                   amount: 0
+                  price_group_id: 0
                 customer:
                   id: 15
                   name: "Mr Oscar"
