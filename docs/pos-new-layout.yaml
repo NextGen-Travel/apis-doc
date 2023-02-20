@@ -64,6 +64,9 @@ components:
               contact_due:
                 type: number
                 description: 客戶未付金額
+              status:
+                type: boolean
+                description: 狀態是否啟用
         links:
           type: object
           properties:
@@ -1511,6 +1514,12 @@ components:
         location_id:
           type: number
           description: 營業地點ID
+        sale_note:
+          type: string
+          description: 銷售註記
+        staff_note:
+          type: string
+          description: 員工註記
         payment:
           description: 付款資訊
           type: array
@@ -1567,6 +1576,15 @@ components:
       required:
         - location_id
         - payment
+
+    SetLocationAccess:
+      type: object
+      properties:
+        location_id:
+          type: number
+          description: 營業地點ID
+      required:
+        - location_id
 
     TransactionsResponse:
       type: object
@@ -2628,7 +2646,7 @@ paths:
                   per_page: 10
                   to: 10
                   total: 13
-              
+
   /pos-v2/api/price-groups:
     get:
       summary: 取得售價群組清單
@@ -2675,6 +2693,29 @@ paths:
                   per_page: 10
                   to: 3
                   total: 3
+
+  /pos-v2/api/location-access:
+    post:
+      summary: 設定使用者目前選定的location
+      description: 設定使用者目前選定的location
+      tags:
+        - Common
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetLocationAccess'
+            example:
+              location_id: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              example:
+                success: 1
+                msg: 成功
 
 # Sale
   /pos-v2/api/products:
@@ -3711,24 +3752,21 @@ paths:
               $ref: '#/components/schemas/AddNewTransactionPayment'
             example:
               location_id: 1
+              sale_note: This is note
+              staff_note: This is note
               payment:
               - method: cash
                 amount: 10
-                note: This is note
               - method: other
                 amount: 10
-                note: This is note
               - method: advance
                 amount: 10
-                note: This is note
               - method: cheque
                 amount: 10
                 cheque_number: ch1234567
-                note: This is note
               - method: bank_transfer
                 amount: 10
                 bank_account_number: "1021023568741236595"
-                note: This is note
               - method: card
                 amount: 10
                 card_number: "4485174148740953"
@@ -3738,35 +3776,27 @@ paths:
                 card_month: 06
                 card_year: 2027
                 card_security: 975
-                note: This is note
               - method: custom_pay_1
                 amount: 10
                 transaction_no: XXXXXXXX
-                note: This is note
               - method: custom_pay_2
                 amount: 10
                 transaction_no: XXXXXXXX
-                note: This is note
               - method: custom_pay_3
                 amount: 10
                 transaction_no: XXXXXXXX
-                note: This is note
               - method: custom_pay_4
                 amount: 10
                 transaction_no: XXXXXXXX
-                note: This is note
               - method: custom_pay_5
                 amount: 10
                 transaction_no: XXXXXXXX
-                note: This is note
               - method: custom_pay_6
                 amount: 10
                 transaction_no: XXXXXXXX
-                note: This is note
               - method: custom_pay_7
                 amount: 10
                 transaction_no: XXXXXXXX
-                note: This is note
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/AddNewTransactionPayment'
@@ -4682,6 +4712,29 @@ paths:
             type: string
           description: keyword
         - in: query
+          name: customer_group_id
+          schema:
+            type: integer
+            nullable: true
+          description: 客戶群組id
+        - in: query
+          name: show_disabled
+          schema:
+            type: integer
+          description: 是否為顯示停用
+        - in: query
+          name: sort_column
+          schema:
+            type: string
+            enum: ['', status, name, customer_group]
+          description: 排序欄位
+        - in: query
+          name: sort_direction
+          schema:
+            type: string
+            enum: [asc, desc]
+          description: 排序方式
+        - in: query
           name: per_page
           schema:
             type: integer
@@ -4707,6 +4760,7 @@ paths:
                     total_rp: 0
                     customer_group_name: null
                     contact_due: 0
+                    status: true
                   - id: 2
                     name: "Miss jojo Lin"
                     member_id: "CO0002"
@@ -4714,6 +4768,7 @@ paths:
                     total_rp: 0
                     customer_group_name: null
                     contact_due: 100
+                    status: true
                   - id: 6
                     name: "魏如萱"
                     member_id: "CO0006"
@@ -4721,6 +4776,7 @@ paths:
                     total_rp: 0
                     customer_group_name: null
                     contact_due: 1200
+                    status: true
                 links:
                   first: http://localhost:8000/project/public/pos-v2/api/contacts?page=1
                   last: http://localhost:8000/project/public/pos-v2/api/contacts?page=2
