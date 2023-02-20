@@ -4715,7 +4715,6 @@ paths:
           name: customer_group_id
           schema:
             type: integer
-            nullable: true
           description: 客戶群組id
         - in: query
           name: show_disabled
