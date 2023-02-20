@@ -2237,8 +2237,8 @@ components:
               key:
                 type: string
                 description: 付費方式
-              amount:
-                type: string
+              value:
+                type: number
                 description: 金額
         expense:
           type: array
@@ -2249,7 +2249,7 @@ components:
               key:
                 type: string
                 description: 付費方式
-              amount:
+              value:
                 type: string
                 description: 金額
         refund:
@@ -2261,7 +2261,7 @@ components:
               key:
                 type: string
                 description: 付費方式
-              amount:
+              value:
                 type: string
                 description: 金額
 
@@ -4443,7 +4443,7 @@ paths:
           name: sort_column
           schema:
             type: string
-            enum: [order_num, contact_name, creator_name]
+            enum: ['', order_num, contact_name, creator_name]
           description: 排序欄位
         - in: query
           name: sort_direction
@@ -5019,7 +5019,7 @@ paths:
           schema:
             type: object
             properties:
-              面額: 
+              string: 
                 type: integer
                 description: 面額數量
           description: 營業地點ID
