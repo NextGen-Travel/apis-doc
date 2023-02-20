@@ -123,6 +123,9 @@ components:
             contact_name:
               type: string
               description: 病人姓名
+            language:
+              type: string
+              description: 慣用語
             total_amount:
               type: string
               description: 總金額
@@ -309,6 +312,10 @@ components:
         phoneNumber:
           type: string
           description: 電話
+        language:
+          type: string
+          description: 慣用語
+          default: "en"
       required:
         - type
         - name
@@ -653,6 +660,7 @@ paths:
                   contact_id: 45
                   contact_dob:
                   contact_name: "林志玲"
+                  language: en
                   total_amount: 125.0000
   /transactions/{id}/products:
     get:
@@ -1042,6 +1050,14 @@ paths:
         - Contact
       security:
         - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID of contact to return
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         required: true
         content:
