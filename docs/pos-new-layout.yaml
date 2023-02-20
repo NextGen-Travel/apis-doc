@@ -990,9 +990,9 @@ components:
             - includes
             - excludes
           default: includes
-        invoice_scheme_id:
-          type: integer
-          description: 發票計畫ID
+        # invoice_scheme_id:
+        #   type: integer
+        #   description: 發票計畫ID
         products:
           type: array
           items:
@@ -1492,9 +1492,9 @@ components:
         service_custom_field_6:
           type: string
           description: 服務自定欄6
-        invoice_scheme_id:
-          type: integer
-          description: 發票計畫ID
+        # invoice_scheme_id:
+        #   type: integer
+        #   description: 發票計畫ID
       # Both properties are required
       required:  
         - location_id
