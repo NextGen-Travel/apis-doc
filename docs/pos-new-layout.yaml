@@ -2713,6 +2713,15 @@ paths:
           description: 成功
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                    description: 是否成功
+                  msg:
+                    type: string
+                    description: 訊息
               example:
                 success: 1
                 msg: 成功
