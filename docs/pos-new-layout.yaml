@@ -1632,6 +1632,9 @@ components:
         currency_symbol:
           type: string
           description: 貨幣符號
+        currency_code:
+          type: string
+          description: 貨幣代碼
         currency_symbol_placement:
           type: string
           description: 貨幣符號位置
@@ -2520,6 +2523,7 @@ paths:
                 rp_expiry_period: null
                 rp_expiry_type: "year"
                 currency_symbol: $
+                currency_code: HKD
                 currency_symbol_placement: before
                 date_format: m/d/Y H:i
                 denominations: [10, 20, 50, 100, 500, 1000]
