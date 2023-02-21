@@ -489,14 +489,19 @@ components:
                   properties:
                     id:
                       type: number
+                      description: sell line id
                     transaction_id:
                       type: number
+                      description: 訂單id
                     product_id:
                       type: number
+                      description: 產品id
                     variation_id:
                       type: number
+                      description: 衍生規格id
                     quantity:
                       type: number
+                      description: 數量
                     mfg_waste_percent:
                       type: string
                     mfg_ingredient_group_id:
@@ -505,14 +510,19 @@ components:
                       type: string
                     unit_price_before_discount:
                       type: string
+                      description: 折扣前單位價錢(不含稅)
                     unit_price:
                       type: string
+                      description: 單位價錢(不含稅)
                     line_discount_type:
                       type: string
+                      description: 折扣類型
                     line_discount_amount:
                       type: string
+                      description: 折扣數值
                     unit_price_inc_tax:
                       type: string
+                      description: 單位價錢(含稅)
                     item_tax:
                       type: string
                     tax_id:
@@ -523,8 +533,10 @@ components:
                       description: 折扣ID
                     lot_no_line_id:
                       type: integer
+                      description: 批號及過期日id (purchase_line)
                     sell_line_note:
                       type: string
+                      description: 銷售註記
                     so_line_id:
                       type: integer
                     so_quantity_invoiced:
@@ -1607,6 +1619,9 @@ components:
         default_location_id:
           type: number
           description: 預設分店ID
+        default_invoice_id:
+          type: number
+          description: 預設發票方案ID
         employee_id:
           type: number
           description: 店員ID
@@ -1618,7 +1633,7 @@ components:
           description: 是否啟用積分(1=啟用, 0=關閉)
         enable_inline_tax:
           type: integer
-          description: 是否啟用內聯稅於採購及銷售(1=啟用, 0=關閉)
+          description: 是否啟用啟用含稅價Inc. tax，於採購、銷售和POS(1=啟用, 0=關閉)
         rp_name:
           type: string
           description: 積分顯示名稱
@@ -1737,7 +1752,7 @@ components:
             properties:
               name:
                 type: string
-                description: 翻譯後的顯示文字
+                description: 運輸狀態(翻譯後的顯示文字)
               value:
                 type: string
                 description: 下拉選單的value
@@ -1783,7 +1798,7 @@ components:
               type: integer
               description: 總筆數
 
-    InvoiceResponse:
+    InvoiceSchemeResponse:
       type: object
       properties:
         data:  
@@ -1793,7 +1808,7 @@ components:
             properties:
               name:
                 type: string
-                description: 發票名稱
+                description: 發票方案名稱
               value:
                 type: string
                 description: 下拉選單的value
@@ -1892,7 +1907,7 @@ components:
             properties:
               name:
                 type: string
-                description: 發票名稱
+                description: 付款方式（翻譯後的顯示名稱）
               value:
                 type: string
                 description: 下拉選單的value
@@ -2423,6 +2438,7 @@ paths:
               example:
                 business_id: 1
                 default_location_id: 1
+                default_invoice_id: 1
                 employee_id: 1
                 employee_name: "Laplace chen"
                 enable_rp: 1
@@ -2576,8 +2592,8 @@ paths:
 
   /pos-v2/api/invoices:
     get:
-      summary: 取得發票清單
-      description: 取得發票清單
+      summary: 取得發票方案清單
+      description: 取得發票方案清單
       tags:
         - Common
       parameters:
@@ -2597,7 +2613,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InvoiceResponse'
+                $ref: '#/components/schemas/InvoiceSchemeResponse'
               example:
                 data:
                   - value: 1
