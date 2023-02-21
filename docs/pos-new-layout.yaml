@@ -2419,6 +2419,16 @@ components:
           type: string
           description: 下班打卡記錄
 
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: integer
+          description: 0=失敗, 1=成功
+        msg:
+          type: string
+          description: 錯誤訊息
+
 paths:
   
 # Common
@@ -2458,6 +2468,16 @@ paths:
                 currency_symbol_placement: before
                 date_format: m/d/Y H:i
                 denominations: [10, 20, 50, 100, 500, 1000]
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
+                
 
   /pos-v2/api/business-locations:
     get:
@@ -2495,6 +2515,15 @@ paths:
                   per_page: 10
                   to: 5
                   total: 5
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/custom-tags:
     get:
@@ -2539,6 +2568,15 @@ paths:
                   per_page: 10
                   to: 5
                   total: 5
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/transport-status:
     get:
@@ -2589,6 +2627,15 @@ paths:
                   per_page: 10
                   to: 5
                   total: 5
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/invoices:
     get:
@@ -2633,6 +2680,15 @@ paths:
                   per_page: 10
                   to: 2
                   total: 2
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/contact-group:
     get:
@@ -2668,6 +2724,15 @@ paths:
                   per_page: 10
                   to: 3
                   total: 3
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/payment-type:
     get:
@@ -2734,6 +2799,15 @@ paths:
                   per_page: 10
                   to: 10
                   total: 13
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/price-groups:
     get:
@@ -2781,6 +2855,15 @@ paths:
                   per_page: 10
                   to: 3
                   total: 3
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/location-access:
     post:
@@ -2901,6 +2984,15 @@ paths:
                   per_page: 10
                   to: 10
                   total: 11
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/products/{variation_id}:
     get:
@@ -2948,6 +3040,15 @@ paths:
                     lot_number: "batch222"
                     exp_date:
                     qty_available: 26
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/sells:
     get:
@@ -3076,6 +3177,15 @@ paths:
                   per_page: 10
                   to: 4
                   total: 4
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/sells/{transaction_id}:
     get:
@@ -3178,6 +3288,15 @@ paths:
                   cheque_number: ""
                   bank_account_number: ""
                   note: ""
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
 
   /pos-v2/api/pos:
     post:
