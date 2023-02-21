@@ -4931,7 +4931,7 @@ paths:
                   - title: Ｂ-3-5
                     value: 1
 
-  /pos-v2/api/warehouse/duty/clockInOrOut:
+  /pos-v2/api/employee/duty/clockInOrOut:
     post:
       summary: 打卡上下班
       description: 標示『採購/庫存轉移』已接受，並執行商品入庫
@@ -4967,6 +4967,9 @@ paths:
                     type: number
                   msg:
                     type: string
+                  date:
+                    type: object
+                    $ref: '#/components/schemas/EmployeeDutyResponse'
 
 # Member
   /pos-v2/api/contacts:
