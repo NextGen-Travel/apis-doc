@@ -2409,6 +2409,12 @@ components:
         end_time:
           type: string
           description: 下班時間
+        clock_in_time:
+          type: string
+          description: 上班打卡時間
+        clock_out_time:
+          type: string
+          description: 下班打卡時間
         essentials_attendances_id:
           type: integer
           description: 出勤紀錄 id
