@@ -2376,7 +2376,7 @@ components:
                 type: string
                 description: 付費方式
               value:
-                type: string
+                type: number
                 description: 金額
         refund:
           type: array
@@ -2388,7 +2388,7 @@ components:
                 type: string
                 description: 付費方式
               value:
-                type: string
+                type: number
                 description: 金額
 
     CashRegisterStatusResponse:
@@ -3946,6 +3946,7 @@ paths:
           schema:
             type: string
             enum:
+              - ""
               - "fixed"
               - "percentage"
           description: 折舊類型
@@ -3969,6 +3970,15 @@ paths:
           description: 成功
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                    description: 是否成功
+                  msg:
+                    type: string
+                    description: 訊息
               example:
                   success: 1
                   msg: 成功
@@ -4095,6 +4105,15 @@ paths:
           description: 成功
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                    description: 是否成功
+                  msg:
+                    type: string
+                    description: 訊息
               example:
                   success: 1
                   msg: 成功
@@ -5298,6 +5317,15 @@ paths:
           description: 成功
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                    description: 是否成功
+                  msg:
+                    type: string
+                    description: 訊息
               example:
                   success: 1
                   msg: 成功
@@ -5305,6 +5333,15 @@ paths:
           description: 失敗
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                    description: 是否成功
+                  msg:
+                    type: string
+                    description: 訊息
               example:
                   success: 0
                   msg: 系統暫未能運作，請稍後再試
@@ -5774,9 +5811,18 @@ paths:
           description: 成功
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                    description: 是否成功
+                  msg:
+                    type: string
+                    description: 訊息
               example:
-                success: 1
-                msg: 成功
+                  success: 1
+                  msg: 成功
 
   /pos-v2/api/cash-register/expense:
     post:
@@ -5849,6 +5895,15 @@ paths:
           description: 成功
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: number
+                    description: 是否成功
+                  msg:
+                    type: string
+                    description: 訊息
               example:
-                success: 1
-                msg: 成功
+                  success: 1
+                  msg: 成功
