@@ -5172,7 +5172,6 @@ paths:
                 address_line_1: null
                 address_line_2: null
                 alternate_number: null
-                assigned_to_users: null
                 city: null
                 member_id: "CO0002"
                 contact_type: "individual"
