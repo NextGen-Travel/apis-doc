@@ -220,7 +220,7 @@ components:
           type: integer
         supplier_business_name:
           type: string
-              description: 供應商公司名稱
+          description: 供應商公司名稱
         prefix:
           type: string
           description: 稱謂
