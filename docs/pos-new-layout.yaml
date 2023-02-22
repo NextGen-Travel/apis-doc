@@ -6184,10 +6184,8 @@ paths:
           name: denominations
           schema:
             type: object
-            properties:
-              string: 
-                type: integer
-                description: 面額數量
+            additionalProperties:
+              type: integer
           description: 營業地點ID
           examples:
             denominations:
