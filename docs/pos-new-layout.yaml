@@ -105,7 +105,7 @@ components:
           enum:
           - individual
           - business
-        contact_id:
+        member_id:
           type: string
         customer_group_id:
           type: integer
@@ -214,7 +214,7 @@ components:
           enum:
           - individual
           - business
-        contact_id:
+        member_id:
           type: string
         customer_group_id:
           type: integer
@@ -316,6 +316,12 @@ components:
         return_due:
           type: number
           description: 到期銷售總回報
+        total_rp:
+          type: number
+          description: 紅利
+        created_at:
+          type: string
+          description: 建立日期
 
     ProductsResponse:
       type: object
@@ -5088,7 +5094,7 @@ paths:
               $ref: '#/components/schemas/CreateOrUpdateContact'
             example:
               contact_type: 'individual'
-              contact_id: ''
+              member_id: ''
               customer_group_id: ''
               supplier_business_name: ''
               prefix: 'Mr'
@@ -5168,7 +5174,7 @@ paths:
                 alternate_number: null
                 assigned_to_users: null
                 city: null
-                contact_id: "CO0002"
+                member_id: "CO0002"
                 contact_type: "individual"
                 country: null
                 custom_field1: null
@@ -5203,6 +5209,8 @@ paths:
                 balance: 0
                 due: 3
                 return_due: 646.05
+                total_rp: 548
+                created_at: 02-02-2023 12:56
         '404':
           description: 失敗
           content:
@@ -5230,7 +5238,7 @@ paths:
               $ref: '#/components/schemas/CreateOrUpdateContact'
             example:
               contact_type: 'individual'
-              contact_id: ''
+              member_id: ''
               customer_group_id: ''
               supplier_business_name: ''
               prefix: 'Mr'
