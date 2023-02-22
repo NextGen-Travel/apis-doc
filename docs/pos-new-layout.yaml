@@ -4145,7 +4145,6 @@ paths:
           schema:
             type: string
             enum:
-              - "all"
               - "active"
               - "inactive"
         - in: query
@@ -4346,7 +4345,6 @@ paths:
             enum:
               - "purchase"
               - "purchase_transfer"
-              - "all"
           description: 類型
         - in: query
           name: term
