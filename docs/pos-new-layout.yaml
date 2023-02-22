@@ -3100,6 +3100,12 @@ paths:
         - Common
       parameters:
         - in: query
+          name: location_id
+          schema:
+            type: number
+          description: location id
+          required: true
+        - in: query
           name: per_page
           schema:
             type: integer
@@ -3156,6 +3162,12 @@ paths:
         - Common
       parameters:
         - in: query
+          name: location_id
+          schema:
+            type: number
+          description: location id
+          required: true
+        - in: query
           name: per_page
           schema:
             type: integer
@@ -3209,6 +3221,12 @@ paths:
       tags:
         - Common
       parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: number
+          description: location id
+          required: true
         - in: query
           name: per_page
           schema:
