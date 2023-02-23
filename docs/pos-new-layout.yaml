@@ -4488,6 +4488,12 @@ paths:
           description: 成功
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    description: 發票url
               example:
                   url: http://localhost:8001/invoice/32ac6d2fcb5102c74fd4feb150fcdd16
 
