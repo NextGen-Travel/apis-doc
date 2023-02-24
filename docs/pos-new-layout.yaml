@@ -5871,6 +5871,23 @@ paths:
                         clock_out_note:
                           type: string
                           description: 下班打卡記錄
+                        shift_start_time:
+                          type: string
+                          description: 該班別預計上班時間
+                        shift_end_time:
+                          type: string
+                          description: 該班別預計下班時間
+                        clock_in_location:
+                          type: string
+                          description: 打卡上班的地點
+                        clock_out_location:
+                          type: string
+                          description: 打卡下班的地點
+                        shift_type:
+                          type: string
+                          description: 打卡下班的地點
+                        shift_id: 
+                          type: integer
 
               example:
                 recordsTotal: 2
