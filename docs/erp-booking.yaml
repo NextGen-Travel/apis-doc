@@ -33,31 +33,50 @@ components:
   schemas:
     CreateBooking:
       type: object
+      required:
+        - contact_uuid
+        - contact_name
+        - contact_mobile
+        - contact_email
+        - product_specific_sys_activity_id
       properties:
-        business_id:
-          type: integer
-          description: 總店ID
-        location_id:
-          type: integer
-          description: 分店ID
-        contact_id:
-          type: integer
-          description: 顧客ID
-        contact_name:
-          type: string
-          description: 顧客姓名
-        contact_mobile:
-          type: string
-          description: 顧客手機
-        contact_email:
-          type: string
-          description: 顧客 email
         contact_uuid:
           type: string
-          description: 顧客 UUID
+          description: required, 顧客 UUID
+          format: uuid
+          example: e475e794-8105-11ed-a6ed-0242ac170005
+        contact_name:
+          type: string
+          description: required, 顧客姓名
+          example: Next Gen
+        contact_mobile:
+          type: string
+          description: required, 顧客手機
+        contact_email:
+          type: string
+          description: required, 顧客 email
+        product_specific_sys_activity_id:
+          type: integer
+          description: required, ERP 活動場次 ID
+          example: 6
+        # staff_id:
+        #   type: integer
+        #   description: 服務生ID
+        # user_id:
+        #   type: integer
+        #   description: 服務生ID
         res_waiter_id:
           type: integer
-          description: 服務生ID
+          description: optional, 服務生ID
+        business_id:
+          type: integer
+          description: only required in ERP, 總店ID
+        location_id:
+          type: integer
+          description: only required in ERP, 分店ID
+        contact_id:
+          type: integer
+          description: only required in ERP, 顧客ID
         booking_start:
           type: string
           description: 預約開始時間
@@ -67,12 +86,12 @@ components:
         booking_note:
           type: string
           description: 預約備註
-        product_specific_sys_activity_id:
-          type: integer
-          description: 活動相關ID
+          example: 海景第一排
         payment_status:
           type: string
           description: 付款狀態
+          example: unpaid
+          default: unpaid
     CreateBookingResp:
       type: object
       properties:
@@ -253,19 +272,12 @@ paths:
             schema:
               $ref: '#/components/schemas/CreateBooking'
             example:
-              business_id: 1
-              location_id: 1
-              contact_id: 40
               contact_name: 王小明
               contact_mobile: 0912654987
               contact_email: "wangming@nextgen.com.hk"
-              contact_uuid: dsgcydsgv-2t78dtcg8-dshcsd89y
-              res_waiter_id: 5
-              booking_start: "02/8/2023 15:40"
-              booking_end: "02/9/2023 15:45"
-              booking_note: "海景第一排"
+              contact_uuid: e475e794-8105-11ed-a6ed-0242ac170005
               product_specific_sys_activity_id: 8
-              payment_status: unpaid
+              res_waiter_id: 5
 
       responses:
         '200':
