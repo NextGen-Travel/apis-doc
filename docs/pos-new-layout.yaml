@@ -5888,13 +5888,18 @@ paths:
                           description: 打卡下班的地點
                         shift_id: 
                           type: integer
-
               example:
                 recordsTotal: 2
                 total: 2
                 pages: 1
                 data:
                   - id: 1
+                    shift_id: 1
+                    shift_type: 'asd'
+                    clock_out_location: 'asd'
+                    clock_in_location: 'asd'
+                    shift_end_time: '18:30:00'
+                    shift_start_time: '09:30:00'
                     clock_in_time: '2023-02-06 09:00:00'
                     clock_out_time: '2023-02-06 18:00:00'
                     ip_address: '172.18.0.1'
@@ -5904,17 +5909,6 @@ paths:
                     full_name: employee
                     shift_name: 平日班
                     work_duration : 8
-                  - id: 2
-                    clock_in_time: '2023-02-06 09:30:00'
-                    clock_out_time: null
-                    ip_address: '172.18.0.1'
-                    clock_in_note: 上班
-                    clock_out_note: null
-                    end_time: '2023-02-07 00:00:00'
-                    full_name: employee
-                    shift_name: 平日班
-                    work_duration : 8
-
   /pos-v2/api/employee/duties:
     get:
       summary: 本日值班
