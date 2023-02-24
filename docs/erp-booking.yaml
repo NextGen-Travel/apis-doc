@@ -279,7 +279,7 @@ components:
             當 product, user, location 都存在時<br>
             並且 status cancelled, completed<br>
             可以再次預約 (value = 1)<br>
-            反之則不可再次預約 (value = 2)"
+            反之則不可再次預約 (value = 0)"
           example: 1
         start_time:
           type: string
