@@ -67,9 +67,6 @@ components:
         booking_note:
           type: string
           description: 預約備註
-        product_id:
-          type: integer
-          description: 產品ID
         product_specific_sys_activity_id:
           type: integer
           description: 活動相關ID
@@ -100,9 +97,6 @@ components:
         booking_end:
           type: string
           description: 預約結束時間
-        product_id:
-          type: integer
-          description: 產品ID
         product_specific_sys_activity_id:
           type: integer
           description: 活動相關ID
@@ -270,7 +264,6 @@ paths:
               booking_start: "02/8/2023 15:40"
               booking_end: "02/9/2023 15:45"
               booking_note: "海景第一排"
-              product_id: 118
               product_specific_sys_activity_id: 8
               payment_status: unpaid
 
@@ -325,7 +318,6 @@ paths:
               res_waiter_id: 5
               booking_start: "02/10/2023 15:40"
               booking_end: "02/10/2023 15:45"
-              product_id: 118
               product_specific_sys_activity_id: 8
       tags:
         - booking
