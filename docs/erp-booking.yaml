@@ -365,3 +365,69 @@ paths:
                 success: 1
                 msg: delete success
 
+
+  /product/{uuid}/{start_time}/{end_time}:
+    get:
+      summary: 服務人員詳細資訊及可預約場次
+      description: 取得指定服務人員詳細資訊及可預約場次
+      tags:
+        - booking
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          description: ERP Product uuid
+          schema:
+            type: string
+            format: uuid
+          example: 703e2de9-b330-11ed-b4f9-0242ac170002
+        - name: start_time
+          in: path
+          required: true
+          description: 查詢起始時間。Timestamp, 秒級
+          schema:
+            type: integer
+            format: timestamp
+          example: 1675180800
+        - name: end_time
+          in: path
+          required: true
+          description: 查詢結束時間。Timestamp, 秒級
+          schema:
+            type: integer
+            format: timestamp
+          example: 1677599999
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: 成功 = true, 失敗 = false
+                  data:
+                    type: object
+                    description: 回傳的資料
+                    properties:
+                      product_specific_sys_activities:
+                        type: array
+                        description: 活動場次資料的陣列
+                        items:
+                          type: object
+                          description: 活動場次資料
+                          $ref: '#/components/schemas/ProductSpecificSysActivity'
+              example:
+                success: 1
+                data:
+                  product_specific_sys_activities:
+                    - product_specific_sys_activity_id: 1
+                      user_id: 5
+                      start_time: "2023-02-07T08:00:00+80:00"
+                      end_time: "2023-02-07T09:00:00+80:00"
+                    - product_specific_sys_activity_id: 2
+                      user_id: 5
+                      start_time: "2023-02-07T09:00:00+80:00"
+                      end_time: "2023-02-07T10:00:00+80:00"
