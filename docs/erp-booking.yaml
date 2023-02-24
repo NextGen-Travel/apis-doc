@@ -143,6 +143,25 @@ components:
               email:
                 type: string
                 description: 服務人員email
+    ProductSpecificSysActivity:
+      type: object
+      properties:
+        product_specific_sys_activity_id:
+          type: integer
+          description: 活動ID
+        user_id:
+          type: integer
+          description: 服務人員ID
+        start_time:
+          type: string
+          format: ISO8601:2004
+          description: 活動開始時間
+          example: "2023-02-07T08:00:00+80:00"
+        end_time:
+          type: string
+          format: ISO8601:2004
+          description: 活動結束時間
+          example: "2023-02-07T09:00:00+80:00"
     SingleServiceStaffResp:
       type: object
       properties:
@@ -159,26 +178,8 @@ components:
           type: array
           items:
             type: object
-            properties:
-              id:
-                type: integer
-                description: 活動ID
-              user_id:
-                type: integer
-                description: 服務人員ID
-              start_time:
-                type: string
-                description: 活動開始時間
-              end_time:
-                type: string
-                description: 活動結束時間
-              max_contacts:
-                type: integer
-                description: 人數上限
-              signed_up_contacts:
-                type: integer
-                description: 已預約人數
-    
+            $ref: '#/components/schemas/ProductSpecificSysActivity'
+
 paths:
   /booking/service-staff:
     get:
