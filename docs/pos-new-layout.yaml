@@ -5888,6 +5888,9 @@ paths:
                           description: 打卡下班的地點
                         shift_id: 
                           type: integer
+                        work_duration:
+                          type: string
+                          description: 上班時間 
               example:
                 recordsTotal: 2
                 total: 2
@@ -5908,7 +5911,7 @@ paths:
                     end_time: '2023-02-06 18:00:00'
                     full_name: employee
                     shift_name: 平日班
-                    work_duration : 8
+                    work_duration : '02:00:00'
   /pos-v2/api/employee/duties:
     get:
       summary: 本日值班
