@@ -103,22 +103,25 @@ components:
           description: 結果訊息
     UpdateBooking:
       type: object
+      required:
+        - product_specific_sys_activity_id
       properties:
-        location_id:
+        product_specific_sys_activity_id:
           type: integer
-          description: 分店ID
+          description: required, ERP 活動場次 ID
+          example: 6
         res_waiter_id:
           type: integer
-          description: 服務生ID
+          description: optional, 服務生ID
+        location_id:
+          type: integer
+          description: only required in ERP, 分店ID
         booking_start:
           type: string
           description: 預約開始時間
         booking_end:
           type: string
           description: 預約結束時間
-        product_specific_sys_activity_id:
-          type: integer
-          description: 活動相關ID
     UpdateBookingResp:
       type: object
       properties:
@@ -326,11 +329,8 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateBooking'
             example:
-              location_id: 1
-              res_waiter_id: 5
-              booking_start: "02/10/2023 15:40"
-              booking_end: "02/10/2023 15:45"
               product_specific_sys_activity_id: 8
+              res_waiter_id: 5
       tags:
         - booking
       responses:
