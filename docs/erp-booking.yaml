@@ -196,6 +196,130 @@ components:
             type: object
             $ref: '#/components/schemas/ProductSpecificSysActivity'
 
+    Pagination:
+      description: 分頁紀錄
+      type: object
+      properties:
+        per_page:
+          type: integer
+          enum: [10, 20, 50]
+          example: 10
+          description: 每頁筆數
+        current_page:
+          type: integer
+          example: 4
+          description: 當前頁碼
+        total:
+          type: integer
+          example: 13
+          description: 所有頁碼
+        count:
+          type: integer
+          example: 124
+          description: 全部筆數
+
+    ActivityProductInfo:
+      type: object
+      description: 商業活動主要內容
+      required:
+        - uuid
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: 703e2de9-b330-11ed-b4f9-0242ac170002
+          description: ERP Product UUID
+        name:
+          type: string
+          example: 頸椎治療
+          description: 商業活動名稱
+        image_url:
+          type: string
+          format: url
+          example: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+          description:
+            "Product image url<br>
+            僅供參考, NSS 可以調整商品圖片"
+        description:
+          type: string
+          format: html
+          example: '頸椎治療<br>頸椎治療<br>頸椎治療<br>頸椎治療'
+          description:
+            "ERP Product UUID<br>
+            僅供參考, NSS 可以調整商品圖片"
+
+    BookedActivityInfo:
+      type: object
+      description: 已預約的商業活動場次詳細資訊
+      required:
+        - product
+        - product_specific_sys_activity_id
+        - booking_id
+        - can_rebook
+        - start_time
+        - end_time
+        - booking_status
+      properties:
+        product:
+          type: object
+          $ref: '#/components/schemas/ActivityProductInfo'
+        product_specific_sys_activity_id:
+          type: integer
+          description: 商業活動場次ID
+          example: 8
+        booking_id:
+          type: integer
+          description: booking id
+          example: 165
+        can_rebook:
+          type: boolean
+          enum: [1, 0]
+          description:
+            "可被再次預約<br>
+            當 product, user, location 都存在時<br>
+            並且 status cancelled, completed<br>
+            可以再次預約 (value = 1)<br>
+            反之則不可再次預約 (value = 2)"
+          example: 1
+        start_time:
+          type: string
+          format: ISO8601:2004
+          description: 活動開始時間
+          example: "2023-02-07T08:00:00+80:00"
+        end_time:
+          type: string
+          format: ISO8601:2004
+          description: 活動結束時間
+          example: "2023-02-07T09:00:00+80:00"
+        user_name:
+          type: string
+          description: 服務人員名稱
+          example: 九龍包租公
+        location_name:
+          type: string
+          description: 分店名稱
+          example: 九龍城寨
+        booking_status:
+          type: string
+          enum:
+            - booked
+            - cancelled
+            - completed
+          description: "
+            此預定的活動是否已完成服務:<br>
+              - booked: 即將到來的預約<br>
+              - cancelled: 已經取消的預約<br>
+              - completed: 已經完成的預約"
+          example: completed
+        user_id:
+          type: integer
+          description: 服務人員ID
+          example: 165
+        location_id:
+          type: integer
+          description: 分店ID
+          example: 4
+
 paths:
   /booking/service-staff:
     get:
@@ -295,6 +419,11 @@ paths:
     get:
       summary: 取得預約列表
       description: 取得預約列表
+      # description: "
+      #     取得預約列表。<br>
+      #     按說應該要取得登入驗證:<br>
+      #       1. 先打一個驗證去 NSS Server 向 EPR Server 要 token<br>
+      #       2. 將取得的 token 存放至 header 一起送出驗證"
       tags:
         - booking
       parameters:
@@ -306,9 +435,60 @@ paths:
             type: string
             format: uuid
             example: e475e794-8105-11ed-a6ed-0242ac170005
+        - name: status
+          in: query
+          required: false
+          description: "
+            optional, booked status<br>
+            此預定的活動是否已完成服務:<br>
+              - all: 所有預約<br>
+              - booked: 即將到來的預約<br>
+              - cancelled: 已經取消的預約<br>
+              - completed: 已經完成的預約"
+          schema:
+            type: string
+            enum:
+              - all
+              - booked
+              - cancelled
+              - completed
+            default: all
+        - name: page
+          in: query
+          required: false
+          description: optional, 頁次
+          schema:
+            type: integer
+            default: 1
+        - name: per_page
+          in: query
+          required: false
+          description: optional, booked status
+          schema:
+            type: integer
+            enum: [10, 20, 50]
+            default: 10
       responses:
         '200':
           description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: optional, booked status
+                  data:
+                    type: object
+                    properties:
+                      booking_records:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/BookedActivityInfo'
+                      pagination:
+                        type: object
+                        $ref: '#/components/schemas/Pagination'
 
   /booking/{booking_id}:
     put:
