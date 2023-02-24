@@ -5384,7 +5384,7 @@ paths:
                     type: number
                   msg:
                     type: string
-                  date:
+                  data:
                     type: object
                     $ref: '#/components/schemas/EmployeeDutyResponse'
 
