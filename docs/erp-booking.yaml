@@ -70,7 +70,7 @@ components:
         product_id:
           type: integer
           description: 產品ID
-        product_specific_sys_activities_id:
+        product_specific_sys_activity_id:
           type: integer
           description: 活動相關ID
         payment_status:
@@ -103,7 +103,7 @@ components:
         product_id:
           type: integer
           description: 產品ID
-        product_specific_sys_activities_id:
+        product_specific_sys_activity_id:
           type: integer
           description: 活動相關ID
     UpdateBookingResp:
@@ -236,19 +236,16 @@ paths:
                 - id: 1
                   full_name: Service Staff A
                   email: waiter1@nextgen.com.hk
-                  product_specific_sys_activities_id:
-                    - id: 1
+                  product_specific_sys_activities:
+                    - product_specific_sys_activity_id: 1
                       user_id: 5
-                      start_time: 2023-01-23 12:00:00
-                      end_time: 2023-01-23 13:00:00
-                      max_contacts: 1
-                      signed_up_contacts: 1
-                    - id: 2
+                      start_time: "2023-02-07T08:00:00+80:00"
+                      end_time: "2023-02-07T09:00:00+80:00"
+                    - product_specific_sys_activity_id: 2
                       user_id: 5
-                      start_time: 2023-01-23 13:00:00
-                      end_time: 2023-01-23 14:00:00
-                      max_contacts: 1
-                      signed_up_contacts: 1
+                      start_time: "2023-02-07T09:00:00+80:00"
+                      end_time: "2023-02-07T10:00:00+80:00"
+
   /booking:
     post:
       summary: 新增預約
@@ -274,7 +271,7 @@ paths:
               booking_end: "02/9/2023 15:45"
               booking_note: "海景第一排"
               product_id: 118
-              product_specific_sys_activities_id: 8
+              product_specific_sys_activity_id: 8
               payment_status: unpaid
 
       responses:
@@ -329,7 +326,7 @@ paths:
               booking_start: "02/10/2023 15:40"
               booking_end: "02/10/2023 15:45"
               product_id: 118
-              product_specific_sys_activities_id: 8
+              product_specific_sys_activity_id: 8
       tags:
         - booking
       responses:
