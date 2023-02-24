@@ -370,7 +370,7 @@ paths:
                 msg: delete success
 
 
-  /product/{uuid}/{start_time}/{end_time}:
+  /product/{uuid}:
     get:
       summary: 服務人員詳細資訊及可預約場次
       description: 取得指定服務人員詳細資訊及可預約場次
@@ -386,7 +386,7 @@ paths:
             format: uuid
           example: 703e2de9-b330-11ed-b4f9-0242ac170002
         - name: start_time
-          in: path
+          in: query
           required: true
           description: 查詢起始時間。Timestamp, 秒級
           schema:
@@ -394,13 +394,27 @@ paths:
             format: timestamp
           example: 1675180800
         - name: end_time
-          in: path
+          in: query
           required: true
           description: 查詢結束時間。Timestamp, 秒級
           schema:
             type: integer
             format: timestamp
           example: 1677599999
+        - name: user_id
+          in: query
+          required: false
+          description: 即 CreateBooking 的 res_waiter_id, optional, 服務生ID
+          schema:
+            type: integer
+          example: 4
+        - name: location_id
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: optional, ERP 分店ID
+          example: 1
       responses:
         '200':
           description: 成功
