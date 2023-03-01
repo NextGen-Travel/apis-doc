@@ -168,6 +168,11 @@ components:
         user_id:
           type: integer
           description: 服務人員ID
+          example: 5
+        location_id:
+          type: integer
+          description: 營業地點ID
+          example: 2
         start_time:
           type: string
           format: ISO8601:2004
@@ -658,8 +663,8 @@ paths:
                   users:
                     - user_id: 2
                       user_name: 服務生2
-                    - user_id: 4
-                      user_name: 服務生4
+                    - user_id: 5
+                      user_name: 服務生5
                   locations:
                     - location_id: 2
                       location_name: 虛擬倉庫
@@ -670,7 +675,9 @@ paths:
                       user_id: 5
                       start_time: "2023-02-07T08:00:00+80:00"
                       end_time: "2023-02-07T09:00:00+80:00"
+                      location_id: 9
                     - product_specific_sys_activity_id: 2
                       user_id: 5
                       start_time: "2023-02-07T09:00:00+80:00"
                       end_time: "2023-02-07T10:00:00+80:00"
+                      location_id: 9
