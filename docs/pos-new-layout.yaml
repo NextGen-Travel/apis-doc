@@ -2454,6 +2454,9 @@ components:
         payment_status:
           type: string
           description: 付費狀態
+        payment_amount:
+          type: number
+          description: 已付費金額（已退）
         products:
           description: 退貨訂單產品
           type: array
@@ -4368,6 +4371,7 @@ paths:
                   staff_note: ""
                   payment_method: ['cash']
                   payment_status: partial
+                  payment_amount: 281.36
                   products:
                   - image : "http://localhost:8000/cloudsatlas/project/public/img/default.png"
                     lot : ""
