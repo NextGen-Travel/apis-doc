@@ -2264,7 +2264,7 @@ paths:
         - client: []
       parameters:
         - in: path
-          name: wishclientIdId
+          name: clientId
           schema:
             type: number
           required: true
