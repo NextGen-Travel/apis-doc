@@ -596,6 +596,20 @@ paths:
             type: integer
           description: optional, ERP 分店ID
           example: 1
+        - name: no_users
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: optional, 只要帶此參數就不會輸出 users 部分
+          allowEmptyValue: true
+        - name: no_locations
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: optional, 只要帶此參數就不會輸出 locations 部分
+          allowEmptyValue: true
       responses:
         '200':
           description: 成功
@@ -611,6 +625,26 @@ paths:
                     type: object
                     description: 回傳的資料
                     properties:
+                      users:
+                        type: array
+                        description: 指定時間區段內, 可用的服務人員
+                        items:
+                          type: object
+                          properties:
+                            user_id:
+                              type: integer
+                            user_name:
+                              type: string
+                      locations:
+                        type: array
+                        description: 指定時間區段內, 可用的營業地點
+                        items:
+                          type: object
+                          properties:
+                            location_id:
+                              type: integer
+                            location_name:
+                              type: string
                       product_specific_sys_activities:
                         type: array
                         description: 活動場次資料的陣列
@@ -619,8 +653,18 @@ paths:
                           description: 活動場次資料
                           $ref: '#/components/schemas/ProductSpecificSysActivity'
               example:
-                success: 1
+                success: true
                 data:
+                  users:
+                    - user_id: 2
+                      user_name: 服務生2
+                    - user_id: 4
+                      user_name: 服務生4
+                  locations:
+                    - location_id: 2
+                      location_name: 虛擬倉庫
+                    - location_id: 9
+                      location_name: 九龍旗艦
                   product_specific_sys_activities:
                     - product_specific_sys_activity_id: 1
                       user_id: 5
