@@ -2225,12 +2225,19 @@ paths:
                       total:
                         type: number
   
-  /client/confrimDelete:
-    post:
+  /client/{clientId}/confirmDelete:
+    delete:
       tags:
         - user
       security:
-        - client: []
+        - client: []  
+      parameters:
+        - in: path
+          name: clientId
+          schema:
+            type: number
+          required: true
+          example: 3
       requestBody:
         required: true
         content:
@@ -2241,34 +2248,7 @@ paths:
                 confirm:
                   type: string
                   description: 確認是否刪除
-                  example: DELETE
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-
-  /client/{clientId}:
-    delete:
-      tags:
-        - user
-      security:
-        - client: []
-      parameters:
-        - in: path
-          name: clientId
-          schema:
-            type: number
-          required: true
-          example: 3
+                  example: DELETE    
       responses:
         '200':
           description: 成功
