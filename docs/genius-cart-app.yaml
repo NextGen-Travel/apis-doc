@@ -2226,7 +2226,7 @@ paths:
                         type: number
   
   /client/{clientId}/confirmDelete:
-    delete:
+    post:
       tags:
         - user
       security:
