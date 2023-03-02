@@ -468,7 +468,7 @@ paths:
         - name: per_page
           in: query
           required: false
-          description: optional, booked status
+          description: optional, 每個分頁顯示的資料筆數
           schema:
             type: integer
             enum: [10, 20, 50]
