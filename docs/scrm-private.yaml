@@ -1318,6 +1318,25 @@ paths:
       responses:
         '200':
           description: 成功
+
+  /companies/signal/qrcode:
+    get:
+      summary: 拿新增廠商 signal 帳號時要掃描的 qrcode
+      description: 會回傳 base64
+      tags:
+        - company
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: 'iVBORw0KGgoAAAANSUhEUgAAAQAAAAEAAQMAAABmvDolAAAABlBMVEX///8AAABVwtN+AAAEEElEQVR42uyZP+7krhLECxE45AZwESSu5czOuBYSF4EbEBIg6qmZr2d3430m+S2abD5BC/pPVRv/zr/z5yHZTIO1jiwWenhNZvaD5L0JaEBjq8VaWKicdE4hJ5zHjWMbwNaAAonRkTknhKTZj8i4FTDWFeumVSkMnfPwOHcDhgVQK1ByhBHY9wJAa61OVclaJF9SGLjuP17zZUCStrX6c/LPiTH+ntUvAx9IMhZWFZ2T5gjp+vXnFoCEgZrWTUcmwPuQzit2nLsAooGtcroC2MAUUsgDF/vnrXYArYGGxVrrKqfOZNKZ8b7ife4CABjS1fppIMOHgTDO83uPGwDTQIlSFXmshEAOneN99etTvH8PsK0gJgDFKoDUxS3tYRsAsqHV4upUnGF8GuV5xRg7NgGGxhi6CVeLqikkICR/dFw3dgEwYDNuumlhLTwAD90v/rTqHQCbAQ1cUfJg3kPnoXO/YmTfBTQ2gtO6KneVM4fX8li8fypjAyARStKqCatq0gneexmc5/l0sdcBSpysEiULQs5rdsd+9H1Ak8dCcQXyy/JSXBcV+9NIXwdEtpg2VS1uqqKlboZOOC8+GfU+0IxBo3VTsXL61UFGuK/7ecwdgPTyBlWnq8X6MLwMTnacx6Pt3wfYDI2T14IrHt7rT/E+bWwH0ETMqeIoEoY5QTP583jeagtgloBgsWoljF+1G3kfj8DYAIisbj/6oebhA0XbXzH2R3j/LWBMQ0NxrEUka9KikvJ9fGPYAFCq00yoKaXB1ShDvo+vcN8AGMIYU6e1cHWGIcYagffF+5OTG4AlYkwRL1ksoAcg+RDXVe0C2GBYp5qOVbykeLlVE1fcBawVB6yTlJlW5xFkfssdnSc2AcYYgFMqZ1qXxNCGoeNvOut94JO0oh5ExuiclpYSLfcMtfeB1qSFuEppIFMnr3MK6TyP/mNrdwBmWTkA1ioBRNOGftzn8czu94Emebtql7VIo05aLG0/vgPlfcCQMjFVFUGZB7weq3iv70B5HVjFa6DKkjFr3ZSZGTu+DeZ1gI2tUTQ15bZWLx+47vPbRt8H1mg1EKPlikorY4R47OgOoImcNHYtH1lz0iInM288Y+3/ADTpUrXOn2WSX/kg2XB+tf0GQJISSrKhilod3usu/24D1tKdkg2KBfrj7EP/uocdwIepc2l3qYs8AN1Fsp4bgWXlKoui2CgPcQ/HfcR7F7A2vbRqLb1rTsvB5H782j+8D6wvIGbZyaLK2m8M4Lx+k+7vAxIjxTtQ9P0IEmeOIiB+fRrYABjyKV7vw9Ac5/oEshMAKM7e1QmJESFd9yM3twDLWRdXrBV7EfIIzLnju+rdAHw0rYxNydq1+g9JSyP/Q1e/Cvw7/53zvwAAAP//0ecnbHZ9JNkAAAAASUVORK5CYII='
+
   # ====================
   #
   # 自動回覆設定
@@ -2435,7 +2454,7 @@ paths:
                               type: string
                             type:
                               type: string
-                              enum: ['text' , 'hsm' , 'image' , 'file' , 'audio' , 'video' , 'whatsappSticker']
+                              enum: ['text' , 'hsm' , 'image' , 'file' , 'audio' , 'video' , 'whatsappSticker', 'multimedia']
                             user:
                               type: object
                               properties:
@@ -2447,20 +2466,22 @@ paths:
                                   type: string
                             file:
                               nullable: true
-                              type: object
-                              properties:
-                                url:
-                                  nullable: true
-                                  type: string
-                                caption:
-                                  nullable: true
-                                  type: string
-                                size:
-                                  nullable: true
-                                  type: string
-                                extension:
-                                  nullable: true
-                                  type: string
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  url:
+                                    nullable: true
+                                    type: string
+                                  caption:
+                                    nullable: true
+                                    type: string
+                                  size:
+                                    nullable: true
+                                    type: string
+                                  extension:
+                                    nullable: true
+                                    type: string
                             components:
                               nullable: true
                               type: array
