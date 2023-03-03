@@ -333,6 +333,14 @@ paths:
       # 分類
       tags:
         - booking
+      parameters:
+        - name: location_id
+          in: query
+          required: false
+          description: optional, 分店ID
+          schema:
+            type: integer
+            default: 1
       responses:
         '200':
           description: 成功
@@ -365,6 +373,13 @@ paths:
             type: integer
             format: int64
             minimum: 1
+        - name: location_id
+          in: query
+          required: false
+          description: optional, 分店ID
+          schema:
+            type: integer
+            default: 1
       # 分類
       tags:
         - booking
@@ -473,6 +488,13 @@ paths:
             type: integer
             enum: [10, 20, 50]
             default: 10
+        - name: location_id
+          in: query
+          required: false
+          description: optional, 分店ID
+          schema:
+            type: integer
+            default: 1
       responses:
         '200':
           description: 成功
