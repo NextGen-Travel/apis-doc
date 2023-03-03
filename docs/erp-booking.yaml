@@ -177,12 +177,12 @@ components:
           type: string
           format: ISO8601:2004
           description: 活動開始時間
-          example: "2023-02-07T08:00:00+80:00"
+          example: "2023-02-07T08:00:00+08:00"
         end_time:
           type: string
           format: ISO8601:2004
           description: 活動結束時間
-          example: "2023-02-07T09:00:00+80:00"
+          example: "2023-02-07T09:00:00+08:00"
     SingleServiceStaffResp:
       type: object
       properties:
@@ -279,23 +279,23 @@ components:
         can_rebook:
           type: boolean
           enum: [1, 0]
-          description:
-            "可被再次預約<br>
+          description: >
+            可被再次預約<br>
             當 product, user, location 都存在時<br>
-            並且 status cancelled, completed<br>
+            並且 booking_status 為 cancelled 或 completed<br>
             可以再次預約 (value = 1)<br>
-            反之則不可再次預約 (value = 0)"
+            反之則不可再次預約 (value = 0)
           example: 1
         start_time:
           type: string
           format: ISO8601:2004
           description: 活動開始時間
-          example: "2023-02-07T08:00:00+80:00"
+          example: "2023-02-07T08:00:00+08:00"
         end_time:
           type: string
           format: ISO8601:2004
           description: 活動結束時間
-          example: "2023-02-07T09:00:00+80:00"
+          example: "2023-02-07T09:00:00+08:00"
         user_name:
           type: string
           description: 服務人員名稱
@@ -310,11 +310,11 @@ components:
             - booked
             - cancelled
             - completed
-          description: "
+          description: >
             此預定的活動是否已完成服務:<br>
               - booked: 即將到來的預約<br>
               - cancelled: 已經取消的預約<br>
-              - completed: 已經完成的預約"
+              - completed: 已經完成的預約
           example: completed
         user_id:
           type: integer
@@ -399,12 +399,12 @@ paths:
                   product_specific_sys_activities:
                     - product_specific_sys_activity_id: 1
                       user_id: 5
-                      start_time: "2023-02-07T08:00:00+80:00"
-                      end_time: "2023-02-07T09:00:00+80:00"
+                      start_time: "2023-02-07T08:00:00+08:00"
+                      end_time: "2023-02-07T09:00:00+08:00"
                     - product_specific_sys_activity_id: 2
                       user_id: 5
-                      start_time: "2023-02-07T09:00:00+80:00"
-                      end_time: "2023-02-07T10:00:00+80:00"
+                      start_time: "2023-02-07T09:00:00+08:00"
+                      end_time: "2023-02-07T10:00:00+08:00"
 
   /booking:
     post:
@@ -695,11 +695,11 @@ paths:
                   product_specific_sys_activities:
                     - product_specific_sys_activity_id: 1
                       user_id: 5
-                      start_time: "2023-02-07T08:00:00+80:00"
-                      end_time: "2023-02-07T09:00:00+80:00"
+                      start_time: "2023-02-07T08:00:00+08:00"
+                      end_time: "2023-02-07T09:00:00+08:00"
                       location_id: 9
                     - product_specific_sys_activity_id: 2
                       user_id: 5
-                      start_time: "2023-02-07T09:00:00+80:00"
-                      end_time: "2023-02-07T10:00:00+80:00"
+                      start_time: "2023-02-07T09:00:00+08:00"
+                      end_time: "2023-02-07T10:00:00+08:00"
                       location_id: 9
