@@ -2447,20 +2447,22 @@ paths:
                                   type: string
                             file:
                               nullable: true
-                              type: object
-                              properties:
-                                url:
-                                  nullable: true
-                                  type: string
-                                caption:
-                                  nullable: true
-                                  type: string
-                                size:
-                                  nullable: true
-                                  type: string
-                                extension:
-                                  nullable: true
-                                  type: string
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  url:
+                                    nullable: true
+                                    type: string
+                                  caption:
+                                    nullable: true
+                                    type: string
+                                  size:
+                                    nullable: true
+                                    type: string
+                                  extension:
+                                    nullable: true
+                                    type: string
                             components:
                               nullable: true
                               type: array
