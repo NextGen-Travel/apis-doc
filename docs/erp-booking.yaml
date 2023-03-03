@@ -264,6 +264,7 @@ components:
         - start_time
         - end_time
         - booking_status
+        - booking_note
       properties:
         product:
           type: object
@@ -304,6 +305,10 @@ components:
           type: string
           description: 分店名稱
           example: 九龍城寨
+        booking_note:
+          type: string
+          description: 預約時的備註訊息
+          example: 我的頸椎最近常落枕, 可能需要特別處理
         booking_status:
           type: string
           enum:
@@ -509,6 +514,25 @@ paths:
                   data:
                     type: object
                     properties:
+                      contact:
+                        type: object
+                        description: ERP 預約客戶的詳細資訊
+                        required:
+                          - name
+                        properties:
+                          name:
+                            type: string
+                            description: required, 顧客名稱
+                            example: 好健康
+                          email:
+                            type: string
+                            format: email
+                            description: 顧客 email
+                            example: i.am.grandpa@paid.money
+                          mobile:
+                            type: string
+                            description: 顧客手機
+                            example: 0912654980
                       booking_records:
                         type: array
                         items:
