@@ -2632,6 +2632,9 @@ components:
         opened_at:
           type: string
           description: 開機時間
+        location_id:
+          type: integer
+          description: 開帳營業地點 or 預設開帳地點
 
     EmployeeDutyResponse:
       type: object
@@ -6273,13 +6276,6 @@ paths:
       description: 取得收銀機狀態
       tags:
         - Cash Register
-      parameters:
-        - in: query
-          name: location_id
-          schema:
-            type: integer
-          description: 營業地點ID
-          required: true
       responses:
         '200':
           description: 成功
@@ -6290,6 +6286,7 @@ paths:
               example:
                 status: open
                 opened_at: 02/15/2023 18:38
+                location_id: 1
 
   /pos-v2/api/cash-register/open:
     post:
