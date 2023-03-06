@@ -4169,6 +4169,11 @@ paths:
             type: string
             enum: [asc, desc]
           description: 排序方式
+        - in: query
+          name: contact_id
+          schema:
+            type: integer
+          description: 訂單客戶ID
       responses:
         '200':
           description: 成功
