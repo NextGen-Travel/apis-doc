@@ -59,9 +59,6 @@ components:
             city:
               type: string
               description: 城市
-            landmark:
-              type: string
-              description: 地址
             zip_code:
               type: string
               description: 郵遞區號
