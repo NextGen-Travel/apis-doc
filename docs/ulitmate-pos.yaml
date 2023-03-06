@@ -47,11 +47,15 @@ components:
             mobile:
               type: string
               description: 電話
+            landmark:
+              type: string
+              description: 地址
             country:
               type: string
               description: 國家
             state:
               type: string
+              description: 地區
             city:
               type: string
               description: 城市
