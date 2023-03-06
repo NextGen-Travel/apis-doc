@@ -5103,6 +5103,12 @@ paths:
                           transaction_date:
                             type: string
                             description: 建立日期
+                          business_name:
+                            type: string
+                            description: 營業名稱
+                          business_logo:
+                            type: string
+                            description: 營業 logo
                           location_from:
                             type: string
                             description: 地點(由)
@@ -5171,6 +5177,15 @@ paths:
                             product_url:
                               type: string
                               description: 商品圖片
+                            position:
+                              type: string
+                              description: 區域
+                            row:
+                              type: string
+                              description: 排
+                            rack:
+                              type: string
+                              description: 貨架
                             lot_number:
                               type: string
                               description: 批號
@@ -5214,6 +5229,8 @@ paths:
                     type: purchase_transfer
                     ref_no: ST2023/0001
                     transaction_date: '2023-01-30 12:00:00'
+                    business_name: Nextgen
+                    business_logo: https://erp.tw/img/default.png
                     location_from: Nextgen
                     location_to: 港九
                     additional_notes: 庫存轉移
@@ -5235,6 +5252,9 @@ paths:
                       product_name: 可樂
                       product_description : 肥宅快樂水
                       product_url: https://erp.tw/img/default.png
+                      position: A區
+                      row: 3
+                      rack: 6
                       lot_number: Batch111
                       exp_date: 20240209
                       quantity: 100
@@ -5253,6 +5273,9 @@ paths:
                       product_name: 雪碧
                       product_description : 商品備註
                       product_url: https://erp.tw/img/default.png
+                      position: A區
+                      row: 3
+                      rack: 6
                       lot_number: Batch111
                       exp_date: 20240209
                       quantity: 100
