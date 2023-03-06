@@ -4877,6 +4877,7 @@ paths:
             enum:
               - "purchase"
               - "purchase_transfer"
+              - "all"
           description: 類型
         - in: query
           name: term
