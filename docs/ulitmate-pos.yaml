@@ -55,6 +55,9 @@ components:
             city:
               type: string
               description: 城市
+            landmark:
+              type: string
+              description: 地址
             zip_code:
               type: string
               description: 郵遞區號
@@ -542,6 +545,7 @@ paths:
                   state: 尖沙嘴頂好北路50巷10號
                   city: 九龍
                   zip_code: 111
+                  landmark: 好北路50巷10號
   /on-duty:
     get:
       summary: 值班人員
