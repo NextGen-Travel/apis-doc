@@ -39,6 +39,10 @@
         {
             "name": "ERP booking",
             "value": "erp-booking"
+        },
+        {
+            "name": "POS original",
+            "value": "pos-origin"
         }
     ]
 }

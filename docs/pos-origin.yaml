@@ -1,0 +1,152 @@
+openapi: 3.0.1
+
+info:
+  title: POS原生相關API
+  version: 1.0.0
+  description: POS原生相關API
+
+servers:
+  - url: http://localhost:8000/project/public
+  - url: https://erp-dev.cloudsatlas.com.hk/public
+
+components:
+  parameters:
+    language:
+      in: header
+      name: accept-language
+      schema:
+        type: string
+      required: false
+      example: 'en'   
+  schemas:
+    CustomersResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: number
+            description: 客戶ID
+          text:
+            type: string
+            description: 客戶名稱
+          mobile:
+            type: string
+            description: 手機
+          address_line_1:
+            type: string
+          address_line_2:
+            type: string
+          city:
+            type: string
+          state:
+            type: string
+          country:
+            type: string
+          zip_code:
+            type: string
+          shipping_address:
+            type: string
+            description: 寄件地址
+          pay_term_number:
+            type: string
+          pay_term_type:
+            type: string
+          balance:
+            type: string
+          supplier_business_name:
+            type: string
+          discount_percent:
+            type: string
+          price_calculation_type:
+            type: string
+          selling_price_group_id:
+            type: integer
+          shipping_custom_field_details:
+            type: string
+          is_export:
+            type: integer
+          export_custom_field_1:
+            type: string
+          export_custom_field_2:
+            type: string
+          export_custom_field_3:
+            type: string
+          export_custom_field_4:
+            type: string
+          export_custom_field_5:
+            type: string
+          export_custom_field_6:
+            type: string
+          passportNo:
+            type: string
+          passportName:
+            type: string
+          HKID:
+            type: integer
+          prefix:
+            type: string
+          email:
+            type: string
+            description: 信箱
+          last_name:
+            type: string
+            description: 姓
+          first_name:
+            type: string
+            description: 名
+           
+
+paths:
+  /contacts/customers:
+    get:
+      summary: 取得客戶列表
+      description: 取得客戶列表
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 過濾條件
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersResponse'
+              example:
+                id: 1
+                text: "Walk-In Customer (CO0001)"
+                mobile: "0000"
+                address_line_1: null
+                address_line_2: null
+                city: null
+                state: null
+                country: null
+                zip_code: null
+                shipping_address: null
+                pay_term_number: null
+                pay_term_type: null
+                balance: "0.0000"
+                supplier_business_name: null
+                discount_percent: null
+                price_calculation_type: null
+                selling_price_group_id: null
+                shipping_custom_field_details: null
+                is_export: 0
+                export_custom_field_1: null
+                export_custom_field_2: null
+                export_custom_field_3: null
+                export_custom_field_4: null
+                export_custom_field_5: null
+                export_custom_field_6: null
+                passportNo: null
+                passportName: null
+                HKID: null
+                prefix: null
+                email: null
+                last_name: null
+                first_name: "Walk-In Customer"
+
