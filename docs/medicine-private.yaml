@@ -466,6 +466,10 @@ components:
           type: string
           description: 地址
           example: '安和路'
+        data[addressEn]:
+          type: string
+          description: 英文地址
+          example: 'rd. annho'
         data[district]:
           type: string
           description: 區域
@@ -500,6 +504,10 @@ components:
               type: string
               description: 地址
               example: '安和路'
+            addressEn:
+              type: string
+              description: 英文地址
+              example: 'rd. annho'
             district:
               type: string
               description: 區域
@@ -546,6 +554,8 @@ components:
                 district:
                   type: string
                 address:
+                  type: string
+                addressEn:
                   type: string
                 createdAt:
                   type: string
