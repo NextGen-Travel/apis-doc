@@ -95,8 +95,54 @@ components:
           first_name:
             type: string
             description: 名
-           
-
+    ProductListResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          product_id:
+            type: number
+            description: 產品ID
+          name:
+            type: string
+            description: 產品名稱
+          type:
+            type: string
+            description: 產品類型
+          enable_stock:
+            type: integer
+            description: 是否啟用庫存
+          variation_id:
+            type: integer
+            description: 規格ID
+          variation:
+            type: string
+            description: 規格名稱
+          qty_available:
+            type: number
+            description: 庫存數量
+          selling_price:
+            type: number
+            description: 售價
+          sub_sku:
+            type: string
+            description: Sub SKU
+          unit:
+            type: string
+            description: 單位
+          category_id:
+            type: integer
+            description: 分類ID
+          purchase_line_id:
+            type: integer
+            description: Purchase Line ID
+          lot_number:
+            type: string
+            description: 批號
+          image_url:
+            type: string
+            description: 圖片URL
+          
 paths:
   /contacts/customers:
     get:
@@ -149,4 +195,72 @@ paths:
                 email: null
                 last_name: null
                 first_name: "Walk-In Customer"
+
+  /products/list:
+    get:
+      summary: 取得產品列表
+      description: 取得產品列表
+      parameters:
+        - in: query
+          name: price_group
+          schema:
+            type: integer
+          description: 價格群組ID
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 分店ID
+        - in: query
+          name: term
+          schema:
+            type: string
+          description: 搜尋條件
+        - in: query
+          name: not_for_selling
+          schema:
+            type: integer
+          description: 是否為非賣品
+        - in: query
+          name: search_fields
+          schema:
+            type: array
+          description: 搜尋欄位
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListResponse'
+              example:       
+                - product_id: 76
+                  name: "滴眼液"
+                  type: "medicine"
+                  enable_stock: 1
+                  variation_id: 127
+                  variation: "顆粒 (粒)"
+                  qty_available: "2123.0000"
+                  selling_price: "125.0000"
+                  sub_sku: "0076-1"
+                  unit: "粒"
+                  category_id: null
+                  purchase_line_id: 84
+                  lot_number: "Batch111"
+                  image_url: "http://localhost:8000/project/public/img/default.png"
+                - product_id: 70
+                  name: "可樂"
+                  type: "single"
+                  enable_stock: 1
+                  variation_id: 119
+                  variation: "DUMMY"
+                  qty_available: "2059.0000"
+                  selling_price: "125.0000"
+                  sub_sku: "0070"
+                  unit: "Pc(s)"
+                  category_id: 5
+                  purchase_line_id: 70
+                  lot_number: "batch111"
+                  image_url: "http://localhost:8000/project/public/img/default.png"
 
