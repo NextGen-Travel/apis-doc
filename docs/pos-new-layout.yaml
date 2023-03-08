@@ -1710,19 +1710,19 @@ components:
           type: string
           description: 積分顯示名稱
         amount_for_unit_rp:
-          type: integer
+          type: string
           description: 每一積分需要的消費金額
         min_order_total_for_rp:
-          type: integer
+          type: string
           description: 可獲獎勵的最低消費金額
         max_rp_per_order:
           type: integer
           description: 每個訂單的最大積分額
         redeem_amount_per_unit_rp:
-          type: integer
+          type: string
           description: 每一積分的兌換金額
         min_order_total_for_redeem:
-          type: integer
+          type: string
           description: 可兌換積分的最低消費額
         min_redeem_point:
           type: integer
