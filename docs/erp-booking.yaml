@@ -242,16 +242,16 @@ components:
           type: string
           format: url
           example: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
-          description:
-            "Product image url<br>
-            僅供參考, NSS 可以調整商品圖片"
+          description: >
+            Product image url<br>
+            僅供參考, NSS 可以調整商品圖片
         description:
           type: string
           format: html
           example: '頸椎治療<br>頸椎治療<br>頸椎治療<br>頸椎治療'
-          description:
-            "ERP Product UUID<br>
-            僅供參考, NSS 可以調整商品圖片"
+          description: >
+            ERP Product UUID<br>
+            僅供參考, NSS 可以調整商品圖片
 
     BookedActivityInfo:
       type: object
@@ -444,11 +444,11 @@ paths:
     get:
       summary: 取得預約列表
       description: 取得預約列表
-      # description: "
+      # description: >
       #     取得預約列表。<br>
       #     按說應該要取得登入驗證:<br>
       #       1. 先打一個驗證去 NSS Server 向 EPR Server 要 token<br>
-      #       2. 將取得的 token 存放至 header 一起送出驗證"
+      #       2. 將取得的 token 存放至 header 一起送出驗證
       tags:
         - booking
       parameters:
@@ -463,13 +463,13 @@ paths:
         - name: status
           in: query
           required: false
-          description: "
+          description: >
             optional, booked status<br>
             此預定的活動是否已完成服務:<br>
               - all: 所有預約<br>
               - booked: 即將到來的預約<br>
               - cancelled: 已經取消的預約<br>
-              - completed: 已經完成的預約"
+              - completed: 已經完成的預約
           schema:
             type: string
             enum:
