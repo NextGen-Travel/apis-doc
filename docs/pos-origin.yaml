@@ -263,4 +263,82 @@ paths:
                   purchase_line_id: 70
                   lot_number: "batch111"
                   image_url: "http://localhost:8000/project/public/img/default.png"
-
+  
+  /sells/pos/get_product_row/{variation_id}/{location_id}:
+    get:
+      summary: 取得單一產品規格資訊
+      description: 取得單一產品規格資訊
+      parameters:
+        - in: path
+          name: variation_id
+          required: true
+          schema:
+            type: integer
+          description: 規格ID
+        - in: path
+          name: location_id
+          required: true
+          schema:
+            type: integer
+          description: 分店ID
+        - in: query
+          name: product_row
+          schema:
+            type: integer
+        - in: query
+          name: customer_id
+          schema:
+            type: integer
+          description: 客戶ID
+        - in: query
+          name: is_direct_sell
+          schema:
+            type: boolean
+            default: false
+          description: 是否為直接銷售
+        - in: query
+          name: price_group
+          schema:
+            type: integer
+          description: 價格群組ID
+        - in: query
+          name: purchase_line_id
+          schema:
+            type: integer
+          description: Purchase Line ID
+        - in: query
+          name: weighing_scale_barcode
+          schema:
+            type: integer
+        - in: query
+          name: quantity
+          schema:
+            type: integer
+            default: 1
+          description: 數量
+        - in: query
+          name: is_sales_order
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enable_sr_no:
+                    type: integer
+                  html_content:
+                    type: string
+                    description: HTML
+                  success:
+                    type: boolean
+                    description: 是否成功
+              example:
+                enable_sr_no: 0
+                html_content: <tr class="product_row" data-row_index="2" >...</tr>
+                success: true
+              
