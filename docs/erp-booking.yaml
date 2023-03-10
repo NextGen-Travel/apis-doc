@@ -38,8 +38,36 @@ components:
         - contact_name
         - contact_mobile
         - contact_email
-        - product_specific_sys_activity_id
+      example:
+        book_type: activity
+        product_specific_sys_activity_id: 8
+        contact_uuid: e475e794-8105-11ed-a6ed-0242ac170005
+        contact_name: 王小明
+        contact_mobile: 0912654987
+        contact_email: "wangming@nextgen.com.hk"
       properties:
+        book_type:
+          type: string
+          description: >
+            optional
+
+            - activity:<br>
+              - body變數 required:<br>
+                - product_specific_sys_activity_id
+
+            - product:<br>
+              - body變數 required:<br>
+                - product_id<br>
+                - booking_start<br>
+                - booking_end<br>
+              - body變數 optional:<br>
+                - res_waiter_id<br>
+                - business_id<br>
+                - location_id<br>
+          enum:
+            - activity
+            - product
+          example: activity
         contact_uuid:
           type: string
           description: required, 顧客 UUID
@@ -57,8 +85,10 @@ components:
           description: required, 顧客 email
         product_specific_sys_activity_id:
           type: integer
-          description: required, ERP 活動場次 ID
-          example: 6
+          description: only required when book_type = activity , ERP 活動場次 ID
+        product_id:
+          type: integer
+          description: only required when book_type = product, ERP 商品 ID
         # staff_id:
         #   type: integer
         #   description: 服務生ID
@@ -70,13 +100,10 @@ components:
           description: optional, 服務生ID
         business_id:
           type: integer
-          description: only required in ERP, 總店ID
+          description: only required when book_type = product, 總店ID
         location_id:
           type: integer
-          description: only required in ERP, 分店ID
-        contact_id:
-          type: integer
-          description: only required in ERP, 顧客ID
+          description: only required when book_type = product, 分店ID
         booking_start:
           type: string
           description: 預約開始時間
@@ -103,9 +130,32 @@ components:
           description: 結果訊息
     UpdateBooking:
       type: object
-      required:
-        - product_specific_sys_activity_id
+      example:
+        book_type: activity
+        product_specific_sys_activity_id: 234
       properties:
+        book_type:
+          type: string
+          description: >
+            optional
+
+            - activity:<br>
+              - body變數 required:<br>
+                - product_specific_sys_activity_id
+
+            - product:<br>
+              - body變數 required:<br>
+                - product_id<br>
+                - booking_start<br>
+                - booking_end<br>
+              - body變數 optional:<br>
+                - res_waiter_id<br>
+                - location_id<br>
+          enum:
+            - activity
+            - product
+          example: activity
+
         product_specific_sys_activity_id:
           type: integer
           description: required, ERP 活動場次 ID
@@ -423,14 +473,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateBooking'
-            example:
-              contact_name: 王小明
-              contact_mobile: 0912654987
-              contact_email: "wangming@nextgen.com.hk"
-              contact_uuid: e475e794-8105-11ed-a6ed-0242ac170005
-              product_specific_sys_activity_id: 8
-              res_waiter_id: 5
-
       responses:
         '200':
           description: 成功
@@ -560,9 +602,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateBooking'
-            example:
-              product_specific_sys_activity_id: 8
-              res_waiter_id: 5
       tags:
         - booking
       responses:
@@ -588,6 +627,20 @@ paths:
             type: integer
             format: int64
             minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                book_type:
+                  type: string
+                  enum:
+                    - activity
+                    - product
+                  example: activity
+
       tags:
         - booking
       responses:
