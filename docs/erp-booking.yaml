@@ -654,6 +654,52 @@ paths:
                 success: 1
                 msg: delete success
 
+  /booking/{booking_id}/cancel:
+    patch:
+      summary: 顧客取消預約
+      description: 顧客取消預約
+      tags:
+        - booking
+
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          description: The ID of the booking.
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                book_type:
+                  type: string
+                  enum:
+                    - activity
+                    - product
+                  example: activity
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: 執行結果(1=成功, 0=失敗)
+                    example: 1
+                  msg:
+                    type: string
+                    description: 結果訊息
+                    example: This booking was cancelled
 
   /product/{uuid}:
     get:
