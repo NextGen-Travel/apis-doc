@@ -1160,6 +1160,9 @@ paths:
               cautions[]  :
                 style : form
                 explode : true
+              usageSupport[]  :
+                style : form
+                explode : true
             schema:
               type: object
               properties:
@@ -1203,6 +1206,12 @@ paths:
                     type: integer
                   description: 用藥天數
                   example: ['3','3']
+                usageSupport[]:
+                  type: array
+                  items:
+                    type: string
+                  description: 用藥說明
+                  example: ['飯前', '飯後']
                 frequency[]:
                   type: array
                   items:
