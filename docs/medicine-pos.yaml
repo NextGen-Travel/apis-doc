@@ -219,7 +219,30 @@ components:
           description: 處方簽症狀
         products:
           type: string
-          description: 藥品清單
+          description: | 
+            藥品細項(欄位如下)
+
+            days: 配藥天數
+            
+            total: 總數量
+
+            dosage: 每次數量
+
+            frequency: 每天次數
+
+            product_id: 藥品ID
+
+            variation_id: 規格ID
+
+            cautions: 
+
+            custom_caution:
+
+            dosage_form: 劑型
+
+            unit: 單位
+
+            usage: 
         contact_custom_field1:
           type: string
           description: 病人身分證字號
@@ -494,21 +517,18 @@ components:
             name:
               type: string
               description: 藥品名稱
-            unit_key:
-              type: string
-              description: 單位 Key
-            unit_short_name:
-              type: string
-              description: 單位簡稱
+            unit_id:
+              type: integer
+              description: 單位ID
             qty_available:
               type: number
-              description: 庫存數量
+              description: 庫存總數量
             alert_quantity:
               type: string
               description: 庫存警告數量
-            default_sell_price:
+            unit_short_name:
               type: string
-              description: 售價
+              description: 單位簡稱
             product_custom_field1:
               type: string
               description: 藥品證號
@@ -521,6 +541,23 @@ components:
             product_custom_field4:
               type: string
               description: 藥品主成份
+            stock:
+              type: array
+              items:
+                type: object
+                properties:
+                  variation_id:
+                    type: integer
+                    description: 規格ID
+                  unit_name:
+                    type: string
+                    description: 單位名稱
+                  default_sell_price:
+                    type: string
+                    description: 售價(不含稅)
+                  qty_available:
+                    type: string
+                    description: 庫存數量
 
 paths:
   /info:
