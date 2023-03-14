@@ -4164,7 +4164,7 @@ paths:
           name: sort_column
           schema:
             type: string
-            enum: ['', order_num, contact_name, creator_name]
+            enum: ['', 'order_date', order_num, contact_name, creator_name]
           description: 排序欄位
         - in: query
           name: sort_direction
