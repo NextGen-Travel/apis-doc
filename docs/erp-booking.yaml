@@ -266,12 +266,16 @@ components:
           description: 當前頁碼
         total:
           type: integer
-          example: 13
-          description: 所有頁碼
-        count:
-          type: integer
           example: 124
           description: 全部筆數
+        count:
+          type: integer
+          example: 10
+          description: 本頁筆數
+        last_page:
+          type: integer
+          example: 13
+          description: 最後頁碼
 
     ActivityProductInfo:
       type: object
