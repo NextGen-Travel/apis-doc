@@ -5201,6 +5201,9 @@ paths:
                             unit_price:
                               type: string
                               description: 每單位價格
+                            selling_price:
+                              type: string
+                              description: 每單位建議售價
                             unit:
                               type: string
                               description: 庫存單位
@@ -5262,6 +5265,7 @@ paths:
                       exp_date: 20240209
                       quantity: 100
                       unit_price: 10
+                      selling_price: 15.0000
                       unit: 罐
                       base_unit: 箱
                       base_unit_multiplier: 24
@@ -5283,6 +5287,7 @@ paths:
                       exp_date: 20240209
                       quantity: 100
                       unit_price: 10
+                      selling_price: 15.0000
                       unit: 罐
                       base_unit: 箱
                       base_unit_multiplier: 24
