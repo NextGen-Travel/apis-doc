@@ -243,6 +243,8 @@ components:
             unit: 單位
 
             usage: 
+
+            sell_line_note: 用藥說明
         contact_custom_field1:
           type: string
           description: 病人身分證字號
@@ -736,22 +738,33 @@ paths:
                       properties:
                         sell_id:
                           type: number
+                          description: sell line id
                         quantity:
                           type: number
+                          description: 數量
                         price:
                           type: string
+                          description: 售價（不含稅）
                         usage_id:
                           type: number
                         product_id:
                           type: number
+                          description: 產品ID
+                        variation_id:
+                          type: number
+                          description: 規格ID
                         days:
                           type: number
+                          description: 配藥天數
                         total:
                           type: number
+                          description: 總數量
                         dosage:
                           type: number
+                          description: 每次數量
                         frequency:
                           type: number
+                          description: 用藥頻率
                         cautions:
                           type: array
                           items:
@@ -764,6 +777,9 @@ paths:
                           type: string
                         usage:
                           type: number
+                        sell_line_note:
+                          type: string
+                          description: 用藥說明
                   links:
                     type: object
                     properties:
