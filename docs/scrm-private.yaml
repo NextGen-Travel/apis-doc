@@ -2717,10 +2717,13 @@ paths:
                   msg:
                     type: string                   
                     example: Success
-                  id:
-                    type: number
-                  tagName:
-                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      tagName:
+                        type: string
                   
   /tags/{id}:
     delete:
