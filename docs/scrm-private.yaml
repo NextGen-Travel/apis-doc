@@ -568,8 +568,10 @@ paths:
                   example: TJ
                   description: 客服前台顯示名稱  
                 avatar  :  
-                  type: string
-                  format: binary
+                  oneOf:
+                    - type: string
+                    - type: string
+                      format: binary
                   description: 客服大頭貼
                 phone:
                   type: string
