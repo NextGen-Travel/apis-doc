@@ -1163,6 +1163,9 @@ paths:
               usageSupport[]  :
                 style : form
                 explode : true
+              usageSupportEn[]  :
+                style : form
+                explode : true
             schema:
               type: object
               properties:
@@ -1212,12 +1215,18 @@ paths:
                     type: string
                   description: 用藥說明
                   example: ['飯前', '飯後']
+                usageSupportEn[]:
+                  type: array
+                  items:
+                    type: string
+                  description: 用藥說明 En
+                  example: ['before meal', 'after meal']
                 frequency[]:
                   type: array
                   items:
                     type: string
                   description: 用藥頻率
-                  example: ['take_morning_and_night','take_after_meals']
+                  example: ['one_time_a_day','as_needed']
                 usage[]:
                   type: array
                   items:
