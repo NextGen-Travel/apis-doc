@@ -418,10 +418,10 @@ paths:
                   type: string
                   example: test
                   description: 備註
-                roleName:
+                role:
                   type: string
-                  example: Manager
-                  description: 員工權限（ Manager || Advanced-Staff || Staff )
+                  example: supervisor
+                  description: 員工權限（ admin-> 管理員 | supervisor-> 主管 | seniorStaff-> seniorStaff | staff-> 一般員工 )
 
       responses:
         '200':
@@ -793,8 +793,10 @@ paths:
                   example: TJ
                   description: 客服前台顯示名稱  
                 avatar  :  
-                  type: string
-                  format: binary
+                  oneOf:
+                    - type: string
+                      format: binary
+                    - type: string
                   description: 客服大頭貼 
                 phone:
                   type: string
