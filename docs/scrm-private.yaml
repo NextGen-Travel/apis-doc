@@ -569,8 +569,7 @@ paths:
                   description: 客服前台顯示名稱  
                 avatar  :  
                   oneOf:
-                    - type: string
-                      format: binary
+                    - type: file
                     - type: string
                   description: 客服大頭貼
                 phone:
