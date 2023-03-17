@@ -407,9 +407,10 @@ paths:
                   example: 1
                   description: 啟用 || 停用
                 avatar  :  
-                  type: string
-                  format: binary
-                  description: 客服大頭貼 
+                  oneOf:
+                    - type: string
+                      format: binary
+                    - type: string
                 phone: 
                   type: string
                   example: 123456789
