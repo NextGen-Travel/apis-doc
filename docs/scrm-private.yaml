@@ -65,10 +65,7 @@ components:
                 isActive:
                   type: boolean
                 children: 
-                  type: array
-                  items:
-                    type: object
-                    description: 遞迴
+                  $ref: '#/components/schemas/AutoReplies'
             
     QuickReplies:
       type: object
@@ -388,7 +385,6 @@ paths:
           multipart/form-data:
             schema:
               type: object
-              required: []
               properties:
                 password:
                   type: string
