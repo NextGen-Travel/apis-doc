@@ -13,6 +13,7 @@ servers:
 
 
 components:
+
   securitySchemes:
     client:
       in: header
@@ -44,28 +45,21 @@ components:
             type: boolean
           children:
             type: array
-            description: 遞迴
-            items: 
-              type: object
-              required:
-                - id
-                - replyText
-                - keyword
-                - children
-                - isActive
-              properties:
-                id:
-                  type: number
-                replyText:
-                  type: string
-                keyword:
-                  type: string
-                isEnd:
-                  type: boolean
-                isActive:
-                  type: boolean
-                children: 
-                  $ref: '#/components/schemas/AutoReplies'
+            items:
+              $ref: '#/components/schemas/AutoReplies'
+        example:
+          id: 0
+          replyText: "string"
+          keyword: "string"
+          isEnd: true
+          isActive: true
+          children:
+            - id: 1
+              replyText: "string"
+              keyword: "string"
+              isEnd: true
+              isActive: true
+              children: []
             
     QuickReplies:
       type: object
