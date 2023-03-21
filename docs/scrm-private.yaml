@@ -1403,7 +1403,7 @@ paths:
                   data:
                       $ref: '#/components/schemas/AutoReplies'
 
-  /auto-replies/all:
+  /auto-replies/{id}:
     put:
       summary: 編輯樹根或樹葉用的
       description: 編輯樹根或樹葉用的
@@ -1436,9 +1436,16 @@ paths:
                     type: string                   
                     example: Success
                   data:
-                    type: array
-                    items: 
-                      $ref: '#/components/schemas/AutoReplies'
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      replyText:
+                        type: string
+                      keyword:
+                        type: string
+                      isActive:
+                        type: boolean
 
   /auto-reply/welcome:
     get: 
@@ -1490,7 +1497,7 @@ paths:
                   msg:
                     type: string                   
                     example: Success
-  /auto-replies/{id}:
+  /auto-replies/active/{id}:
     put:
       summary: 更新該樹節點是否啟用
       description: 更新該樹節點是否啟用
