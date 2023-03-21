@@ -1401,7 +1401,17 @@ paths:
                     type: string                   
                     example: Success
                   data:
-                      $ref: '#/components/schemas/AutoReplies'
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      replyText:
+                        type: string
+                      keyword:
+                        type: string
+                      isActive:
+                        type: boolean
+                      
 
   /auto-replies/{id}:
     put:
