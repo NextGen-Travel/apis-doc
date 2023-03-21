@@ -1411,6 +1411,10 @@ paths:
                         type: string
                       isActive:
                         type: boolean
+                      children:
+                        type: array
+                        items:
+                          type: object
                       
 
   /auto-replies/{id}:
