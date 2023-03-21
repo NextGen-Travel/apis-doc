@@ -1425,6 +1425,12 @@ paths:
         - auto-replies
       security:
         - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -1432,8 +1438,6 @@ paths:
             schema:
               type: object
               properties:
-                id:
-                  type: number
                 replyText:
                   type: string
                 keyword:
