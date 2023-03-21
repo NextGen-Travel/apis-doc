@@ -973,7 +973,8 @@ paths:
           name: platform
           schema:
             type: string
-          required: false           
+          required: false   
+          enum: [facebook, whatsapp, signal, telegram, wechat, instagram]        
         - in: query
           name: keyword
           required: false
