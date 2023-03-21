@@ -1456,6 +1456,30 @@ paths:
                         type: string
                       isActive:
                         type: boolean
+    delete:
+      summary: 刪除該樹節點
+      description: 刪除該樹節點
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
 
   /auto-reply/welcome:
     get: 
@@ -1541,34 +1565,6 @@ paths:
                   msg:
                     type: string                   
                     example: Success
-    delete:
-      summary: 刪除該樹節點
-      description: 刪除該樹節點
-      tags:
-        - auto-replies
-      security:
-        - client: []
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string                   
-                    example: Success
-                  data:
-                    type: array
-                    items: 
-                      $ref: '#/components/schemas/AutoReplies'
   # ====================
   #
   # 快捷回覆
