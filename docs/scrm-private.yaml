@@ -1534,7 +1534,7 @@ paths:
   /auto-replies/active/{id}:
     put:
       summary: 更新該樹節點是否啟用
-      description: 更新該樹節點是否啟用
+      description: 更新該樹節點是否啟用。如果 isActive 改 false 的話，後端也會把 children 改成 false；但是 isActive 改 true 的話，後端不會把 children 改成 true。
       tags:
         - auto-replies
       security:
