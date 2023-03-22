@@ -773,6 +773,13 @@ paths:
         - users
       security:
         - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 10 
       requestBody:
         required: true
         content:
@@ -974,7 +981,8 @@ paths:
           name: platform
           schema:
             type: string
-          required: false           
+          required: false   
+          enum: [facebook, whatsapp, signal, telegram, wechat, instagram]        
         - in: query
           name: keyword
           required: false
@@ -1401,9 +1409,23 @@ paths:
                     type: string                   
                     example: Success
                   data:
-                      $ref: '#/components/schemas/AutoReplies'
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      replyText:
+                        type: string
+                      keyword:
+                        type: string
+                      isActive:
+                        type: boolean
+                      children:
+                        type: array
+                        items:
+                          type: object
+                      
 
-  /auto-replies/all:
+  /auto-replies/{id}:
     put:
       summary: 編輯樹根或樹葉用的
       description: 編輯樹根或樹葉用的
@@ -1411,6 +1433,12 @@ paths:
         - auto-replies
       security:
         - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -1418,8 +1446,6 @@ paths:
             schema:
               type: object
               properties:
-                id:
-                  type: number
                 replyText:
                   type: string
                 keyword:
@@ -1436,9 +1462,40 @@ paths:
                     type: string                   
                     example: Success
                   data:
-                    type: array
-                    items: 
-                      $ref: '#/components/schemas/AutoReplies'
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      replyText:
+                        type: string
+                      keyword:
+                        type: string
+                      isActive:
+                        type: boolean
+    delete:
+      summary: 刪除該樹節點
+      description: 刪除該樹節點
+      tags:
+        - auto-replies
+      security:
+        - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                   
+                    example: Success
 
   /auto-reply/welcome:
     get: 
@@ -1490,10 +1547,10 @@ paths:
                   msg:
                     type: string                   
                     example: Success
-  /auto-replies/{id}:
+  /auto-replies/active/{id}:
     put:
       summary: 更新該樹節點是否啟用
-      description: 更新該樹節點是否啟用
+      description: 更新該樹節點是否啟用。如果 isActive 改 false 的話，後端也會把 children 改成 false；但是 isActive 改 true 的話，後端不會把 children 改成 true。
       tags:
         - auto-replies
       security:
@@ -1524,34 +1581,6 @@ paths:
                   msg:
                     type: string                   
                     example: Success
-    delete:
-      summary: 刪除該樹節點
-      description: 刪除該樹節點
-      tags:
-        - auto-replies
-      security:
-        - client: []
-      parameters:
-        - in: path
-          name: id
-          schema:
-            type: string
-          required: true
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string                   
-                    example: Success
-                  data:
-                    type: array
-                    items: 
-                      $ref: '#/components/schemas/AutoReplies'
   # ====================
   #
   # 快捷回覆
