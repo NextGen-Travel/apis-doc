@@ -152,10 +152,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ButtonItem'
-
-    Languages:
-      additionalProperties:
-        type: string
   
     Language:
       type: object
@@ -171,7 +167,7 @@ components:
         id:
           type: string
         language:
-          $ref: '#/components/schemas/Languages'
+          type: string
         rejectedReason:
           type: string
         status:
@@ -1785,7 +1781,7 @@ paths:
               type: object
               properties:
                 language:
-                  $ref: '#/components/schemas/Languages'
+                  type: string
                 name:
                   type: string
                 category:
@@ -1818,7 +1814,7 @@ paths:
                       name:
                         type: string
                       language:
-                        $ref: '#/components/schemas/Languages'
+                        type: string
                       status:
                         type: string
                         enum: ['NEW','APPROVED','PENDING','REJECTED','PENDING_DELETION','DELETED']
