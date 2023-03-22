@@ -154,7 +154,6 @@ components:
             $ref: '#/components/schemas/ButtonItem'
 
     Languages:
-      type: object
       additionalProperties:
         type: string
   
@@ -981,8 +980,8 @@ paths:
           name: platform
           schema:
             type: string
+            enum: [facebook, whatsapp, signal, telegram, wechat, instagram]        
           required: false   
-          enum: [facebook, whatsapp, signal, telegram, wechat, instagram]        
         - in: query
           name: keyword
           required: false
