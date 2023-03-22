@@ -773,6 +773,13 @@ paths:
         - users
       security:
         - client: []
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          required: true
+          example: 10 
       requestBody:
         required: true
         content:
