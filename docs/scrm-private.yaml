@@ -806,6 +806,8 @@ paths:
                   type: string
                   example: test
                   description: 備註
+              required:
+                - ""
 
       responses:
         '200':
@@ -919,7 +921,6 @@ paths:
                   type: number
                   example: 5
                   description: 建立客服的數量限制(預設是1)
-
               required:
                 - name
 
