@@ -154,41 +154,43 @@ components:
             $ref: '#/components/schemas/ButtonItem'
   
     Language:
-      type: object
-      required:
-        - id
-        - language
-        - rejectedReason
-        - status
-        - createdAt
-        - updatedAt
-        - components
-      properties:
-        id:
-          type: string
-        language:
-          type: string
-        rejectedReason:
-          type: string
-        status:
-          type: string
-          enum: ['NEW','APPROVED','PENDING','REJECTED','PENDING_DELETION','DELETED']
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
-        components:
-          type: array
-          $ref: '#/components/schemas/TemplateMessageComponent'
-        namespace:
-          type: string
-        wabaId:
-          type: string
-        category:
-          type: string
-          enum: ['OTP','TRANSACTIONAL','MARKETING']
-        name:
-          type: string
+      type: array
+      items:
+        type: object
+        required:
+          - id
+          - language
+          - rejectedReason
+          - status
+          - createdAt
+          - updatedAt
+          - components
+        properties:
+          id:
+            type: string
+          language:
+            type: string
+          rejectedReason:
+            type: string
+          status:
+            type: string
+            enum: ['NEW','APPROVED','PENDING','REJECTED','PENDING_DELETION','DELETED']
+          createdAt:
+            type: string
+          updatedAt:
+            type: string
+          components:
+            type: array
+            $ref: '#/components/schemas/TemplateMessageComponent'
+          namespace:
+            type: string
+          wabaId:
+            type: string
+          category:
+            type: string
+            enum: ['OTP','TRANSACTIONAL','MARKETING']
+          name:
+            type: string
     TemplateMessageItems:
       type: object
       properties:
@@ -1826,7 +1828,7 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/TemplateMessageComponent'
-  /messagebird/templates/{templateName}/:
+  /messagebird/templates/{templateName}:
     get: 
       summary: 取得特定範本
       description: 取得特定範本
