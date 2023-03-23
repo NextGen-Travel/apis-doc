@@ -419,6 +419,8 @@ paths:
                   type: string
                   example: supervisor
                   description: 員工權限（ admin-> 管理員 | supervisor-> 主管 | seniorStaff-> seniorStaff | staff-> 一般員工 )
+              required:
+                - ""
 
       responses:
         '200':
