@@ -927,8 +927,13 @@ paths:
                   type: number
                   example: 5
                   description: 建立客服的數量限制(預設是1)
+                channel:
+                  type: string
+                  example: cas
+                  description: 提供是哪一個channel
               required:
                 - name
+                - channel
 
       responses:
         '200':
