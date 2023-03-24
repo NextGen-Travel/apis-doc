@@ -1084,6 +1084,12 @@ paths:
                               type: string
                             enable: 
                               type: boolean
+                            wabaId:
+                              type: string
+                              description:  只有whatsapp才有
+                            templateNamespace:
+                              type: string
+                              description:  只有whatsapp才有
     put:
       summary: 更新公司（superadmin權限才可使用）
       description: 更新公司（superadmin權限才可使用）
@@ -1132,6 +1138,14 @@ paths:
                       channelId:
                         type: string
                         example: test123-wafds-vv654
+                      wabaId:
+                        type: string
+                        example: 1066553231322
+                        description: 只有whatsapp平台必填
+                      templateNamespace:
+                        type: string
+                        example: 12dea546c123asd456
+                        description: 只有whatsapp平台必填
                       enable:
                         type: boolean
                         example: true
