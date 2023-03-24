@@ -1337,6 +1337,8 @@ paths:
       description: 會回傳 base64
       tags:
         - company
+      security:
+        - client: []
       responses:
         '200':
           description: 成功
