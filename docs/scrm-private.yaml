@@ -1103,13 +1103,6 @@ paths:
                             templateNamespace:
                               type: string
                               description:  只有whatsapp才有
-                required:
-                  - 'id'
-                  - 'enable'
-                  - 'name'
-                  - 'accountLimit'
-                  - 'sso'
-                  - 'keys'
     put:
       summary: 更新公司（superadmin權限才可使用）
       description: 更新公司（superadmin權限才可使用）
