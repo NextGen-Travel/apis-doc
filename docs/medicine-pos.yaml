@@ -453,6 +453,9 @@ components:
             created_at:
               type: string
               description: 建立日期
+            language:
+              type: string
+              description: 慣用語
     SuspendResponse:
       type: object
       properties:
