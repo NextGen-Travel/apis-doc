@@ -1181,6 +1181,9 @@ paths:
                   type: number
                   example: 5
                   description: 建立客服的數量限制
+                productLink:
+                  type: string
+                  example: www.nss.girlssecrets.com
 
       responses:
         '200':
