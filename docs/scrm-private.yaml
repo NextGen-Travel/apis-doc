@@ -2481,8 +2481,9 @@ paths:
                             id:
                               type: number
                             status:
+                              description: 'sent:訊息送出了 ,delivered: 接收的人有收到了（sent, delivered 想像一下 whatsapp 不是會有 2 個勾勾，一個勾勾代表發的人有發出去，2 個勾勾代表收的人的手機有網路所以收到了） ,read:訊息已讀 failed:通常是因為超過可以發給客人的時間限制了，either 24hr or 7 days ,pending:發出去了但是 messagebird 還沒回報狀態 ,transmitted:運送中 ,rejected:被拒，目前發生過的時候是因為使用的電話被 messagebird bang 掉不能用。總的來說 msg 的狀態: pending -> transmitted -> sent -> delivered -> read. 或失敗: failed, rejected'
                               type: string
-                              enum: ['sent' , 'read' , 'delivered' , 'failed']
+                              enum: ['sent' , 'read' , 'delivered' , 'failed' , 'pending' , 'transmitted' , 'rejected']
                             text:
                               type: string
                             timestamp:
@@ -2629,8 +2630,9 @@ paths:
                         lastMsg:
                           type: string
                         status:
+                          description: 'sent:訊息送出了 ,delivered: 接收的人有收到了（sent, delivered 想像一下 whatsapp 不是會有 2 個勾勾，一個勾勾代表發的人有發出去，2 個勾勾代表收的人的手機有網路所以收到了） ,read:訊息已讀 failed:通常是因為超過可以發給客人的時間限制了，either 24hr or 7 days ,pending:發出去了但是 messagebird 還沒回報狀態 ,transmitted:運送中 ,rejected:被拒，目前發生過的時候是因為使用的電話被 messagebird bang 掉不能用。總的來說 msg 的狀態: pending -> transmitted -> sent -> delivered -> read. 或失敗: failed, rejected'
                           type: string
-                          enum: ['sent' , 'read' , 'delivered' , 'failed']
+                          enum: ['sent' , 'read' , 'delivered' , 'failed' , 'pending' , 'transmitted' , 'rejected']
                         timestamp:
                           type: string
                         unreadCount:
