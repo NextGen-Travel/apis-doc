@@ -702,6 +702,8 @@ paths:
                             type: string
                           company:
                             type: number
+                          productLink:
+                            type: string
                       platform:
                           type: array
                           description: 該使用者所屬公司有開啟的社群平台帳號（superadmin不會有）
@@ -931,6 +933,10 @@ paths:
                   type: string
                   example: cas
                   description: 提供是哪一個channel
+                productLink:
+                  type: string
+                  example: www.nss.com
+                  description: 商品導購連結
               required:
                 - name
                 - channel
@@ -1184,6 +1190,9 @@ paths:
                   type: number
                   example: 5
                   description: 建立客服的數量限制
+                productLink:
+                  type: string
+                  example: www.nss.girlssecrets.com
 
       responses:
         '200':
