@@ -2687,7 +2687,7 @@ paths:
                               type: number
                             platform:
                               type: string
-                              enum: ['whatsapp','wechat','facebook','instagram','telegram']
+                              enum: ['whatsapp','wechat','facebook','instagram','telegram', 'signal']
                             tags:
                               type: array
                               items:
