@@ -67,6 +67,9 @@ components:
               status:
                 type: boolean
                 description: 狀態是否啟用
+              balance:
+                type: number
+                description: 預付款結餘
         links:
           type: object
           properties:
