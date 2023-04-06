@@ -370,3 +370,30 @@ paths:
                         type: string
                         example:  建立失敗         
 
+  # ====================
+  #
+  # stores
+  #
+
+  /stores/list:
+    get:
+      summary: 獲取商店的id及name
+      tags:
+        - stores
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
