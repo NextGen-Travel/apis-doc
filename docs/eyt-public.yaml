@@ -522,7 +522,81 @@ paths:
                         id:
                           type: number
                         name:
-                          type: string                
+                          type: string      
+
+    post:
+      summary: 建立tag
+      tags:
+        - tags
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                parent:
+                  type: number
+                  description: 標籤的父層
+                tagName:
+                  type: string
+                  description: 標籤名稱
+                sort:
+                  type: number
+                  description: 該標籤是屬於哪一層，1的話是主分類，2是次分類，預設999是一般的標籤
+                  example: 999
+
+              required:
+                - tagName
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      tagName:
+                        type: string
+                      children:
+                        type: array
+                        items:
+                          type: object
+
+        '500':
+          description: 伺服器錯誤
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  伺服器錯誤
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example:  建立失敗              
 
   # ====================
   #
