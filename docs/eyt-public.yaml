@@ -6,6 +6,7 @@ info:
 
 servers:
   - url: http://localhost:1339/api/
+  - url: https://e-drugsearch.com.hk/api/
 
 components:
   parameters:
@@ -70,7 +71,7 @@ paths:
                           type: string
                         content:
                           type: string
-                        source:
+                        store:
                           type: string
                         type:
                           type: string
@@ -96,10 +97,10 @@ paths:
                 content:
                   type: string
                   description: 文章內容
-                source:
-                  type: string
-                  example: 創譽大藥房
-                  description: 文章來源（發文者）
+                store:
+                  type: number
+                  description: 該文章是屬於哪一個供應商，當前因無後台機制故先寫死
+                  example: 1
                 type:
                   type: string
                   example: 藥物新知
@@ -125,7 +126,7 @@ paths:
 
               required:
                 - title
-                - source
+                - store
                 - type
                 - locale
                 - image
@@ -149,7 +150,7 @@ paths:
                         type: string
                       content:
                         type: string
-                      source:
+                      store:
                         type: string
                       type:
                         type: string
@@ -231,7 +232,7 @@ paths:
                         type: string
                       content:
                         type: string
-                      source:
+                      store:
                         type: string
                       type:
                         type: string
@@ -265,10 +266,10 @@ paths:
                 content:
                   type: string
                   description: 文章內容
-                source:
-                  type: string
-                  example: 創譽大藥房
-                  description: 文章來源（發文者）
+                store:
+                  type: number
+                  description: 該文章是屬於哪一個供應商，當前因無後台機制故先寫死
+                  example: 1
                 type:
                   type: string
                   example: 藥物新知
@@ -294,7 +295,7 @@ paths:
 
               required:
                 - title
-                - source
+                - store
                 - type
                 - locale
                 - image
@@ -318,7 +319,7 @@ paths:
                         type: string
                       content:
                         type: string
-                      source:
+                      store:
                         type: string
                       type:
                         type: string
