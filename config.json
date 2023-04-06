@@ -43,6 +43,10 @@
         {
             "name": "POS original",
             "value": "pos-origin"
+        },
+        {
+            "name": "Eyt Public",
+            "value": "eyt-public"
         }
     ]
 }
