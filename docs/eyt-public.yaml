@@ -496,6 +496,36 @@ paths:
 
   # ====================
   #
+  # tags
+  #
+
+  /tags:
+    get:
+      summary: 獲取tags
+      tags:
+        - tags
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string                
+
+  # ====================
+  #
   # products
   #
 
