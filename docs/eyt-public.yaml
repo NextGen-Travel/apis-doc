@@ -541,13 +541,18 @@ paths:
                 tagName:
                   type: string
                   description: 標籤名稱
-                sort:
+                level:
                   type: number
                   description: 該標籤是屬於哪一層，1的話是主分類，2是次分類，預設999是一般的標籤
                   example: 999
+                locale:
+                  type: string
+                  enum: ['zh', 'en', 'zh-CN']
+                  description: 文章語言，上面分別對應 繁體中文，英文，簡體中文
 
               required:
                 - tagName
+                - locale
 
       responses:
         '200':
@@ -597,6 +602,49 @@ paths:
                       msg:
                         type: string
                         example:  建立失敗              
+
+  /tags/{id}:
+    get:
+      summary: 獲取tag
+      tags:
+        - tags
+      parameters:
+        - name: id
+          in: path
+          description: tag id
+          required: true
+          example: 3
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      tagName:
+                        type: string
+                      level:
+                        type: object
+                        properties:
+                      children:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
 
   # ====================
   #
