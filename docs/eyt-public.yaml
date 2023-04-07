@@ -166,14 +166,23 @@ paths:
                           type: string
                         content:
                           type: string
-                        store:
-                          type: string
                         type:
                           type: string
                         viewCount:
                           type: number
                         image:
                           type: string
+                        store:
+                          type: string
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              tagName:
+                                type: string
 
     post:
       summary: 建立文章
@@ -335,7 +344,15 @@ paths:
                         type: number
                       image:
                         type: string
-
+                      tag:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
     # review
     put:
       summary: 更新指定文章
