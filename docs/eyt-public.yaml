@@ -634,8 +634,14 @@ paths:
                       tagName:
                         type: string
                       level:
+                        type: number
+                      parent:
                         type: object
                         properties:
+                          id:
+                            type: number
+                          tagName:
+                            type: string
                       children:
                         type: array
                         items:
