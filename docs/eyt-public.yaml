@@ -344,7 +344,7 @@ paths:
                         type: number
                       image:
                         type: string
-                      tag:
+                      tags:
                         type: array
                         items:
                           type: object
