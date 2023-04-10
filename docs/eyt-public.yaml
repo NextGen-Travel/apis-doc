@@ -554,7 +554,10 @@ paths:
                         id:
                           type: number
                         name:
-                          type: string      
+                          type: string
+                        parent:
+                          type: number | string
+                          description: 如果有上一層的標籤，則會給上一層標籤的id，不然會給空字串      
 
   /add/tags:
     post:
@@ -574,10 +577,10 @@ paths:
                 tagName:
                   type: string
                   description: 標籤名稱
-                level:
-                  type: number
-                  description: 該標籤是屬於哪一層，1的話是主分類，2是次分類，預設999是一般的標籤
-                  example: 999
+                type:
+                  type: string
+                  description: 該標籤是屬於分類還是一般標籤，default為 hashTag，分類則帶值categories
+                  example: categories
                 locale:
                   type: string
                   enum: ['zh', 'en', 'zh-CN']
@@ -604,8 +607,6 @@ paths:
                         type: number
                       tagName:
                         type: string
-                      level:
-                        type: number
                       parent:
                         type: object
                         properties:
@@ -680,8 +681,8 @@ paths:
                         type: number
                       tagName:
                         type: string
-                      level:
-                        type: number
+                      type:
+                        type: string
                       parent:
                         type: object
                         properties:
@@ -717,10 +718,10 @@ paths:
                 tagName:
                   type: string
                   description: 標籤名稱
-                level:
+                type:
                   type: number
-                  description: 該標籤是屬於哪一層，1的話是主分類，2是次分類，預設999是一般的標籤
-                  example: 999
+                  description: 該標籤是屬於分類還是一般標籤，default為 hashTag，分類則帶值categories
+                  example: hashTag
                 locale:
                   type: string
                   enum: ['zh', 'en', 'zh-CN']
@@ -743,8 +744,8 @@ paths:
                         type: number
                       tagName:
                         type: string
-                      level:
-                        type: number
+                      type:
+                        type: string
                       parent:
                         type: object
                         properties:
@@ -791,8 +792,9 @@ paths:
                           type: number
                         name:
                           type: string   
-                        level:
-                          type: number  
+                        parent:
+                          type: number | string
+                          description: 如果有上一層的標籤，則會給上一層標籤的id，不然會給空字串 
 
   # ====================
   #
