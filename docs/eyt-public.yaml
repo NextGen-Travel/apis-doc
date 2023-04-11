@@ -174,9 +174,6 @@ paths:
                         viewCount:
                           type: number
                           description: 瀏覽次數（此為預開欄位）
-                        image:
-                          type: string
-                          description: 圖片
                         store:
                           type: string
                           description: 發布來源
@@ -534,6 +531,119 @@ paths:
                         type: string
                         example:  建立失敗         
 
+  /new/posts:  
+    get:
+      summary: 獲取最新文章
+      tags:
+        - posts
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                        description: 文章標題
+                      content:
+                        type: string
+                         description: 文章內容
+                      type:
+                        type: string
+                         description: 文章類別（大標）
+                      viewCount:
+                        type: number
+                         description: 文章瀏覽數
+                      image:
+                        type: string
+                      store:
+                        type: string
+                         description: 文章來源
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
+                      publishedAt:
+                        type: string
+                      memberCount:
+                        type: number
+                        description: 文章收藏數
+
+
+  /posts/tag/:tagId:  
+    get:
+      summary: 搜尋具有特定tag的文章
+      tags:
+        - posts
+      parameters:
+        - in: path
+          name: tagId
+          required: true
+          schema:
+            type: string
+          description: tag id        
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                        description: 文章標題 
+                      content:
+                        type: object
+                        description: 文章內容
+                      type:
+                        type: string
+                        description: 文章類型（大標）
+                      viewCount:
+                        type: number
+                        description: 文章瀏覽數
+                      store:
+                        type: string
+                        description: 文章來源
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            tagName:
+                              type: string
+                      publishedAt:
+                        type: string
+                      memberCount:
+                        type: number
+                total:
+                  type: number
+                 
   # ====================
   #
   # stores
