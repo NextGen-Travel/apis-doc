@@ -164,16 +164,22 @@ paths:
                           type: number
                         title:
                           type: string
+                          description: 文章標題
                         content:
                           type: string
+                          description: 文章內容
                         type:
                           type: string
+                          description: 文章類別（主要是大標，像藥物新知，政策宣導這些）
                         viewCount:
                           type: number
+                          description: 瀏覽次數（此為預開欄位）
                         image:
                           type: string
+                          description: 圖片
                         store:
                           type: string
+                          description: 發布來源
                         tags:
                           type: array
                           items:
@@ -183,6 +189,7 @@ paths:
                                 type: number
                               tagName:
                                 type: string
+                                description: hashTag名稱
                         publishedAt:
                           type: string
                         memberCount:
@@ -257,18 +264,25 @@ paths:
                         type: number
                       title:
                         type: string
+                        description: 文章標題
                       content:
                         type: string
+                        description: 文章內容
                       store:
                         type: string
+                        description: 發布來源
                       type:
                         type: string
+                        description: 文章類別（大標）
                       sort:
                         type: number
+                        description: 文章排序的值
                       viewCount:
                         type: number
+                        description: 文章瀏覽數
                       isApproved:
                         type: boolean
+                        description: 文章是否已核准（核轉狀態下才會出現在前台）
                       isDeleted:
                         type: boolean
                       publishStart:
@@ -277,8 +291,10 @@ paths:
                         type: string
                       locale:
                         type: string
+                        description: 文章語系
                       image:
                         type: string
+                        description: 文章圖片
 
         '500':
           description: 伺服器錯誤
@@ -335,16 +351,22 @@ paths:
                     properties:
                       title:
                         type: string
+                        description: 文章標題
                       content:
                         type: string
+                        description: 文章內容
                       store:
                         type: string
+                        description: 文章來源
                       type:
                         type: string
+                        description: 文章類別（大標）
                       viewCount:
                         type: number
+                        description: 文章瀏覽數
                       image:
                         type: string
+                        description: 文章圖片
                       tags:
                         type: array
                         items:
@@ -354,6 +376,7 @@ paths:
                               type: number
                             tagName:
                               type: string
+                              description: hashTag名稱
                       publishedAt:
                         type: string
                       memberCount:
@@ -435,16 +458,22 @@ paths:
                         type: number
                       title:
                         type: string
+                        description: 文章標題
                       content:
                         type: string
+                        description: 文章內容
                       store:
                         type: string
+                        description: 文章來源
                       type:
                         type: string
+                        description: 文章類別（大標）
                       sort:
                         type: number
+                        description: 文章排序值
                       viewCount:
                         type: number
+                        description: 文章瀏覽數
                       isApproved:
                         type: boolean
                       isDeleted:
@@ -459,8 +488,10 @@ paths:
                         type: string
                       locale:
                         type: string
+                        description: 文章語系
                       image:
                         type: string
+                        description: 文章圖片
                       tags:
                         type: array
                         items:
