@@ -196,6 +196,7 @@ paths:
                           example: 30 / Mar / 2023
                         memberCount:
                           type: number
+                          description: 收藏數
                   total:
                     type: number
                     description: 文章總數
