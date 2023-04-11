@@ -194,7 +194,9 @@ paths:
                           type: string
                         memberCount:
                           type: number
-
+                  total:
+                    type: number
+                    description: 文章總數
   /add/posts:
     post:
       summary: 建立文章
