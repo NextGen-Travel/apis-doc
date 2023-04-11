@@ -645,8 +645,10 @@ paths:
                         properties:
                           id:
                             type: number
+                            description: 父層tag的名稱（只會有一個父層）
                           tagName:
                             type: string
+                            description: 父層tag的名稱（只會有一個父層）
                       children:
                         type: array
                         items:
@@ -654,8 +656,10 @@ paths:
                           properties:
                             id:
                               type: number
+                              description: 子層tag的名稱
                             tagName:
                               type: string
+                              description: 子層tag的名稱
 
         '500':
           description: 伺服器錯誤
