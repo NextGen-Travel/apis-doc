@@ -969,9 +969,9 @@ paths:
   # categories
   #                              
 
-  /categories:
+  /categories/posts:
     get:
-      summary: 獲取categories
+      summary: 獲取文章的categories
       tags:
         - categories
       responses:
@@ -993,7 +993,7 @@ paths:
                           type: number
                         name:
                           type: string   
-                        parent:
+                        parent_id:
                           description: 如果有上一層的標籤，則會給上一層標籤的id，不然會給空字串
                           oneOf:
                             - type: string
