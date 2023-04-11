@@ -145,58 +145,80 @@ paths:
       summary: 獲取文章列表
       tags:
         - posts
+      parameters:
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁        
       responses:
         '200':
           description: 成功
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        title:
-                          type: string
-                          description: 文章標題
-                        content:
-                          type: string
-                          description: 文章內容
-                        type:
-                          type: string
-                          description: 文章類別（主要是大標，像藥物新知，政策宣導這些）
-                        viewCount:
-                          type: number
-                          description: 瀏覽次數（此為預開欄位）
-                        store:
-                          type: string
-                          description: 發布來源
-                        tags:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                              tagName:
-                                type: string
-                                description: hashTag名稱
-                        publishedAt:
-                          type: string
-                          description: 上架時間（格式已經調整好，前端不用額外處理）
-                          example: 30 / Mar / 2023
-                        memberCount:
-                          type: number
-                          description: 收藏數
-                  total:
-                    type: number
-                    description: 文章總數
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                        description: 文章標題
+                      content:
+                        type: string
+                        description: 文章內容
+                      type:
+                        type: string
+                        description: 文章類別（大標）
+                      viewCount:
+                        type: number
+                        description: 文章瀏覽數
+                      store:
+                        type: string
+                        description: 文章來源
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
+                              description: 標籤名稱
+                      publishedAt:
+                        type: string
+                      memberCount:
+                        type: number
+                        description: 收藏數
+                pagination:
+                  type: object
+                  properties:
+                    page:
+                      type: string
+                      description: 當前頁面
+                    pageSize:
+                      type: string
+                      description: 每頁筆數
+                    pageCount:
+                      type: number
+                      description: 總共頁數
+                    total:
+                      type: number
+                      description: 總共筆數
   /add/posts:
     post:
       summary: 建立文章
@@ -596,52 +618,80 @@ paths:
           required: true
           schema:
             type: string
-          description: tag id        
+          description: tag id  
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁                     
       responses:
         '200':
           description: 成功
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        title:
-                          type: string
-                          description: 文章標題 
-                        content:
+              type: object
+              properties:
+                msg:
+                  type: string
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                        description: 文章標題
+                      content:
+                        type: string
+                        description: 文章內容
+                      type:
+                        type: string
+                        description: 文章類別（大標）
+                      viewCount:
+                        type: number
+                        description: 文章瀏覽數
+                      store:
+                        type: string
+                        description: 文章來源
+                      tags:
+                        type: array
+                        items:
                           type: object
-                          description: 文章內容
-                        type:
-                          type: string
-                          description: 文章類型（大標）
-                        viewCount:
-                          type: number
-                          description: 文章瀏覽數
-                        store:
-                          type: string
-                          description: 文章來源
-                        tags:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              tagName:
-                                type: string
-                        publishedAt:
-                          type: string
-                        memberCount:
-                          type: number
-                  total:
-                    type: number
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
+                              description: 標籤名稱
+                      publishedAt:
+                        type: string
+                      memberCount:
+                        type: number
+                        description: 收藏數
+                pagination:
+                  type: object
+                  properties:
+                    page:
+                      type: string
+                      description: 當前頁面
+                    pageSize:
+                      type: string
+                      description: 每頁筆數
+                    pageCount:
+                      type: number
+                      description: 總共頁數
+                    total:
+                      type: number
+                      description: 總共筆數
                  
   # ====================
   #
