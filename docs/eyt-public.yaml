@@ -556,8 +556,10 @@ paths:
                         name:
                           type: string
                         parent:
-                          type: number | string
-                          description: 如果有上一層的標籤，則會給上一層標籤的id，不然會給空字串      
+                          description: 如果有上一層的標籤，則會給上一層標籤的id，不然會給空字串
+                          oneOf:
+                            - type: string
+                            - type: number
 
   /add/tags:
     post:
@@ -793,9 +795,11 @@ paths:
                         name:
                           type: string   
                         parent:
-                          type: number | string
-                          description: 如果有上一層的標籤，則會給上一層標籤的id，不然會給空字串 
-
+                          description: 如果有上一層的標籤，則會給上一層標籤的id，不然會給空字串
+                          oneOf:
+                            - type: string
+                            - type: number
+                          
   # ====================
   #
   # products
