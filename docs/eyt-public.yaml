@@ -6,7 +6,7 @@ info:
 
 servers:
   - url: http://localhost:1339/api/
-  - url: https://e-drugsearch.com.hk/api/
+  - url: https://api-dev.e-drugsearch.com.hk/api/
 
 components:
   parameters:
