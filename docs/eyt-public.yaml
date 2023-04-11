@@ -192,6 +192,8 @@ paths:
                                 description: hashTag名稱
                         publishedAt:
                           type: string
+                          description: 上架時間（格式已經調整好，前端不用額外處理）
+                          example: 30 / Mar / 2023
                         memberCount:
                           type: number
                   total:
