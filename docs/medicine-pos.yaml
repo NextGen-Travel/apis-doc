@@ -893,14 +893,17 @@ paths:
                           type: string
                         unit:
                           type: string
+                        unit_short_eng_name:
+                          type: string
+                          description: 單位英文簡稱
                         usage:
                           type: number
                         sell_line_note:
                           type: string
-                          description: 用藥說明第一欄
+                          description: 中文用藥說明
                         medicine_note:
                           type: string
-                          description: 用藥說明第二欄
+                          description: 英文用藥說明
                   links:
                     type: object
                     properties:
@@ -929,6 +932,56 @@ paths:
                         type: number
                       total:
                         type: number
+
+              example:
+                data:
+                - sell_id: 410
+                  quantity: 2
+                  price: "125.0000"
+                  usage_id: 47
+                  product_id: 132
+                  variation_id: 190
+                  days: 1
+                  total: 2
+                  dosage: 1
+                  frequency: "one_time_a_day"
+                  cautions: []
+                  custom_caution: ""
+                  dosage_form: "tablet"
+                  unit: "patch"
+                  unit_short_eng_name: "package"
+                  usage: "oral"
+                  sell_line_note: "吃少點"
+                  medicine_note: "eat less"
+                links:
+                  type: object
+                  properties:
+                    first:
+                      type: string
+                    last:
+                      type: string
+                    prev:
+                      type: string
+                    next:
+                      type: string
+                meta:
+                  type: object
+                  properties:
+                    current_page:
+                      type: number
+                    from:
+                      type: number
+                    last_page:
+                      type: number
+                    path:
+                      type: string
+                    per_page:
+                      type: number
+                    to:
+                      type: number
+                    total:
+                      type: number
+
   /transactions/suspend:
     post:
       summary: 暫存交易
