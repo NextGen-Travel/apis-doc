@@ -706,7 +706,67 @@ paths:
                     total:
                       type: number
                       description: 總共筆數
-                 
+
+  /collect/posts/{id}:  
+    post:
+      summary: 收藏文章
+      tags:
+        - posts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: post id                    
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 收藏文章成功
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 收藏文章失敗            
+
+  /cancel/posts/{id}:  
+    put:
+      summary: 取消收藏文章
+      tags:
+        - posts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: post id                    
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 取消收藏！
+
   # ====================
   #
   # stores
@@ -1012,6 +1072,8 @@ paths:
                           oneOf:
                             - type: string
                             - type: number
+                        children:
+                          type: string
                           
   # ====================
   #
