@@ -795,6 +795,97 @@ paths:
                         type: number
                         description: 總共筆數
 
+  /posts/store/:storeId:  
+    get:
+      summary: 根據store搜尋文章
+      tags:
+        - posts
+      parameters:
+        - in: path
+          name: storeId
+          required: true
+          schema:
+            type: string
+          description: store id  
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁                     
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        title:
+                          type: string
+                          description: 文章標題
+                        content:
+                          type: string
+                          description: 文章內容
+                        type:
+                          type: string
+                          description: 文章類別（大標）
+                        viewCount:
+                          type: number
+                          description: 文章瀏覽數
+                        store:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: 文章來源
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              tagName:
+                                type: string
+                                description: 標籤名稱
+                        publishedAt:
+                          type: string
+                        memberCount:
+                          type: number
+                          description: 收藏數
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: string
+                        description: 當前頁面
+                      pageSize:
+                        type: string
+                        description: 每頁筆數
+                      pageCount:
+                        type: number
+                        description: 總共頁數
+                      total:
+                        type: number
+                        description: 總共筆數
+
   /collect/posts/{id}:  
     post:
       summary: 收藏文章
