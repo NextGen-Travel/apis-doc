@@ -126,6 +126,20 @@ components:
                   qty_available:
                     type: string
                     description: 庫存數量
+    DrugOptionsResponse:
+      type: object
+      properties:
+        msg :
+          type: string
+        data:
+          type: object
+          properties:
+            key:
+              type: string
+              description: 用來執行搜尋用的參數
+            value:
+              type: string
+              description: 顯示名稱
 
 paths:
 
@@ -1121,3 +1135,340 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SingleProductResponse'
+
+
+  # ====================
+  #
+  # drug
+  #
+  /drugs/options/holders:
+    get:
+      summary: 持有人
+      description: "取得持有人"
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: 3M HONG KONG LTD
+                    - key: 2
+                      name: A P TECHNOTRADE CO
+
+  /drugs/options/ingredients:
+    get:
+      summary: 藥品成分
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: sulfadiazine silver
+                    - key: 2
+                      name: cetrimide
+
+  /drugs/options/tags:
+    get:
+      summary: 藥品分類
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: Central Nervous System Agents
+                      name: 中樞神經系統藥物
+                    - key: Cough and Common Cold Medicines
+                      name: 傷風感冒藥
+
+  /drugs/options/saleRequirements:
+    get:
+      summary: 銷售要求
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: Over The Counter/For Animal Feeds
+                      name: Over The Counter/For Animal Feeds
+                    - key: Over-The-Counter Medicines
+                      name: Over-The-Counter Medicines
+
+  /drugs/options/names:
+    get:
+      summary: 藥品名稱
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 0.015% CHLORHEXIDINE & 0.15% CETRIMIDE SOL
+                      name: 0.015% CHLORHEXIDINE & 0.15% CETRIMIDE SOL
+                      permitNo: HK-42682
+                    - key: 0.05% CHLORHEXIDINE & 0.5% CETRIMIDE SOL
+                      name: 0.05% CHLORHEXIDINE & 0.5% CETRIMIDE SOL
+                      permitNo: HK-42684
+
+  /search/drugs:
+    get:
+      summary: 藥品搜尋
+      tags:
+        - drug
+      parameters:
+        - in: query
+          name: ingredient
+          schema:
+            type: integer
+          description: 藥品成分 id
+        - in: query
+          name: holder
+          schema:
+            type: integer
+          description: 證書持有人id
+        - in: query
+          name: tags
+          schema:
+            type: string
+          description: 藥品分類
+        - in: query
+          name: saleRequirement
+          schema:
+            type: string
+          description: 銷售要求
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: 藥品名稱
+        - in: query
+          name: permitNo
+          schema:
+            type: string
+          description: permit No
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg :
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        isCollect:
+                          type: boolean
+                          description: 是否收藏
+                        permitNo:
+                          type: string
+                          description: 用來執行搜尋用的參數
+                        name:
+                          type: string
+                          description: 顯示名稱
+                        nameZh:
+                          type: string
+                          description: 顯示名稱(中文)
+                        url:
+                          type: string
+                          description: 藥品圖示
+                        ingredients:
+                          type: array
+                          description: 顯示名稱
+                    pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                            description: 起始頁數
+                          pageSize:
+                            type: integer
+                            description: 每頁資料筆數
+                          pageCount:
+                            type: integer
+                            description: 總頁數
+                          total:
+                            type: integer
+                            description: 總筆數
+                example:
+                  msg : Success
+                  pagination :
+                    page: 1
+                    pageSize: 50
+                    pageCount: 1
+                    total: 1
+                  data:
+                    - isCollect: false
+                      permitNo: HK-21197
+                      name: MARSEDYL ELIXIR
+                      nameZh: 萬咳療
+                      url: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                      ingredients:
+                        - codeine phosphate
+                        - ephedrine hydrochloride
+                        - promethazine hydrochloride
+
+  /drugs/detail/{permitNo}:
+    get:
+      summary: 藥品明細
+      tags:
+        - drug
+      parameters:
+        - name: permitNo
+          in: path
+          description: 藥品核准碼
+          required: true
+          example: HK-42682
+          schema:
+            type: string
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        isCollect:
+                          type: boolean
+                        permitNo:
+                          type: string
+                        precaution:
+                          type: string
+                        indication:
+                          type: string
+                        holder:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            address:
+                              type: string
+                        name:
+                          type: string
+                        nameZh:
+                          type: string
+                        sideEffect:
+                          type: string
+                        legalClassification:
+                          type: string
+                        saleRequirement:
+                          type: string
+                        ingredients:
+                          type: array
+                          items:
+                            type: string
+                        urls:
+                          type: array
+                          items:
+                            type: string
+                        packages:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              dosage:
+                                type: number
+                              usage:
+                                type: string
+                              unit:
+                                type: string
+                              sku:
+                                type: string
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                              name:
+                                type: string
+                              dosageForm:
+                                type: string
+                              urls:
+                                type: array
+                                items:
+                                  type: string
+                example:
+                  msg : Success
+                  data:
+                    - isCollect: false
+                      permitNo: HK-65977
+                      name: MAX COLTALIN COUGH HOT REMEDY POWDER FOR ORAL SOLUTION
+                      nameZh: 幸福傷風咳-熱飲5包
+                      precaution: 測試資料
+                      indication:
+                      legalClassification: Not A Poison
+                      saleRequirement: Over-The-Counter Medicines
+                      url: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                      ingredients:
+                        - guaifenesin
+                        - paracetamol
+                        - phenylephrine hydrochloride
+                      urls:
+                        - https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/017b5138_8b8c_4e50_947a_11b2e09f1e34_a1b70956e7.png
+                        - https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/42e68e79_ee43_4f11_bd64_4108527a0712_d018c4fc13.png
+                        - https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/f0db146f_7cea_4ae0_abab_000c3e70ddfb_1087e50d9e.png
+                      packages:
+                        sku: 3514671130562
+                        name: 幸福傷風咳-熱飲5包
+                        dosage: 1
+                        usage: oral
+                        unit: sachet
+                        dosageForm: powder
+                        urls:
+                          - https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/f0db146f_7cea_4ae0_abab_000c3e70ddfb_a1c38f0e0f.png
+                      holder:
+                        name: FP HEALTHCARE LIMITED
+                        address: FLAT/RM A, 3/F, SUN KING FACTORY BUILDING, 1-7, SHING CHUEN ROAD, TAI WAI, SHATIN, NEW TERRITORIES
