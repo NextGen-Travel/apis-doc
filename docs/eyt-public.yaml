@@ -145,8 +145,46 @@ paths:
 
   # ====================
   #
-  # Auth
+  # Member
   #
+
+  /register:
+    post:
+      summary: 會員註冊 EYT 帳號
+      tags:
+        - member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: test
+                email:
+                  type: string
+                  example: test@123.com
+                mobile:
+                  type: string
+                  example: 0912345678
+                password:
+                  type: string
+                  example: 123
+                confirmPassword:
+                  type: string
+                  example: 123
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
 
 
   # ====================
