@@ -496,7 +496,69 @@ paths:
                       publishedAt:
                         type: string
                       memberCount:
-                        type: number        
+                        type: number    
+
+  /all/posts/{id}/extends:  
+    get:
+      summary: 獲取延伸閱讀文章 三篇
+      tags:
+        - posts
+      parameters:
+        - name: id
+          in: path
+          description: 文章id
+          required: true
+          example: 3
+          schema:
+            type: string        
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        type:
+                          type: string
+                        viewCount:
+                          type: number
+                        image:
+                          type: string
+                        store:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              tagName:
+                                type: string
+                        publishedAt:
+                          type: string
+                        memberCount:
+                          type: number                      
+
   /update/posts/{id}:    
     # review
     put:
