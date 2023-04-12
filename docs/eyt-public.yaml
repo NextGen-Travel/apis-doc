@@ -150,7 +150,7 @@ paths:
   # Member
   #
 
-  /register:
+  /member/register:
     post:
       summary: 會員註冊 EYT 帳號
       tags:
@@ -201,6 +201,34 @@ paths:
         - posts
       parameters:
         - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 關鍵字搜尋(title, content, tags, store, type)-模糊搜尋
+        - in: query
+          name: startTime
+          schema:
+            type: string
+            minimum: 1
+          description: 篩選功能(文章發佈時間)   
+        - in: query
+          name: endTime
+          schema:
+            type: string
+          description: 篩選功能(文章發佈時間)   
+        - in: query
+          name: storeName
+          schema:
+            type: string
+            minimum: 1
+          description: 篩選功能-來源名稱（精準搜尋）     
+        - in: query
+          name: sortCondition
+          schema:
+            type: string
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc]
+          description: 排序功能
+        - in: query
           name: pageSize
           schema:
             type: integer
@@ -210,7 +238,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: 第幾頁        
+          description: 第幾頁                                       
       responses:
         '200':
           description: 成功
