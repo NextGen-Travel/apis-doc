@@ -337,8 +337,11 @@ paths:
                   success:
                     type: boolean
                     description: 是否成功
+                  popup_note:
+                    type: string
+                    description: popup訊息
               example:
                 enable_sr_no: 0
                 html_content: <tr class="product_row" data-row_index="2" >...</tr>
                 success: true
-              
+                popup: This is popup message
