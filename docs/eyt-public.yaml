@@ -476,13 +476,12 @@ paths:
                             description: 文章來源
                       type:
                         type: string
-                        description: 文章類別（大標）
+                        description: 文章type
                       viewCount:
                         type: number
                         description: 文章瀏覽數
                       image:
                         type: string
-                        description: 文章圖片
                       tags:
                         type: array
                         items:
@@ -492,11 +491,22 @@ paths:
                               type: number
                             tagName:
                               type: string
-                              description: hashTag名稱
+                              description: hashTag 名稱
+                      categories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
+                              description: 分類 名稱(分類由大到小排列）
                       publishedAt:
                         type: string
                       memberCount:
-                        type: number    
+                        type: number
+                        description: 文章收藏數
 
   /all/posts/{id}/extends:  
     get:
