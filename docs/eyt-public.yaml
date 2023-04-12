@@ -239,8 +239,13 @@ paths:
                           type: number
                           description: 文章瀏覽數
                         store:
-                          type: string
-                          description: 文章來源
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: 文章來源
                         tags:
                           type: array
                           items:
@@ -432,8 +437,13 @@ paths:
                         type: string
                         description: 文章內容
                       store:
-                        type: string
-                        description: 文章來源
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+                            description: 文章來源
                       type:
                         type: string
                         description: 文章類別（大標）
@@ -642,8 +652,13 @@ paths:
                         image:
                           type: string
                         store:
-                          type: string
-                          description: 文章來源
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: 文章來源
                         tags:
                           type: array
                           items:
@@ -712,8 +727,13 @@ paths:
                           type: number
                           description: 文章瀏覽數
                         store:
-                          type: string
-                          description: 文章來源
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: 文章來源
                         tags:
                           type: array
                           items:
