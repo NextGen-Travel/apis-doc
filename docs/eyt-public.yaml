@@ -132,14 +132,16 @@ components:
         msg :
           type: string
         data:
-          type: object
-          properties:
-            key:
-              type: string
-              description: 用來執行搜尋用的參數
-            value:
-              type: string
-              description: 顯示名稱
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 用來執行搜尋用的參數
+              value:
+                type: string
+                description: 顯示名稱
 
 paths:
 
