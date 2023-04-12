@@ -241,8 +241,13 @@ paths:
                           type: number
                           description: 文章瀏覽數
                         store:
-                          type: string
-                          description: 文章來源
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: 文章來源
                         tags:
                           type: array
                           items:
@@ -434,8 +439,13 @@ paths:
                         type: string
                         description: 文章內容
                       store:
-                        type: string
-                        description: 文章來源
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+                            description: 文章來源
                       type:
                         type: string
                         description: 文章類別（大標）
@@ -644,8 +654,13 @@ paths:
                         image:
                           type: string
                         store:
-                          type: string
-                          description: 文章來源
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: 文章來源
                         tags:
                           type: array
                           items:
@@ -714,8 +729,13 @@ paths:
                           type: number
                           description: 文章瀏覽數
                         store:
-                          type: string
-                          description: 文章來源
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: 文章來源
                         tags:
                           type: array
                           items:
@@ -1120,7 +1140,7 @@ paths:
   # products
   #
 
-  /products:
+  /v1/eyt/products:
     get:
       summary: 產品清單
       description: "取得產品清單"
@@ -1207,7 +1227,7 @@ paths:
                       type: number
                     total:
                       type: number
-  /products/{id}:
+  /v1/eyt/products/{id}:
     get:
       summary: '取得單一產品'
       description: 取得單一產品詳細資訊
