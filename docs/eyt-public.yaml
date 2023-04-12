@@ -1405,6 +1405,8 @@ paths:
                           type: string
                         saleRequirement:
                           type: string
+                        registrationDate:
+                          type: string
                         ingredients:
                           type: array
                           items:
@@ -1451,6 +1453,7 @@ paths:
                       indication:
                       legalClassification: Not A Poison
                       saleRequirement: Over-The-Counter Medicines
+                      registrationDate: 2018-11-14
                       url: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
                       ingredients:
                         - guaifenesin
