@@ -148,7 +148,7 @@ paths:
   # Member
   #
 
-  /register:
+  /member/register:
     post:
       summary: 會員註冊 EYT 帳號
       tags:
