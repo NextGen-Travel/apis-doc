@@ -226,7 +226,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount]
           description: 排序功能
         - in: query
           name: pageSize
@@ -776,7 +776,7 @@ paths:
                           type: number
                           description: 文章收藏數
 
-  /posts/tag/:tagId:  
+  /posts/tag/{tagId}:  
     get:
       summary: 搜尋具有特定tag的文章
       tags:
@@ -798,7 +798,13 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: 第幾頁                     
+          description: 第幾頁  
+        - in: query
+          name: sortCondition
+          schema:
+            type: string
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount]
+          description: 排序功能                             
       responses:
         '200':
           description: 成功
@@ -867,7 +873,7 @@ paths:
                         type: number
                         description: 總共筆數
 
-  /posts/store/:storeId:  
+  /posts/store/{storeId}:  
     get:
       summary: 根據store搜尋文章
       tags:
@@ -889,7 +895,13 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: 第幾頁                     
+          description: 第幾頁
+        - in: query
+          name: sortCondition
+          schema:
+            type: string
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount]
+          description: 排序功能                               
       responses:
         '200':
           description: 成功
