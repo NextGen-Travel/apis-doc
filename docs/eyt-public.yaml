@@ -306,7 +306,7 @@ paths:
                       total:
                         type: number
                         description: 總共筆數
-  /add/posts:
+
     post:
       summary: 建立文章
       tags:
@@ -569,7 +569,7 @@ paths:
                         memberCount:
                           type: number                      
 
-  /update/posts/{id}:    
+
     # review
     put:
       summary: 更新指定文章
@@ -1093,7 +1093,7 @@ paths:
                             - type: string
                             - type: number
 
-  /add/tags:
+
     post:
       summary: 建立tag
       tags:
@@ -1238,7 +1238,7 @@ paths:
                             tagName:
                               type: string
 
-  /update/tags/{id}:
+
     put:
       summary: 修改tag
       tags:
