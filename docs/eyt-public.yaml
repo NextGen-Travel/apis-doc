@@ -295,10 +295,10 @@ paths:
                     type: object
                     properties:
                       page:
-                        type: string
+                        type: number
                         description: 當前頁面
                       pageSize:
-                        type: string
+                        type: number
                         description: 每頁筆數
                       pageCount:
                         type: number
@@ -855,10 +855,10 @@ paths:
                     type: object
                     properties:
                       page:
-                        type: string
+                        type: number
                         description: 當前頁面
                       pageSize:
-                        type: string
+                        type: number
                         description: 每頁筆數
                       pageCount:
                         type: number
@@ -946,10 +946,10 @@ paths:
                     type: object
                     properties:
                       page:
-                        type: string
+                        type: number
                         description: 當前頁面
                       pageSize:
-                        type: string
+                        type: number
                         description: 每頁筆數
                       pageCount:
                         type: number
