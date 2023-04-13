@@ -1323,6 +1323,8 @@ paths:
                           oneOf:
                             - type: string
                             - type: number
+                        children:
+                          type: string
                           
   # ====================
   #
