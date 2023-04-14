@@ -93,6 +93,50 @@ paths:
                 properties:
                   msg:
                     type: string
+  /member/login:
+    post:
+      summary: 會員登入 EYT email 註冊的帳號
+      tags:
+        - member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: test@123.com
+                password:
+                  type: string
+                  example: 123
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+                      member:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                          email:
+                            type: string
 
 
   # ====================
