@@ -132,7 +132,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
           description: 排序功能
         - in: query
           name: pageSize
@@ -709,7 +709,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
           description: 排序功能                             
       responses:
         '200':
@@ -806,7 +806,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
           description: 排序功能                               
       responses:
         '200':
