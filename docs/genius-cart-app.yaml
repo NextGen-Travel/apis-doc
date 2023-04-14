@@ -3786,6 +3786,9 @@ paths:
                       pay_amount:
                         type: number
                         description: 最終價格 
+                      tax:
+                        type: number
+                        description: 稅項
 
   /cart/checkout:
     post:
