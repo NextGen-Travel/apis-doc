@@ -1802,3 +1802,377 @@ paths:
                       holder:
                         name: FP HEALTHCARE LIMITED
                         address: FLAT/RM A, 3/F, SUN KING FACTORY BUILDING, 1-7, SHING CHUEN ROAD, TAI WAI, SHATIN, NEW TERRITORIES
+
+
+  # ====================
+  #
+  # stores 藥房搜尋
+  #
+  /stores/options/stockTypes:
+    get:
+      summary: 庫存類型
+      tags:
+        - stores
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: lv1
+                      name: 即時庫存
+                    - key: lv2
+                      name: 非即時庫存
+                    - key: lv3
+                      name: 無庫存資料
+
+  /drugs/options/mainServices:
+    get:
+      summary: 主要服務類型
+      tags:
+        - stores
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: 處方藥配藥
+                    - key: 2
+                      name: 藥品諮詢
+                    - key: 3
+                      name: 零售藥品與健康食品
+
+  /drugs/options/services:
+    get:
+      summary: 服務類型
+      tags:
+        - stores
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: 處方藥配藥服務
+                    - key: 2
+                      name: 非處方藥和保健品的銷售
+                    - key: 3
+                      name: 中醫藥建議和配方
+
+  /drugs/options/districts:
+    get:
+      summary: 取的香港行政區域
+      tags:
+        - stores
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg :
+                      type: string
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          key:
+                            type: string
+                            description: 行政區域代碼
+                          value:
+                            type: string
+                            description: 行政區域 名稱
+                          areaKey:
+                            type: string
+                            description: 區域代碼
+                          area:
+                            type: string
+                            description: 區域名稱
+                example:
+                  msg : Success
+                  data:
+                    - key: EASTERN
+                      value: 東區
+                      areaKey: HONG_KONG_ISLAND
+                      area: 香港島
+                    - key: WAN_CHAI
+                      value: 灣仔區
+                      areaKey: HONG_KONG_ISLAND
+                      area: 香港島
+                    - key: SAI_KUNG
+                      value: 西貢區
+                      areaKey: NEW_TERRITORIES
+                      area: 新界
+
+  /search/stores:
+    get:
+      summary: 藥房
+      tags:
+        - stores
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                              stockType:
+                                type: string
+                              name:
+                                type: string
+                              address:
+                                type: string
+                              lat:
+                                type: number
+                              lng:
+                                type: number
+                              contactNumber:
+                                type: string
+                              businessHours:
+                                type: string
+                              isExcellent:
+                                type: boolean
+                              isGenuine:
+                                type: boolean
+                              website:
+                                type: string
+                              plan:
+                                type: object
+                                properties:
+                                  wechat:
+                                    type: boolean
+                                  website:
+                                    type: boolean
+                                  facebook:
+                                    type: boolean
+                                  whatsapp:
+                                    type: boolean
+                                  instagram:
+                                    type: boolean
+                                  navigation:
+                                    type: boolean
+                                  contactNumber:
+                                    type: boolean
+                              districtKey:
+                                type: string
+                              areaKey:
+                                type: string
+                              district:
+                                type: string
+                              area:
+                                type: string
+                              favoriteCount:
+                                type: number
+                              isCollect:
+                                type: boolean
+                              tags:
+                                type: array
+                                items:
+                                  type: string
+                              mainServices:
+                                type: array
+                                items:
+                                  type: string
+                              mainServicesKey:
+                                type: array
+                                items:
+                                  type: string
+                              imgUrl:
+                                type: string
+                example:
+                  msg : Success
+                  data:
+                    - uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+                      stockType: lv3
+                      name: Nextgen
+                      districtKey: EASTERN
+                      areaKey: HONG_KONG_ISLAND
+                      district: 東區
+                      area: 香港島
+                      address: Anhe Road, Daan District
+                      lat: 25.0260285
+                      lng: 121.5493852
+                      contactNumber: 2323232
+                      businessHours: 09:00 ~ 18:00
+                      website: https://erp-dev.cloudsatlas.com.hk
+                      plan:
+                        wechat: false
+                        facebook: false
+                        whatsapp: false
+                        instagram: false
+                        navigation: false
+                        website: false
+                      isExcellent: false
+                      isGenuine: true
+                      favoriteCount: 0
+                      isCollect: false
+                      imgUrl: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                      tags:
+                        - 24小時營業
+                        - 線上藥師諮詢
+                        - 連鎖藥房
+                      mainServices:
+                        - 處方藥配藥
+                        - 藥品諮詢
+                        - 零售藥品與健康食品
+                      mainServicesKey:
+                        - prescription drug dispensing
+                        - drug consultation
+                        - Retail Pharmaceuticals & Health Foods
+
+  /stores/detail/{uuid}:
+    get:
+      summary: 藥房
+      tags:
+        - stores
+      parameters:
+        - name: uuid
+          in: path
+          description: 藥房唯一代碼
+          required: true
+          example: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+          schema:
+            type: string
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                        stockType:
+                          type: string
+                        name:
+                          type: string
+                        address:
+                          type: string
+                        lat:
+                          type: number
+                        lng:
+                          type: number
+                        contactNumber:
+                          type: string
+                        businessHours:
+                          type: string
+                        isExcellent:
+                          type: boolean
+                        isGenuine:
+                          type: boolean
+                        website:
+                          type: string
+                        plan:
+                          type: object
+                          properties:
+                            wechat:
+                              type: boolean
+                            website:
+                              type: boolean
+                            facebook:
+                              type: boolean
+                            whatsapp:
+                              type: boolean
+                            instagram:
+                              type: boolean
+                            navigation:
+                              type: boolean
+                            contactNumber:
+                              type: boolean
+                        district:
+                          type: string
+                        area:
+                          type: string
+                        favoriteCount:
+                          type: number
+                        isCollect:
+                          type: boolean
+                        imgUrl:
+                          type: string
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        mainServices:
+                          type: array
+                          items:
+                            type: string
+                        services:
+                          type: array
+                          items:
+                            type: string
+                example:
+                  msg : Success
+                  data:
+                    uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+                    stockType: lv3
+                    name: Nextgen
+                    district: 東區
+                    area: 香港島
+                    address: Anhe Road, Daan District
+                    lat: 25.0260285
+                    lng: 121.5493852
+                    contactNumber: 2323232
+                    businessHours: 09:00 ~ 18:00
+                    website: https://erp-dev.cloudsatlas.com.hk
+                    plan:
+                      wechat: false
+                      facebook: false
+                      whatsapp: false
+                      instagram: false
+                      navigation: false
+                      website: false
+                    isExcellent: false
+                    isGenuine: true
+                    favoriteCount: 0
+                    isCollect: false
+                    imgUrl: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                    tags:
+                      - 24小時營業
+                      - 線上藥師諮詢
+                      - 連鎖藥房
+                    mainServices:
+                      - 處方藥配藥
+                      - 藥品諮詢
+                      - 零售藥品與健康食品
+                    services:
+                      - 處方藥配藥服務
+                      - 藥品信息和用藥建議
+                      - 藥物遵從性評估和提醒
