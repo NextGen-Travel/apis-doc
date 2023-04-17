@@ -56,7 +56,7 @@ paths:
   # Member
   #
 
-  /member/register:
+  /members/register:
     post:
       summary: 會員註冊 EYT 帳號
       tags:
@@ -93,7 +93,7 @@ paths:
                 properties:
                   msg:
                     type: string
-  /member/login:
+  /members/login:
     post:
       summary: 會員登入 EYT email 註冊的帳號
       tags:
