@@ -1376,6 +1376,48 @@ paths:
                     - key: Over-The-Counter Medicines
                       name: Over-The-Counter Medicines
 
+  /drugs/options/brands:
+    get:
+      summary: 品牌
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: 普拿疼
+                    - key: 2
+                      name: 伏冒
+
+  /drugs/options/legalClassification:
+    get:
+      summary: 藥品管制分類
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: Antibiotic
+                    - key: 2
+                      name: Exempted Antibiotic
+                    - key: 3
+                      name: Not A Poison
+
   /drugs/options/names:
     get:
       summary: 藥品名稱
@@ -1425,6 +1467,16 @@ paths:
             type: string
           description: 銷售要求
         - in: query
+          name: legalClassification
+          schema:
+            type: integer
+          description: 藥品管制分類
+        - in: query
+          name: brand
+          schema:
+            type: integer
+          description: 品牌
+        - in: query
           name: name
           schema:
             type: string
@@ -1434,6 +1486,17 @@ paths:
           schema:
             type: string
           description: permit No
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 藥品名稱(中英), 名稱, 核准碼, 主成份, SKU
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [name_asc, name_desc,collect_desc]
+          description: 排序功能
         - in: query
           name: perPage
           schema:
@@ -1555,6 +1618,12 @@ paths:
                           type: string
                         nameZh:
                           type: string
+                        aka:
+                          type: string
+                        dosageForm:
+                          type: string
+                        usage:
+                          type: string
                         sideEffect:
                           type: string
                         legalClassification:
@@ -1567,6 +1636,12 @@ paths:
                           type: array
                           items:
                             type: string
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        brand:
+                          type: string
                         urls:
                           type: array
                           items:
@@ -1605,12 +1680,18 @@ paths:
                       permitNo: HK-65977
                       name: MAX COLTALIN COUGH HOT REMEDY POWDER FOR ORAL SOLUTION
                       nameZh: 幸福傷風咳-熱飲5包
+                      aka: 幸福傷風咳
+                      dosageForm: powder
+                      usage: oral
                       precaution: 測試資料
                       indication:
                       legalClassification: Not A Poison
                       saleRequirement: Over-The-Counter Medicines
                       registrationDate: 2018-11-14
                       url: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                      tags:
+                        - 西藥
+                        - 感冒藥
                       ingredients:
                         - guaifenesin
                         - paracetamol
@@ -1623,9 +1704,7 @@ paths:
                         sku: 3514671130562
                         name: 幸福傷風咳-熱飲5包
                         dosage: 1
-                        usage: oral
                         unit: sachet
-                        dosageForm: powder
                         urls:
                           - https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/f0db146f_7cea_4ae0_abab_000c3e70ddfb_a1c38f0e0f.png
                       holder:
