@@ -156,6 +156,11 @@ paths:
             type: string
           description: 關鍵字搜尋(title, content, tags, store, type)-模糊搜尋
         - in: query
+          name: category
+          schema:
+            type: string
+          description: 分類篩選
+        - in: query
           name: startTime
           schema:
             type: string
