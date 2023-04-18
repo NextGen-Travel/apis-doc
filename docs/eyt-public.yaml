@@ -1835,6 +1835,46 @@ paths:
       summary: 藥房
       tags:
         - stores
+      parameters:
+        - in: query
+          name: isGenuine
+          schema:
+            type: integer
+            enum: [0,1]
+          description: 正版正貨
+        - in: query
+          name: isExcellent
+          schema:
+            type: integer
+            enum: [0,1]
+          description: 信心保證
+        - in: query
+          name: stockType
+          schema:
+            type: string
+            enum: [lv1, lv2, lv3]
+          description: 庫存類型
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 藥房名稱(中英), 電話, 區域, 分區, 地址, 主要服務項目, 服務項目, tags
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [name_asc, name_desc,collect_desc]
+          description: 排序功能
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
       responses:
           '200':
             description: 成功
@@ -1856,6 +1896,8 @@ paths:
                               uuid:
                                 type: string
                               stockType:
+                                type: string
+                              nameEn:
                                 type: string
                               name:
                                 type: string
@@ -1923,6 +1965,7 @@ paths:
                   data:
                     - uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
                       stockType: lv3
+                      nameEn: Nextgen
                       name: Nextgen
                       districtKey: EASTERN
                       areaKey: HONG_KONG_ISLAND
@@ -1989,6 +2032,8 @@ paths:
                           type: string
                         stockType:
                           type: string
+                        nameEn:
+                          type: string
                         name:
                           type: string
                         address:
@@ -2046,11 +2091,32 @@ paths:
                           type: array
                           items:
                             type: string
+                    pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                            description: 起始頁數
+                          pageSize:
+                            type: integer
+                            description: 每頁資料筆數
+                          pageCount:
+                            type: integer
+                            description: 總頁數
+                          total:
+                            type: integer
+                            description: 總筆數
                 example:
                   msg : Success
+                  pagination :
+                    page: 1
+                    pageSize: 50
+                    pageCount: 1
+                    total: 1
                   data:
                     uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
                     stockType: lv3
+                    nameEn: Nextgen
                     name: Nextgen
                     district: 東區
                     area: 香港島
