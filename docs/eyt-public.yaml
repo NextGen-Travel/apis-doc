@@ -1495,7 +1495,7 @@ paths:
           name: sort
           schema:
             type: string
-            enum: [name_asc, name_desc,collect_desc]
+            enum: [nameAsc, nameDesc,collectDesc]
           description: 排序功能
         - in: query
           name: perPage
@@ -1863,7 +1863,7 @@ paths:
           name: sort
           schema:
             type: string
-            enum: [name_asc, name_desc,collect_desc]
+            enum: [nameAsc, nameDesc,collectDesc]
           description: 排序功能
         - in: query
           name: perPage
@@ -1950,14 +1950,29 @@ paths:
                                 type: array
                                 items:
                                   type: string
+                              tagKey:
+                                type: array
+                                items:
+                                  type: number
                               mainServices:
                                 type: array
                                 items:
                                   type: string
-                              mainServicesKey:
+                              mainServiceKey:
                                 type: array
                                 items:
-                                  type: string
+                                  type: number
+                              mainServiceIcon:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    key:
+                                      type: number
+                                    name:
+                                      type: string
+                                    icon:
+                                      type: string
                               imgUrl:
                                 type: string
                 example:
@@ -1993,14 +2008,28 @@ paths:
                         - 24小時營業
                         - 線上藥師諮詢
                         - 連鎖藥房
+                      tagKey:
+                        - 254
+                        - 255
+                        - 256
                       mainServices:
                         - 處方藥配藥
                         - 藥品諮詢
                         - 零售藥品與健康食品
                       mainServicesKey:
-                        - prescription drug dispensing
-                        - drug consultation
-                        - Retail Pharmaceuticals & Health Foods
+                        - 254
+                        - 255
+                        - 256
+                      mainServiceIcon:
+                        - key : 254
+                          name: 處方藥配藥
+                          icon: bchat-question-outline
+                        - key : 255
+                          name: 藥品諮詢
+                          icon: bchat-question-outline
+                        - key : 256
+                          name: 零售藥品與健康食品
+                          icon: bchat-question-outline
 
   /stores/detail/{uuid}:
     get:
@@ -2083,14 +2112,37 @@ paths:
                           type: array
                           items:
                             type: string
+                        tagKey:
+                          type: array
+                          items:
+                            type: number
+                        mainServiceIcon:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              key:
+                                type: number
+                              name:
+                                type: string
+                              icon:
+                                type: string
                         mainServices:
                           type: array
                           items:
                             type: string
+                        mainServiceKey:
+                          type: array
+                          items:
+                            type: number
                         services:
                           type: array
                           items:
                             type: string
+                        serviceKey:
+                          type: array
+                          items:
+                            type: number
                     pagination:
                         type: object
                         properties:
@@ -2142,11 +2194,33 @@ paths:
                       - 24小時營業
                       - 線上藥師諮詢
                       - 連鎖藥房
+                    tagKey:
+                      - 254
+                      - 255
+                      - 256
                     mainServices:
                       - 處方藥配藥
                       - 藥品諮詢
                       - 零售藥品與健康食品
+                    mainServicesKey:
+                      - 254
+                      - 255
+                      - 256
+                    mainServiceIcon:
+                      - key : 254
+                        name: 處方藥配藥
+                        icon: bchat-question-outline
+                      - key : 255
+                        name: 藥品諮詢
+                        icon: bchat-question-outline
+                      - key : 256
+                        name: 零售藥品與健康食品
+                        icon: bchat-question-outline
                     services:
                       - 處方藥配藥服務
                       - 藥品信息和用藥建議
                       - 藥物遵從性評估和提醒
+                    serviceKey:
+                        - 254
+                        - 255
+                        - 256
