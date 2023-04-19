@@ -172,25 +172,28 @@ paths:
               schema:
                 type: object
                 properties:
-                  msg:
-                    type: string
-                  member:
+                  data:
                     type: object
                     properties:
-                      id:
-                        type: number
-                      createdAt:
+                      msg:
                         type: string
-                      name:
-                        type: string
-                      mobile:
-                        type: string
-                      email:
-                        type: string
-                      fax:
-                        type: string
-                      uuid:
-                        type: string
+                      member:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          createdAt:
+                            type: string
+                          name:
+                            type: string
+                          mobile:
+                            type: string
+                          email:
+                            type: string
+                          fax:
+                            type: string
+                          uuid:
+                            type: string
     put:
       summary: 修改會員資料
       tags:
@@ -228,25 +231,28 @@ paths:
               schema:
                 type: object
                 properties:
-                  msg:
-                    type: string
-                  member:
+                  data:
                     type: object
                     properties:
-                      id:
-                        type: number
-                      createdAt:
+                      msg:
                         type: string
-                      name:
-                        type: string
-                      mobile:
-                        type: string
-                      email:
-                        type: string
-                      fax:
-                        type: string
-                      uuid:
-                        type: string
+                      member:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          createdAt:
+                            type: string
+                          name:
+                            type: string
+                          mobile:
+                            type: string
+                          email:
+                            type: string
+                          fax:
+                            type: string
+                          uuid:
+                            type: string
 
   /members/:uuid/third-party-logins:
     get:
@@ -270,21 +276,24 @@ paths:
               schema:
                 type: object
                 properties:
-                  msg:
-                    type: string
-                  thirdPartyLogins:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        platform:
-                          type: string
-                        openId:
-                          type: string
-                        email:
-                          type: string
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                      thirdPartyLogins:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            platform:
+                              type: string
+                            openId:
+                              type: string
+                            email:
+                              type: string
   /members/:uuid/reset-password:
     put:
       summary: 修改會員密碼
