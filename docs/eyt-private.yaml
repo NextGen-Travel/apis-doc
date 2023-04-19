@@ -270,24 +270,21 @@ paths:
               schema:
                 type: object
                 properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                      thirdPartyLogins:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            platform:
-                              type: string
-                            openId:
-                              type: string
-                            email:
-                              type: string
+                  msg:
+                    type: string
+                  thirdPartyLogins:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        platform:
+                          type: string
+                        openId:
+                          type: string
+                        email:
+                          type: string
   /members/:uuid/reset-password:
     put:
       summary: 修改會員密碼
