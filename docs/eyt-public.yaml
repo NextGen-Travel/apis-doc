@@ -43,7 +43,7 @@ components:
             type: object
             properties:
               key:
-                type: string
+                type: number
                 description: 用來執行搜尋用的參數
               value:
                 type: string
@@ -181,7 +181,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
           description: 排序功能
         - in: query
           name: pageSize
@@ -758,7 +758,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
           description: 排序功能                             
       responses:
         '200':
@@ -855,7 +855,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
           description: 排序功能                               
       responses:
         '200':
@@ -1351,9 +1351,9 @@ paths:
                 example:
                   msg : Success
                   data:
-                    - key: Central Nervous System Agents
+                    - key: 1
                       name: 中樞神經系統藥物
-                    - key: Cough and Common Cold Medicines
+                    - key: 2
                       name: 傷風感冒藥
 
   /drugs/options/saleRequirements:
@@ -1371,9 +1371,9 @@ paths:
                 example:
                   msg : Success
                   data:
-                    - key: Over The Counter/For Animal Feeds
+                    - key: 1
                       name: Over The Counter/For Animal Feeds
-                    - key: Over-The-Counter Medicines
+                    - key: 2
                       name: Over-The-Counter Medicines
 
   /drugs/options/brands:
