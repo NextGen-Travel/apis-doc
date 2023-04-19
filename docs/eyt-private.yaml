@@ -172,28 +172,25 @@ paths:
               schema:
                 type: object
                 properties:
-                  data:
+                  msg:
+                    type: string
+                  member:
                     type: object
                     properties:
-                      msg:
+                      id:
+                        type: number
+                      createdAt:
                         type: string
-                      member:
-                        type: object
-                        properties:
-                          id:
-                            type: number
-                          createdAt:
-                            type: string
-                          name:
-                            type: string
-                          mobile:
-                            type: string
-                          email:
-                            type: string
-                          fax:
-                            type: string
-                          uuid:
-                            type: string
+                      name:
+                        type: string
+                      mobile:
+                        type: string
+                      email:
+                        type: string
+                      fax:
+                        type: string
+                      uuid:
+                        type: string
     put:
       summary: 修改會員資料
       tags:
@@ -231,28 +228,25 @@ paths:
               schema:
                 type: object
                 properties:
-                  data:
+                  msg:
+                    type: string
+                  member:
                     type: object
                     properties:
-                      msg:
+                      id:
+                        type: number
+                      createdAt:
                         type: string
-                      member:
-                        type: object
-                        properties:
-                          id:
-                            type: number
-                          createdAt:
-                            type: string
-                          name:
-                            type: string
-                          mobile:
-                            type: string
-                          email:
-                            type: string
-                          fax:
-                            type: string
-                          uuid:
-                            type: string
+                      name:
+                        type: string
+                      mobile:
+                        type: string
+                      email:
+                        type: string
+                      fax:
+                        type: string
+                      uuid:
+                        type: string
 
   /members/:uuid/third-party-logins:
     get:
