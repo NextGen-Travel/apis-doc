@@ -1897,9 +1897,6 @@ paths:
                     msg:
                       type: string
                     data:
-                      type: object
-                      properties:
-                        data:
                           type: array
                           items:
                             type: object
