@@ -1950,7 +1950,7 @@ paths:
                                 type: string
                               area:
                                 type: string
-                              favoriteCount:
+                              collectCount:
                                 type: number
                               isCollect:
                                 type: boolean
@@ -2009,7 +2009,7 @@ paths:
                         website: false
                       isExcellent: false
                       isGenuine: true
-                      favoriteCount: 0
+                      collectCount: 0
                       isCollect: false
                       imgUrl: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
                       tags:
@@ -2110,7 +2110,7 @@ paths:
                           type: string
                         area:
                           type: string
-                        favoriteCount:
+                        collectCount:
                           type: number
                         isCollect:
                           type: boolean
@@ -2195,7 +2195,7 @@ paths:
                       website: false
                     isExcellent: false
                     isGenuine: true
-                    favoriteCount: 0
+                    collectCount: 0
                     isCollect: false
                     imgUrl: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
                     tags:
