@@ -447,16 +447,6 @@ paths:
                             tagName:
                               type: string
                               description: hashTag 名稱
-                      categories:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            tagName:
-                              type: string
-                              description: 分類 名稱(分類由大到小排列）
                       publishedAt:
                         type: string
                       memberCount:
@@ -984,6 +974,27 @@ paths:
                   msg:
                     type: string
                     example: 取消收藏！
+
+  /posts/{id}/categories:  
+    get:
+      summary: 獲取文章的分類麵包屑
+      tags:
+        - posts
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+
 
   # ====================
   #
