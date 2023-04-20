@@ -1301,6 +1301,106 @@ paths:
                           oneOf:
                             - type: string
                             - type: number
+  # ====================
+  #
+  # subscribes
+  #
+
+  /subscribe/list:
+    get:
+      summary: 獲取訂閱的選項
+      tags:
+        - subscribe
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stores:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+
+  /general/subscribe:
+    post:
+      summary: 非會員訂閱
+      tags:
+        - subscribe
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: number
+                  description: 標籤的父層
+                store:
+                  type: string
+                  description: 追蹤的來源
+                  example: 1,2,3
+                category:
+                  type: string
+                  description: 追蹤的分類
+                  example: 2,4,7
+
+              required:
+                - email
+ 
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+
+  /subscribe/cancel/{uuid}:
+    post:
+      summary: 取消訂閱（不論會員非會員）
+      tags:
+        - subscribe
+      parameters:
+        - name: uuid
+          in: path
+          description: 訂閱的uuid
+          required: true
+          example: f6bd3fe9-62ae-4f68-9a78-5779880571812
+          schema:
+            type: string   
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
 
   # ====================
   #
