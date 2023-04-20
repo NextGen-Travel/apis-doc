@@ -2197,7 +2197,8 @@ paths:
                     isGenuine: true
                     collectCount: 0
                     isCollect: false
-                    imgUrl: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                    imgUrls:
+                      - https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
                     tags:
                       - 24小時營業
                       - 線上藥師諮詢
