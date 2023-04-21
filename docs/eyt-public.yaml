@@ -1593,6 +1593,11 @@ paths:
             type: string
           description: 藥品名稱
         - in: query
+          name: prefixName
+          schema:
+            type: string
+          description: 藥品字首
+        - in: query
           name: permitNo
           schema:
             type: string
@@ -2333,3 +2338,140 @@ paths:
                         - 254
                         - 255
                         - 256
+
+  /stores/medicines:
+    get:
+      summary: 哪裡買藥
+      tags:
+        - stores
+      parameters:
+        - in: query
+          name: permitNo
+          schema:
+            type: array
+            items:
+              type: string
+          description: 藥品
+          example: ['HK-05357', 'HK-07007']
+        - in: query
+          name: isExact
+          schema:
+            type: integer
+            enum: [0,1]
+          description: 藥品使否要完整符合
+        - in: query
+          name: stockType
+          schema:
+            type: string
+            enum: [lv1, lv2]
+          description: 庫存類型
+        - in: query
+          name: district
+          schema:
+            type: string
+          description: 指定行政區
+        - in: query
+          name: area
+          schema:
+            type: string
+          description: 指定搜尋區域
+        - in: query
+          name: lat
+          schema:
+            type: integer
+          description: 緯度
+        - in: query
+          name: lng
+          schema:
+            type: integer
+          description: 經度
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    coordinate:
+                      type: object
+                      properties:
+                        lat:
+                          type: number
+                        lng:
+                          type: number
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                          address:
+                            type: string
+                          district:
+                            type: string
+                          lng:
+                            type: number
+                          lat:
+                            type: number
+                          distance:
+                            type: number
+                          contactNumber:
+                            type: string
+                          businessHours:
+                            type: string
+                          isExcellent:
+                            type: boolean
+                          isGenuine:
+                            type: boolean
+                          collectCount:
+                            type: number
+                          isCollect:
+                            type: boolean
+                          isExact:
+                            type: boolean
+                          stockType:
+                            type: string
+                          drugCount:
+                            type: number
+                          drugs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                permitNo:
+                                  type: string
+                                name:
+                                  type: string
+                example:
+                  msg : Success
+                  coordinate:
+                    lat: 22.3530251
+                    lng: 113.9628303
+                  data:
+                    - uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+                      stockType: lv1
+                      name: Nextgen
+                      address: Anhe Road, Daan District
+                      lat: 25.0260285
+                      lng: 121.5493852
+                      distance: 21
+                      contactNumber: 2323232
+                      businessHours: 09:00 ~ 18:00
+                      website: https://erp-dev.cloudsatlas.com.hk
+                      isExcellent: false
+                      isGenuine: true
+                      collectCount: 0
+                      isCollect: false
+                      isExact: true
+                      drugCount: 2
+                      drugs:
+                        - permitNo : HK-05357
+                          name: ROCALTROL CAP 0.25UG
+                        - permitNo : HK-07007
+                          name: VENTOLIN INHALER 100MCG/METERED DOSE
