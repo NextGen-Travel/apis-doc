@@ -1653,11 +1653,11 @@ paths:
                   msg : Success
                   data:
                     - key: lv1
-                      name: 即時庫存
+                      value: 即時庫存
                     - key: lv2
-                      name: 非即時庫存
+                      value: 非即時庫存
                     - key: lv3
-                      name: 無庫存資料
+                      value: 無庫存資料
 
   /drugs/options/mainServices:
     get:
@@ -1767,78 +1767,75 @@ paths:
                     msg:
                       type: string
                     data:
-                      type: object
-                      properties:
-                        data:
-                          type: array
-                          items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                          stockType:
+                            type: string
+                          name:
+                            type: string
+                          address:
+                            type: string
+                          lat:
+                            type: number
+                          lng:
+                            type: number
+                          contactNumber:
+                            type: string
+                          businessHours:
+                            type: string
+                          isExcellent:
+                            type: boolean
+                          isGenuine:
+                            type: boolean
+                          website:
+                            type: string
+                          plan:
                             type: object
                             properties:
-                              uuid:
-                                type: string
-                              stockType:
-                                type: string
-                              name:
-                                type: string
-                              address:
-                                type: string
-                              lat:
-                                type: number
-                              lng:
-                                type: number
-                              contactNumber:
-                                type: string
-                              businessHours:
-                                type: string
-                              isExcellent:
-                                type: boolean
-                              isGenuine:
+                              wechat:
                                 type: boolean
                               website:
-                                type: string
-                              plan:
-                                type: object
-                                properties:
-                                  wechat:
-                                    type: boolean
-                                  website:
-                                    type: boolean
-                                  facebook:
-                                    type: boolean
-                                  whatsapp:
-                                    type: boolean
-                                  instagram:
-                                    type: boolean
-                                  navigation:
-                                    type: boolean
-                                  contactNumber:
-                                    type: boolean
-                              districtKey:
-                                type: string
-                              areaKey:
-                                type: string
-                              district:
-                                type: string
-                              area:
-                                type: string
-                              favoriteCount:
-                                type: number
-                              isCollect:
                                 type: boolean
-                              tags:
-                                type: array
-                                items:
-                                  type: string
-                              mainServices:
-                                type: array
-                                items:
-                                  type: string
-                              mainServicesKey:
-                                type: array
-                                items:
-                                  type: string
-                              imgUrl:
-                                type: string
+                              facebook:
+                                type: boolean
+                              whatsapp:
+                                type: boolean
+                              instagram:
+                                type: boolean
+                              navigation:
+                                type: boolean
+                              contactNumber:
+                                type: boolean
+                          districtKey:
+                            type: string
+                          areaKey:
+                            type: string
+                          district:
+                            type: string
+                          area:
+                            type: string
+                          favoriteCount:
+                            type: number
+                          isCollect:
+                            type: boolean
+                          tags:
+                            type: array
+                            items:
+                              type: string
+                          mainServices:
+                            type: array
+                            items:
+                              type: string
+                          mainServicesKey:
+                            type: array
+                            items:
+                              type: string
+                          imgUrl:
+                            type: string
                 example:
                   msg : Success
                   data:
