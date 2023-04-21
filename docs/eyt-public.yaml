@@ -43,7 +43,7 @@ components:
             type: object
             properties:
               key:
-                type: string
+                type: number
                 description: 用來執行搜尋用的參數
               value:
                 type: string
@@ -181,7 +181,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
           description: 排序功能
         - in: query
           name: pageSize
@@ -447,16 +447,6 @@ paths:
                             tagName:
                               type: string
                               description: hashTag 名稱
-                      categories:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            tagName:
-                              type: string
-                              description: 分類 名稱(分類由大到小排列）
                       publishedAt:
                         type: string
                       memberCount:
@@ -758,7 +748,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
           description: 排序功能                             
       responses:
         '200':
@@ -855,7 +845,7 @@ paths:
           name: sortCondition
           schema:
             type: string
-            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectCount, priority]
+            enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
           description: 排序功能                               
       responses:
         '200':
@@ -984,6 +974,27 @@ paths:
                   msg:
                     type: string
                     example: 取消收藏！
+
+  /posts/{id}/categories:  
+    get:
+      summary: 獲取文章的分類麵包屑
+      tags:
+        - posts
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+
 
   # ====================
   #
@@ -1290,6 +1301,106 @@ paths:
                           oneOf:
                             - type: string
                             - type: number
+  # ====================
+  #
+  # subscribes
+  #
+
+  /subscribe/list:
+    get:
+      summary: 獲取訂閱的選項
+      tags:
+        - subscribe
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stores:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                  categories:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+
+  /general/subscribe:
+    post:
+      summary: 非會員訂閱
+      tags:
+        - subscribe
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: number
+                  description: 標籤的父層
+                store:
+                  type: string
+                  description: 追蹤的來源
+                  example: 1,2,3
+                category:
+                  type: string
+                  description: 追蹤的分類
+                  example: 2,4,7
+
+              required:
+                - email
+ 
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+
+  /subscribe/cancel/{uuid}:
+    post:
+      summary: 取消訂閱（不論會員非會員）
+      tags:
+        - subscribe
+      parameters:
+        - name: uuid
+          in: path
+          description: 訂閱的uuid
+          required: true
+          example: f6bd3fe9-62ae-4f68-9a78-5779880571812
+          schema:
+            type: string   
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
 
   # ====================
   #
@@ -1351,9 +1462,9 @@ paths:
                 example:
                   msg : Success
                   data:
-                    - key: Central Nervous System Agents
+                    - key: 1
                       name: 中樞神經系統藥物
-                    - key: Cough and Common Cold Medicines
+                    - key: 2
                       name: 傷風感冒藥
 
   /drugs/options/saleRequirements:
@@ -1371,10 +1482,52 @@ paths:
                 example:
                   msg : Success
                   data:
-                    - key: Over The Counter/For Animal Feeds
+                    - key: 1
                       name: Over The Counter/For Animal Feeds
-                    - key: Over-The-Counter Medicines
+                    - key: 2
                       name: Over-The-Counter Medicines
+
+  /drugs/options/brands:
+    get:
+      summary: 品牌
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: 普拿疼
+                    - key: 2
+                      name: 伏冒
+
+  /drugs/options/legalClassification:
+    get:
+      summary: 藥品管制分類
+      tags:
+        - drug
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: Antibiotic
+                    - key: 2
+                      name: Exempted Antibiotic
+                    - key: 3
+                      name: Not A Poison
 
   /drugs/options/names:
     get:
@@ -1425,15 +1578,41 @@ paths:
             type: string
           description: 銷售要求
         - in: query
+          name: legalClassification
+          schema:
+            type: integer
+          description: 藥品管制分類
+        - in: query
+          name: brand
+          schema:
+            type: integer
+          description: 品牌
+        - in: query
           name: name
           schema:
             type: string
           description: 藥品名稱
         - in: query
+          name: prefixName
+          schema:
+            type: string
+          description: 藥品字首
+        - in: query
           name: permitNo
           schema:
             type: string
           description: permit No
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 藥品名稱(中英), 名稱, 核准碼, 主成份, SKU
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [nameAsc, nameDesc,collectDesc]
+          description: 排序功能
         - in: query
           name: perPage
           schema:
@@ -1555,6 +1734,12 @@ paths:
                           type: string
                         nameZh:
                           type: string
+                        aka:
+                          type: string
+                        dosageForm:
+                          type: string
+                        usage:
+                          type: string
                         sideEffect:
                           type: string
                         legalClassification:
@@ -1567,6 +1752,12 @@ paths:
                           type: array
                           items:
                             type: string
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        brand:
+                          type: string
                         urls:
                           type: array
                           items:
@@ -1605,12 +1796,18 @@ paths:
                       permitNo: HK-65977
                       name: MAX COLTALIN COUGH HOT REMEDY POWDER FOR ORAL SOLUTION
                       nameZh: 幸福傷風咳-熱飲5包
+                      aka: 幸福傷風咳
+                      dosageForm: powder
+                      usage: oral
                       precaution: 測試資料
                       indication:
                       legalClassification: Not A Poison
                       saleRequirement: Over-The-Counter Medicines
                       registrationDate: 2018-11-14
                       url: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                      tags:
+                        - 西藥
+                        - 感冒藥
                       ingredients:
                         - guaifenesin
                         - paracetamol
@@ -1623,9 +1820,7 @@ paths:
                         sku: 3514671130562
                         name: 幸福傷風咳-熱飲5包
                         dosage: 1
-                        usage: oral
                         unit: sachet
-                        dosageForm: powder
                         urls:
                           - https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/f0db146f_7cea_4ae0_abab_000c3e70ddfb_a1c38f0e0f.png
                       holder:
@@ -1756,6 +1951,46 @@ paths:
       summary: 藥房
       tags:
         - stores
+      parameters:
+        - in: query
+          name: isGenuine
+          schema:
+            type: integer
+            enum: [0,1]
+          description: 正版正貨
+        - in: query
+          name: isExcellent
+          schema:
+            type: integer
+            enum: [0,1]
+          description: 信心保證
+        - in: query
+          name: stockType
+          schema:
+            type: string
+            enum: [lv1, lv2, lv3]
+          description: 庫存類型
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 藥房名稱(中英), 電話, 區域, 分區, 地址, 主要服務項目, 服務項目, tags
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [nameAsc, nameDesc,collectDesc]
+          description: 排序功能
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
       responses:
           '200':
             description: 成功
@@ -1767,80 +2002,98 @@ paths:
                     msg:
                       type: string
                     data:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          uuid:
-                            type: string
-                          stockType:
-                            type: string
-                          name:
-                            type: string
-                          address:
-                            type: string
-                          lat:
-                            type: number
-                          lng:
-                            type: number
-                          contactNumber:
-                            type: string
-                          businessHours:
-                            type: string
-                          isExcellent:
-                            type: boolean
-                          isGenuine:
-                            type: boolean
-                          website:
-                            type: string
-                          plan:
+                          type: array
+                          items:
                             type: object
                             properties:
-                              wechat:
+                              uuid:
+                                type: string
+                              stockType:
+                                type: string
+                              nameEn:
+                                type: string
+                              name:
+                                type: string
+                              address:
+                                type: string
+                              lat:
+                                type: number
+                              lng:
+                                type: number
+                              contactNumber:
+                                type: string
+                              businessHours:
+                                type: string
+                              isExcellent:
+                                type: boolean
+                              isGenuine:
                                 type: boolean
                               website:
+                                type: string
+                              plan:
+                                type: object
+                                properties:
+                                  wechat:
+                                    type: boolean
+                                  website:
+                                    type: boolean
+                                  facebook:
+                                    type: boolean
+                                  whatsapp:
+                                    type: boolean
+                                  instagram:
+                                    type: boolean
+                                  navigation:
+                                    type: boolean
+                                  contactNumber:
+                                    type: boolean
+                              districtKey:
+                                type: string
+                              areaKey:
+                                type: string
+                              district:
+                                type: string
+                              area:
+                                type: string
+                              collectCount:
+                                type: number
+                              isCollect:
                                 type: boolean
-                              facebook:
-                                type: boolean
-                              whatsapp:
-                                type: boolean
-                              instagram:
-                                type: boolean
-                              navigation:
-                                type: boolean
-                              contactNumber:
-                                type: boolean
-                          districtKey:
-                            type: string
-                          areaKey:
-                            type: string
-                          district:
-                            type: string
-                          area:
-                            type: string
-                          favoriteCount:
-                            type: number
-                          isCollect:
-                            type: boolean
-                          tags:
-                            type: array
-                            items:
-                              type: string
-                          mainServices:
-                            type: array
-                            items:
-                              type: string
-                          mainServicesKey:
-                            type: array
-                            items:
-                              type: string
-                          imgUrl:
-                            type: string
+                              tags:
+                                type: array
+                                items:
+                                  type: string
+                              tagKey:
+                                type: array
+                                items:
+                                  type: number
+                              mainServices:
+                                type: array
+                                items:
+                                  type: string
+                              mainServiceKey:
+                                type: array
+                                items:
+                                  type: number
+                              mainServiceIcon:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    key:
+                                      type: number
+                                    name:
+                                      type: string
+                                    icon:
+                                      type: string
+                              imgUrl:
+                                type: string
                 example:
                   msg : Success
                   data:
                     - uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
                       stockType: lv3
+                      nameEn: Nextgen
                       name: Nextgen
                       districtKey: EASTERN
                       areaKey: HONG_KONG_ISLAND
@@ -1861,21 +2114,35 @@ paths:
                         website: false
                       isExcellent: false
                       isGenuine: true
-                      favoriteCount: 0
+                      collectCount: 0
                       isCollect: false
                       imgUrl: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
                       tags:
                         - 24小時營業
                         - 線上藥師諮詢
                         - 連鎖藥房
+                      tagKey:
+                        - 254
+                        - 255
+                        - 256
                       mainServices:
                         - 處方藥配藥
                         - 藥品諮詢
                         - 零售藥品與健康食品
                       mainServicesKey:
-                        - prescription drug dispensing
-                        - drug consultation
-                        - Retail Pharmaceuticals & Health Foods
+                        - 254
+                        - 255
+                        - 256
+                      mainServiceIcon:
+                        - key : 254
+                          name: 處方藥配藥
+                          icon: bchat-question-outline
+                        - key : 255
+                          name: 藥品諮詢
+                          icon: bchat-question-outline
+                        - key : 256
+                          name: 零售藥品與健康食品
+                          icon: bchat-question-outline
 
   /stores/detail/{uuid}:
     get:
@@ -1906,6 +2173,8 @@ paths:
                         uuid:
                           type: string
                         stockType:
+                          type: string
+                        nameEn:
                           type: string
                         name:
                           type: string
@@ -1946,7 +2215,7 @@ paths:
                           type: string
                         area:
                           type: string
-                        favoriteCount:
+                        collectCount:
                           type: number
                         isCollect:
                           type: boolean
@@ -1956,19 +2225,63 @@ paths:
                           type: array
                           items:
                             type: string
+                        tagKey:
+                          type: array
+                          items:
+                            type: number
+                        mainServiceIcon:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              key:
+                                type: number
+                              name:
+                                type: string
+                              icon:
+                                type: string
                         mainServices:
                           type: array
                           items:
                             type: string
+                        mainServiceKey:
+                          type: array
+                          items:
+                            type: number
                         services:
                           type: array
                           items:
                             type: string
+                        serviceKey:
+                          type: array
+                          items:
+                            type: number
+                    pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                            description: 起始頁數
+                          pageSize:
+                            type: integer
+                            description: 每頁資料筆數
+                          pageCount:
+                            type: integer
+                            description: 總頁數
+                          total:
+                            type: integer
+                            description: 總筆數
                 example:
                   msg : Success
+                  pagination :
+                    page: 1
+                    pageSize: 50
+                    pageCount: 1
+                    total: 1
                   data:
                     uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
                     stockType: lv3
+                    nameEn: Nextgen
                     name: Nextgen
                     district: 東區
                     area: 香港島
@@ -1987,18 +2300,178 @@ paths:
                       website: false
                     isExcellent: false
                     isGenuine: true
-                    favoriteCount: 0
+                    collectCount: 0
                     isCollect: false
-                    imgUrl: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                    imgUrls:
+                      - https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
                     tags:
                       - 24小時營業
                       - 線上藥師諮詢
                       - 連鎖藥房
+                    tagKey:
+                      - 254
+                      - 255
+                      - 256
                     mainServices:
                       - 處方藥配藥
                       - 藥品諮詢
                       - 零售藥品與健康食品
+                    mainServicesKey:
+                      - 254
+                      - 255
+                      - 256
+                    mainServiceIcon:
+                      - key : 254
+                        name: 處方藥配藥
+                        icon: bchat-question-outline
+                      - key : 255
+                        name: 藥品諮詢
+                        icon: bchat-question-outline
+                      - key : 256
+                        name: 零售藥品與健康食品
+                        icon: bchat-question-outline
                     services:
                       - 處方藥配藥服務
                       - 藥品信息和用藥建議
                       - 藥物遵從性評估和提醒
+                    serviceKey:
+                        - 254
+                        - 255
+                        - 256
+
+  /stores/medicines:
+    get:
+      summary: 哪裡買藥
+      tags:
+        - stores
+      parameters:
+        - in: query
+          name: permitNo
+          schema:
+            type: array
+            items:
+              type: string
+          description: 藥品
+          example: ['HK-05357', 'HK-07007']
+        - in: query
+          name: isExact
+          schema:
+            type: integer
+            enum: [0,1]
+          description: 藥品使否要完整符合
+        - in: query
+          name: stockType
+          schema:
+            type: string
+            enum: [lv1, lv2]
+          description: 庫存類型
+        - in: query
+          name: district
+          schema:
+            type: string
+          description: 指定行政區
+        - in: query
+          name: area
+          schema:
+            type: string
+          description: 指定搜尋區域
+        - in: query
+          name: lat
+          schema:
+            type: integer
+          description: 緯度
+        - in: query
+          name: lng
+          schema:
+            type: integer
+          description: 經度
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    coordinate:
+                      type: object
+                      properties:
+                        lat:
+                          type: number
+                        lng:
+                          type: number
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                          address:
+                            type: string
+                          district:
+                            type: string
+                          lng:
+                            type: number
+                          lat:
+                            type: number
+                          distance:
+                            type: number
+                          contactNumber:
+                            type: string
+                          businessHours:
+                            type: string
+                          isExcellent:
+                            type: boolean
+                          isGenuine:
+                            type: boolean
+                          collectCount:
+                            type: number
+                          isCollect:
+                            type: boolean
+                          isExact:
+                            type: boolean
+                          stockType:
+                            type: string
+                          drugCount:
+                            type: number
+                          drugs:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                permitNo:
+                                  type: string
+                                name:
+                                  type: string
+                example:
+                  msg : Success
+                  coordinate:
+                    lat: 22.3530251
+                    lng: 113.9628303
+                  data:
+                    - uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+                      stockType: lv1
+                      name: Nextgen
+                      address: Anhe Road, Daan District
+                      lat: 25.0260285
+                      lng: 121.5493852
+                      distance: 21
+                      contactNumber: 2323232
+                      businessHours: 09:00 ~ 18:00
+                      website: https://erp-dev.cloudsatlas.com.hk
+                      isExcellent: false
+                      isGenuine: true
+                      collectCount: 0
+                      isCollect: false
+                      isExact: true
+                      drugCount: 2
+                      drugs:
+                        - permitNo : HK-05357
+                          name: ROCALTROL CAP 0.25UG
+                        - permitNo : HK-07007
+                          name: VENTOLIN INHALER 100MCG/METERED DOSE

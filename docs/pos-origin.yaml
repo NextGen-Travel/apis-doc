@@ -345,3 +345,48 @@ paths:
                 html_content: <tr class="product_row" data-row_index="2" >...</tr>
                 success: true
                 popup: This is popup message
+
+  /contacts/ledger:
+    get:
+      summary: 取得客戶分類帳
+      description: 取得客戶分類帳詳細資訊
+      parameters:
+        - in: query
+          name: contact_id
+          schema:
+            type: integer
+          description: 客戶ID
+        - in: query
+          name: start_date
+          schema:
+            type: integer
+          description: 起始日期
+        - in: query
+          name: show_payments
+          schema:
+            type: boolean
+            default: false
+        - in: query
+          name: end_date
+          schema:
+            type: integer
+          description: 結束日期
+        - in: query
+          name: format
+          schema:
+            type: string
+            enum:
+              - format_1
+              - format_2
+            default: format_1
+          description: 格式
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 分店ID
+      responses:
+        '200':
+          description: 成功
+
+

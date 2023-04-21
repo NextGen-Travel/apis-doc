@@ -147,6 +147,258 @@ paths:
 
   # ====================
   #
+  # Member
+  #
+
+  /members/:uuid:
+    get:
+      summary: 拿會員中心顯示的個人資料
+      tags:
+        - members
+      security:
+        - client_token: []
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: member uuid
+      responses:
+        '200':
+          description: 成功
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                      member:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          createdAt:
+                            type: string
+                          name:
+                            type: string
+                          mobile:
+                            type: string
+                          email:
+                            type: string
+                          fax:
+                            type: string
+                          uuid:
+                            type: string
+    put:
+      summary: 修改會員資料
+      tags:
+        - members
+      security:
+        - client_token: []
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: member uuid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: name
+                fax:
+                  type: string
+                  description: fax
+                mobile:
+                  type: string
+                  description: mobile
+      responses:
+        '200':
+          description: 成功
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                      member:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          createdAt:
+                            type: string
+                          name:
+                            type: string
+                          mobile:
+                            type: string
+                          email:
+                            type: string
+                          fax:
+                            type: string
+                          uuid:
+                            type: string
+
+  /members/:uuid/third-party-logins:
+    get:
+      summary: 拿會員有連結的第三方登入資料
+      tags:
+        - members
+      security:
+        - client_token: []
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: member uuid
+      responses:
+        '200':
+          description: 成功
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                      thirdPartyLogins:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            platform:
+                              type: string
+                            openId:
+                              type: string
+                            email:
+                              type: string
+  /members/:uuid/reset-password:
+    put:
+      summary: 修改會員密碼
+      tags:
+        - members
+      security:
+        - client_token: []
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: member uuid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                  description: 舊密碼
+                newPassword:
+                  type: string
+                  description: 新密碼
+                confirmNewPassword:
+                  type: string
+                  description: 確認新密碼，值要跟新密碼一樣
+      responses:
+        '200':
+          description: 成功
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+
+  /members/third-party-callback:
+    post:
+      summary: 綁定新的第三方(這個要帶 header) or 用第三方登入 or 用第三方註冊
+      tags:
+        - members
+      security:
+        - client_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider:
+                  type: string
+                  description: 哪個第三方（全小寫）
+                  example: 'google'
+                idToken:
+                  type: string
+                  description: 第三方給的 token
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  jwt:
+                    type: string
+                  member:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      uuid:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                  thirdPartyLogin:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      platform:
+                        type: string
+                      openId:
+                        type: string
+                      email:
+                        type: string
+
+
+
+
+  # ====================
+  #
   # posts
   #
 
@@ -589,4 +841,105 @@ paths:
                               type: number
                             tagName:
                               type: string
-               
+
+  # ====================
+  #
+  # subscribes
+  #
+
+  /member/subscribe:
+    post:
+      summary: 會員訂閱
+      tags:
+        - subscribe
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: number
+                  description: 標籤的父層
+                store:
+                  type: string
+                  description: 追蹤的來源
+                  example: 1,2,3
+                category:
+                  type: string
+                  description: 追蹤的分類
+                  example: 2,4,7
+
+              required:
+                - email
+ 
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /member/subscribe/:uuid:
+    put:
+      summary: 更新訂閱的選項
+      tags:
+        - subscribe
+      parameters:
+        - name: uuid
+          in: path
+          description: 訂閱的uuid
+          required: true
+          example: f6bd3fe9-62ae-4f68-9a78-5779880571812
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: number
+                  description: 標籤的父層
+                store:
+                  type: string
+                  description: 追蹤的來源
+                  example: 1,2,3
+                category:
+                  type: string
+                  description: 追蹤的分類
+                  example: 2,4,7
+                   
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      email:
+                        type: string
+                      isSubscribed:
+                        type: boolean
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      uuid:
+                        type: string
+
