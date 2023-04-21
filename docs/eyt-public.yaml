@@ -43,7 +43,7 @@ components:
             type: object
             properties:
               key:
-                type: number
+                type: string
                 description: 用來執行搜尋用的參數
               value:
                 type: string
