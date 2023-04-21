@@ -1854,7 +1854,7 @@ paths:
                     - key: lv3
                       value: 無庫存資料
 
-  /drugs/options/mainServices:
+  /stores/options/mainServices:
     get:
       summary: 主要服務類型
       tags:
@@ -1876,7 +1876,7 @@ paths:
                     - key: 3
                       name: 零售藥品與健康食品
 
-  /drugs/options/services:
+  /stores/options/services:
     get:
       summary: 服務類型
       tags:
@@ -1898,7 +1898,7 @@ paths:
                     - key: 3
                       name: 中醫藥建議和配方
 
-  /drugs/options/districts:
+  /stores/options/districts:
     get:
       summary: 取的香港行政區域
       tags:
