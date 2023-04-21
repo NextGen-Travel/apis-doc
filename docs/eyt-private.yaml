@@ -338,6 +338,64 @@ paths:
                       msg:
                         type: string
 
+  /members/third-party-callback:
+    post:
+      summary: 綁定新的第三方(這個要帶 header) or 用第三方登入 or 用第三方註冊
+      tags:
+        - members
+      security:
+        - client_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider:
+                  type: string
+                  description: 哪個第三方（全小寫）
+                  example: 'google'
+                idToken:
+                  type: string
+                  description: 第三方給的 token
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  jwt:
+                    type: string
+                  member:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      uuid:
+                        type: string
+                      name:
+                        type: string
+                      email:
+                        type: string
+                  thirdPartyLogin:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      platform:
+                        type: string
+                      openId:
+                        type: string
+                      email:
+                        type: string
+
+
+
 
   # ====================
   #
