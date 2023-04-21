@@ -783,4 +783,105 @@ paths:
                               type: number
                             tagName:
                               type: string
-               
+
+  # ====================
+  #
+  # subscribes
+  #
+
+  /member/subscribe:
+    post:
+      summary: 會員訂閱
+      tags:
+        - subscribe
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: number
+                  description: 標籤的父層
+                store:
+                  type: string
+                  description: 追蹤的來源
+                  example: 1,2,3
+                category:
+                  type: string
+                  description: 追蹤的分類
+                  example: 2,4,7
+
+              required:
+                - email
+ 
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /member/subscribe/:uuid:
+    put:
+      summary: 更新訂閱的選項
+      tags:
+        - subscribe
+      parameters:
+        - name: uuid
+          in: path
+          description: 訂閱的uuid
+          required: true
+          example: f6bd3fe9-62ae-4f68-9a78-5779880571812
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: number
+                  description: 標籤的父層
+                store:
+                  type: string
+                  description: 追蹤的來源
+                  example: 1,2,3
+                category:
+                  type: string
+                  description: 追蹤的分類
+                  example: 2,4,7
+                   
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      email:
+                        type: string
+                      isSubscribed:
+                        type: boolean
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+                      uuid:
+                        type: string
+
