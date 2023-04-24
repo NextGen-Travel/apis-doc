@@ -9,6 +9,12 @@ servers:
   - url: https://api-dev.e-drugsearch.com.hk/api/
 
 components:
+  securitySchemes:
+    member_token:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: 驗證需要的 token, Bearer xxx
   parameters:
     page:
       in: query
@@ -943,3 +949,136 @@ paths:
                       uuid:
                         type: string
 
+  # ====================
+  #
+  # drug
+  #
+  /collect/drugs/:permit_no:
+    post:
+      summary: 收藏文章
+      tags:
+        - drug
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: permit_no
+          required: true
+          schema:
+            type: string
+          description: permit_no
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 收藏成功
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 收藏失敗            
+
+  /collect/drugs/:permit_no/cancel:
+    put:
+      summary: 取消收藏
+      tags:
+        - drug
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: permit_no
+          required: true
+          schema:
+            type: string
+          description: permit_no
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 取消收藏！
+
+  # ====================
+  #
+  # store
+  #
+  /collect/stores/:uuid:
+    post:
+      summary: 收藏藥房
+      tags:
+        - store
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: 藥房uuid
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 收藏成功
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 收藏失敗            
+
+  /collect/stores/:uuid/cancel:
+    put:
+      summary: 取消收藏
+      tags:
+        - store
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: 藥房uuid
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 取消收藏！
