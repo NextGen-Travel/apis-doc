@@ -1955,21 +1955,20 @@ paths:
         - in: query
           name: isGenuine
           schema:
-            type: integer
-            enum: [0,1]
-          description: 正版正貨
+            type: string
+          description: 正版正貨 0,1
         - in: query
           name: isExcellent
           schema:
-            type: integer
+            type: string
             enum: [0,1]
-          description: 信心保證
+          description: 信心保證 0,1
         - in: query
           name: stockType
           schema:
             type: string
             enum: [lv1, lv2, lv3]
-          description: 庫存類型
+          description: 庫存類型 lv1,lv2,lv3
         - in: query
           name: keyword
           schema:
