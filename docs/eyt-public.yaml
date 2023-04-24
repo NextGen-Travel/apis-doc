@@ -1961,13 +1961,11 @@ paths:
           name: isExcellent
           schema:
             type: string
-            enum: [0,1]
           description: 信心保證 0,1
         - in: query
           name: stockType
           schema:
             type: string
-            enum: [lv1, lv2, lv3]
           description: 庫存類型 lv1,lv2,lv3
         - in: query
           name: keyword
