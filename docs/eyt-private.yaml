@@ -10,11 +10,16 @@ servers:
 
 components:
   securitySchemes:
+    user_token:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: 藥房使用者 驗證需要的 token, Bearer xxx
     member_token:
       in: header
       type: apiKey
       name: Authorization
-      description: 驗證需要的 token, Bearer xxx
+      description: member 驗證需要的 token, Bearer xxx
   parameters:
     page:
       in: query

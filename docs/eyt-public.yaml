@@ -9,6 +9,17 @@ servers:
   - url: https://api-dev.e-drugsearch.com.hk/api/
 
 components:
+  securitySchemes:
+    user_token:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: 藥房使用者 驗證需要的 token, Bearer xxx
+    member_token:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: member 驗證需要的 token, Bearer xxx
   parameters:
     page:
       in: query
@@ -920,6 +931,8 @@ paths:
       summary: 收藏文章
       tags:
         - posts
+      security:
+        - member_token: []
       parameters:
         - in: path
           name: id
@@ -955,6 +968,8 @@ paths:
       summary: 取消收藏文章
       tags:
         - posts
+      security:
+        - member_token: []
       parameters:
         - in: path
           name: id
