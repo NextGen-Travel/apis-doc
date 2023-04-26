@@ -2038,7 +2038,7 @@ paths:
             type: string
           description: 指定搜尋區域
         - in: query
-          name: district[]
+          name: district
           explode: true
           schema:
             type: array
