@@ -2015,12 +2015,12 @@ paths:
         - in: query
           name: tags
           schema:
-            type: integer
+            type: string
           description: tags 篩選
         - in: query
           name: mainServices
           schema:
-            type: integer
+            type: string
           description: 主要服務篩選
         - in: query
           name: services
