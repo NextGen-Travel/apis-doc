@@ -2441,7 +2441,7 @@ paths:
             enum: [lv1, lv2]
           description: 庫存類型
         - in: query
-          name: district[]
+          name: district
           explode: true
           schema:
             type: array
