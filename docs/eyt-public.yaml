@@ -42,6 +42,13 @@ components:
         type: string
       required: false
       example: 'en'
+    locale:
+      in: query
+      name: locale
+      schema:
+        type: string
+      required: false
+      example: 'zh'
   schemas:
     DrugOptionsResponse:
       type: object
@@ -1852,6 +1859,8 @@ paths:
       summary: 庫存類型
       tags:
         - stores
+      parameters:
+        - $ref: '#/components/parameters/locale'
       responses:
           '200':
             description: 成功
@@ -1874,6 +1883,8 @@ paths:
       summary: 主要服務類型
       tags:
         - stores
+      parameters:
+        - $ref: '#/components/parameters/locale'
       responses:
           '200':
             description: 成功
@@ -1896,6 +1907,8 @@ paths:
       summary: 服務類型
       tags:
         - stores
+      parameters:
+        - $ref: '#/components/parameters/locale'
       responses:
           '200':
             description: 成功
@@ -1912,6 +1925,28 @@ paths:
                       name: 非處方藥和保健品的銷售
                     - key: 3
                       name: 中醫藥建議和配方
+
+  /stores/options/tags:
+    get:
+      summary: 服務類型
+      tags:
+        - stores
+      parameters:
+        - $ref: '#/components/parameters/locale'
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DrugOptionsResponse'
+                example:
+                  msg : Success
+                  data:
+                    - key: 1
+                      name: 24 小時營業
+                    - key: 2
+                      name: 線上藥師諮詢
 
   /stores/options/districts:
     get:
@@ -1978,10 +2013,35 @@ paths:
             type: string
           description: 信心保證 0,1
         - in: query
+          name: tags
+          schema:
+            type: integer
+          description: tags 篩選
+        - in: query
+          name: mainServices
+          schema:
+            type: integer
+          description: 主要服務篩選
+        - in: query
+          name: services
+          schema:
+            type: integer
+          description: 服務篩選
+        - in: query
           name: stockType
           schema:
             type: string
           description: 庫存類型 lv1,lv2,lv3
+        - in: query
+          name: area
+          schema:
+            type: string
+          description: 指定搜尋區域
+        - in: query
+          name: district
+          schema:
+            type: string
+          description: 指定行政區
         - in: query
           name: keyword
           schema:
