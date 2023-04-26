@@ -2038,9 +2038,12 @@ paths:
             type: string
           description: 指定搜尋區域
         - in: query
-          name: district
+          name: district[]
+          explode: true
           schema:
-            type: string
+            type: array
+            items:
+              type: string
           description: 指定行政區
         - in: query
           name: keyword
@@ -2438,9 +2441,12 @@ paths:
             enum: [lv1, lv2]
           description: 庫存類型
         - in: query
-          name: district
+          name: district[]
+          explode: true
           schema:
-            type: string
+            type: array
+            items:
+              type: string
           description: 指定行政區
         - in: query
           name: area
