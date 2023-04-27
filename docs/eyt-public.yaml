@@ -47,8 +47,19 @@ components:
       name: locale
       schema:
         type: string
+        enum: ['zh', 'en', 'zh-CN']
+      description: 多語系輸出 繁體中文，英文，簡體中文
       required: false
       example: 'zh'
+    isCollect:
+      in: query
+      name: isCollect
+      schema:
+        type: integer
+        enum: [0,1]
+      required: false
+      description: 是否已收藏，isCollect=1 ，已收藏
+      example: 0
   schemas:
     DrugOptionsResponse:
       type: object
@@ -1662,6 +1673,7 @@ paths:
       tags:
         - drug
       parameters:
+        - $ref: '#/components/parameters/isCollect'
         - in: query
           name: ingredient
           schema:
@@ -2085,6 +2097,7 @@ paths:
       tags:
         - stores
       parameters:
+        - $ref: '#/components/parameters/isCollect'
         - in: query
           name: isGenuine
           schema:
