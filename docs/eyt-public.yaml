@@ -168,6 +168,12 @@ paths:
       tags:
         - posts
       parameters:
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章的語言  
         - in: query
           name: keyword
           schema:
@@ -751,6 +757,12 @@ paths:
           schema:
             type: string
           description: tag id  
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章的語言            
         - in: query
           name: pageSize
           schema:
@@ -848,6 +860,12 @@ paths:
           schema:
             type: string
           description: store id  
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章的語言            
         - in: query
           name: pageSize
           schema:
