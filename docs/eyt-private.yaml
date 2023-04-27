@@ -450,7 +450,8 @@ paths:
 
   /members/third-party-callback:
     post:
-      summary: 綁定新的第三方(這個要帶 header) or 用第三方登入 or 用第三方註冊
+      summary: 第三方綁定或登入
+      description: 舊用戶第三方登入 or 新用戶第三方註冊 or 舊用戶綁定新的第三方(這個要帶 header) 三個都是打這支
       tags:
         - members
       security:
