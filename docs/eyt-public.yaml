@@ -745,6 +745,71 @@ paths:
                           type: number
                           description: 文章收藏數
 
+  /type/posts:  
+    get:
+      summary: 依照type撈取三篇最新的文章
+      tags:
+        - posts
+      parameters:      
+        - in: query
+          name: type
+          schema:
+            type: string
+          description: type的名稱        
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        title:
+                          type: string
+                          description: 文章標題
+                        content:
+                          type: string
+                          description: 文章內容
+                        type:
+                          type: string
+                          description: 文章類別（大標）
+                        viewCount:
+                          type: number
+                          description: 文章瀏覽數
+                        image:
+                          type: string
+                        store:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: 文章來源
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              tagName:
+                                type: string
+                        publishedAt:
+                          type: string
+                        memberCount:
+                          type: number
+                          description: 文章收藏數
+
   /posts/tag/{tagId}:  
     get:
       summary: 搜尋具有特定tag的文章
