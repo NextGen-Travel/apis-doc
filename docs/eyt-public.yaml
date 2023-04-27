@@ -2124,9 +2124,7 @@ paths:
           name: district
           explode: true
           schema:
-            type: array
-            items:
-              type: string
+            type: string
           description: 指定行政區
         - in: query
           name: keyword
