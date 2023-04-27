@@ -363,13 +363,9 @@ paths:
             schema:
               type: object
               properties:
-                provider:
+                sessionId:
                   type: string
-                  description: 哪個第三方（全小寫）
-                  example: 'google'
-                idToken:
-                  type: string
-                  description: 第三方給的 token
+                  description: oauth 那支跟後端拿到的 sessionId
       responses:
         '200':
           description: 成功
