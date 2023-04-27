@@ -500,7 +500,18 @@ paths:
           required: true
           example: 3
           schema:
-            type: string        
+            type: string 
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章的語言  
+        - in: query
+          name: limit
+          schema:
+            type: number
+          description: 回傳的數量                             
       responses:
         '200':
           description: 成功
@@ -702,6 +713,18 @@ paths:
       summary: 獲取最新文章
       tags:
         - posts
+      parameters:
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章的語言  
+        - in: query
+          name: limit
+          schema:
+            type: number
+          description: 回傳的數量           
       responses:
         '200':
           description: 成功
@@ -761,7 +784,18 @@ paths:
       summary: 依照type撈取三篇最新的文章
       tags:
         - posts
-      parameters:      
+      parameters:
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章的語言  
+        - in: query
+          name: limit
+          schema:
+            type: number
+          description: 回傳的數量                 
         - in: query
           name: type
           schema:
