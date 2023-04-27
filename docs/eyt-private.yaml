@@ -349,6 +349,105 @@ paths:
                       msg:
                         type: string
 
+
+  /members/oauth/:provider/:action/:from:
+    post:
+      summary: apple, facebook, google, wechat 的第三方登入 callback 打這支
+      tags:
+        - members
+      parameters:
+        - in: path
+          name: provider
+          required: true
+          schema:
+            type: string
+          description: 全小寫，完整名稱。
+          example: facebook
+        - in: path
+          name: action
+          required: true
+          schema:
+            type: string
+          description: 這次動作是 login 或 新增綁定
+          example: login
+        - in: path
+          name: from
+          required: true
+          schema:
+            type: string
+          description: web or app
+          example: web
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: wechat 要帶 code
+                idToken:
+                  type: string
+                  description: apple, facebook, google 要帶 idToken
+      responses:
+        '302':
+          description: Redirect
+          headers:
+            Location:
+              description: The new URL to redirect to.
+              schema:
+                type: string
+                example: https://dev.e-drugsearch.com.hk/oauth
+
+    get:
+      summary: ig 的第三方登入 callback 打這支
+      tags:
+        - members
+      security:
+        - client_token: []
+      parameters:
+        - in: path
+          name: provider
+          required: true
+          schema:
+            type: string
+          description: 全小寫，完整名稱。
+          example: instagram
+        - in: path
+          name: action
+          required: true
+          schema:
+            type: string
+          description: 這次動作是 login 或 新增綁定
+          example: login
+        - in: path
+          name: from
+          required: true
+          schema:
+            type: string
+          description: web or app
+          example: web
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: wechat 要帶 code
+      responses:
+        '302':
+          description: Redirect
+          headers:
+            Location:
+              description: The new URL to redirect to.
+              schema:
+                type: string
+                example: https://dev.e-drugsearch.com.hk/oauth
+
   /members/third-party-callback:
     post:
       summary: 綁定新的第三方(這個要帶 header) or 用第三方登入 or 用第三方註冊
