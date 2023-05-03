@@ -77,6 +77,77 @@ components:
               value:
                 type: string
                 description: 顯示名稱
+    CoordinateResponse:
+      type: object
+      properties:
+        lat:
+          type: number
+        lng:
+          type: number
+    StoresMedicineOptionsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          uuid:
+            type: string
+            example: 'bb9ae68e-e856-41cf-85f6-72f7c7a3716e'
+          name:
+            type: string
+            example: 'Nextgen'
+          address:
+            type: string
+            example: Anhe Road, Daan District
+          district:
+            type: string
+            example: Daan District
+          lng:
+            type: number
+            example: 121.5493852
+          lat:
+            type: number
+            example: 25.0260285
+          distance:
+            type: number
+            example: 25
+          contactNumber:
+            type: string
+            example: 2323232
+          businessHours:
+            type: string
+            example: 09:00 ~ 18:00
+          isExcellent:
+            type: boolean
+            example: false
+          isGenuine:
+            type: boolean
+            example: true
+          collectCount:
+            type: number
+            example: 0
+          isCollect:
+            type: boolean
+            example: false
+          isExact:
+            type: boolean
+            example: true
+          stockType:
+            type: string
+            example: lv1
+          drugCount:
+            type: number
+            example: 2
+          drugs:
+            type: array
+            items:
+              type: object
+              properties:
+                permitNo:
+                  type: string
+                  example: HK-05357
+                name:
+                  type: string
+                  example: ROCALTROL CAP 0.25UG
 
 paths:
 
@@ -1854,6 +1925,29 @@ paths:
           example: HK-42682
           schema:
             type: string
+        - in: query
+          name: district
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+          description: 指定行政區
+        - in: query
+          name: area
+          schema:
+            type: string
+          description: 指定搜尋區域
+        - in: query
+          name: lat
+          schema:
+            type: integer
+          description: 緯度
+        - in: query
+          name: lng
+          schema:
+            type: integer
+          description: 經度
       responses:
           '200':
             description: 成功
@@ -1941,6 +2035,10 @@ paths:
                                 type: array
                                 items:
                                   type: string
+                        coordinate:
+                          $ref: '#/components/schemas/CoordinateResponse'
+                        stores:
+                          $ref: '#/components/schemas/StoresMedicineOptionsResponse'
                 example:
                   msg : Success
                   data:
@@ -1978,7 +2076,31 @@ paths:
                       holder:
                         name: FP HEALTHCARE LIMITED
                         address: FLAT/RM A, 3/F, SUN KING FACTORY BUILDING, 1-7, SHING CHUEN ROAD, TAI WAI, SHATIN, NEW TERRITORIES
-
+                      coordinate:
+                        lat: 22.3530251
+                        lng: 113.9628303
+                      stores:
+                        - uuid: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+                          stockType: lv1
+                          name: Nextgen
+                          address: Anhe Road, Daan District
+                          lat: 25.0260285
+                          lng: 121.5493852
+                          distance: 21
+                          contactNumber: 2323232
+                          businessHours: 09:00 ~ 18:00
+                          website: https://erp-dev.cloudsatlas.com.hk
+                          isExcellent: false
+                          isGenuine: true
+                          collectCount: 0
+                          isCollect: false
+                          isExact: true
+                          drugCount: 2
+                          drugs:
+                            - permitNo : HK-05357
+                              name: ROCALTROL CAP 0.25UG
+                            - permitNo : HK-07007
+                              name: VENTOLIN INHALER 100MCG/METERED DOSE
 
   # ====================
   #
@@ -2603,58 +2725,9 @@ paths:
                     msg:
                       type: string
                     coordinate:
-                      type: object
-                      properties:
-                        lat:
-                          type: number
-                        lng:
-                          type: number
+                      $ref: '#/components/schemas/CoordinateResponse'
                     data:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          uuid:
-                            type: string
-                          name:
-                            type: string
-                          address:
-                            type: string
-                          district:
-                            type: string
-                          lng:
-                            type: number
-                          lat:
-                            type: number
-                          distance:
-                            type: number
-                          contactNumber:
-                            type: string
-                          businessHours:
-                            type: string
-                          isExcellent:
-                            type: boolean
-                          isGenuine:
-                            type: boolean
-                          collectCount:
-                            type: number
-                          isCollect:
-                            type: boolean
-                          isExact:
-                            type: boolean
-                          stockType:
-                            type: string
-                          drugCount:
-                            type: number
-                          drugs:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                permitNo:
-                                  type: string
-                                name:
-                                  type: string
+                      $ref: '#/components/schemas/StoresMedicineOptionsResponse'
                 example:
                   msg : Success
                   coordinate:
