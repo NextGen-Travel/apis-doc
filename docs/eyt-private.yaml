@@ -1056,7 +1056,7 @@ paths:
   #
   /collect/drugs/:permit_no:
     post:
-      summary: 收藏文章
+      summary: 收藏藥品
       tags:
         - drug
       security:
