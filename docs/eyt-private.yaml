@@ -349,9 +349,109 @@ paths:
                       msg:
                         type: string
 
+
+  /members/oauth/:provider/:action/:from:
+    post:
+      summary: apple, facebook, google, wechat 的第三方登入 callback 打這支
+      tags:
+        - members
+      parameters:
+        - in: path
+          name: provider
+          required: true
+          schema:
+            type: string
+          description: 全小寫，完整名稱。
+          example: facebook
+        - in: path
+          name: action
+          required: true
+          schema:
+            type: string
+          description: 這次動作是 login 或 新增綁定
+          example: login
+        - in: path
+          name: from
+          required: true
+          schema:
+            type: string
+          description: web or app
+          example: web
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: wechat 要帶 code
+                idToken:
+                  type: string
+                  description: apple, facebook, google 要帶 idToken
+      responses:
+        '302':
+          description: Redirect
+          headers:
+            Location:
+              description: The new URL to redirect to.
+              schema:
+                type: string
+                example: https://dev.e-drugsearch.com.hk/oauth
+
+    get:
+      summary: ig 的第三方登入 callback 打這支
+      tags:
+        - members
+      security:
+        - client_token: []
+      parameters:
+        - in: path
+          name: provider
+          required: true
+          schema:
+            type: string
+          description: 全小寫，完整名稱。
+          example: instagram
+        - in: path
+          name: action
+          required: true
+          schema:
+            type: string
+          description: 這次動作是 login 或 新增綁定
+          example: login
+        - in: path
+          name: from
+          required: true
+          schema:
+            type: string
+          description: web or app
+          example: web
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  description: wechat 要帶 code
+      responses:
+        '302':
+          description: Redirect
+          headers:
+            Location:
+              description: The new URL to redirect to.
+              schema:
+                type: string
+                example: https://dev.e-drugsearch.com.hk/oauth
+
   /members/third-party-callback:
     post:
-      summary: 綁定新的第三方(這個要帶 header) or 用第三方登入 or 用第三方註冊
+      summary: 第三方綁定或登入
+      description: 舊用戶第三方登入 or 新用戶第三方註冊 or 舊用戶綁定新的第三方(這個要帶 header) 三個都是打這支
       tags:
         - members
       security:
@@ -363,13 +463,9 @@ paths:
             schema:
               type: object
               properties:
-                provider:
+                sessionId:
                   type: string
-                  description: 哪個第三方（全小寫）
-                  example: 'google'
-                idToken:
-                  type: string
-                  description: 第三方給的 token
+                  description: oauth 那支跟後端拿到的 sessionId
       responses:
         '200':
           description: 成功
@@ -687,7 +783,71 @@ paths:
                     properties:
                       msg:
                         type: string
-                        example:  建立失敗         
+                        example:  建立失敗      
+
+  /collect/posts/{id}:  
+    post:
+      summary: 收藏文章
+      tags:
+        - posts
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: post id                    
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 收藏文章成功
+        '400':
+          description: 失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 收藏文章失敗            
+
+  /cancel/posts/{id}:  
+    put:
+      summary: 取消收藏文章
+      tags:
+        - posts
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: post id                    
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: 取消收藏！                           
 
   # ====================
   #
@@ -960,7 +1120,7 @@ paths:
   #
   /collect/drugs/:permit_no:
     post:
-      summary: 收藏文章
+      summary: 收藏藥品
       tags:
         - drug
       security:
