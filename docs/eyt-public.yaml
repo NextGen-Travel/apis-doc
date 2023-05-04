@@ -61,7 +61,7 @@ components:
             type: object
             properties:
               key:
-                type: string
+                type: number
                 description: 用來執行搜尋用的參數
               value:
                 type: string
