@@ -561,7 +561,7 @@ paths:
                       memberCount:
                         type: number
                         description: 文章收藏數
-                     isCollect:
+                      isCollect:
                         type: boolean
                         description: 是否被登入的會員收藏，未登入時一律顯示false
 
