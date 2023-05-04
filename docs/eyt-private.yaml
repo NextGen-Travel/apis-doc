@@ -391,14 +391,22 @@ paths:
                   type: string
                   description: apple, facebook, google 要帶 idToken
       responses:
-        '302':
-          description: Redirect
-          headers:
-            Location:
-              description: The new URL to redirect to.
+        '200':
+          description: 成功
+          content:
+            application/json:
               schema:
-                type: string
-                example: https://dev.e-drugsearch.com.hk/oauth
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      action:
+                        type: string
+                      msg:
+                        type: string
+                      sessionId:
+                        type: string
 
     get:
       summary: ig 的第三方登入 callback 打這支
@@ -474,32 +482,35 @@ paths:
               schema:
                 type: object
                 properties:
-                  msg:
-                    type: string
-                  jwt:
-                    type: string
-                  member:
+                  data:
                     type: object
                     properties:
-                      id:
-                        type: number
-                      uuid:
+                      msg:
                         type: string
-                      name:
+                      jwt:
                         type: string
-                      email:
-                        type: string
-                  thirdPartyLogin:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      platform:
-                        type: string
-                      openId:
-                        type: string
-                      email:
-                        type: string
+                      member:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                          email:
+                            type: string
+                      thirdPartyLogin:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          platform:
+                            type: string
+                          openId:
+                            type: string
+                          email:
+                            type: string
 
 
 
