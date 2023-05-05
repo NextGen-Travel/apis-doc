@@ -284,13 +284,13 @@ paths:
             minimum: 1
           description: 篩選功能-來源名稱（精準搜尋）     
         - in: query
-          name: sortCondition
+          name: sort
           schema:
             type: string
             enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
           description: 排序功能
         - in: query
-          name: pageSize
+          name: perPage
           schema:
             type: integer
           description: 單頁筆數
@@ -955,7 +955,7 @@ paths:
             enum: [ zh, zh-CN, en]
           description: 文章的語言            
         - in: query
-          name: pageSize
+          name: perPage
           schema:
             type: integer
           description: 單頁筆數
@@ -966,7 +966,7 @@ paths:
             minimum: 1
           description: 第幾頁  
         - in: query
-          name: sortCondition
+          name: sort
           schema:
             type: string
             enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
@@ -1058,7 +1058,7 @@ paths:
             enum: [ zh, zh-CN, en]
           description: 文章的語言            
         - in: query
-          name: pageSize
+          name: perPage
           schema:
             type: integer
           description: 單頁筆數
@@ -1069,7 +1069,7 @@ paths:
             minimum: 1
           description: 第幾頁
         - in: query
-          name: sortCondition
+          name: sort
           schema:
             type: string
             enum: [nameAsc, nameDesc,timeAsc,timeDesc, collectDesc, priorityDesc]
