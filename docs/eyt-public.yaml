@@ -882,7 +882,7 @@ paths:
           name: type
           schema:
             type: string
-            enum: [ latestNews, EYTPAGE, NewDevelopmentsAboutMedicine, PolicyPromotion, FAQ]
+            enum: [ latestNews, EYTPAGE, NewDevelopmentsAboutMedicine, PolicyPromotion]
           description: type的名稱        
       responses:
         '200':
