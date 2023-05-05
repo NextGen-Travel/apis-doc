@@ -1193,7 +1193,7 @@ paths:
                       properties:
                         id:
                           type: number
-                        tagName:
+                        category:
                           type: string
                         questions:
                           type: array
