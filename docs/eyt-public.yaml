@@ -1162,6 +1162,39 @@ paths:
                     name:
                       type: string
 
+  /faq:  
+    get:
+      summary: 獲取常見問題的文章
+      tags:
+        - posts
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        tagName:
+                          type: string
+                        questions:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              title:
+                                type: string
+                              content:
+                                type: string
 
   # ====================
   #
@@ -1434,6 +1467,34 @@ paths:
                             tagName:
                               type: string
 
+  /categories/faq:
+    get:
+      summary: 獲取faq的category
+      tags:
+        - tags
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        parent_id:
+                          type: string
+                          description: 暫時先開出來的欄位，不確定之後會不會用到
+                     
   # ====================
   #
   # categories
