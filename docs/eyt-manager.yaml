@@ -1,0 +1,119 @@
+openapi: 3.0.1
+
+info:
+  title: 醫藥淘
+  version: 1.0.0
+  description: 醫藥淘 後台相關 api
+
+servers:
+  - url: http://localhost:1339/api/
+  - url: https://api-dev.e-drugsearch.com.hk/api/
+
+components:
+  securitySchemes:
+    user_token:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: 藥房使用者 驗證需要的 token, Bearer xxx
+  parameters:
+    language:
+      in: header
+      name: accept-language
+      schema:
+        type: string
+      required: false
+      example: 'zh'
+    locale:
+      in: query
+      name: locale
+      schema:
+        type: string
+        enum: ['zh', 'en', 'zh-CN']
+      description: 多語系輸出 繁體中文，英文，簡體中文
+      required: false
+      example: 'zh'
+
+
+paths:
+
+  # ====================
+  #
+  # Auth
+  #
+
+  /users-permissions/auth/login:
+    post:
+      summary: 後台使用者帳號登錄
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: string
+                  description: 帳號
+                  example: 'dev'
+                password:
+                  type: string
+                  description: 密碼
+                  example: 'nextgen123'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          username:
+                            type: string
+                          email:
+                            type: string
+                          provider:
+                            type: string
+                          confirmed:
+                            type: boolean
+                          blocked:
+                            type: boolean
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          store:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              nameCn:
+                                type: string
+                              nameEn:
+                                type: string
+                              tel:
+                                type: string
+                              address:
+                                type: string
+                              district:
+                                type: string
+                              rxNo:
+                                type: string
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                              publishedAt:
+                                type: string
