@@ -238,6 +238,53 @@ paths:
                           email:
                             type: string
 
+  # ====================
+  #
+  # Contact-us
+  #
+
+  /contact-uses/connect:
+    post:
+      summary: 聯絡我們
+      tags:
+        - contact-us
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: 小明
+                phone:
+                  type: string
+                  example: '0912345678'
+                email:
+                  type: string
+                  example: nextgen@nextgen.com.hk
+                title:
+                  type: string
+                  example: 主旨
+                type:
+                  type: string
+                  example: 醫藥淘相關問題
+                content:
+                  type: string
+                  example: 訊息內容
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
 
   # ====================
   #
