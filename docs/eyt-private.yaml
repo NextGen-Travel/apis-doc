@@ -1037,12 +1037,12 @@ paths:
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               type: object
               properties:
                 email:
-                  type: number
+                  type: string
                   description: 標籤的父層
                 store:
                   type: string
@@ -1083,12 +1083,12 @@ paths:
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               type: object
               properties:
                 email:
-                  type: number
+                  type: string
                   description: 標籤的父層
                 store:
                   type: string
