@@ -264,6 +264,41 @@ paths:
                             type: string
                           uuid:
                             type: string
+    delete:
+      summary: 註銷會員
+      tags:
+        - members
+      security:
+        - client_token: []
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: member uuid
+        - in: query
+          name: confirm
+          required: true
+          schema:
+            type: string
+          description: 讓會員輸入 DELETE 確認要註銷帳號
+          example: DELETE
+      responses:
+        '200':
+          description: 成功
+          content:
+            multipart/form-data:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                        example: Success
+
 
   /members/:uuid/third-party-logins:
     get:
