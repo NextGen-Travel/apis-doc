@@ -299,7 +299,14 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: 第幾頁                                       
+          description: 第幾頁  
+        - in: query
+          name: isCollect
+          schema:
+            type: integer
+            enum: [0,1]
+          required: false
+          description: 會員才會用到的篩選條件，isCollect=1 ，表示要查該會員已收藏的文章                               
       responses:
         '200':
           description: 成功
