@@ -1612,7 +1612,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  stores:
+                  type:
                     type: array
                     items:
                       type: object
@@ -1628,8 +1628,9 @@ paths:
                       properties:
                         id:
                           type: number
-                        name:
+                        tagName:
                           type: string
+
 
   /general/subscribe:
     post:
@@ -1645,7 +1646,7 @@ paths:
               properties:
                 email:
                   type: string
-                  description: 標籤的父層
+                  description:  訂閱的信箱
                 store:
                   type: string
                   description: 追蹤的來源
