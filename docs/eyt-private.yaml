@@ -1094,11 +1094,11 @@ paths:
                       types:
                         type: array
                         items:
-                          type: number
+                          type: string
                       tags:
                         type: array
                         items:
-                          type: number
+                          type: string
 
   /member/subscribe:
     post:
@@ -1121,14 +1121,13 @@ paths:
                   type: string
                   description: 追蹤的來源
                   example: 1,2,3
-                category:
+                tags:
                   type: string
                   description: 追蹤的分類
                   example: 2,4,7
                 isSubscribed:
                   type: boolean
                   description: 是否開啟訂閱
-                  example: 1,0
 
               required:
                 - email
@@ -1159,11 +1158,11 @@ paths:
                       types:
                         type: array
                         items:
-                          type: number
+                          type: string
                       tags:
                         type: array
                         items:
-                          type: number
+                          type: string
 
   /member/subscribe/:uuid:
     put:
@@ -1194,14 +1193,13 @@ paths:
                   type: string
                   description: 追蹤的來源
                   example: 1,2,3
-                category:
+                tags:
                   type: string
                   description: 追蹤的分類
                   example: 2,4,7
                 isSubscribed:
                   type: boolean
                   description: 是否開啟訂閱
-                  example: 1,0
                    
       responses:
         '200':
