@@ -161,13 +161,13 @@ paths:
   # Member
   #
 
-  /members/:uuid:
+  /members/{uuid}:
     get:
       summary: 拿會員中心顯示的個人資料
       tags:
         - members
       security:
-        - client_token: []
+        - member_token: []
       parameters:
         - in: path
           name: uuid
@@ -210,7 +210,7 @@ paths:
       tags:
         - members
       security:
-        - client_token: []
+        - member_token: []
       parameters:
         - in: path
           name: uuid
@@ -269,7 +269,7 @@ paths:
       tags:
         - members
       security:
-        - client_token: []
+        - member_token: []
       parameters:
         - in: path
           name: uuid
@@ -298,15 +298,91 @@ paths:
                       msg:
                         type: string
                         example: Success
+  /members/{uuid}/avatar:
+    post:
+      summary: member 上傳頭像
+      tags:
+        - members
+      security:
+        - member_token: []
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+          description: member uuid
+      requestBody:
+        required: false
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                avatar:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      avatar:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+                          alternativeText:
+                            type: string
+                          caption:
+                            type: string
+                          width:
+                            type: number
+                          height:
+                            type: number
+                          formats:
+                            type: string
+                          hash:
+                            type: string
+                          ext:
+                            type: string
+                          mime:
+                            type: string
+                          size:
+                            type: number
+                          url:
+                            type: string
+                          previewUrl:
+                            type: string
+                          provider:
+                            type: string
+                          provider_metadata:
+                            type: string
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
 
 
-  /members/:uuid/third-party-logins:
+
+
+  /members/{uuid}/third-party-logins:
     get:
       summary: 拿會員有連結的第三方登入資料
       tags:
         - members
       security:
-        - client_token: []
+        - member_token: []
       parameters:
         - in: path
           name: uuid
@@ -340,13 +416,13 @@ paths:
                               type: string
                             email:
                               type: string
-  /members/:uuid/reset-password:
+  /members/{uuid}/reset-password:
     put:
       summary: 修改會員密碼
       tags:
         - members
       security:
-        - client_token: []
+        - member_token: []
       parameters:
         - in: path
           name: uuid
@@ -385,7 +461,7 @@ paths:
                         type: string
 
 
-  /members/oauth/:provider/:action/:from:
+  /members/oauth/{provider}/{action}/{from}:
     post:
       summary: apple, facebook, google, wechat 的第三方登入 callback 打這支
       tags:
@@ -498,7 +574,7 @@ paths:
       tags:
         - members
       security:
-        - client_token: []
+        - member_token: []
       requestBody:
         required: true
         content:
