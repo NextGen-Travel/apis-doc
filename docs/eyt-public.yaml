@@ -1262,6 +1262,15 @@ paths:
                                 type: string
                               content:
                                 type: string
+                              updatedAt:
+                                type: string
+                              source:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  website:
+                                    type: string
 
   # ====================
   #
