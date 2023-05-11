@@ -441,9 +441,7 @@ paths:
                               type: string
                             email:
                               type: string
-                            avatar:
-                              type: string
-                              
+
   /members/{uuid}/reset-password:
     put:
       summary: 修改會員密碼
@@ -638,6 +636,8 @@ paths:
                           name:
                             type: string
                           email:
+                            type: string
+                          avatar:
                             type: string
                       thirdPartyLogin:
                         type: object
