@@ -398,6 +398,38 @@ paths:
                     type: string
                     example: Success
 
+  /members/me:
+    get:
+      summary: refresh member
+      tags:
+        - members
+      security:
+        - member_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      member:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          avatar:
+                            type: string
+                            example: "https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/2023_05_10_4_24_27_175189b4cb.png"
 
 
 
