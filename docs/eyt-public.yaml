@@ -1269,8 +1269,10 @@ paths:
                                 properties:
                                   name:
                                     type: string
+                                    description: 空字串則表示畫面不用顯示來源及更新日期
                                   website:
                                     type: string
+                                    description: 空字串則表示畫面不用顯示來源及更新日期
 
   # ====================
   #
