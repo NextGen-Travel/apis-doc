@@ -441,6 +441,9 @@ paths:
                               type: string
                             email:
                               type: string
+                            avatar:
+                              type: string
+                              
   /members/{uuid}/reset-password:
     put:
       summary: 修改會員密碼
