@@ -406,7 +406,7 @@ paths:
                                 description: 標籤名稱
                         publishedAt:
                           type: string
-                        memberCount:
+                        collectCount:
                           type: number
                           description: 收藏數
                         isCollect:
@@ -615,7 +615,7 @@ paths:
                               description: hashTag 名稱
                       publishedAt:
                         type: string
-                      memberCount:
+                      collectCount:
                         type: number
                         description: 文章收藏數
                       isCollect:
@@ -691,7 +691,7 @@ paths:
                                 type: string
                         publishedAt:
                           type: string
-                        memberCount:
+                        collectCount:
                           type: number                      
                         isCollect:
                           type: boolean
@@ -911,7 +911,7 @@ paths:
                                 type: string
                         publishedAt:
                           type: string
-                        memberCount:
+                        collectCount:
                           type: number
                           description: 文章收藏數
                         isCollect:
@@ -991,7 +991,7 @@ paths:
                                 type: string
                         publishedAt:
                           type: string
-                        memberCount:
+                        collectCount:
                           type: number
                           description: 文章收藏數
                         isCollect:
@@ -1082,7 +1082,7 @@ paths:
                                 description: 標籤名稱
                         publishedAt:
                           type: string
-                        memberCount:
+                        collectCount:
                           type: number
                           description: 收藏數
                         isCollect:
@@ -1188,7 +1188,7 @@ paths:
                                 description: 標籤名稱
                         publishedAt:
                           type: string
-                        memberCount:
+                        collectCount:
                           type: number
                           description: 收藏數
                         isCollect:
