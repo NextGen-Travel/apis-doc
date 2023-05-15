@@ -21,6 +21,38 @@ components:
       name: Authorization
       description: member 驗證需要的 token, Bearer xxx
   parameters:
+    visitor:
+      in: header
+      name: visitor
+      schema:
+        type: string
+      required: true
+      example: false663c8908-c8f8-4ea2-8869-5b1f42819a51
+      description: visitor token，參數來源為 api/visitor/token 輸出的 data
+    permitNo:
+      in: path
+      name: permitNo
+      schema:
+        type: string
+      required: true
+      example: HK-42682
+      description: 藥品核准碼
+    storeUUID:
+      in: path
+      name: uuid
+      schema:
+        type: string
+      required: true
+      example: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+      description: 藥房唯一代碼
+    postUUID:
+      in: path
+      name: uuid
+      schema:
+        type: string
+      required: true
+      example: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+      description: 文章唯一代碼
     page:
       in: query
       name: pagination[page]
@@ -150,6 +182,100 @@ components:
                   example: ROCALTROL CAP 0.25UG
 
 paths:
+
+  /visitor/token/{mode}:
+    get:
+      summary: 取的訪問者 token
+      description: 首次訪問，首次訪問該網站時呼叫，回傳的 data 用於記錄 訪客的 觀看紀錄
+      tags:
+        - visitor
+      parameters:
+        - in: path
+          name: mode
+          required: true
+          schema:
+            type: string
+            enum: [web, app]
+          example: web
+          description: 訪客使用手機app或web
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: string
+                    example: false663c8908-c8f8-4ea2-8869-5b1f42819a51
+                    description: visitor token
+
+  /visitor/drug/{permit_no}:
+    post:
+      summary: 記錄藥品查詢
+      description: 取得藥品明細前需要先呼叫該api 用於統計
+      tags:
+        - visitor
+      parameters:
+        - $ref: '#/components/parameters/permitNo'
+        - $ref: '#/components/parameters/visitor'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+
+  /visitor/store/{uuid}:
+    post:
+      summary: 記錄藥房查詢
+      description: 查詢藥房，取得藥房明細前需要先呼叫該api 用於統計
+      tags:
+        - visitor
+      parameters:
+        - $ref: '#/components/parameters/storeUUID'
+        - $ref: '#/components/parameters/visitor'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+
+  /visitor/post/{uuid}:
+    post:
+      summary: 記錄文章讀取
+      description: 文章讀取，取得文章明細前需要先呼叫該api 用於統計
+      tags:
+        - visitor
+      parameters:
+        - $ref: '#/components/parameters/postUUID'
+        - $ref: '#/components/parameters/visitor'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
 
   # ====================
   #
@@ -1865,6 +1991,7 @@ paths:
       tags:
         - drug
       parameters:
+        - $ref: '#/components/parameters/visitor'
         - $ref: '#/components/parameters/isCollect'
         - in: query
           name: ingredient
@@ -2004,13 +2131,8 @@ paths:
       tags:
         - drug
       parameters:
-        - name: permitNo
-          in: path
-          description: 藥品核准碼
-          required: true
-          example: HK-42682
-          schema:
-            type: string
+        - $ref: '#/components/parameters/visitor'
+        - $ref: '#/components/parameters/permitNo'
         - in: query
           name: district
           explode: true
@@ -2340,6 +2462,7 @@ paths:
       tags:
         - stores
       parameters:
+        - $ref: '#/components/parameters/visitor'
         - $ref: '#/components/parameters/isCollect'
         - in: query
           name: isGenuine
@@ -2548,13 +2671,13 @@ paths:
                       mainServiceIcon:
                         - key : 254
                           name: 處方藥配藥
-                          icon: bchat-question-outline
+                          icon: chat-question-outline
                         - key : 255
                           name: 藥品諮詢
-                          icon: bchat-question-outline
+                          icon: chat-question-outline
                         - key : 256
                           name: 零售藥品與健康食品
-                          icon: bchat-question-outline
+                          icon: chat-question-outline
 
   /stores/detail/{uuid}:
     get:
@@ -2562,13 +2685,8 @@ paths:
       tags:
         - stores
       parameters:
-        - name: uuid
-          in: path
-          description: 藥房唯一代碼
-          required: true
-          example: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
-          schema:
-            type: string
+        - $ref: '#/components/parameters/visitor'
+        - $ref: '#/components/parameters/storeUUID'
       responses:
           '200':
             description: 成功
