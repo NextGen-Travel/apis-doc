@@ -2379,10 +2379,13 @@ paths:
             type: integer
           description: 服務篩選
         - in: query
-          name: stockType
+          name: stockType[]
           schema:
-            type: string
-          description: 庫存類型 lv1,lv2,lv3
+            type: array
+            items:
+              type: string
+            description: 庫存類型 lv1,lv2,lv3
+            example: ['lv1', 'lv2']
         - in: query
           name: area
           schema:
@@ -2779,11 +2782,13 @@ paths:
             enum: [0,1]
           description: 藥品使否要完整符合
         - in: query
-          name: stockType
+          name: stockType[]
           schema:
-            type: string
-            enum: [lv1, lv2]
-          description: 庫存類型
+            type: array
+            items:
+              type: string
+            description: 庫存類型 lv1,lv2,lv3
+            example: ['lv1', 'lv2']
         - in: query
           name: district
           explode: true
