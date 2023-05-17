@@ -696,7 +696,7 @@ paths:
           required: true
           schema:
             type: string
-            enum: [drug, store, post]
+            enum: [all, drug, store, post, stock]
           example: web
           description: 記錄類型
       responses:
@@ -714,10 +714,80 @@ paths:
                     items:
                       type: object
                       properties:
+                        uuid:
+                          type: string
+                          example: 68f2a709-e4cd-4f53-9936-dadcc02045c4
+                          description: 唯一識別碼
+                        type:
+                          type: string
+                          example: drug
+                          description: 記錄類型
                         keyword:
                           type: string
                           example: 港九
                           description: 關鍵字
+                        createdAt:
+                          type: string
+                          example: 2023-05-17T09:43:09.944Z
+                          description: 建立時間
+
+  /members/search/repeat/:uuid:
+    get:
+      summary: 重複搜尋
+      tags:
+        - members
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          example: 9d86687a-0c2f-47e2-9989-ecbcf01ae4c2
+          description: 記錄類型
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+
+
+  /members/search/history/clear/:type:
+    delete:
+      summary: 清空會員搜尋記錄
+      tags:
+        - members
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum: [all, drug, store, post, stock]
+          example: web
+          description: 記錄類型
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
 
   # ====================
   #
