@@ -683,8 +683,41 @@ paths:
                           email:
                             type: string
 
-
-
+  /members/search/history/:type:
+    get:
+      summary: 會員搜尋記錄
+      tags:
+        - members
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum: [drug, store, post]
+          example: web
+          description: 記錄類型
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        keyword:
+                          type: string
+                          example: 港九
+                          description: 關鍵字
 
   # ====================
   #
