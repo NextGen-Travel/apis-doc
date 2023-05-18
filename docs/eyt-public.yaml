@@ -2620,18 +2620,45 @@ paths:
                           type: object
                           properties:
                             wechat:
-                              type: boolean
-                            website:
-                              type: boolean
-                            facebook:
-                              type: boolean
+                              description: 當值是 false 代表沒使用
+                              oneOf:
+                                - type: boolean
+                                - type: object
+                                  properties:
+                                    appId:
+                                      type: string
+                                    title:
+                                      type: string
+                                    qrcode:
+                                      type: string
+                            messanger:
+                              description: 當值是 false 代表沒使用
+                              oneOf:
+                                - type: boolean
+                                - type: string
                             whatsapp:
-                              type: boolean
+                              description: 當值是 false 代表沒使用
+                              oneOf:
+                                - type: boolean
+                                - type: string
                             instagram:
+                              description: 當值是 false 代表沒使用
+                              oneOf:
+                                - type: boolean
+                                - type: string
+                            email:
+                              description: 當值是 false 代表沒使用
+                              oneOf:
+                                - type: boolean
+                                - type: string
+                            website:
+                              description: 當值是 false 代表不顯示，實際值參照本身回傳的 website
                               type: boolean
                             navigation:
+                              description: 當值是 false 代表不顯示，實際值參照本身回傳的 navigation
                               type: boolean
                             contactNumber:
+                              description: 當值是 false 代表不顯示，實際值參照本身回傳的 contactNumber
                               type: boolean
                         district:
                           type: string
