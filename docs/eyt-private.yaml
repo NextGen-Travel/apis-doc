@@ -877,7 +877,37 @@ paths:
                       token:
                         type: string
                         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQzOTExMjEsImV4cCI6MTY4NDM5MjAyMX0.eE00SIAyBBbWkIkSg6lklG-jwAveTnBGml6wCxTrxeE
-
+  /verification-code/verify:
+    post:
+      summary: verify 驗證碼
+      tags:
+        - verification-code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: 上一步拿到的 token
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQzOTIxNDMsImV4cCI6MTY4NDM5MzA0M30.agDt9R_X33r4ryE-v3jXklHoqdg9tz2OzC08KSHyPEM
+                verificationCode:
+                  type: string
+                  description: 發到信箱的六碼驗證碼
+                  example: 161321
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
 
   # ====================
   #
