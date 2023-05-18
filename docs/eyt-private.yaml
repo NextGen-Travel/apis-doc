@@ -769,6 +769,15 @@ paths:
                           type: string
                           example: 港九
                           description: 關鍵字
+                        options:
+                          type: object
+                          properties:
+                            permitNo:
+                              type: array
+                              items:
+                                type: string
+                              example: [HK-44731, HK-45577]
+                              description: 僅記錄類為 stock 才會有
                         createdAt:
                           type: string
                           example: 2023-05-17T09:43:09.944Z
