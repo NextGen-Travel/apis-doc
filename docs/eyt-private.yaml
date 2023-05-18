@@ -21,6 +21,14 @@ components:
       name: Authorization
       description: member 驗證需要的 token, Bearer xxx
   parameters:
+    visitor:
+      in: header
+      name: visitor
+      schema:
+        type: string
+      required: true
+      example: false663c8908-c8f8-4ea2-8869-5b1f42819a51
+      description: visitor token，參數來源為 api/visitor/token 輸出的 data
     page:
       in: query
       name: pagination[page]
@@ -42,6 +50,15 @@ components:
         type: string
       required: false
       example: 'en'
+    isCollect:
+      in: query
+      name: isCollect
+      schema:
+        type: integer
+        enum: [0,1]
+      required: false
+      description: 是否已收藏，isCollect=1 ，已收藏
+      example: 0
   schemas:
     ProductsResponse:
       type: object
@@ -820,6 +837,30 @@ paths:
   # posts
   #
 
+  /search/posts:
+    post:
+      summary: 記錄 log  文章
+      tags:
+        - posts
+      security:
+        - member_token: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 關鍵字搜尋(title, content, tags, store, type)-模糊搜尋                          
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   /add/posts:
     post:
       summary: 建立文章
@@ -1159,6 +1200,7 @@ paths:
                   msg:
                     type: string
                     example: 取消收藏！                           
+
 
   # ====================
   #
@@ -1565,6 +1607,93 @@ paths:
                     type: string
                     example: 取消收藏！
 
+  /search/drugs:
+    post:
+      summary: 藥品搜尋(keyword log)
+      tags:
+        - drug
+      security:
+        - member_token: []
+      parameters:
+        - $ref: '#/components/parameters/visitor'
+        - $ref: '#/components/parameters/isCollect'
+        - in: query
+          name: ingredient
+          schema:
+            type: integer
+          description: 藥品成分 id
+        - in: query
+          name: holder
+          schema:
+            type: integer
+          description: 證書持有人id
+        - in: query
+          name: tags
+          schema:
+            type: string
+          description: 藥品分類
+        - in: query
+          name: saleRequirement
+          schema:
+            type: string
+          description: 銷售要求
+        - in: query
+          name: legalClassification
+          schema:
+            type: integer
+          description: 藥品管制分類
+        - in: query
+          name: brand
+          schema:
+            type: integer
+          description: 品牌
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: 藥品名稱
+        - in: query
+          name: prefixName
+          schema:
+            type: string
+          description: 藥品字首
+        - in: query
+          name: permitNo
+          schema:
+            type: string
+          description: permit No
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 藥品名稱(中英), 名稱, 核准碼, 主成份, SKU
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [nameAsc, nameDesc,collectDesc]
+          description: 排序功能
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg :
+                      type: string
+
   # ====================
   #
   # store
@@ -1631,3 +1760,154 @@ paths:
                   msg:
                     type: string
                     example: 取消收藏！
+
+  /search/stores:
+    post:
+      summary: 記錄藥房收尋(keyword log)
+      tags:
+        - stores
+      security:
+        - member_token: []
+      parameters:
+        - $ref: '#/components/parameters/visitor'
+        - $ref: '#/components/parameters/isCollect'
+        - in: query
+          name: isGenuine
+          schema:
+            type: string
+          description: 正版正貨 0,1
+        - in: query
+          name: isExcellent
+          schema:
+            type: string
+          description: 信心保證 0,1
+        - in: query
+          name: tags
+          schema:
+            type: string
+          description: tags 篩選
+        - in: query
+          name: mainServices
+          schema:
+            type: string
+          description: 主要服務篩選
+        - in: query
+          name: services
+          schema:
+            type: integer
+          description: 服務篩選
+        - in: query
+          name: stockType[]
+          schema:
+            type: array
+            items:
+              type: string
+            description: 庫存類型 lv1,lv2,lv3
+            example: ['lv1', 'lv2']
+        - in: query
+          name: area
+          schema:
+            type: string
+          description: 指定搜尋區域
+        - in: query
+          name: district
+          explode: true
+          schema:
+            type: string
+          description: 指定行政區
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 藥房名稱(中英), 電話, 區域, 分區, 地址, 主要服務項目, 服務項目, tags
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [nameAsc, nameDesc,collectDesc]
+          description: 排序功能
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+
+  /stores/medicines:
+    post:
+      summary: 哪裡買藥(keyword log)
+      tags:
+        - stores
+      security:
+        - member_token: []
+      parameters:
+        - $ref: '#/components/parameters/visitor'
+        - in: query
+          name: permitNo
+          schema:
+            type: array
+            items:
+              type: string
+          description: 藥品
+          example: ['HK-05357', 'HK-07007']
+        - in: query
+          name: isExact
+          schema:
+            type: integer
+            enum: [0,1]
+          description: 藥品使否要完整符合
+        - in: query
+          name: stockType[]
+          schema:
+            type: array
+            items:
+              type: string
+            description: 庫存類型 lv1,lv2,lv3
+            example: ['lv1', 'lv2']
+        - in: query
+          name: district
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+          description: 指定行政區
+        - in: query
+          name: area
+          schema:
+            type: string
+          description: 指定搜尋區域
+        - in: query
+          name: lat
+          schema:
+            type: integer
+          description: 緯度
+        - in: query
+          name: lng
+          schema:
+            type: integer
+          description: 經度
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
