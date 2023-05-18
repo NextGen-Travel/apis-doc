@@ -1571,7 +1571,7 @@ paths:
                     properties:
                       id:
                         type: number
-                      email:
+                      emails:
                         type: array
                         items:
                           type: string
