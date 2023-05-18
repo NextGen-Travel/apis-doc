@@ -683,6 +683,32 @@ paths:
                           email:
                             type: string
 
+  /members/third-party-logins/{openId}:
+    delete:
+      summary: 刪除第三方綁定
+      tags:
+        - members
+      security:
+        - member_token: []
+      parameters:
+        - in: path
+          name: openId
+          required: true
+          schema:
+            type: string
+          example: 000332.954c3605e5c14549be066a32f4cb3175.0703
+          description: openId
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   /members/search/history/:type:
     get:
       summary: 會員搜尋記錄
