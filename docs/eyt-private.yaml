@@ -908,6 +908,37 @@ paths:
                   msg:
                     type: string
                     example: Success
+  /verification-code/reset-password:
+    post:
+      summary: 用 token 重設密碼
+      tags:
+        - verification-code
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: 上一步拿到的 token
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQzOTIxNDMsImV4cCI6MTY4NDM5MzA0M30.agDt9R_X33r4ryE-v3jXklHoqdg9tz2OzC08KSHyPEM
+                newPassword:
+                  type: string
+                confirmNewPassword:
+                  type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
 
   # ====================
   #
