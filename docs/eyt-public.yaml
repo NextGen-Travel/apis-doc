@@ -2616,6 +2616,8 @@ paths:
                           type: boolean
                         website:
                           type: string
+                        content:
+                          type: string
                         plan:
                           type: object
                           properties:
@@ -2655,7 +2657,7 @@ paths:
                               description: 當值是 false 代表不顯示，實際值參照本身回傳的 website
                               type: boolean
                             navigation:
-                              description: 當值是 false 代表不顯示，實際值參照本身回傳的 navigation
+                              description: 當值是 false 代表不顯示
                               type: boolean
                             contactNumber:
                               description: 當值是 false 代表不顯示，實際值參照本身回傳的 contactNumber
@@ -2668,8 +2670,10 @@ paths:
                           type: number
                         isCollect:
                           type: boolean
-                        imgUrl:
-                          type: string
+                        imgUrls:
+                          type: array
+                          items:
+                            type: string
                         tags:
                           type: array
                           items:
