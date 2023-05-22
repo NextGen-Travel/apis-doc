@@ -367,6 +367,62 @@ paths:
                             type: string
                             example: "https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/2023_05_10_4_24_27_175189b4cb.png"
 
+  /members/third-party-callback:
+    post:
+      summary: 第三方綁定或登入
+      description: 舊用戶第三方登入 or 新用戶第三方註冊 or 舊用戶綁定新的第三方(這個要帶 header) 三個都是打這支
+      tags:
+        - member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionId:
+                  type: string
+                  description: oauth 那支跟後端拿到的 sessionId
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
+                      jwt:
+                        type: string
+                      member:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          avatar:
+                            type: string
+                      thirdPartyLogin:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          platform:
+                            type: string
+                          openId:
+                            type: string
+                          email:
+                            type: string
+
   # ====================
   #
   # verification code
