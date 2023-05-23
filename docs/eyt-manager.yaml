@@ -126,6 +126,8 @@ paths:
   /admin/posts:
     get:
       summary: 獲取後台文章列表及審核文章列表
+      security:
+        - user_token: []
       tags:
         - posts
       parameters:
@@ -268,6 +270,8 @@ paths:
   /admin/posts/type:
     get:
       summary: 獲取後台文章類別
+      security:
+        - user_token: []
       tags:
         - posts 
       parameters:
@@ -298,6 +302,8 @@ paths:
   /admin/posts/categories:
     get:
       summary: 獲取後台文章分類，帶category_id表搜尋第二層分類資料
+      security:
+        - user_token: []
       tags:
         - posts
       parameters:
