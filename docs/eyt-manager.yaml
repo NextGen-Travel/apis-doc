@@ -140,9 +140,9 @@ paths:
                               type: number
                             name:
                               type: string
-                        tags:
+                        categories:
                           type: array
-                          description: 文章標籤
+                          description: 文章分類
                           items:
                             type: object
                             properties:
