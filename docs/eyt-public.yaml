@@ -182,6 +182,87 @@ components:
                   example: ROCALTROL CAP 0.25UG
 
 paths:
+  # ====================
+  #
+  # Auth
+  #
+
+  /users-permissions/auth/login:
+    post:
+      summary: 後台使用者帳號登錄
+      description: 後台使用者帳號登錄
+      tags:
+        - auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: string
+                  description: 帳號
+                  example: 'dev'
+                password:
+                  type: string
+                  description: 密碼
+                  example: 'nextgen123'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      jwt:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          username:
+                            type: string
+                          email:
+                            type: string
+                          provider:
+                            type: string
+                          confirmed:
+                            type: boolean
+                          blocked:
+                            type: boolean
+                          createdAt:
+                            type: string
+                          updatedAt:
+                            type: string
+                          store:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              nameCn:
+                                type: string
+                              nameEn:
+                                type: string
+                              tel:
+                                type: string
+                              address:
+                                type: string
+                              district:
+                                type: string
+                              rxNo:
+                                type: string
+                              createdAt:
+                                type: string
+                              updatedAt:
+                                type: string
+                              publishedAt:
+                                type: string
 
   /visitor/token/{mode}:
     get:
