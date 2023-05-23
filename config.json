@@ -51,6 +51,10 @@
         {
             "name": "Eyt Private",
             "value": "eyt-private"
-        }
+        },
+        {
+          "name": "Eyt Manger",
+          "value": "eyt-manager"
+      }
     ]
 }

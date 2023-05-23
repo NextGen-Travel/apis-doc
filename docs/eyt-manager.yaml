@@ -117,3 +117,150 @@ paths:
                                 type: string
                               publishedAt:
                                 type: string
+
+  # ====================
+  #
+  # posts
+  #
+
+  /admin/posts:
+    get:
+      summary: 獲取後台文章列表及審核文章列表
+      tags:
+        - posts
+      parameters:
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章的語言 
+        - in: query
+          name: reviewStatus
+          schema:
+            type: string
+            enum: [pending,reviewed,reviewArchived]
+          required: false
+          description: 搜尋審核文章列表時必須要帶此query 
+        - in: query
+          name: listStatus
+          schema:
+            type: string
+            enum: [listArchived,review,draft,rejected]
+          required: false
+          description:  搜尋文章列表時必須要帶此query                     
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 關鍵字搜尋(title,  store)-模糊搜尋
+        - in: query
+          name: firstCategory
+          schema:
+            type: string
+          description: 第一層分類篩選
+        - in: query
+          name: secondCategory
+          schema:
+            type: string
+          description: 第二層分類篩選          
+        - in: query
+          name: startTime
+          schema:
+            type: string
+            minimum: 1
+          description: 篩選功能(起始時間)   
+        - in: query
+          name: endTime
+          schema:
+            type: string
+          description: 篩選功能(結束時間)   
+        - in: query
+          name: type
+          schema:
+            type: string
+            minimum: 1
+          description: 篩選功能-文章分類  
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁                               
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        title:
+                          type: string
+                        type:
+                          type: object
+                          description: 文章分類
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        tags:
+                          type: array
+                          description: 文章標籤
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        store:
+                          type: object
+                          description: 公司名稱
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        status:
+                          type: string
+                        editor:
+                          type: string
+                          description: 編輯者
+                        date:
+                          type: string
+                        image:
+                          type: string
+                        reasonForReject:
+                          type: string
+                          description: 文章退件原因
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                        description: 當前頁面
+                      pageSize:
+                        type: number
+                        description: 每頁筆數
+                      pageCount:
+                        type: number
+                        description: 總共頁數
+                      total:
+                        type: number
+                        description: 總共筆數
