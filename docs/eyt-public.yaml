@@ -406,7 +406,7 @@ paths:
                     type: string
   /members/login:
     post:
-      summary: 會員登入 EYT email 註冊的帳號
+      summary: 會員登入 EYT email/mobile 註冊的帳號
       tags:
         - member
       requestBody:
