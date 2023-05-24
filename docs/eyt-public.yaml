@@ -366,6 +366,7 @@ paths:
   /members/register:
     post:
       summary: 會員註冊 EYT 帳號
+      description: 用 mobile/email 註冊，只能選一種不能同時存在
       tags:
         - member
       requestBody:
@@ -383,7 +384,10 @@ paths:
                   example: test@123.com
                 mobile:
                   type: string
-                  example: 0912345678
+                  example: '只有數字，ex: 0912345678'
+                mobileCountryCode:
+                  type: string
+                  example: '只有數字，ex: 886'
                 password:
                   type: string
                   example: 123
@@ -418,6 +422,12 @@ paths:
                 password:
                   type: string
                   example: 123
+                mobile:
+                  type: string
+                  example: '只有數字，ex: 0919123456'
+                mobileCountryCode:
+                  type: string
+                  example: '只有數字，ex: 886'
       responses:
         '200':
           description: 成功
