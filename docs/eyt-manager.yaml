@@ -33,9 +33,305 @@ components:
       description: 多語系輸出 繁體中文，英文，簡體中文
       required: false
       example: 'zh'
-
+    storeUUID:
+      in: path
+      name: uuid
+      schema:
+        type: string
+      required: true
+      example: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
+      description: 藥房唯一代碼
+  schemas:
+    store :
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            planType:
+              type: string
+              description: 方案類型
+            adType:
+              type: string
+              description: 廣告類型
+            stockType:
+              type: string
+              description: 庫存類型
+            stockUrl:
+              type: string
+              description: 庫存 api
+            stockSyncParams:
+              type: object
+              description: 庫存 api 額外參數
+            tel:
+              type: string
+              description: 聯絡電話
+              example: '1234567890'
+            type:
+              type: string
+              description: 類型
+            isExcellent:
+              type: boolean
+              example: false
+            isGenuine:
+              type: boolean
+              example: true
+            rxNo:
+              type: string
+              description: rxNo
+            name:
+              type: object
+              description: 藥局名稱(中文}
+              properties:
+                zh:
+                  type: string
+                  example: '良躍社區藥房'
+                zh-CN:
+                  type: string
+                  example: '良跃社区药房'
+                en:
+                  type: string
+                  example: 'A-LIVELY COMMUNITY PHARMACY O/B ABERDEEN KAI-FONG WELFARE ASSOCIATION LIMITED'
+            contactNumber:
+              type: string
+              description: 聯絡電話
+            address:
+              type: object
+              description: 地址
+              properties:
+                zh:
+                  type: string
+                  example: '安和路'
+                zh-CN:
+                  type: string
+                  example: '安和路'
+                en:
+                  type: string
+                  example: 'Anhe Road'
+            lat:
+              type: string
+              description: 緯度
+              example: 22.25193195
+            lng:
+              type: string
+              description: 經度
+              example: 114.13825551
+            area:
+              type: number
+              description: 區域
+              example: 1
+            district:
+              type: number
+              description: 行政區域
+              example: 1
+            businessHours:
+              type: string
+              description: 營業時間
+            openingHours:
+              type: array
+              items:
+                type: object
+              description: 營業時間
+              example: [{'id':1, 'weekday': 1, "startTime": "00:00:00", "endTime": "12:00:00"}]       
+            website:
+              type: string
+              description: 網站
+            content:
+              type: object
+              description: 網站內容
+              properties:
+                zh:
+                  type: string
+                zh-CN:
+                  type: string
+                en:
+                  type: string
+            tags:
+              type: array
+              items:
+                type: integer
+              description: tag id
+              example: [1,2,3]
+            mainServices:
+              type: array
+              items:
+                type: integer
+              description: mainServices id
+              example: [1,2,3]
+            services:
+              type: array
+              items:
+                type: integer
+              description: tag id
+              example: [1,2,3]
+            images:
+              type: array
+              items:
+                type: integer
+              description: image id
+              example: [1,2,3]
+            plan:
+              type: object
 
 paths:
+  # ====================
+  #
+  # other
+  #
+  /upload:
+    post:
+      summary: 上傳檔案
+      tags:
+        - other
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                files:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    alternativeText:
+                      type: string
+                      nullable: true
+                    caption:
+                      type: string
+                      nullable: true
+                    width:
+                      type: number
+                    height:
+                      type: number
+                    formats:
+                      type: object
+                      properties:
+                        large:
+                          type: object
+                          properties:
+                            ext:
+                              type: string
+                            url:
+                              type: string
+                            hash:
+                              type: string
+                            mime:
+                              type: string
+                            name:
+                              type: string
+                            path:
+                              type: string
+                              nullable: true
+                            size:
+                              type: number
+                            width:
+                              type: number
+                            height:
+                              type: number
+                        small:
+                          type: object
+                          properties:
+                            ext:
+                              type: string
+                            url:
+                              type: string
+                            hash:
+                              type: string
+                            mime:
+                              type: string
+                            name:
+                              type: string
+                            path:
+                              type: string
+                              nullable: true
+                            size:
+                              type: number
+                            width:
+                              type: number
+                            height:
+                              type: number
+                        medium:
+                          type: object
+                          properties:
+                            ext:
+                              type: string
+                            url:
+                              type: string
+                            hash:
+                              type: string
+                            mime:
+                              type: string
+                            name:
+                              type: string
+                            path:
+                              type: string
+                              nullable: true
+                            size:
+                              type: number
+                            width:
+                              type: number
+                            height:
+                              type: number
+                        thumbnail:
+                          type: object
+                          properties:
+                            ext:
+                              type: string
+                            url:
+                              type: string
+                            hash:
+                              type: string
+                            mime:
+                              type: string
+                            name:
+                              type: string
+                            path:
+                              type: string
+                              nullable: true
+                            size:
+                              type: number
+                            width:
+                              type: number
+                            height:
+                              type: number
+                    hash:
+                      type: string
+                    ext:
+                      type: string
+                    mime:
+                      type: string
+                    size:
+                      type: number
+                    url:
+                      type: string
+                    previewUrl:
+                      type: string
+                      nullable: true
+                    provider:
+                      type: string
+                    provider_metadata:
+                      type: string
+                      nullable: true
+                    createdAt:
+                      type: string
+                    updatedAt:
+                      type: string
 
   # ====================
   #
@@ -254,3 +550,262 @@ paths:
                           type: number
                         name:
                           type: string                       
+
+
+  # ====================
+  #
+  # stores
+  #
+  /admin/search/stores:
+    get:
+      summary: 藥房
+      tags:
+        - stores
+      security:
+        - user_token: []
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+          description: 類型
+        - in: query
+          name: area
+          schema:
+            type: string
+          description: 指定搜尋區域
+        - in: query
+          name: district
+          explode: true
+          schema:
+            type: string
+          description: 指定行政區
+        - in: query
+          name: adType
+          explode: true
+          schema:
+            type: string
+          description: 廣告類型
+        - in: query
+          name: stockType
+          explode: true
+          schema:
+            type: string
+          description: 庫存類型
+        - in: query
+          name: status
+          explode: true
+          schema:
+            type: string
+          description: 狀態
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 藥房名稱(中英), 電話, 地址
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                              imgUrl:
+                                type: string
+                              name:
+                                type: string
+                              area:
+                                type: string
+                              district:
+                                type: string
+                              address:
+                                type: string
+                              type:
+                                type: string
+                              adType:
+                                type: string
+                              status:
+                                type: string
+                              stockType:
+                                type: string
+
+  /admin/stores/detail/{uuid}:
+    get:
+      summary: 藥房
+      tags:
+        - stores
+      security:
+        - user_token: []
+      parameters:
+        - $ref: '#/components/parameters/storeUUID'
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                        stockType:
+                          type: string
+                        name:
+                          type: object
+                          properties:
+                            zh:
+                              type: string
+                            zh-CN:
+                              type: string
+                            en:
+                              type: string
+                        address:
+                          type: object
+                          properties:
+                            zh:
+                              type: string
+                            zh-CN:
+                              type: string
+                            en:
+                              type: string
+                        lat:
+                          type: number
+                        lng:
+                          type: number
+                        contactNumber:
+                          type: string
+                        businessHours:
+                          type: string
+                        openingHours:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              weekday:
+                                type: number
+                              startTime:
+                                type: string
+                              endTime:
+                                type: string
+                        isExcellent:
+                          type: boolean
+                        isGenuine:
+                          type: boolean
+                        website:
+                          type: string
+                        plan:
+                          type: string
+                        planType:
+                          type: string
+                        content:
+                          type: object
+                          properties:
+                            zh:
+                              type: string
+                            zh-CN:
+                              type: string
+                            en:
+                              type: string
+                        area:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        district:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        mainServices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        services:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              url:
+                                type: string
+
+  /admin/stores/{uuid} :
+    post:
+      summary: 修改 藥房
+      tags:
+        - stores
+      security:
+        - user_token: []
+      parameters:
+        - $ref: '#/components/parameters/storeUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/store'
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
