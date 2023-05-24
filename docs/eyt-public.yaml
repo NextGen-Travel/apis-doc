@@ -1546,7 +1546,13 @@ paths:
           schema:
             type: string
             enum: [ zh, zh-CN, en]
-          description: 文章類別的語言            
+          description: 文章類別的語言 
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum: [ latestNews, drugDonations, NewDevelopmentsAboutMedicine, PolicyPromotion]
+          description: type的名稱                        
       responses:
         '200':
           description: 成功
