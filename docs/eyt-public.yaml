@@ -543,6 +543,12 @@ paths:
                   type: string
                   description: member 信箱
                   example: test@123.com
+                mobile:
+                  type: string
+                  example: '只有數字，ex: 0919123456'
+                mobileCountryCode:
+                  type: string
+                  example: '只有數字，ex: 886'
       responses:
         '200':
           description: 成功
