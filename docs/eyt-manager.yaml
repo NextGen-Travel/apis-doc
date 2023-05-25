@@ -482,7 +482,7 @@ paths:
                         type: number
                         description: 總共筆數
 
-  /admin/posts/type:
+  /admin/postTags:
     get:
       summary: 獲取後台文章類別
       security:
@@ -495,44 +495,18 @@ paths:
           schema:
             type: string
             enum: [ zh, zh-CN, en]
-          description: 文章類別的語言            
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        name:
-                          type: string
-
-  /admin/posts/categories:
-    get:
-      summary: 獲取後台文章分類，帶category_id表搜尋第二層分類資料
-      security:
-        - user_token: []
-      tags:
-        - posts
-      parameters:
-        - in: header
-          name: accept-language
+          description: 文章類別的語言
+        - in: query
+          name: type
           schema:
             type: string
-            enum: [ zh, zh-CN, en]
-          description: 文章標籤的語言  
+            enum: [post_categories, hashTag, post_type ]
+          description: 搜尋的哪一種類型的tag, 分類，標籤，類別，預設是標籤         
         - in: query
           name: category_id
           schema:
             type: string
-          description: 第一層分類id（搜尋第二層分類）               
+          description: 第一層分類id（搜尋第二層分類）                                  
       responses:
         '200':
           description: 成功
@@ -549,8 +523,7 @@ paths:
                         id:
                           type: number
                         name:
-                          type: string                       
-
+                          type: string                 、
 
   # ====================
   #
