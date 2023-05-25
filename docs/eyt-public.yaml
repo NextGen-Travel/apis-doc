@@ -759,8 +759,9 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
-                          type: number
+                        uuid:
+                          type: string
+                          description: 文章uuid
                         title:
                           type: string
                           description: 文章標題
@@ -781,8 +782,9 @@ paths:
                         store:
                           type: object
                           properties:
-                            id:
-                              type: number
+                            uuid:
+                              type: string
+                              description: 來源的uuid
                             name:
                               type: string
                               description: 文章來源
@@ -818,146 +820,19 @@ paths:
                         description: 總共頁數
                       total:
                         type: number
-                        description: 總共筆數
+                        description: 總共筆數                          
 
-    post:
-      summary: 建立文章
-      tags:
-        - posts
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  description: 文章標題
-                content:
-                  type: string
-                  description: 文章內容
-                store:
-                  type: number
-                  description: 該文章是屬於哪一個供應商，當前因無後台機制故先寫死
-                  example: 1
-                type:
-                  type: string
-                  example: 藥物新知
-                  description: 文章類別
-                locale:
-                  type: string
-                  enum: ['zh', 'en', 'zh-CN']
-                  description: 文章語言，上面分別對應 繁體中文，英文，簡體中文
-                image:
-                  type: string
-                  example: binary
-                  description: 文章圖片 
-                sort:
-                  type: number        
-                  description: 排序順序
-                  example: 999     
-                publishStart:
-                  type: string
-                  description: 預計上架時間（實際功能會到 phaseII 實作）
-                publishEnd:
-                  type: number
-                  description: 預計下架時間（實際功能會到 phaseII 實作）
-
-              required:
-                - title
-                - store
-                - type
-                - locale
-                - image
-
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      title:
-                        type: string
-                        description: 文章標題
-                      content:
-                        type: string
-                        description: 文章內容
-                      store:
-                        type: string
-                        description: 發布來源
-                      type:
-                        type: string
-                        description: 文章類別（大標）
-                      sort:
-                        type: number
-                        description: 文章排序的值
-                      viewCount:
-                        type: number
-                        description: 文章瀏覽數
-                      isApproved:
-                        type: boolean
-                        description: 文章是否已核准（核轉狀態下才會出現在前台）
-                      isDeleted:
-                        type: boolean
-                      publishStart:
-                        type: string
-                      publishEnd:
-                        type: string
-                      locale:
-                        type: string
-                        description: 文章語系
-                      image:
-                        type: string
-                        description: 文章圖片
-
-        '500':
-          description: 伺服器錯誤
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        example:  伺服器錯誤
-        '400':
-          description: 失敗
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        example:  建立失敗                              
-
-  /all/posts/{id}:
+  /all/posts/{uuid}:
     get:
       summary: 獲取指定文章
       tags:
         - posts
       parameters:
-        - name: id
+        - name: uuid
           in: path
-          description: 文章id
+          description: 文章uuid
           required: true
-          example: 3
+          example: e6d37477-7224-4fb6-a56a-d860228d48f4
           schema:
             type: string
       responses:
@@ -973,6 +848,9 @@ paths:
                   post:
                     type: object
                     properties:
+                      uuid:
+                        type: string
+                        description: 文章uuid
                       title:
                         type: string
                         description: 文章標題
@@ -982,8 +860,9 @@ paths:
                       store:
                         type: object
                         properties:
-                          id:
-                            type: number
+                          uuid:
+                            type: string
+                            description: 文章來源uuid
                           name:
                             type: string
                             description: 文章來源
@@ -1019,15 +898,15 @@ paths:
                         type: boolean
                         description: 是否被登入的會員收藏，未登入時一律顯示false
 
-  /all/posts/{id}/extends:  
+  /all/posts/{uuid}/extends:  
     get:
       summary: 獲取延伸閱讀文章 三篇
       tags:
         - posts
       parameters:
-        - name: id
+        - name: uuid
           in: path
-          description: 文章id
+          description: 文章uuid
           required: true
           example: 3
           schema:
@@ -1058,8 +937,9 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
-                          type: number
+                        uuid:
+                          type: string
+                          description: 文章uuid
                         title:
                           type: string
                         content:
@@ -1079,8 +959,8 @@ paths:
                         store:
                           type: object
                           properties:
-                            id:
-                              type: number
+                            uuid:
+                              type: string
                             name:
                               type: string
                         tags:
@@ -1132,8 +1012,9 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
-                          type: number
+                        uuid:
+                          type: string
+                          description: 文章uuid
                         title:
                           type: string
                           description: 文章標題
@@ -1156,8 +1037,8 @@ paths:
                         store:
                           type: object
                           properties:
-                            id:
-                              type: number
+                            uuid:
+                              type: string
                             name:
                               type: string
                               description: 文章來源
@@ -1217,8 +1098,9 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
-                          type: number
+                        uuid:
+                          type: string
+                          description: 文章uuid
                         title:
                           type: string
                           description: 文章標題
@@ -1241,8 +1123,8 @@ paths:
                         store:
                           type: object
                           properties:
-                            id:
-                              type: number
+                            uuid:
+                              type: string
                             name:
                               type: string
                               description: 文章來源
@@ -1314,8 +1196,9 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
-                          type: number
+                        uuid:
+                          type: string
+                          description: 文章uuid
                         title:
                           type: string
                           description: 文章標題
@@ -1336,8 +1219,8 @@ paths:
                         store:
                           type: object
                           properties:
-                            id:
-                              type: number
+                            uuid:
+                              type: string
                             name:
                               type: string
                               description: 文章來源
@@ -1375,18 +1258,18 @@ paths:
                         type: number
                         description: 總共筆數
 
-  /posts/store/{storeId}:  
+  /posts/store/{uuid}:  
     get:
-      summary: 根據store搜尋文章
+      summary: 根據store uuid 搜尋文章
       tags:
         - posts
       parameters:
         - in: path
-          name: storeId
+          name: uuid
           required: true
           schema:
             type: string
-          description: store id  
+          description: store uuid  
         - in: header
           name: accept-language
           schema:
@@ -1425,8 +1308,9 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
-                          type: number
+                        uuid:
+                          type: string
+                          description: 文章標題
                         title:
                           type: string
                           description: 文章標題
@@ -1447,8 +1331,8 @@ paths:
                         store:
                           type: object
                           properties:
-                            id:
-                              type: number
+                            uuid:
+                              type: string
                             name:
                               type: string
                               description: 文章來源
@@ -1486,9 +1370,16 @@ paths:
                         type: number
                         description: 總共筆數
 
-  /posts/{id}/categories:  
+  /posts/{uuid}/categories:  
     get:
       summary: 獲取文章的分類麵包屑
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: post uuid  
       tags:
         - posts
       responses:
@@ -1533,8 +1424,8 @@ paths:
                           items:
                             type: object
                             properties:
-                              id:
-                                type: number
+                              uuid:
+                                type: string
                               title:
                                 type: string
                               content:

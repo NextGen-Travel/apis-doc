@@ -424,8 +424,8 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
-                          type: number
+                        uuid:
+                          type: string
                         title:
                           type: string
                         type:
@@ -450,8 +450,8 @@ paths:
                           type: object
                           description: 公司名稱
                           properties:
-                            id:
-                              type: number
+                            uuid:
+                              type: string
                             name:
                               type: string
                         status:

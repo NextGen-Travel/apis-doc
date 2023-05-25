@@ -869,284 +869,8 @@ paths:
                 properties:
                   msg:
                     type: string
-
-  /add/posts:
-    post:
-      summary: 建立文章
-      tags:
-        - posts
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  description: 文章標題
-                content:
-                  type: string
-                  description: 文章內容
-                store:
-                  type: number
-                  description: 該文章是屬於哪一個供應商，當前因無後台機制故先寫死
-                  example: 1
-                type:
-                  type: string
-                  example: 藥物新知
-                  description: 文章類別
-                locale:
-                  type: string
-                  enum: ['zh', 'en', 'zh-CN']
-                  description: 文章語言，上面分別對應 繁體中文，英文，簡體中文
-                image:
-                  type: string
-                  example: binary
-                  description: 文章圖片 
-                sort:
-                  type: number        
-                  description: 排序順序
-                  example: 999     
-                publishStart:
-                  type: string
-                  description: 預計上架時間（實際功能會到 phaseII 實作）
-                publishEnd:
-                  type: number
-                  description: 預計下架時間（實際功能會到 phaseII 實作）
-
-              required:
-                - title
-                - store
-                - type
-                - locale
-                - image
-
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      title:
-                        type: string
-                        description: 文章標題
-                      content:
-                        type: string
-                        description: 文章內容
-                      store:
-                        type: string
-                        description: 發布來源
-                      type:
-                        type: string
-                        description: 文章類別（大標）
-                      sort:
-                        type: number
-                        description: 文章排序的值
-                      viewCount:
-                        type: number
-                        description: 文章瀏覽數
-                      isApproved:
-                        type: boolean
-                        description: 文章是否已核准（核轉狀態下才會出現在前台）
-                      isDeleted:
-                        type: boolean
-                      publishStart:
-                        type: string
-                      publishEnd:
-                        type: string
-                      locale:
-                        type: string
-                        description: 文章語系
-                      image:
-                        type: string
-                        description: 文章圖片
-
-        '500':
-          description: 伺服器錯誤
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        example:  伺服器錯誤
-        '400':
-          description: 失敗
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        example:  建立失敗                              
-
-  /update/posts/{id}:    
-    # review
-    put:
-      summary: 更新指定文章
-      tags:
-        - posts
-      parameters:
-        - in: path
-          name: id
-          required: true
-          schema:
-            type: string
-          description: post id
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  description: 文章標題
-                content:
-                  type: string
-                  description: 文章內容
-                store:
-                  type: number
-                  description: 該文章是屬於哪一個供應商，當前因無後台機制故先寫死
-                  example: 1
-                type:
-                  type: string
-                  example: 藥物新知
-                  description: 文章類別
-                locale:
-                  type: string
-                  enum: ['zh', 'en', 'zh-CN']
-                  description: 文章語言，上面分別對應 繁體中文，英文，簡體中文
-                image:
-                  type: string
-                  example: binary
-                  description: 文章圖片 
-                sort:
-                  type: number        
-                  description: 排序順序
-                  example: 999     
-                publishStart:
-                  type: string
-                  description: 預計上架時間（實際功能會到 phaseII 實作）
-                publishEnd:
-                  type: number
-                  description: 預計下架時間（實際功能會到 phaseII 實作）
-
-              required:
-                - title
-                - store
-                - type
-                - locale
-                - image
-
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      title:
-                        type: string
-                        description: 文章標題
-                      content:
-                        type: string
-                        description: 文章內容
-                      store:
-                        type: string
-                        description: 文章來源
-                      type:
-                        type: string
-                        description: 文章類別（大標）
-                      sort:
-                        type: number
-                        description: 文章排序值
-                      viewCount:
-                        type: number
-                        description: 文章瀏覽數
-                      isApproved:
-                        type: boolean
-                      isDeleted:
-                        type: boolean
-                      publishStart:
-                        type: string
-                      publishEnd:
-                        type: string
-                      createdAt:
-                        type: string
-                      updatedAt:
-                        type: string
-                      locale:
-                        type: string
-                        description: 文章語系
-                      image:
-                        type: string
-                        description: 文章圖片
-                      tags:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            tagName:
-                              type: string  
-
-        '500':
-          description: 伺服器錯誤
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        example:  伺服器錯誤
-        '400':
-          description: 失敗
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      msg:
-                        type: string
-                        example:  建立失敗      
-
-  /collect/posts/{id}:  
+                         
+  /collect/posts/{uuid}:  
     post:
       summary: 收藏文章
       tags:
@@ -1155,11 +879,11 @@ paths:
         - member_token: []
       parameters:
         - in: path
-          name: id
+          name: uuid
           required: true
           schema:
             type: string
-          description: post id                    
+          description: post uuid                    
 
       responses:
         '200':
@@ -1183,7 +907,7 @@ paths:
                     type: string
                     example: 收藏文章失敗            
 
-  /cancel/posts/{id}:  
+  /cancel/posts/{uuid}:  
     put:
       summary: 取消收藏文章
       tags:
@@ -1192,11 +916,11 @@ paths:
         - member_token: []
       parameters:
         - in: path
-          name: id
+          name: uuid
           required: true
           schema:
             type: string
-          description: post id                    
+          description: post uuid                    
 
       responses:
         '200':
