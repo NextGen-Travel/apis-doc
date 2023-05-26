@@ -45,133 +45,149 @@ components:
     store :
       type: object
       properties:
-        data:
+        planType:
+          type: string
+          description: 方案類型
+        adType:
+          type: string
+          description: 廣告類型
+        stockType:
+          type: string
+          description: 庫存類型
+        stockUrl:
+          type: string
+          description: 庫存 api
+        stockSyncParams:
           type: object
+          description: 庫存 api 額外參數
+        tel:
+          type: string
+          description: 聯絡電話
+          example: '1234567890'
+        type:
+          type: string
+          description: 類型
+        isExcellent:
+          type: boolean
+          example: false
+        isGenuine:
+          type: boolean
+          example: true
+        rxNo:
+          type: string
+          description: rxNo
+        name:
+          type: object
+          description: 藥局名稱(中文}
           properties:
-            planType:
+            zh:
               type: string
-              description: 方案類型
-            adType:
+              example: '良躍社區藥房'
+            zh-CN:
               type: string
-              description: 廣告類型
-            stockType:
+              example: '良跃社区药房'
+            en:
               type: string
-              description: 庫存類型
-            stockUrl:
+              example: 'A-LIVELY COMMUNITY PHARMACY O/B ABERDEEN KAI-FONG WELFARE ASSOCIATION LIMITED'
+        contactNumber:
+          type: string
+          description: 聯絡電話
+        address:
+          type: object
+          description: 地址
+          properties:
+            zh:
               type: string
-              description: 庫存 api
-            stockSyncParams:
-              type: object
-              description: 庫存 api 額外參數
-            tel:
+              example: '安和路'
+            zh-CN:
               type: string
-              description: 聯絡電話
-              example: '1234567890'
-            type:
+              example: '安和路'
+            en:
               type: string
-              description: 類型
-            isExcellent:
-              type: boolean
-              example: false
-            isGenuine:
-              type: boolean
-              example: true
-            rxNo:
+              example: 'Anhe Road'
+        lat:
+          type: string
+          description: 緯度
+          example: 22.25193195
+        lng:
+          type: string
+          description: 經度
+          example: 114.13825551
+        area:
+          type: number
+          description: 區域
+          example: 1
+        district:
+          type: number
+          description: 行政區域
+          example: 1
+        businessHours:
+          type: string
+          description: 營業時間
+        openingHours:
+          type: array
+          items:
+            type: object
+          description: 營業時間
+          example: [{'id':1, 'weekday': 1, "startTime": "00:00:00", "endTime": "12:00:00"}]       
+        website:
+          type: string
+          description: 網站
+        content:
+          type: object
+          description: 網站內容
+          properties:
+            zh:
               type: string
-              description: rxNo
-            name:
-              type: object
-              description: 藥局名稱(中文}
-              properties:
-                zh:
-                  type: string
-                  example: '良躍社區藥房'
-                zh-CN:
-                  type: string
-                  example: '良跃社区药房'
-                en:
-                  type: string
-                  example: 'A-LIVELY COMMUNITY PHARMACY O/B ABERDEEN KAI-FONG WELFARE ASSOCIATION LIMITED'
-            contactNumber:
+            zh-CN:
               type: string
-              description: 聯絡電話
-            address:
-              type: object
-              description: 地址
-              properties:
-                zh:
-                  type: string
-                  example: '安和路'
-                zh-CN:
-                  type: string
-                  example: '安和路'
-                en:
-                  type: string
-                  example: 'Anhe Road'
-            lat:
+            en:
               type: string
-              description: 緯度
-              example: 22.25193195
-            lng:
-              type: string
-              description: 經度
-              example: 114.13825551
-            area:
-              type: number
-              description: 區域
-              example: 1
-            district:
-              type: number
-              description: 行政區域
-              example: 1
-            businessHours:
-              type: string
-              description: 營業時間
-            openingHours:
-              type: array
-              items:
-                type: object
-              description: 營業時間
-              example: [{'id':1, 'weekday': 1, "startTime": "00:00:00", "endTime": "12:00:00"}]       
-            website:
-              type: string
-              description: 網站
-            content:
-              type: object
-              description: 網站內容
-              properties:
-                zh:
-                  type: string
-                zh-CN:
-                  type: string
-                en:
-                  type: string
-            tags:
-              type: array
-              items:
-                type: integer
-              description: tag id
-              example: [1,2,3]
-            mainServices:
-              type: array
-              items:
-                type: integer
-              description: mainServices id
-              example: [1,2,3]
-            services:
-              type: array
-              items:
-                type: integer
-              description: tag id
-              example: [1,2,3]
-            images:
-              type: array
-              items:
-                type: integer
-              description: image id
-              example: [1,2,3]
-            plan:
-              type: object
+        tags:
+          type: array
+          items:
+            type: integer
+          description: tag id
+          example: [1,2,3]
+        mainServices:
+          type: array
+          items:
+            type: integer
+          description: mainServices id
+          example: [1,2,3]
+        services:
+          type: array
+          items:
+            type: integer
+          description: tag id
+          example: [1,2,3]
+        images:
+          type: array
+          items:
+            type: integer
+          description: image id
+          example: [1,2,3]
+        plan:
+          type: object
+    OptionsBaseResponse:
+      type: object
+      properties:
+        msg :
+          type: string
+          example: Success
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: number
+                description: 用來執行搜尋用的參數
+                example: 1
+              value:
+                type: string
+                description: 顯示名稱
+                example: 名稱
 
 paths:
   # ====================
@@ -1127,3 +1143,155 @@ paths:
                   properties:
                     msg:
                       type: string
+
+  /admin/stores/uuid:
+    get:
+      summary: 取得新藥房 uuid
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: string
+                      example: 0089adf3-187e-4882-b831-e5eb6612f587
+
+  /admin/stores/:uuid/create:
+    post:
+      summary: 新增 藥房
+      tags:
+        - stores
+      security:
+        - user_token: []
+      parameters:
+        - $ref: '#/components/parameters/storeUUID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/store'
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+
+  /admin/stores/options/planTypes:
+    get:
+      summary: 藥房 方案
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/stores/options/adTypes:
+    get:
+      summary: 藥房廣告類型
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/stores/options/stockTypes:
+    get:
+      summary: 藥房庫存方案
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/stores/options/tags:
+    get:
+      summary: 藥房 Tags
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/stores/options/mainServices:
+    get:
+      summary: 藥房 主要服務
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/stores/options/services:
+    get:
+      summary: 藥房 服務
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/stores/options/districts:
+    get:
+      summary: 取的香港行政區域
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
