@@ -1450,7 +1450,7 @@ paths:
 
   /postTypes:
     get:
-      summary: 獲取文章類別 id 及 name
+      summary: 獲取文章類別 id 及 name 及 typeName
       tags:
         - posts 
       parameters:
@@ -1483,6 +1483,8 @@ paths:
                           type: number
                         name:
                           type: string
+                        typeName:
+                          type: string  
 
   /posts/uploadImages:
     post:
