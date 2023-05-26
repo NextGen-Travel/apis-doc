@@ -3154,3 +3154,49 @@ paths:
                           name: ROCALTROL CAP 0.25UG
                         - permitNo : HK-07007
                           name: VENTOLIN INHALER 100MCG/METERED DOSE
+
+
+
+  # ====================
+  #
+  # other
+  #
+  /other/coordinates:
+    get:
+      summary: 地址轉座標
+      tags:
+        - other
+      parameters:
+        - $ref: '#/components/parameters/visitor'
+        - in: query
+          name: address
+          schema:
+            type: string
+          description: 地址
+          example: 106台北市大安區安和路二段211號
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      old:
+                        type: string
+                        example: 106台北市大安區安和路二段211號
+                      address_en:
+                        type: string
+                        example: No. 211, Section 2, Anhe Rd, Da’an District, Taipei City, Taiwan 106
+                      lat:
+                        type: number
+                        example: 25.0260285
+                      lng:
+                        type: number
+                        example: 121.5504914
