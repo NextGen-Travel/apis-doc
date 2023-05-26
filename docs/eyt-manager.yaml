@@ -482,6 +482,165 @@ paths:
                         type: number
                         description: 總共筆數
 
+  /admin/posts/{uuid}:
+    get:  
+      summary: 後台獲取指定文章
+      security:
+        - user_token: []
+      tags:
+        - posts
+      parameters:
+        - name: uuid
+          in: path
+          description: 文章uuid
+          required: true
+          example: e6d37477-7224-4fb6-a56a-d860228d48f4
+          schema:
+            type: string
+      responses:  
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uuid:
+                        type: string
+                      title:
+                        type: string
+                      content:
+                        type: string
+                      publishType:
+                        type: string
+                      publishStart:
+                        type: string
+                      publishEnd:
+                        type: string
+                      seoDescription:
+                        type: string
+                      urlSuffix:
+                        type: string
+                      image:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          url:
+                            type: string
+                      store:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+                      editor:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          email:
+                            type: string
+                      localizations:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            uuid:
+                              type: string
+                            locale:
+                              type: string
+                      type:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+                      categories:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string         
+
+  /admin/checkDuplicates:
+    post:
+      summary: 確認特定屬性是否重複（當前僅用來確認urlSuffix)
+      security:
+        - user_token: []
+      tags:
+        - posts
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                urlSuffix:
+                  type: string
+                  description: 後綴網址檢查
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/posts/stores:
+    get:
+      summary: 獲取後台發布者id及name
+      security:
+        - user_token: []
+      tags:
+        - posts 
+      parameters:
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章類別的語言                                
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string   
+
   /admin/postTags:
     get:
       summary: 獲取後台文章類別
@@ -524,6 +683,192 @@ paths:
                           type: number
                         name:
                           type: string                 、
+
+  /admin/create/posts:
+    post:
+      summary: 後台建立文章
+      security:
+        - user_token: []
+      tags:
+        - posts
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: object
+                  properties:
+                    zh:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        seoDescription:
+                          type: string
+                        image:
+                          type: number
+                    zh-CN:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        seoDescription:
+                          type: string
+                        image:
+                          type: number
+                    en:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        seoDescription:
+                          type: string
+                        image:
+                          type: number
+                urlSuffix:
+                  type: string
+                publishType:
+                  type: string
+                publishStart:
+                  type: string
+                publishEnd:
+                  type: string
+                publisher:
+                  type: string
+                type:
+                  type: string
+                firstCategory:
+                  type: string
+                secondCategory:
+                  type: string
+                tags:
+                  type: string
+                store:
+                  type: string
+                status:
+                  type: string
+              required:
+                - content
+                - tags
+                - firstCategory
+                - urlSuffix
+                - type
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/update/posts:
+    post:
+      summary: 後台更新文章
+      security:
+        - user_token: []
+      tags:
+        - posts
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: object
+                  properties:
+                    zh:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        seoDescription:
+                          type: string
+                        image:
+                          type: number
+                        uuid:
+                          type: string
+                    zh-CN:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        seoDescription:
+                          type: string
+                        image:
+                          type: number
+                        uuid:
+                          type: string
+                    en:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        seoDescription:
+                          type: string
+                        image:
+                          type: number
+                        uuid:
+                          type: string  
+                urlSuffix:
+                  type: string
+                publishType:
+                  type: string
+                publishStart:
+                  type: string
+                publishEnd:
+                  type: string
+                publisher:
+                  type: string
+                type:
+                  type: string
+                firstCategory:
+                  type: string
+                secondCategory:
+                  type: string
+                tags:
+                  type: string
+                store:
+                  type: string
+                status:
+                  type: string
+              required:
+                - content
+                - tags
+                - firstCategory
+                - urlSuffix
+                - type
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
 
   # ====================
   #

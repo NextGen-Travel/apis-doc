@@ -1478,6 +1478,43 @@ paths:
                         name:
                           type: string
 
+  /posts/uploadImages:
+    post:
+      summary: 上傳文章圖片
+      tags:
+        - posts
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+
+              required:
+                - image
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      url:
+                        type: string
+
   # ====================
   #
   # stores
