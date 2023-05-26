@@ -978,10 +978,29 @@ paths:
                                 type: string
                               adType:
                                 type: string
-                              status:
-                                type: string
                               stockType:
                                 type: string
+                              status:
+                                type: boolean
+                    pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                            description: 起始頁數
+                            example: 1
+                          pageSize:
+                            type: integer
+                            description: 每頁資料筆數
+                            example: 10
+                          pageCount:
+                            type: integer
+                            description: 總頁數
+                            example: 23
+                          total:
+                            type: integer
+                            description: 總筆數
+                            example: 236
 
   /admin/stores/detail/{uuid}:
     get:
