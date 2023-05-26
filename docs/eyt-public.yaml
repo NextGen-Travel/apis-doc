@@ -801,7 +801,7 @@ paths:
                             properties:
                               id:
                                 type: number
-                              tagName:
+                              name:
                                 type: string
                                 description: 標籤名稱
                         publishedAt:
@@ -892,7 +892,7 @@ paths:
                           properties:
                             id:
                               type: number
-                            tagName:
+                            name:
                               type: string
                               description: hashTag 名稱
                       publishedAt:
@@ -976,7 +976,7 @@ paths:
                             properties:
                               id:
                                 type: number
-                              tagName:
+                              name:
                                 type: string
                         publishedAt:
                           type: string
@@ -1055,7 +1055,7 @@ paths:
                             properties:
                               id:
                                 type: number
-                              tagName:
+                              name:
                                 type: string
                         publishedAt:
                           type: string
@@ -1141,7 +1141,7 @@ paths:
                             properties:
                               id:
                                 type: number
-                              tagName:
+                              name:
                                 type: string
                         publishedAt:
                           type: string
@@ -1237,7 +1237,7 @@ paths:
                             properties:
                               id:
                                 type: number
-                              tagName:
+                              name:
                                 type: string
                                 description: 標籤名稱
                         publishedAt:
@@ -1349,7 +1349,7 @@ paths:
                             properties:
                               id:
                                 type: number
-                              tagName:
+                              name:
                                 type: string
                                 description: 標籤名稱
                         publishedAt:
