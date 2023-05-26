@@ -520,6 +520,43 @@ paths:
                           email:
                             type: string
 
+  /wechatSignature:
+    get:
+      summary: 取得微信的簽名
+      tags:
+        - member 
+      parameters:   
+        - in: query
+          name: url
+          schema:
+            type: string
+          description: url        
+          required: true                      
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      signature:
+                        type: string
+                      nonceStr:
+                        type: string
+                      timestamp:
+                        type: number
+                      url:
+                        type: string
+                      appId:
+                        type: string
+                      ticket:
+                        type: string
   # ====================
   #
   # verification code

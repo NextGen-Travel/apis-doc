@@ -698,7 +698,7 @@ paths:
                         id:
                           type: number
                         name:
-                          type: string                 、
+                          type: string
 
   /admin/create/posts:
     post:
