@@ -60,6 +60,11 @@ components:
         stockSyncParams:
           type: object
           description: 庫存 api 額外參數
+          properties:
+            location_id:
+              type: string
+              description: 庫存 erp 系統  location_id
+              example: 1
         tel:
           type: string
           description: 聯絡電話
@@ -125,11 +130,26 @@ components:
           type: string
           description: 營業時間
         openingHours:
+          description: 營業時間 startTime 為 00:00:00 跟 endTime 為 24:00:00，為『二十四小時不打烊』"
           type: array
           items:
             type: object
-          description: 營業時間
-          example: [{'id':1, 'weekday': 1, "startTime": "00:00:00", "endTime": "12:00:00"}]       
+            properties:
+              isClosed:
+                type: number
+                description: "本日公休 isClosed=1 則 startTime 跟 endTime 輸出 00:00:00 "
+                example: 1
+              weekday:
+                type: number
+                description: isoWeekday 1-7， 週日為 7
+                example: 1
+              startTime:
+                type: string
+                description: 營業時間
+                example: 00:00:00
+              endTime:
+                type: string
+                example: 12:00:00
         website:
           type: string
           description: 網站
@@ -169,6 +189,28 @@ components:
           example: [1,2,3]
         plan:
           type: object
+          properties:
+            messanger:
+              type: string
+              example: NextgenTravelTechnology
+            instagram:
+              type: string
+              example: nextgentechco
+            whatsapp:
+              type: string
+              example: 85263111356
+            wechat:
+               type: object
+               properties:
+                title:
+                  type: string
+                  example: 女生秘物網購
+                appId:
+                  type: string
+                  example: girlssecrets_shop
+                qrcode:
+                  type: string
+                  example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/qrcode_for_gh_1b9715c09cc3_1280_1_42ca67a97d.jpg
     OptionsBaseResponse:
       type: object
       properties:
@@ -1059,8 +1101,6 @@ paths:
                           items:
                             type: object
                             properties:
-                              id:
-                                type: number
                               weekday:
                                 type: number
                               startTime:
