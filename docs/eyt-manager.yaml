@@ -722,9 +722,20 @@ paths:
                         id:
                           type: number
                         name:
-                          type: string   
+                          type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
 
-  /admin/postTags:
+  /admin/tags:
     get:
       summary: 獲取後台文章標籤
       security:
@@ -768,7 +779,7 @@ paths:
                         type: number
 
 
-  /admin/postTypes:
+  /admin/types:
     get:
       summary: 獲取後台文章類別
       security:
@@ -800,7 +811,7 @@ paths:
                         name:
                           type: string
 
-  /admin/postCategories:
+  /admin/categories:
     get:
       summary: 獲取後台文章分類
       security:
