@@ -753,8 +753,20 @@ paths:
                       properties:
                         id:
                           type: number
-                        name:
+                        tagName:
                           type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
 
   /admin/postTypes:
     get:
