@@ -1430,4 +1430,39 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/OptionsBaseResponse'
+                  type: object
+                  properties:
+                    msg :
+                      type: string
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          key:
+                            type: string
+                            description: 行政區域代碼
+                          value:
+                            type: string
+                            description: 行政區域 名稱
+                          areaKey:
+                            type: string
+                            description: 區域代碼
+                          area:
+                            type: string
+                            description: 區域名稱
+                example:
+                  msg : Success
+                  data:
+                    - key: EASTERN
+                      value: 東區
+                      areaKey: HONG_KONG_ISLAND
+                      area: 香港島
+                    - key: WAN_CHAI
+                      value: 灣仔區
+                      areaKey: HONG_KONG_ISLAND
+                      area: 香港島
+                    - key: SAI_KUNG
+                      value: 西貢區
+                      areaKey: NEW_TERRITORIES
+                      area: 新界
