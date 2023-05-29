@@ -701,6 +701,38 @@ paths:
 
   /admin/postTags:
     get:
+      summary: 獲取後台文章標籤
+      security:
+        - user_token: []
+      tags:
+        - posts 
+      parameters:
+        - in: header
+          name: accept-language
+          schema:
+            type: string
+            enum: [ zh, zh-CN, en]
+          description: 文章類別的語言                               
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+
+  /admin/postTypes:
+    get:
       summary: 獲取後台文章類別
       security:
         - user_token: []
@@ -712,15 +744,41 @@ paths:
           schema:
             type: string
             enum: [ zh, zh-CN, en]
-          description: 文章類別的語言
-        - in: query
-          name: type
+          description: 文章類別的語言                              
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+
+  /admin/postCategories:
+    get:
+      summary: 獲取後台文章分類
+      security:
+        - user_token: []
+      tags:
+        - posts 
+      parameters:
+        - in: header
+          name: accept-language
           schema:
             type: string
-            enum: [post_categories, hashTag, post_type ]
-          description: 搜尋的哪一種類型的tag, 分類，標籤，類別，預設是標籤         
+            enum: [ zh, zh-CN, en]
+          description: 文章類別的語言 
         - in: query
-          name: category_id
+          name: categoryId
           schema:
             type: string
           description: 第一層分類id（搜尋第二層分類）                                  
