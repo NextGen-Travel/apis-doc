@@ -841,6 +841,37 @@ paths:
                   msg:
                     type: string
 
+  /members/chatbot/question:
+    post:
+      summary: chatbot客服
+      description: 回應內容靠 sse 回傳，網址：https://api-dev.e-drugsearch.com.hk/event.sse/:visitor_uuid
+      tags:
+        - members
+      security:
+        - member_token: []
+      parameters:
+        - $ref: '#/components/parameters/visitor'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: 問題
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   # ====================
   #
   # posts
