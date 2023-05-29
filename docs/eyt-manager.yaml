@@ -230,6 +230,25 @@ components:
                 type: string
                 description: 顯示名稱
                 example: 名稱
+    OptionsModeOneResponse:
+      type: object
+      properties:
+        msg :
+          type: string
+          example: Success
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: 用來執行搜尋用的參數
+                example: default
+              value:
+                type: string
+                description: 顯示名稱
+                example: 名稱
 
 paths:
   # ====================
@@ -1321,7 +1340,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/OptionsBaseResponse'
+                  $ref: '#/components/schemas/OptionsModeOneResponse'
 
   /admin/stores/options/adTypes:
     get:
@@ -1336,7 +1355,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/OptionsBaseResponse'
+                  $ref: '#/components/schemas/OptionsModeOneResponse'
 
   /admin/stores/options/stockTypes:
     get:
@@ -1351,7 +1370,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/OptionsBaseResponse'
+                  $ref: '#/components/schemas/OptionsModeOneResponse'
 
   /admin/stores/options/tags:
     get:
