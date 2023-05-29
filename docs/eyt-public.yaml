@@ -531,7 +531,7 @@ paths:
           schema:
             type: string
           description: url        
-          required: true                      
+          required: false                      
       responses:
         '200':
           description: 成功

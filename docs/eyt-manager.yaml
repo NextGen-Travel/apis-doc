@@ -661,7 +661,10 @@ paths:
                       secondCategory:
                         type: string
                       tags:
-                        type: string
+                        type: array
+                        items:
+                          type: number
+
 
   /admin/checkDuplicates:
     post:
@@ -687,10 +690,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
+                type: boolean
 
   /admin/posts/stores:
     get:
@@ -913,7 +913,9 @@ paths:
                 secondCategory:
                   type: string
                 tags:
-                  type: string
+                  type: array
+                  items:
+                    type: number
                 store:
                   type: string
                 status:
@@ -1026,7 +1028,9 @@ paths:
                 secondCategory:
                   type: string
                 tags:
-                  type: string
+                  type: array
+                  items:
+                    type: number
                 store:
                   type: string
                 status:
