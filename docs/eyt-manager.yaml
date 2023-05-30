@@ -1169,7 +1169,29 @@ paths:
                         website:
                           type: string
                         plan:
-                          type: string
+                          type: object
+                          properties:
+                            messanger:
+                              type: string
+                              example: NextgenTravelTechnology
+                            instagram:
+                              type: string
+                              example: nextgentechco
+                            whatsapp:
+                              type: string
+                              example: 85263111356
+                            wechat:
+                              type: object
+                              properties:
+                                title:
+                                  type: string
+                                  example: 女生秘物網購
+                                appId:
+                                  type: string
+                                  example: girlssecrets_shop
+                                qrcode:
+                                  type: string
+                                  example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/qrcode_for_gh_1b9715c09cc3_1280_1_42ca67a97d.jpg
                         planType:
                           type: string
                         content:
