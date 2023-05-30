@@ -190,6 +190,9 @@ components:
         plan:
           type: object
           properties:
+            email:
+              type: string
+              example: nextgen@nextgen.com.hk
             messanger:
               type: string
               example: NextgenTravelTechnology
@@ -1314,6 +1317,9 @@ paths:
                         plan:
                           type: object
                           properties:
+                            email:
+                              type: string
+                              example: nextgen@nextgen.com.hk
                             messanger:
                               type: string
                               example: NextgenTravelTechnology
