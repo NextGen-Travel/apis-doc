@@ -1107,6 +1107,20 @@ paths:
                           type: string
                         stockType:
                           type: string
+                        stockUrl:
+                          type: string
+                        stockSyncParams:
+                          type: object
+                          description: 庫存 api 額外參數
+                          properties:
+                            location_id:
+                              type: string
+                              description: 庫存 erp 系統  location_id
+                              example: 1
+                        adType:
+                          type: string
+                        tel:
+                          type: string
                         name:
                           type: object
                           properties:
