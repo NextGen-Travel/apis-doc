@@ -752,15 +752,15 @@ paths:
                       urlSuffix:
                         type: string
                       store:
-                        type: string
+                        type: number
                       editor:
                         type: string
                       type:
-                        type: string
+                        type: number
                       firstCategory:
-                        type: string
+                        type: number
                       secondCategory:
-                        type: string
+                        type: number
                       tags:
                         type: array
                         items:
@@ -921,17 +921,17 @@ paths:
                 publisher:
                   type: string
                 type:
-                  type: string
+                  type: number
                 firstCategory:
-                  type: string
+                  type: number
                 secondCategory:
-                  type: string
+                  type: number
                 tags:
                   type: array
                   items:
                     type: number
                 store:
-                  type: string
+                  type: number
                 status:
                   type: string
                   enum: [pendingReview,draft]
@@ -1041,17 +1041,17 @@ paths:
                 publisher:
                   type: string
                 type:
-                  type: string
+                  type: number
                 firstCategory:
-                  type: string
+                  type: number
                 secondCategory:
-                  type: string
+                  type: number
                 tags:
                   type: array
                   items:
                     type: number
                 store:
-                  type: string
+                  type: number
                 status:
                   type: string
                   enum: [pendingReview,draft]
