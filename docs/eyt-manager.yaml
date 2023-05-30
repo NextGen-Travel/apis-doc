@@ -811,6 +811,8 @@ paths:
                   type: string
                 publishType:
                   type: string
+                  enum: [ now , reserve]
+                  description: 立即 now, 預約reserve
                 publishStart:
                   type: string
                 publishEnd:
@@ -929,6 +931,8 @@ paths:
                   type: string
                 publishType:
                   type: string
+                  enum: [ now , reserve]
+                  description: 立即 now, 預約reserve
                 publishStart:
                   type: string
                 publishEnd:
