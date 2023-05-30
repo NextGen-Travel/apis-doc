@@ -111,11 +111,11 @@ components:
               type: string
               example: 'Anhe Road'
         lat:
-          type: string
+          type: number
           description: 緯度
           example: 22.25193195
         lng:
-          type: string
+          type: number
           description: 經度
           example: 114.13825551
         area:

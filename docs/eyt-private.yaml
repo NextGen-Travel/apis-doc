@@ -1658,12 +1658,12 @@ paths:
         - in: query
           name: lat
           schema:
-            type: integer
+            type: number
           description: 緯度
         - in: query
           name: lng
           schema:
-            type: integer
+            type: number
           description: 經度
       responses:
           '200':
