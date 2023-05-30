@@ -958,7 +958,7 @@ paths:
                     type: string
 
   /admin/update/posts:
-    post:
+    put:
       summary: 後台更新文章
       security:
         - user_token: []
