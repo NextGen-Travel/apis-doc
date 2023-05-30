@@ -1759,6 +1759,9 @@ components:
           description: 貨幣面額
           items:
             type: integer
+        alert_pos_cash:
+          type: integer
+          description: 收銀現金額度提醒
 
     LocationListResponse:
       type: object
@@ -2565,6 +2568,9 @@ components:
     CashRegisterDetailResponse:
       type: object
       properties:
+        alert_pos_cash:
+          type: integer
+          description: 收銀現金額度提醒
         open_time:
           type: string
           description: 訂單ID
@@ -2728,6 +2734,7 @@ paths:
                 currency_symbol_placement: before
                 date_format: m/d/Y H:i
                 denominations: [10, 20, 50, 100, 500, 1000]
+                alert_pos_cash: 10000
         '404':
           description: 錯誤
           content:
@@ -6185,6 +6192,7 @@ paths:
               example:
                 open_time: 02/15/2023 18:38
                 close_time: 02/17/2023 09:29
+                alert_pos_cash: 1000
                 cash_in_hand: 0
                 total_sell: 200
                 total_expense: 0
