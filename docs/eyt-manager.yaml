@@ -1081,6 +1081,33 @@ paths:
                   msg:
                     type: string
 
+  /admin/delete/posts/{uuid}:
+    put:
+      summary: 後台刪除文章 （用put)
+      security:
+        - user_token: []
+      tags:
+        - posts
+      parameters:
+        - name: uuid
+          in: path
+          description: 文章uuid
+          required: true
+          example: e6d37477-7224-4fb6-a56a-d860228d48f4
+          schema:
+            type: string        
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+
   # ====================
   #
   # stores
