@@ -935,7 +935,7 @@ paths:
                 status:
                   type: string
                   enum: [pendingReview,draft]
-                  description: 點擊儲存並審核則帶pendingReview,不然就是draft
+                  description: superAdmin的話不是pendingPublish就是draft,其他身份點擊儲存並審核則帶pendingReview,不然就是draft
                 editor:
                   type: string
               required:
@@ -945,6 +945,8 @@ paths:
                 - urlSuffix
                 - type
                 - status
+                - publishStart
+                - publishType
 
       responses:
         '200':
@@ -1055,7 +1057,7 @@ paths:
                 status:
                   type: string
                   enum: [pendingReview,draft]
-                  description: 點擊儲存並審核則帶pendingReview,不然就是draft
+                  description: superAdmin的話不是pendingPublish就是draft,其他身份點擊儲存並審核則帶pendingReview,不然就是draft
                 editor:
                   type: string                  
               required:
@@ -1065,6 +1067,8 @@ paths:
                 - urlSuffix
                 - type
                 - status
+                - publishStart
+                - publishType
 
       responses:
         '200':
