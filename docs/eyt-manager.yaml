@@ -119,13 +119,13 @@ components:
           description: 經度
           example: 114.13825551
         area:
-          type: number
+          type: string
           description: 區域
-          example: 1
+          example: HONG_KONG_ISLAND
         district:
-          type: number
+          type: string
           description: 行政區域
-          example: 1
+          example: WAN_CHAI
         businessHours:
           type: string
           description: 營業時間
@@ -1152,6 +1152,10 @@ paths:
                           items:
                             type: object
                             properties:
+                              isClosed:
+                                type: number
+                                description: "本日公休 isClosed=1 則 startTime 跟 endTime 輸出 00:00:00 "
+                                example: 1
                               weekday:
                                 type: number
                               startTime:
@@ -1180,15 +1184,15 @@ paths:
                         area:
                           type: object
                           properties:
-                            id:
-                              type: number
+                            key:
+                              type: string
                             name:
                               type: string
                         district:
                           type: object
                           properties:
-                            id:
-                              type: number
+                            key:
+                              type: string
                             name:
                               type: string
                         tags:
