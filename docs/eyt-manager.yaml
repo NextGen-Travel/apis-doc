@@ -831,6 +831,8 @@ paths:
                   type: string
                 status:
                   type: string
+                  enum: [pendingReview,draft]
+                  description: 點擊儲存並審核則帶pendingReview,不然就是draft
                 editor:
                   type: string
               required:
@@ -839,6 +841,7 @@ paths:
                 - firstCategory
                 - urlSuffix
                 - type
+                - status
 
       responses:
         '200':
@@ -946,6 +949,8 @@ paths:
                   type: string
                 status:
                   type: string
+                  enum: [pendingReview,draft]
+                  description: 點擊儲存並審核則帶pendingReview,不然就是draft
                 editor:
                   type: string                  
               required:
@@ -954,6 +959,7 @@ paths:
                 - firstCategory
                 - urlSuffix
                 - type
+                - status
 
       responses:
         '200':
