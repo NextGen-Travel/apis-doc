@@ -691,6 +691,7 @@ paths:
             application/json:
               schema:
                 type: boolean
+                description: true表示有重複，false則否
 
   /admin/posts/stores:
     get:
