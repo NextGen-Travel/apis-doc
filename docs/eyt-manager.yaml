@@ -251,6 +251,107 @@ components:
                 example: 名稱
 
 paths:
+
+  # ====================
+  #
+  # user
+  #
+
+  /users/me :
+    get:
+      summary: 取得個人資訊
+      tags:
+        - users
+      security:
+        - client_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  username:
+                    type: string
+                  email:
+                    type: string
+                  provider:
+                    type: string
+                  confirmed:
+                    type: boolean
+                  blocked:
+                    type: boolean
+                  createdAt:
+                    type: string
+                  updatedAt:
+                    type: string
+                  memo:
+                    type: string
+                  startedAt:
+                    type: string
+                  finishedAt:
+                    type: string
+                  account:
+                    type: string
+                  store:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      uuid:
+                        type: string
+                      stockType:
+                        type: string
+                      address:
+                        type: string
+                      lat:
+                        type: number
+                      lng:
+                        type: number
+                      contactNumber:
+                        type: string
+                      businessHours:
+                        type: string
+                      isExcellent:
+                        type: boolean
+                      isGenuine:
+                        type: boolean
+                      website:
+                        type: string
+                      collectCount:
+                        type: number
+                      plan:
+                        type: object
+                        properties:
+                          email:
+                            type: string
+                          website:
+                            type: string
+                          whatsapp:
+                            type: string
+                          instagram:
+                            type: string
+                          messanger:
+                            type: string
+                          navigation:
+                            type: boolean
+                          contactNumber:
+                            type: string
+                          wechat:
+                            type: object
+                            properties:
+                              appId:
+                                type: string
+                              title:
+                                type: string
+                              qrcode:
+                                type: string
+
   # ====================
   #
   # other
