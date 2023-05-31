@@ -1253,6 +1253,10 @@ paths:
                           type: string
                         stockType:
                           type: string
+                        type:
+                          type: string
+                        rxNo:
+                          type: string
                         stockUrl:
                           type: string
                         stockSyncParams:
