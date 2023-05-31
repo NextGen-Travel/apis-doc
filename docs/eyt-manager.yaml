@@ -45,6 +45,10 @@ components:
     store :
       type: object
       properties:
+        status:
+          type: boolean
+          description: 狀態
+          example: true
         planType:
           type: string
           description: 方案類型
@@ -97,6 +101,10 @@ components:
         contactNumber:
           type: string
           description: 聯絡電話
+        mobileCountryCode:
+          type: string
+          description: 國碼
+          example: 886
         address:
           type: object
           description: 地址
@@ -1251,6 +1259,10 @@ paths:
                       properties:
                         uuid:
                           type: string
+                        status:
+                          type: boolean
+                          description: 狀態
+                          example: true
                         stockType:
                           type: string
                         type:
@@ -1295,6 +1307,10 @@ paths:
                           type: number
                         contactNumber:
                           type: string
+                        mobileCountryCode:
+                          type: string
+                          description: 國碼
+                          example: 886
                         businessHours:
                           type: string
                         openingHours:
@@ -1479,6 +1495,21 @@ paths:
                   properties:
                     msg:
                       type: string
+
+  /admin/stores/options/types:
+    get:
+      summary: 藥房 類型
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsModeOneResponse'
 
   /admin/stores/options/planTypes:
     get:
