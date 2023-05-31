@@ -872,6 +872,27 @@ paths:
                   msg:
                     type: string
 
+  /members/chatbot/question/refresh:
+    post:
+      summary: 重置 chatbot客服 對話
+      description: 重置 對話
+      tags:
+        - members
+      security:
+        - member_token: []
+      parameters:
+        - $ref: '#/components/parameters/visitor'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   # ====================
   #
   # posts
