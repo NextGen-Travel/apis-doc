@@ -562,19 +562,12 @@ paths:
   # verification code
   #
 
-  /verification-code/{action}:
+  /verification-code/login:
     post:
       summary: 忘記密碼/註冊帳號/手機登入 拿驗證碼
       description: 打這個 api 後，申請的信箱會收到一封驗證碼的信
       tags:
         - verification-code
-      parameters:
-        - in: path
-          required: true
-          name: action
-          schema:
-            type: string
-          description: 用途，忘記密碼 forgot-password / 註冊 register / 手機登入 login
       requestBody:
         required: true
         content:
@@ -609,6 +602,10 @@ paths:
                       token:
                         type: string
                         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODQzOTExMjEsImV4cCI6MTY4NDM5MjAyMX0.eE00SIAyBBbWkIkSg6lklG-jwAveTnBGml6wCxTrxeE
+                      verificationCode:
+                        type: string
+                        example: '12345'
+
   /verification-code/verify:
     post:
       summary: verify 驗證碼
