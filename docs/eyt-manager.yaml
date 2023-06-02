@@ -1324,10 +1324,15 @@ paths:
                                 example: 1
                               weekday:
                                 type: number
+                                description: isoWeekday 1-7， 週日為 7
+                                example: 1
                               startTime:
                                 type: string
+                                description: 營業時間
+                                example: 00:00:00
                               endTime:
                                 type: string
+                                example: 12:00:00
                         isExcellent:
                           type: boolean
                         isGenuine:
