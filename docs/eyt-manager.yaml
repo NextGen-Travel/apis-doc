@@ -66,7 +66,7 @@ components:
           description: 庫存 api 額外參數
           properties:
             location_id:
-              type: string
+              type: number
               description: 庫存 erp 系統  location_id
               example: 1
         tel:
@@ -1276,7 +1276,7 @@ paths:
                           description: 庫存 api 額外參數
                           properties:
                             location_id:
-                              type: string
+                              type: number
                               description: 庫存 erp 系統  location_id
                               example: 1
                         adType:
