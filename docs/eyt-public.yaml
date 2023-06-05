@@ -1128,7 +1128,7 @@ paths:
           name: type
           schema:
             type: string
-            enum: [ latestNews, drugDonations, NewDevelopmentsAboutMedicine, PolicyPromotion]
+            enum: [latestNews, drugDonations, newDevelopmentsAboutMedicine, policyPromotion]
           description: type的名稱        
       responses:
         '200':
@@ -1499,13 +1499,13 @@ paths:
           name: accept-language
           schema:
             type: string
-            enum: [ zh, zh-CN, en]
+            enum: [zh, zh-CN, en]
           description: 文章類別的語言 
         - in: query
           name: type
           schema:
             type: string
-            enum: [ latestNews, drugDonations, NewDevelopmentsAboutMedicine, PolicyPromotion]
+            enum: [latestNews, drugDonations, newDevelopmentsAboutMedicine, policyPromotion]
           description: type的名稱                        
       responses:
         '200':
