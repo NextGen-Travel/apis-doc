@@ -360,8 +360,8 @@ paths:
 
   /visitor/log:
     post:
-      summary: 會員註冊 EYT 帳號
-      description: 用 mobile/email 註冊，只能選一種不能同時存在
+      summary: api log trace
+      description: 讓前端 trace user api log
       tags:
         - visitor
       requestBody:
