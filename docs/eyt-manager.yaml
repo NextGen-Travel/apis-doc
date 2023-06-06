@@ -862,63 +862,28 @@ paths:
             schema:
               type: object
               properties:
-                content:
-                  type: object
-                  properties:
-                    zh:
-                      type: object
-                      properties:
-                        title:
-                          type: string
-                        uuid:
-                          type: string
-                        content:
-                          type: string
-                        seoDescription:
-                          type: string
-                        image:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            url:
-                              type: string
-                    zh-CN:
-                      type: object
-                      properties:
-                        title:
-                          type: string
-                        uuid:
-                          type: string
-                        content:
-                          type: string
-                        seoDescription:
-                          type: string
-                        image:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            url:
-                              type: string
-                    en:
-                      type: object
-                      properties:
-                        title:
-                          type: string
-                        uuid:
-                          type: string
-                        content:
-                          type: string
-                        seoDescription:
-                          type: string
-                        image:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            url:
-                              type: string
+                contents:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      locale:
+                        type: string
+                      title:
+                        type: string
+                      uuid:
+                        type: string
+                      content:
+                        type: string
+                      seoDescription:
+                        type: string
+                      image:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          url:
+                            type: string
                 urlSuffix:
                   type: string
                 publishType:
@@ -950,7 +915,7 @@ paths:
                 editor:
                   type: string
               required:
-                - content
+                - contents
                 - tags
                 - firstCategory
                 - urlSuffix
@@ -984,63 +949,28 @@ paths:
             schema:
               type: object
               properties:
-                content:
-                  type: object
-                  properties:
-                    zh:
-                      type: object
-                      properties:
-                        title:
-                          type: string
-                        uuid:
-                          type: string    
-                        content:
-                          type: string
-                        seoDescription:
-                          type: string
-                        image:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            url:
-                              type: string
-                    zh-CN:
-                      type: object
-                      properties:
-                        title:
-                          type: string
-                        uuid:
-                          type: string    
-                        content:
-                          type: string
-                        seoDescription:
-                          type: string
-                        image:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            url:
-                              type: string
-                    en:
-                      type: object
-                      properties:
-                        title:
-                          type: string
-                        uuid:
-                          type: string    
-                        content:
-                          type: string
-                        seoDescription:
-                          type: string
-                        image:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            url:
-                              type: string
+                contents:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      locale:
+                        type: string
+                      title:
+                        type: string
+                      uuid:
+                        type: string
+                      content:
+                        type: string
+                      seoDescription:
+                        type: string
+                      image:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          url:
+                            type: string
                 urlSuffix:
                   type: string
                 publishType:
@@ -1072,7 +1002,7 @@ paths:
                 editor:
                   type: string                  
               required:
-                - content
+                - contents
                 - tags
                 - firstCategory
                 - urlSuffix
