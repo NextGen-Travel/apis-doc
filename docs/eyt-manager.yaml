@@ -697,63 +697,28 @@ paths:
                   data:
                     type: object
                     properties:
-                      content:
-                        type: object
-                        properties:
-                          zh:
-                            type: object
-                            properties:
-                              title:
-                                type: string
-                              content:
-                                type: string
-                              seoDescription:
-                                type: string
-                              uuid:
-                                type: string
-                              image:
-                                type: object
-                                properties:
-                                  id:
-                                    type: number
-                                  url:
-                                    type: string
-                          zh-CN:
-                            type: object
-                            properties:
-                              uuid:
-                                type: string
-                              content:
-                                type: string
-                              title:
-                                type: string
-                              seoDescription:
-                                type: string
-                              image:
-                                type: object
-                                properties:
-                                  id:
-                                    type: number
-                                  url:
-                                    type: string
-                          en:
-                            type: object
-                            properties:
-                              title:
-                                type: string
-                              content:
-                                type: string
-                              seoDescription:
-                                type: string
-                              uuid:
-                                type: string
-                              image:
-                                type: object
-                                properties:
-                                  id:
-                                    type: number
-                                  url:
-                                    type: string
+                      contents:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            locale:
+                              type: string
+                            title:
+                              type: string
+                            uuid:
+                              type: string
+                            content:
+                              type: string
+                            seoDescription:
+                              type: string
+                            image:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                url:
+                                  type: string
                       publishType:
                         type: string
                       publishStart:
