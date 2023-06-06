@@ -745,7 +745,8 @@ paths:
                           type: number
                       status:
                         type: string
-
+                        enum: [pendingReview,draft]
+                        description: superAdmin的話不是pendingPublish就是draft,其他身份點擊儲存並審核則帶pendingReview,不然就是draft
 
   /admin/checkDuplicates:
     post:
