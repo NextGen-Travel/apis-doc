@@ -358,6 +358,63 @@ paths:
                     type: string
                     example: Success
 
+  /visitor/log:
+    post:
+      summary: 會員註冊 EYT 帳號
+      description: 用 mobile/email 註冊，只能選一種不能同時存在
+      tags:
+        - visitor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientId:
+                  type: string
+                fingerId:
+                  type: string
+                messages:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                      type:
+                        type: string
+                      level:
+                        type: string
+                      time:
+                        type: number
+                level:
+                  type: string
+                text:
+                  type: string
+                time:
+                  type: number
+                type:
+                  type: string
+                service:
+                  type: string
+                stage:
+                  type: string
+                url:
+                  type: string
+                visitorId:
+                  type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   # ====================
   #
   # Member
