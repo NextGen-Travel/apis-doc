@@ -1562,7 +1562,7 @@ paths:
   # tags
   #
 
-  /admin/tags:
+  /admin/post-tags:
     get:
       summary: 獲取後台文章標籤
       security:
@@ -1606,7 +1606,7 @@ paths:
                         type: number
 
 
-  /admin/types:
+  /admin/post-types:
     get:
       summary: 獲取後台文章類別
       security:
@@ -1638,7 +1638,7 @@ paths:
                         name:
                           type: string
 
-  /admin/categories:
+  /admin/post-categories:
     get:
       summary: 獲取後台文章分類
       security:
@@ -1653,7 +1653,7 @@ paths:
             enum: [ zh, zh-CN, en]
           description: 文章類別的語言 
         - in: query
-          name: categoryId
+          name: parentId
           schema:
             type: string
           description: 第一層分類id（搜尋第二層分類）                                  
