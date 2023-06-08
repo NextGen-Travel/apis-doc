@@ -2825,6 +2825,8 @@ paths:
                                 type: array
                                 items:
                                   type: number
+                              mobileCountryCode:
+                                type: string
                               mainServices:
                                 type: array
                                 items:
@@ -2948,6 +2950,8 @@ paths:
                         website:
                           type: string
                         content:
+                          type: string
+                        mobileCountryCode:
                           type: string
                         plan:
                           type: object
