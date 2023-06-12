@@ -2378,6 +2378,18 @@ paths:
           schema:
             type: integer
           description: 經度
+        - in: query
+          name: storeCount
+          schema:
+            type: integer
+          description: 輸出可購買的藥房數量
+          example: 3
+        - in: query
+          name: isRandom
+          schema:
+            type: integer
+          description: 隨機輸出可購買的藥房，未帶參數會預設為1
+          example: 1
       responses:
           '200':
             description: 成功
