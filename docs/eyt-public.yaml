@@ -417,6 +417,35 @@ paths:
                   msg:
                     type: string
 
+
+  /visitor/hot/search:
+    get:
+      summary: 熱搜
+      description: 取得 熱搜
+      tags:
+        - visitor
+      parameters:
+        - in: query
+          name: perPage
+          schema:
+            type: number
+          description: 回傳的數量
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: string
+
+
   # ====================
   #
   # Member
