@@ -316,6 +316,8 @@ paths:
                         type: string
                       uuid:
                         type: string
+                      type:
+                        type: string
                       stockType:
                         type: string
                       address:
