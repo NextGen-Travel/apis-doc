@@ -49,6 +49,11 @@ components:
           type: boolean
           description: 狀態
           example: true
+        priority:
+          type: integer
+          enum: [0,1,2,3,4,5,6,7,8,9,10]
+          description: 優先度，高的優先輸出
+          example: 0
         planType:
           type: string
           description: 方案類型
