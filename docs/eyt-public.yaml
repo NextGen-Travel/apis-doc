@@ -2727,6 +2727,15 @@ paths:
       parameters:
         - $ref: '#/components/parameters/visitor'
         - $ref: '#/components/parameters/isCollect'
+        - isPriority:
+          in: query
+          name: isPriority
+          schema:
+            type: integer
+            enum: [0,1]
+          required: false
+          description: 是否已收藏，isCollect=1 ，已收藏
+          example: 0
         - in: query
           name: isGenuine
           schema:
