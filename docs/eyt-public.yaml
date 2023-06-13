@@ -2727,14 +2727,13 @@ paths:
       parameters:
         - $ref: '#/components/parameters/visitor'
         - $ref: '#/components/parameters/isCollect'
-        - isPriority:
-          in: query
+        - in: query
           name: isPriority
           schema:
             type: integer
             enum: [0,1]
           required: false
-          description: 是否已收藏，isCollect=1 ，已收藏
+          description: 啟用優先度輸出，isPriority=1
           example: 0
         - in: query
           name: isGenuine
