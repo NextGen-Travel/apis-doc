@@ -430,6 +430,14 @@ paths:
           schema:
             type: number
           description: 回傳的數量
+        - in: path
+          name: type
+          required: true
+          schema:
+            type: string
+            enum: [all, drug, store, post, stock]
+          example: all
+          description: 熱門收尋分類
       responses:
         '200':
           description: 成功
