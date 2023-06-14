@@ -1025,6 +1025,132 @@ paths:
                   msg:
                     type: string
 
+  /admin/posts/review:
+    put:
+      summary: 後台審核文章
+      security:
+        - user_token: []
+      tags:
+        - posts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contents:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      locale:
+                        type: string
+                        description: 文章語系
+                      reasonForReject:
+                        type: string
+                        description: 退件原因
+                      uuid:
+                        type: string
+                        description: 文章uuid
+                isApproved:
+                  type: number
+                  enum: [0,1]
+                  description: 1表示核准，0則否
+              required:
+                - contents
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+
+  /admin/posts/:uuid/withdraw:
+    put:
+      summary: 後台列表撤回文章
+      security:
+        - user_token: []
+      tags:
+        - posts
+      parameters:
+        - name: uuid
+          in: path
+          description: 文章uuid
+          required: true
+          example: 123456789
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string      
+
+
+  /admin/posts/:uuid/history:
+    get:
+      summary: 取得文章狀態變化的歷史資料
+      security:
+        - user_token: []
+      tags:
+        - posts
+      parameters:
+        - name: uuid
+          in: path
+          description: 文章uuid
+          required: true
+          example: e6d37477-7224-4fb6-a56a-d860228d48f4
+          schema:
+            type: string      
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        username:
+                          type: string
+                        createdAt:
+                          type: string
+                        description:
+                          type: string
+                        reasonForReject:
+                          type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
 
   # ====================
   #
