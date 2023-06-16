@@ -1119,6 +1119,12 @@ paths:
                             templateNamespace:
                               type: string
                               description:  只有whatsapp才有
+                            accessKey: 
+                              type: string
+                              description: 申請社交平台在messageBird的key
+                            accessKeyID:
+                              type: string
+                              description: 申請社交平台在messageBird的keyID                              
     put:
       summary: 更新公司（superadmin權限才可使用）
       description: 更新公司（superadmin權限才可使用）
