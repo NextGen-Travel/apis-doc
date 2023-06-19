@@ -1460,6 +1460,8 @@ paths:
                                 type: number
                               url:
                                 type: string
+                        priority:
+                            type: integer
 
   /admin/stores/{uuid} :
     post:
