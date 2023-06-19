@@ -1810,3 +1810,76 @@ paths:
                           type: number
                         name:
                           type: string
+  
+  # ====================
+  #
+  # drugs
+  #
+  /admin/drugs:
+    get:
+      summary: 獲取後台藥品列表
+      security:
+        - user_token: []
+      tags:
+        - drugs 
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+            example: 3535
+          description: 搜尋 核准字號、藥品學名、名稱
+        - in: query
+          name: page
+          schema:
+            type: string
+          description: 第幾頁
+        - in: query
+          name: perPage
+          schema:
+            type: string
+          description: 每頁幾筆
+        - in: query
+          name: enable
+          schema:
+            type: string
+            example: 1 or 0
+          description: 要 filter 找 啟用/不啟用 的藥品
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        permitNo:
+                          type: string
+                        productName:
+                          type: string
+                        productName_zh:
+                          type: string
+                        enable:
+                          type: number
+                        priority:
+                          type: number
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: string
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
