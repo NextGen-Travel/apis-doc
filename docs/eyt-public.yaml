@@ -430,7 +430,7 @@ paths:
           schema:
             type: number
           description: 回傳的數量
-        - in: path
+        - in: query
           name: type
           required: true
           schema:
