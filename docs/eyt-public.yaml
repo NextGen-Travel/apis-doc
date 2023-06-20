@@ -653,6 +653,36 @@ paths:
                         type: string
                       ticket:
                         type: string
+
+  /hcaptcha-verify:
+    post:
+      summary: 登入機器人驗證
+      description: 登入前請先call此api，驗證通過後再call登入的api
+      tags:
+        - member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+              properties:
+                h-captcha-response:
+                  type: string
+                  description: 從hcaptcha 得到的token
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      msg:
+                        type: string
   # ====================
   #
   # verification code
