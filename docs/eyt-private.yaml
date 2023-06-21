@@ -1478,6 +1478,43 @@ paths:
                   properties:
                     msg :
                       type: string
+  /search/drugs/uploadImages:
+    post:
+      summary: 上傳藥品圖片
+      tags:
+        - drug
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  format: binary
+              required:
+                - image
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      imgKey:
+                        type: string
+                      url:
+                        type: string
+
 
   # ====================
   #

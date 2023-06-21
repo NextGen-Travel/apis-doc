@@ -2333,6 +2333,11 @@ paths:
             type: string
           description: 藥品名稱(中英), 名稱, 核准碼, 主成份, SKU
         - in: query
+          name: imgKey
+          schema:
+            type: string
+          description: 圖片搜尋，須先呼叫 api/search/drugs/uploadImages，成功上傳圖檔，取得回傳的 imgKey
+        - in: query
           name: sort
           schema:
             type: string
