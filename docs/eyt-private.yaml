@@ -214,14 +214,19 @@ paths:
                             type: string
                           name:
                             type: string
+                          mobileCountryCode:
+                            type: string
                           mobile:
                             type: string
                           email:
+                            type: string
+                          faxCountryCode:
                             type: string
                           fax:
                             type: string
                           uuid:
                             type: string
+
     put:
       summary: 修改會員資料
       tags:
