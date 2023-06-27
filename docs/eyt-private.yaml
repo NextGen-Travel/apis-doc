@@ -226,6 +226,9 @@ paths:
                             type: string
                           uuid:
                             type: string
+                          gender:
+                            type: string
+                            description: enum, [female, male, prefer not to say]
 
     put:
       summary: 修改會員資料
