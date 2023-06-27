@@ -248,9 +248,12 @@ paths:
                 fax:
                   type: string
                   description: fax
-                mobile:
+                faxCountryCode:
                   type: string
-                  description: mobile
+                  description: fax
+                gender:
+                  type: string
+                  description: enum, [female, male, prefer not to say]
       responses:
         '200':
           description: 成功
