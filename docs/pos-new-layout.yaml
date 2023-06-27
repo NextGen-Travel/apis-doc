@@ -6093,6 +6093,12 @@ paths:
       description: 本日值班
       tags:
         - Clock In/Out
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: integer
+          description: 營業地點ID
       responses:
         '200':
           description: 成功
