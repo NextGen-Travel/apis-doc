@@ -227,6 +227,10 @@ components:
                 qrcode:
                   type: string
                   example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/qrcode_for_gh_1b9715c09cc3_1280_1_42ca67a97d.jpg
+        pharmacistGroup:
+          type: integer
+          example: 1
+          description: 群組類型設定，id = label.id
     OptionsBaseResponse:
       type: object
       properties:
@@ -265,6 +269,35 @@ components:
                 type: string
                 description: 顯示名稱
                 example: 名稱
+    label:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 白金會員
+          description: label 名稱
+        info:
+          type: string
+          example: 說明
+          description: label 說明，非必填可以留空
+        status:
+          type: number
+          enum: [0,1]
+          example: 1
+          description: 狀態，0 :停用，1 :啟用
+        discountType:
+          type: number
+          enum: [0,1,2]
+          example: 0
+          description: 折扣類型 ， 0 :無折扣，1 :折抵金額， 2： 折抵金額
+        discountAmount:
+          type: number
+          description: 折扣類型 為 1 時，該欄位不能為 0
+          example: 0
+        discountRate:
+          type: number
+          description: 折扣類型 為 2 時，該欄位不能為 0
+          example: 0
 
 paths:
 
@@ -1691,6 +1724,163 @@ paths:
                       value: 西貢區
                       areaKey: NEW_TERRITORIES
                       area: 新界
+
+  # ====================
+  #
+  # labels
+  #
+  /admin/search/labels:
+    get:
+      summary: 獲取後台 labels
+      security:
+        - user_token: []
+      tags:
+        - labels
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        info:
+                          type: string
+                        status:
+                          type: number
+                        discountType:
+                          type: number
+                        discountAmount:
+                          type: number
+                        discountRate:
+                          type: number
+                        createdName:
+                          type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
+  /admin/labels/detail/{id}:
+    get:
+      summary: 獲取後台 label 明細
+      security:
+        - user_token: []
+      tags:
+        - labels
+      parameters:
+        - name: id
+          in: path
+          description: label
+          required: true
+          example: 1
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      info:
+                        type: string
+                      status:
+                        type: boolean
+                      discountType:
+                        type: number
+                      discountAmount:
+                        type: number
+                      discountRate:
+                        type: number
+
+  /admin/labels/create:
+    post:
+      summary: 建立 label
+      security:
+        - user_token: []
+      tags:
+        - labels
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/label'
+              required:
+                - name
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/labels/{id}:
+    post:
+      summary: 修改 label
+      security:
+        - user_token: []
+      tags:
+        - labels
+      parameters:
+        - name: id
+          in: path
+          description: label
+          required: true
+          example: 1
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/label'
+              required:
+                - name
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
 
 
   # ====================
