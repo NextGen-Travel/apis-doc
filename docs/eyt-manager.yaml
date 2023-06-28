@@ -403,6 +403,305 @@ paths:
                               qrcode:
                                 type: string
 
+
+  # ====================
+  #
+  # customer-management
+  #
+  /admin/customer-management/:storeType/staffs:
+    get:
+      summary: 獲取後台不同store列表下的員工管理列表
+      security:
+        - user_token: []
+      tags:
+        - customer-management
+      parameters:
+        - name: storeType
+          in: path
+          description: 前綴的store 類別
+          required: true
+          example: pharmacy
+          schema:
+            type: string
+          enum:
+            ['pharmacy','gov','po']                   
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁                               
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        account:
+                          type: string
+                        username:
+                          type: string
+                        roleName:
+                          type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
+    post:
+      summary: 後台建立staff
+      security:
+        - user_token: []
+      tags:
+        - customer-management
+      parameters:
+        - name: storeType
+          in: path
+          description: 前綴的store 類別
+          required: true
+          example: pharmacy
+          schema:
+            type: string
+          enum:
+            ['pharmacy','gov','po']             
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: test0628
+                role:
+                  type: number
+                  example: 1
+                account:
+                  type: string
+                  description: 不可重複
+                  example: test0666
+                password:
+                  type: string
+                  example: 123456
+                  description: 密碼 至少6碼
+                confirmPassword:
+                  type: string
+                  example: 123456
+              required:
+                - username
+                - role
+                - account
+                - password
+                - confirmPassword
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/customer-management/:storeType/staffs/:id:
+    get:
+      summary: 獲取特定的staff資料
+      security:
+        - user_token: []
+      tags:
+        - customer-management
+      parameters:
+        - name: storeType
+          in: path
+          description: 前綴的store 類別
+          required: true
+          example: pharmacy
+          schema:
+            type: string
+          enum:
+            ['pharmacy','gov','po']                   
+        - name: id
+          in: path
+          description: staff的id
+          required: true
+          example: 2
+          schema:
+            type: integer                             
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      account:
+                        type: string
+                      username:
+                        type: string
+                      id:
+                        type: number
+                      role:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+
+    put:
+      summary: 後台更新staff
+      security:
+        - user_token: []
+      tags:
+        - customer-management
+      parameters:
+      - name: storeType
+        in: path
+        description: 前綴的store 類別
+        required: true
+        example: pharmacy
+        schema:
+          type: string
+        enum:
+          ['pharmacy','gov','po']                   
+      - name: id
+        in: path
+        description: staff的id
+        required: true
+        example: 2
+        schema:
+          type: integer           
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: test0628
+                role:
+                  type: number
+                  example: 1
+                password:
+                  type: string
+                  example: 123456
+                  description: 新密碼 至少6碼
+                confirmPassword:
+                  type: string
+                  example: 123456
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+
+  /admin/customer-management/:storeType/staffs/:id/delete:
+    put:
+      summary: 後台軟刪除staff
+      security:
+        - user_token: []
+      tags:
+        - customer-management
+      parameters:
+      - name: storeType
+        in: path
+        description: 前綴的store 類別
+        required: true
+        example: pharmacy
+        schema:
+          type: string
+        enum:
+          ['pharmacy','gov','po']                   
+      - name: id
+        in: path
+        description: staff的id
+        required: true
+        example: 2
+        schema:
+          type: integer           
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+
+  # ====================
+  #
+  # role
+  #
+
+  /admin/roleList:
+    get:
+      summary: 獲取role的列表
+      security:
+        - user_token: []
+      tags:
+        - role                           
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+
+
   # ====================
   #
   # other
