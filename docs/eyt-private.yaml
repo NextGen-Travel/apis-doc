@@ -559,14 +559,14 @@ paths:
           schema:
             type: string
           description: 全小寫，完整名稱。
-          example: facebook
+          example: facebook, eyt, sms
         - in: path
           name: action
           required: true
           schema:
             type: string
           description: 這次動作是 login 或 新增綁定
-          example: login
+          example: login, bind
         - in: path
           name: from
           required: true
@@ -587,6 +587,22 @@ paths:
                 idToken:
                   type: string
                   description: apple, facebook, google 要帶 idToken
+                email:
+                  type: string
+                  description: 如果是新增 eyt 要帶
+                password:
+                  type: string
+                  description: 新增 eyt, sms 要帶
+                mobile:
+                  type: string
+                  description: 如果是新增 sms 要帶
+                mobileCountryCode:
+                  type: string
+                  description: 如果是新增 sms 要帶
+                token:
+                  type: string
+                  description: 如果是新增 sms 要帶
+
       responses:
         '200':
           description: 成功
