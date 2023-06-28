@@ -231,6 +231,10 @@ components:
           type: integer
           example: 1
           description: 群組類型設定，id = label.id
+        userLimit:
+          type: integer
+          example: 5
+          description: 帳號人數上限
     OptionsBaseResponse:
       type: object
       properties:
@@ -1795,6 +1799,10 @@ paths:
                         priority:
                             type: integer
                             enum: [0,1,2,3,4,5,6,7,8,9,10]
+                        userLimit:
+                          type: integer
+                          example: 5
+                          description: 帳號人數上限
 
   /admin/stores/{uuid} :
     post:
