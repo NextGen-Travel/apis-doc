@@ -1804,6 +1804,318 @@ paths:
                           example: 5
                           description: 帳號人數上限
 
+  /admin/stores/me/group:
+    get:
+      summary: 取得登入群組的 stores
+      tags:
+        - stores
+      security:
+        - user_token: []
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+          description: 類型
+        - in: query
+          name: area
+          schema:
+            type: string
+          description: 指定搜尋區域
+        - in: query
+          name: district
+          explode: true
+          schema:
+            type: string
+          description: 指定行政區
+        - in: query
+          name: adType
+          explode: true
+          schema:
+            type: string
+          description: 廣告類型
+        - in: query
+          name: stockType
+          explode: true
+          schema:
+            type: string
+          description: 庫存類型
+        - in: query
+          name: status
+          explode: true
+          schema:
+            type: string
+          description: 狀態
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 藥房名稱(中英), 電話, 地址
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 每頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁碼
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              uuid:
+                                type: string
+                              imgUrl:
+                                type: string
+                              name:
+                                type: string
+                              area:
+                                type: string
+                              district:
+                                type: string
+                              address:
+                                type: string
+                              type:
+                                type: string
+                              adType:
+                                type: string
+                              stockType:
+                                type: string
+                              status:
+                                type: boolean
+                    pagination:
+                        type: object
+                        properties:
+                          page:
+                            type: integer
+                            description: 起始頁數
+                            example: 1
+                          pageSize:
+                            type: integer
+                            description: 每頁資料筆數
+                            example: 10
+                          pageCount:
+                            type: integer
+                            description: 總頁數
+                            example: 23
+                          total:
+                            type: integer
+                            description: 總筆數
+                            example: 236
+
+  /admin/stores/me:
+    get:
+      summary: 取得登入藥房
+      tags:
+        - stores
+      security:
+        - user_token: []
+      parameters:
+        - $ref: '#/components/parameters/storeUUID'
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                        status:
+                          type: boolean
+                          description: 狀態
+                          example: true
+                        stockType:
+                          type: string
+                        type:
+                          type: string
+                        rxNo:
+                          type: string
+                        stockUrl:
+                          type: string
+                        stockSyncParams:
+                          type: object
+                          description: 庫存 api 額外參數
+                          properties:
+                            location_id:
+                              type: number
+                              description: 庫存 erp 系統  location_id
+                              example: 1
+                        adType:
+                          type: string
+                        tel:
+                          type: string
+                        name:
+                          type: object
+                          properties:
+                            zh:
+                              type: string
+                            zh-CN:
+                              type: string
+                            en:
+                              type: string
+                        address:
+                          type: object
+                          properties:
+                            zh:
+                              type: string
+                            zh-CN:
+                              type: string
+                            en:
+                              type: string
+                        lat:
+                          type: number
+                        lng:
+                          type: number
+                        contactNumber:
+                          type: string
+                        mobileCountryCode:
+                          type: string
+                          description: 國碼
+                          example: 886
+                        businessHours:
+                          type: string
+                        openingHours:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              isClosed:
+                                type: number
+                                description: "本日公休 isClosed=1 則 startTime 跟 endTime 輸出 00:00:00 "
+                                example: 1
+                              weekday:
+                                type: number
+                                description: isoWeekday 1-7， 週日為 7
+                                example: 1
+                              startTime:
+                                type: string
+                                description: 營業時間
+                                example: 00:00:00
+                              endTime:
+                                type: string
+                                example: 12:00:00
+                        isExcellent:
+                          type: boolean
+                        isGenuine:
+                          type: boolean
+                        website:
+                          type: string
+                        plan:
+                          type: object
+                          properties:
+                            email:
+                              type: string
+                              example: nextgen@nextgen.com.hk
+                            messanger:
+                              type: string
+                              example: NextgenTravelTechnology
+                            instagram:
+                              type: string
+                              example: nextgentechco
+                            whatsapp:
+                              type: string
+                              example: 85263111356
+                            wechat:
+                              type: object
+                              properties:
+                                title:
+                                  type: string
+                                  example: 女生秘物網購
+                                appId:
+                                  type: string
+                                  example: girlssecrets_shop
+                                qrcode:
+                                  type: string
+                                  example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/qrcode_for_gh_1b9715c09cc3_1280_1_42ca67a97d.jpg
+                        planType:
+                          type: string
+                        content:
+                          type: object
+                          properties:
+                            zh:
+                              type: string
+                            zh-CN:
+                              type: string
+                            en:
+                              type: string
+                        area:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              type: string
+                        district:
+                          type: object
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              type: string
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        mainServices:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        services:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              url:
+                                type: string
+                        priority:
+                            type: integer
+                            enum: [0,1,2,3,4,5,6,7,8,9,10]
+                        userLimit:
+                          type: integer
+                          example: 5
+                          description: 帳號人數上限
+
   /admin/stores/{uuid} :
     post:
       summary: 修改 藥房
