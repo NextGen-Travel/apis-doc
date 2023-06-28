@@ -549,7 +549,7 @@ paths:
 
   /members/oauth/{provider}/{action}/{from}:
     post:
-      summary: apple, facebook, google, wechat 的第三方登入 callback 打這支
+      summary: EYT, SMS, apple, facebook, google, wechat 的第三方登入 callback 打這支
       tags:
         - members
       parameters:
