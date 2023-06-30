@@ -1376,7 +1376,7 @@ paths:
                   msg:
                     type: string
 
-  /admin/posts/review:
+  /admin/posts/review/reject:
     put:
       summary: 後台審核文章
       security:
@@ -1404,10 +1404,6 @@ paths:
                       uuid:
                         type: string
                         description: 文章uuid
-                isApproved:
-                  type: number
-                  enum: [0,1]
-                  description: 1表示核准，0則否
               required:
                 - contents
 
@@ -1421,6 +1417,33 @@ paths:
                 properties:
                   msg:
                     type: string
+
+
+  /admin/posts/review/:uuid/approve:
+    put:
+      summary: 後台審核文章通過
+      security:
+        - user_token: []
+      tags:
+        - posts
+      parameters:
+        - name: uuid
+          in: path
+          description: 文章uuid
+          required: true
+          example: 123456789
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string   
 
 
   /admin/posts/:uuid/withdraw:
