@@ -2809,3 +2809,215 @@ paths:
                       total:
                         type: number
 
+  # ====================
+  #
+  # department
+  #
+
+  /admin/departments:
+    get:
+      summary: 獲取後台部門
+      security:
+        - user_token: []
+      tags:
+        - departments                           
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        status:
+                          type: boolean
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
+    post:
+      summary: 後台建立部門
+      security:
+        - user_token: []
+      tags:
+        - departments    
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+                status:
+                  type: boolean
+                name:
+                  type: string
+                description:
+                  type: string
+              required:
+                - name
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/departments/:id:
+    get:
+      summary: 後台取得特定部門
+      security:
+        - user_token: []
+      tags:
+        - departments
+      parameters:
+        - name: id
+          in: path
+          description: 部門id
+          required: true
+          example: 1
+          schema:
+            type: string        
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      status:
+                        type: boolean
+                      description:
+                        type: string
+
+    put:
+      summary: 後台更新部門 
+      security:
+        - user_token: []
+      tags:
+        - departments   
+      parameters:
+        - name: id
+          in: path
+          description: 部門id
+          required: true
+          example: 1
+          schema:
+            type: string             
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+                status:
+                  type: boolean
+                name:
+                  type: string
+                description:
+                  type: string
+              required:
+                - name
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    
+  /admin/departments/:id/status:
+    put:
+      summary: 後台調整部門狀態
+      security:
+        - user_token: []
+      tags:
+        - departments
+      parameters:
+        - name: id
+          in: path
+          description: 部門id
+          required: true
+          example: 1
+          schema:
+            type: string     
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+                status:
+                  type: boolean
+              required:
+                - status                
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/departments/:id/delete:
+    put:
+      summary: 後台軟刪除部門
+      security:
+        - user_token: []
+      tags:
+        - departments
+      parameters:
+        - name: id
+          in: path
+          description: 部門id
+          required: true
+          example: 1
+          schema:
+            type: string     
+                        
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string                    
