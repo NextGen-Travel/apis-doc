@@ -940,7 +940,13 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: 第幾頁                               
+          description: 第幾頁
+        - in: query
+          name: sort
+          schema:
+            type: string
+            enum: [ asc, desc]
+          description: 排序方式，預設是desc                                            
       responses:
         '200':
           description: 成功
