@@ -888,7 +888,7 @@ paths:
           name: reviewStatus
           schema:
             type: string
-            enum: [pending,reviewed,reviewArchived]
+            enum: [pending,reviewed,reviewArchived,reviewedWithRejected]
           required: false
           description: 搜尋審核文章列表時必須要帶此query 
         - in: query
