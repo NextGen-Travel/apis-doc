@@ -1449,7 +1449,18 @@ paths:
           required: true
           example: e6d37477-7224-4fb6-a56a-d860228d48f4
           schema:
-            type: string      
+            type: string 
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁                     
       responses:
         '200':
           description: 成功
