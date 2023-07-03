@@ -2856,16 +2856,17 @@ paths:
 
     post:
       summary: 後台建立部門
+      tags:
+        - departments   
       security:
         - user_token: []
-      tags:
-        - departments    
       requestBody:
         required: true
         content:
-           application/json:
+          application/json:
             schema:
               type: object
+              properties:
                 status:
                   type: boolean
                 name:
@@ -2939,6 +2940,7 @@ paths:
            application/json:
             schema:
               type: object
+              properties:
                 status:
                   type: boolean
                 name:
@@ -2980,6 +2982,7 @@ paths:
            application/json:
             schema:
               type: object
+              properties:
                 status:
                   type: boolean
               required:
