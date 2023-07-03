@@ -682,7 +682,7 @@ paths:
 
   /admin/roleList:
     get:
-      summary: 獲取role的列表
+      summary: 獲取可以選擇的role資料
       security:
         - user_token: []
       tags:
@@ -705,6 +705,227 @@ paths:
                         name:
                           type: string
 
+  # ====================
+  #
+  # user-management
+  #
+
+  /admin/user-management/roles:
+    get:
+      summary: 獲取role的列表
+      security:
+        - user_token: []
+      tags:
+        - user-management                           
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        status:
+                          type: boolean
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
+    post:
+      summary: 後台建立role
+      security:
+        - user_token: []
+      tags:
+        - user-management           
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: number
+                menu:
+                  type: array
+                  items:
+                    type: number
+              required:
+                - name
+                - status
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/user-management/roles/:id:
+    get:
+      summary: 獲取特定role的資料
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      parameters:            
+        - name: id
+          in: path
+          description: role的id
+          required: true
+          example: 2
+          schema:
+            type: integer                                       
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                data:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    name:
+                      type: string
+                    status:
+                      type: boolean
+                    menu:
+                      type: array
+                      items:
+                        type: number
+
+    put:
+      summary: 更新特定role的id
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      parameters:            
+        - name: id
+          in: path
+          description: role的id
+          required: true
+          example: 2
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                status:
+                  type: number
+                menu:
+                  type: array
+                  items:
+                    type: number  
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/user-management/roles/:id/delete:
+    put:
+      summary: 軟刪除特定的role
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      parameters:            
+        - name: id
+          in: path
+          description: role的id
+          required: true
+          example: 2
+          schema:
+            type: integer
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/user-management/roles/:id/status:
+    put:
+      summary: 更新特定role的狀態（開啟或關閉）
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      parameters:            
+        - name: id
+          in: path
+          description: role的id
+          required: true
+          example: 2
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: number
+
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
 
   # ====================
   #
