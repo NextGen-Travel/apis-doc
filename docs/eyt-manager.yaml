@@ -2057,6 +2057,15 @@ paths:
                                 type: number
                               name:
                                 type: string
+                        pharmacistGroup:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
                         images:
                           type: array
                           items:
