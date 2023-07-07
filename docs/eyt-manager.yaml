@@ -406,7 +406,15 @@ paths:
                                 type: string
                               qrcode:
                                 type: string
-
+                  role:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      type:
+                        type: string
 
   # ====================
   #
