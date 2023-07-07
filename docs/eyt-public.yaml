@@ -180,6 +180,48 @@ components:
                 name:
                   type: string
                   example: ROCALTROL CAP 0.25UG
+    DrugsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          isCollect:
+            type: boolean
+            description: 是否收藏
+          permitNo:
+            type: string
+            description: 用來執行搜尋用的參數
+          name:
+            type: string
+            description: 顯示名稱
+          nameZh:
+            type: string
+            description: 顯示名稱(中文)
+          url:
+            type: string
+            description: 藥品圖示
+          ingredients:
+            type: array
+            description: 顯示名稱
+    paginationResponse:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: 起始頁數
+          example: 1
+        pageSize:
+          type: integer
+          description: 每頁資料筆數
+          example: 10
+        pageCount:
+          type: integer
+          description: 總頁數
+          example: 23
+        total:
+          type: integer
+          description: 總筆數
+          example: 236
 
 paths:
   # ====================
@@ -2364,43 +2406,9 @@ paths:
                     msg :
                       type: string
                     data:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          isCollect:
-                            type: boolean
-                            description: 是否收藏
-                          permitNo:
-                            type: string
-                            description: 用來執行搜尋用的參數
-                          name:
-                            type: string
-                            description: 顯示名稱
-                          nameZh:
-                            type: string
-                            description: 顯示名稱(中文)
-                          url:
-                            type: string
-                            description: 藥品圖示
-                          ingredients:
-                            type: array
-                            description: 顯示名稱
+                      $ref: '#/components/schemas/DrugsResponse'
                     pagination:
-                        type: object
-                        properties:
-                          page:
-                            type: integer
-                            description: 起始頁數
-                          pageSize:
-                            type: integer
-                            description: 每頁資料筆數
-                          pageCount:
-                            type: integer
-                            description: 總頁數
-                          total:
-                            type: integer
-                            description: 總筆數
+                      $ref: '#/components/schemas/paginationResponse'
                 example:
                   msg : Success
                   pagination :
@@ -2462,6 +2470,18 @@ paths:
             type: integer
           description: 隨機輸出可購買的藥房，未帶參數會預設為1
           example: 1
+        - in: query
+          name: similarCount
+          schema:
+            type: integer
+          description: 輸出相似藥品的數量，未帶預設為 3 筆
+          example: 3
+        - in: query
+          name: isStock
+          schema:
+            type: integer
+          description: 輸出的相似藥品需要有庫存，未帶參數會預設為 0，僅判斷是否為相似藥品
+          example: 0
       responses:
           '200':
             description: 成功
@@ -2549,6 +2569,8 @@ paths:
                                 type: array
                                 items:
                                   type: string
+                        similarDrug:
+                          $ref: '#/components/schemas/DrugsResponse'
                         coordinate:
                           $ref: '#/components/schemas/CoordinateResponse'
                         stores:
