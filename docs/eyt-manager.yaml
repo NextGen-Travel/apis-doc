@@ -418,15 +418,15 @@ paths:
 
   # ====================
   #
-  # customer-management
+  # user-management
   #
-  /admin/customer-management/:storeType/staffs:
+  /admin/user-management/:storeType/staffs:
     get:
       summary: 獲取後台不同store列表下的員工管理列表
       security:
         - user_token: []
       tags:
-        - customer-management
+        - user-management
       parameters:
         - name: storeType
           in: path
@@ -488,7 +488,7 @@ paths:
       security:
         - user_token: []
       tags:
-        - customer-management
+        - user-management
       parameters:
         - name: storeType
           in: path
@@ -541,13 +541,13 @@ paths:
                   msg:
                     type: string
 
-  /admin/customer-management/:storeType/staffs/:id:
+  /admin/user-management/:storeType/staffs/:id:
     get:
       summary: 獲取特定的staff資料
       security:
         - user_token: []
       tags:
-        - customer-management
+        - user-management
       parameters:
         - name: storeType
           in: path
@@ -646,13 +646,13 @@ paths:
                     type: string
 
 
-  /admin/customer-management/:storeType/staffs/:id/delete:
+  /admin/user-management/:storeType/staffs/:id/delete:
     put:
       summary: 後台軟刪除staff
       security:
         - user_token: []
       tags:
-        - customer-management
+        - user-management
       parameters:
       - name: storeType
         in: path
