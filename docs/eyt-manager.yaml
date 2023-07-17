@@ -713,18 +713,13 @@ paths:
                         name:
                           type: string
 
-  # ====================
-  #
-  # user-management
-  #
-
   /admin/user-management/roles:
     get:
       summary: 獲取role的列表
       security:
         - user_token: []
       tags:
-        - user-management                           
+        - role
       responses:
         '200':
           description: 成功
@@ -763,7 +758,7 @@ paths:
       security:
         - user_token: []
       tags:
-        - user-management           
+        - role
       requestBody:
         required: true
         content:
@@ -800,7 +795,7 @@ paths:
       security:
         - user_token: []
       tags:
-        - user-management
+        - role
       parameters:            
         - name: id
           in: path
@@ -878,7 +873,7 @@ paths:
       security:
         - user_token: []
       tags:
-        - user-management
+        - role
       parameters:            
         - name: id
           in: path
@@ -905,7 +900,7 @@ paths:
       security:
         - user_token: []
       tags:
-        - user-management
+        - role
       parameters:            
         - name: id
           in: path
