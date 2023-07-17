@@ -595,7 +595,7 @@ paths:
       security:
         - user_token: []
       tags:
-        - customer-management
+        - user-management
       parameters:
       - name: storeType
         in: path
@@ -3262,3 +3262,68 @@ paths:
                 properties:
                   msg:
                     type: string                    
+
+
+  /admin/menus:
+    get:
+      summary: 取得後台 roles設定用的 menus
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        key:
+                          type: string
+                        name:
+                          type: string
+                        parent:
+                          type: number
+
+  /admin/sidebar/menus:
+    get:
+      summary: 取得後台 側邊欄 menus
+      security:
+        - user_token: []
+      tags:
+        - other
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        key:
+                          type: string
+                        enable:
+                          type: number
+                        name:
+                          type: string
+                        parent:
+                          type: number
