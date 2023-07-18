@@ -3074,7 +3074,7 @@ paths:
                         name:
                           type: string
                         status:
-                          type: boolean
+                          type: number
                   pagination:
                     type: object
                     properties:
@@ -3101,7 +3101,7 @@ paths:
               type: object
               properties:
                 status:
-                  type: boolean
+                  type: number
                 name:
                   type: string
                 description:
@@ -3109,6 +3109,43 @@ paths:
               required:
                 - name
 
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/departments/:id/status:
+    put:
+      summary: 後台調整部門狀態
+      security:
+        - user_token: []
+      tags:
+        - departments
+      parameters:
+        - name: id
+          in: path
+          description: 部門id
+          required: true
+          example: 1
+          schema:
+            type: string     
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: boolean
+              required:
+                - status                
       responses:
         '200':
           description: 成功
@@ -3152,7 +3189,6 @@ paths:
                         type: boolean
                       description:
                         type: string
-
     put:
       summary: 後台更新部門 
       security:
@@ -3175,7 +3211,7 @@ paths:
               type: object
               properties:
                 status:
-                  type: boolean
+                  type: number
                 name:
                   type: string
                 description:
@@ -3193,46 +3229,7 @@ paths:
                 properties:
                   msg:
                     type: string
-                    
-  /admin/departments/:id/status:
-    put:
-      summary: 後台調整部門狀態
-      security:
-        - user_token: []
-      tags:
-        - departments
-      parameters:
-        - name: id
-          in: path
-          description: 部門id
-          required: true
-          example: 1
-          schema:
-            type: string     
-      requestBody:
-        required: true
-        content:
-           application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: boolean
-              required:
-                - status                
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-
-  /admin/departments/:id/delete:
-    put:
+    delete:
       summary: 後台軟刪除部門
       security:
         - user_token: []
@@ -3257,7 +3254,7 @@ paths:
                 properties:
                   msg:
                     type: string                    
-
+                   
 
   /admin/menus:
     get:
