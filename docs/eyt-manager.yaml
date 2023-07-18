@@ -3073,6 +3073,8 @@ paths:
                           type: number
                         name:
                           type: string
+                        description:
+                          type: string
                         status:
                           type: number
                   pagination:
