@@ -228,9 +228,16 @@ components:
                   type: string
                   example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/qrcode_for_gh_1b9715c09cc3_1280_1_42ca67a97d.jpg
         pharmacistGroup:
-          type: integer
-          example: 1
-          description: 群組類型設定，id = label.id
+            type: object
+            properties:
+              id:
+                type: number
+                description: "群組類型設定，id = label.id "
+                example: 1
+              name:
+                type: string
+                description: 群組名稱
+                example: VIP
         userLimit:
           type: integer
           example: 5
@@ -2975,17 +2982,13 @@ paths:
                       total:
                         type: number
 
-  # ====================
-  #
-  # drug-updates
-  #
   /admin/drug-updates:
     get:
       summary: 獲取後台藥品審核列表
       security:
         - user_token: []
       tags:
-        - drug-updates
+        - drugs
       parameters:
         - in: query
           name: keyword
