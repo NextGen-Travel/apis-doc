@@ -228,6 +228,8 @@ components:
                   type: string
                   example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/qrcode_for_gh_1b9715c09cc3_1280_1_42ca67a97d.jpg
         pharmacistGroup:
+          type: array
+          items:
             type: object
             properties:
               id:
