@@ -230,16 +230,9 @@ components:
         pharmacistGroup:
           type: array
           items:
-            type: object
-            properties:
-              id:
-                type: number
-                description: "群組類型設定，id = label.id "
-                example: 1
-              name:
-                type: string
-                description: 群組名稱
-                example: VIP
+            type: integer
+          description: "群組類型設定，id = label.id "
+          example: [1,2,3]
         userLimit:
           type: integer
           example: 5
@@ -2076,8 +2069,12 @@ paths:
                             properties:
                               id:
                                 type: number
+                                description: "群組類型設定，id = label.id "
+                                example: 1
                               name:
                                 type: string
+                                description: 群組名稱
+                                example: VIP
                         images:
                           type: array
                           items:
