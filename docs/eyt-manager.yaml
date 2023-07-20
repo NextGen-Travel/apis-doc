@@ -684,6 +684,41 @@ paths:
                   msg:
                     type: string
 
+  /admin/download/user:
+    get:
+      summary: 員工資料輸出
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum: [pdf, csv, xlsx]
+          description: 下載的檔案類型
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      imgKey:
+                        type: string
+                      url:
+                        type: string
+                        description: 下載路徑
+
 
   # ====================
   #
@@ -2631,6 +2666,42 @@ paths:
                       value: 西貢區
                       areaKey: NEW_TERRITORIES
                       area: 新界
+  /admin/download/store:
+    get:
+      summary: 會員(藥房)資料輸出
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+            enum: [pdf, csv, xlsx]
+          description: 下載的檔案類型
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      imgKey:
+                        type: string
+                      url:
+                        type: string
+                        description: 下載路徑
+
+
 
   # ====================
   #
