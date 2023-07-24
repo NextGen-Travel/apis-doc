@@ -3046,7 +3046,7 @@ paths:
                       page:
                         type: number
                       pageSize:
-                        type: string
+                        type: number
                       pageCount:
                         type: number
                       total:
