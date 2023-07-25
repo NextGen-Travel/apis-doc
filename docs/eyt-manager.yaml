@@ -41,6 +41,13 @@ components:
       required: true
       example: bb9ae68e-e856-41cf-85f6-72f7c7a3716e
       description: 藥房唯一代碼
+    drugPathNo:
+      name: permitNo
+      in: path
+      description: 藥品唯一代碼
+      required: true
+      schema:
+        type: string
   schemas:
     store :
       type: object
@@ -3203,6 +3210,173 @@ paths:
                       total:
                         type: number
 
+  /admin/drug-updates/drugs/:permitNo:
+    get:
+      summary: 獲取後台藥品審核資料
+      security:
+        - user_token: []
+      tags:
+        - drugs
+      parameters:
+        - $ref: '#/components/parameters/drugPathNo'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      productName:
+                        type: string
+                      permitNo:
+                        type: string
+                      productName_zh:
+                        type: string
+                      aka:
+                        type: object
+                        properties:
+                      indication:
+                        type: string
+                      side_effect:
+                        type: string
+                      registration_date:
+                        type: string
+                      precaution:
+                        type: string
+                      nonRegistrationDate:
+                        type: object
+                        properties:
+                      id:
+                        type: number
+                      drugUpdates:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            uuid:
+                              type: string
+                            createdAt:
+                              type: string
+                            revise:
+                              type: object
+                              properties:
+                                images:
+                                  type: array
+                                  items:
+                                    type: number
+                                packages:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      sku:
+                                        type: string
+                                      name:
+                                        type: string
+                                      unit:
+                                        type: string
+                                      usage:
+                                        type: string
+                                      dosage:
+                                        type: string
+                                      images:
+                                        type: number
+                                      dosageForm:
+                                        type: string
+                                indication:
+                                  type: string
+                                precaution:
+                                  type: string
+                                side_effect:
+                                  type: string
+                                productName_zh:
+                                  type: string
+                            status:
+                              type: string
+                            applyUser:
+                              type: object
+                              properties:
+                      brand:
+                        type: object
+                        properties:
+                      ingredients:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                      packages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            dosageForm:
+                              type: string
+                            usage:
+                              type: string
+                            name:
+                              type: string
+                            sku:
+                              type: string
+                            unit:
+                              type: string
+                            images:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: number
+                                  url:
+                                    type: string
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                      saleRequirement:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          tagName:
+                            type: string
+                      holder:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+                          address:
+                            type: string
+                      legalClassifications:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
+                      historyRecords:
+                        type: array
+                        items:
+                          type: object
+
+
   /admin/drugs/options/brands:
     get:
       summary: 獲取後台藥品品牌
@@ -3271,12 +3445,7 @@ paths:
       tags:
         - drugs
       parameters:
-        - name: permitNo
-          in: path
-          description: 藥品唯一代碼
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/drugPathNo'
       requestBody:
         required: true
         content:
@@ -3339,12 +3508,7 @@ paths:
       tags:
         - drugs
       parameters:
-        - name: permitNo
-          in: path
-          description: 藥品唯一代碼
-          required: true
-          schema:
-            type: string
+        - $ref: '#/components/parameters/drugPathNo'
       requestBody:
         required: true
         content:
