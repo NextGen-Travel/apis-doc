@@ -3239,8 +3239,7 @@ paths:
                       productName_zh:
                         type: string
                       aka:
-                        type: object
-                        properties:
+                        type: string
                       indication:
                         type: string
                       side_effect:
@@ -3265,48 +3264,76 @@ paths:
                               type: string
                             createdAt:
                               type: string
-                            revise:
-                              type: object
-                              properties:
-                                images:
-                                  type: array
-                                  items:
-                                    type: number
-                                packages:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      sku:
-                                        type: string
-                                      name:
-                                        type: string
-                                      unit:
-                                        type: string
-                                      usage:
-                                        type: string
-                                      dosage:
-                                        type: string
-                                      images:
-                                        type: number
-                                      dosageForm:
-                                        type: string
-                                indication:
-                                  type: string
-                                precaution:
-                                  type: string
-                                side_effect:
-                                  type: string
-                                productName_zh:
-                                  type: string
                             status:
                               type: string
                             applyUser:
                               type: object
                               properties:
+                                id:
+                                  type: number
+                                account:
+                                  type: string
+                                store:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: number
+                                    name:
+                                      type: string
+                            usage:
+                              type: string
+                            images:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: number
+                                  url:
+                                    type: string
+                            packages:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  sku:
+                                    type: string
+                                  name:
+                                    type: string
+                                  unit:
+                                    type: string
+                                  dosage:
+                                    type: number
+                                  images:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: number
+                                        url:
+                                          type: string
+                            dosageForm:
+                              type: string
+                            indication:
+                              type: string
+                            precaution:
+                              type: string
+                            side_effect:
+                              type: string
+                            productName_zh:
+                              type: string
+                            legalClassifications:
+                              type: array
+                              items:
+                                type: number
                       brand:
                         type: object
                         properties:
+                          id:
+                            type: number
+                          tagName:
+                            type: string
                       ingredients:
                         type: array
                         items:
@@ -3323,10 +3350,6 @@ paths:
                           properties:
                             id:
                               type: number
-                            dosageForm:
-                              type: string
-                            usage:
-                              type: string
                             name:
                               type: string
                             sku:
@@ -3342,10 +3365,6 @@ paths:
                                     type: number
                                   url:
                                     type: string
-                      tags:
-                        type: array
-                        items:
-                          type: object
                       saleRequirement:
                         type: object
                         properties:
@@ -3375,7 +3394,25 @@ paths:
                         type: array
                         items:
                           type: object
-
+                          properties:
+                            id:
+                              type: number
+                            createdAt:
+                              type: string
+                            applyUser:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                account:
+                                  type: string
+                                store:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: number
+                                    name:
+                                      type: string
 
   /admin/drugs/options/brands:
     get:
