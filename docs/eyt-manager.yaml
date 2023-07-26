@@ -3251,6 +3251,23 @@ paths:
                       nonRegistrationDate:
                         type: object
                         properties:
+                      priority:
+                        type: number
+                      enable:
+                        type: number
+                      dosageForm:
+                        type: string
+                      usage:
+                        type: string
+                      images:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            url:
+                              type: string
                       id:
                         type: number
                       drugUpdates:
