@@ -3249,8 +3249,7 @@ paths:
                       precaution:
                         type: string
                       nonRegistrationDate:
-                        type: object
-                        properties:
+                        type: string
                       priority:
                         type: number
                       enable:
