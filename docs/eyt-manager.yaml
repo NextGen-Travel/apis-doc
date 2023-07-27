@@ -3194,17 +3194,40 @@ paths:
                           type: string
                         productName_zh:
                           type: string
+                        ingredients:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        legalClassifications:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              tagName:
+                                type: string
+                        saleRequirement:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
                         count:
-                          type: string
-                        latestCreatedAt:
-                          type: string
+                          type: number
                   pagination:
                     type: object
                     properties:
                       page:
                         type: number
                       pageSize:
-                        type: string
+                        type: number
                       pageCount:
                         type: number
                       total:
