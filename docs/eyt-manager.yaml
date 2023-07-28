@@ -326,6 +326,21 @@ components:
     drugUpdateRevise :
       type: object
       properties:
+        aka:
+          type: string
+          nullable: true
+          description: 別名
+          example: ''
+        enable:
+          type: boolean
+          nullable: true
+          description: 啟用
+          example: false
+        priority:
+          type: number
+          nullable: true
+          description: 優先度
+          example: 0
         indication:
           type: string
           description: 適應症狀
