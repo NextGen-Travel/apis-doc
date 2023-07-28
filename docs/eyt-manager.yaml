@@ -3136,6 +3136,31 @@ paths:
                           type: number
                         priority:
                           type: number
+                        ingredients:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        legalClassifications:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              tagName:
+                                type: string
+                        saleRequirement:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
                   pagination:
                     type: object
                     properties:
