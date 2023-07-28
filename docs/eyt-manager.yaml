@@ -328,12 +328,10 @@ components:
       properties:
         aka:
           type: string
-          nullable: true
           description: 別名
           example: ''
         enable:
           type: boolean
-          nullable: true
           description: 啟用
           example: false
         priority:
