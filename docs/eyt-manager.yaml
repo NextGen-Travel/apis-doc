@@ -336,7 +336,6 @@ components:
           example: false
         priority:
           type: number
-          nullable: true
           description: 優先度
           example: 0
         indication:
