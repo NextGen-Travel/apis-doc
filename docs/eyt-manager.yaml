@@ -342,7 +342,7 @@ components:
           type: string
           description: 俗名
           example: '退燒藥'
-        legalClassifications:
+        tags:
           type: array
           description: 藥品分類
           items:
@@ -3496,7 +3496,22 @@ paths:
 
   /admin/drugs/options/legalClassifications:
     get:
-      summary: 獲取後台藥品類型
+      summary: 取得藥品分類（法定）
+      security:
+        - user_token: []
+      tags:
+        - drugs 
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/drugs/options/tags:
+    get:
+      summary: 取得藥品分類
       security:
         - user_token: []
       tags:
