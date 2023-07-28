@@ -22,6 +22,7 @@ components:
       name: accept-language
       schema:
         type: string
+        enum: [ zh, zh-CN, en]
       required: false
       example: 'zh'
     locale:
@@ -3973,3 +3974,278 @@ paths:
                           type: string
                         parent:
                           type: number
+
+
+  # ====================
+  #
+  # faqs
+  #
+  /admin/faq/options/tags:
+    get:
+      summary: faq Tags
+      tags:
+        - faqs
+      security:
+        - user_token: []
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/locale'
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+
+  /admin/faqs:
+    get:
+      summary: 獲取後台 faq列表
+      security:
+        - user_token: []
+      tags:
+        - faqs
+      parameters:
+        - $ref: '#/components/parameters/language'
+        - $ref: '#/components/parameters/locale'
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 關鍵字搜尋(title)-模糊搜尋
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        uuid:
+                          type: string
+                        title:
+                          type: string
+                        content:
+                          type: string
+                        locale:
+                          type: string
+                        tags:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              tagName:
+                                type: string
+                        store:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            uuid:
+                              type: string
+                            name:
+                              type: string
+                        editor:
+                          type: object
+                          properties:
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
+  /admin/faq/create:
+    post:
+      summary: 建立 faq
+      security:
+        - user_token: []
+      tags:
+        - faqs
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                locale:
+                  type: string
+                title:
+                  type: string
+                content:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: number
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/faq/{uuid}:
+    get:
+      summary: 後台獲取指定faq
+      security:
+        - user_token: []
+      tags:
+        - faqs
+      parameters:
+        - name: uuid
+          in: path
+          description: uuid
+          required: true
+          example: e6d37477-7224-4fb6-a56a-d860228d48f4
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      uuid:
+                        type: string
+                      title:
+                        type: string
+                      content:
+                        type: string
+                      locale:
+                        type: string
+                      tags:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
+                      store:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                      editor:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          username:
+                            type: string
+
+    put:
+      summary: 更新 faq
+      security:
+        - user_token: []
+      tags:
+        - faqs
+      parameters:
+        - name: uuid
+          in: path
+          description: uuid
+          required: true
+          example: e6d37477-7224-4fb6-a56a-d860228d48f4
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              properties:
+                locale:
+                  type: string
+                title:
+                  type: string
+                content:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: number
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+    delete:
+      summary: 刪除 faq
+      security:
+        - user_token: []
+      tags:
+        - faqs
+      parameters:
+        - name: uuid
+          in: path
+          description: uuid
+          required: true
+          example: e6d37477-7224-4fb6-a56a-d860228d48f4
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
