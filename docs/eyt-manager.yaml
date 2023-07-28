@@ -3337,6 +3337,17 @@ paths:
                           properties:
                             id:
                               type: number
+                            aka:
+                              type: string
+                              nullable: true
+                            brand:
+                              type: object
+                              nullable: true
+                              properties:
+                                id:
+                                  type: number
+                                tagName:
+                                  type: string
                             uuid:
                               type: string
                             createdAt:
