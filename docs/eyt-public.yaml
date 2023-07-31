@@ -2294,6 +2294,97 @@ paths:
                     - key: 3
                       name: Not A Poison
 
+  /drugs/usages:
+    get:
+      summary: 藥劑使用方式
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                        name:
+                          type: string
+                        nameEn:
+                          type: string
+                        nameZh:
+                          type: string
+  /drugs/dosageForms:
+    get:
+      summary: 藥劑類型
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                        name:
+                          type: string
+                        nameEn:
+                          type: string
+                        nameZh:
+                          type: string
+  /drugs/dosageUnits:
+    get:
+      summary: 藥劑單位
+      tags:
+        - drug
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          type: string
+                        value:
+                          type: string
+                        name:
+                          type: string
+                        nameEn:
+                          type: string
+                        nameZh:
+                          type: string
+
   /drugs/options/names:
     get:
       summary: 藥品名稱
