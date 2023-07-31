@@ -548,6 +548,11 @@ paths:
           enum:
             ['pharmacy','gov','po']                   
         - in: query
+          name: store
+          schema:
+            type: integer
+          description: store id ，未帶參數時，預設登入者的 store.id，僅 role 為 superadmin ，該參數才生效
+        - in: query
           name: pageSize
           schema:
             type: integer
@@ -616,6 +621,10 @@ paths:
             schema:
               type: object
               properties:
+                store:
+                  type: integer
+                  example: 1
+                  description: store id ，未帶參數時，預設登入者的 store.id，僅 role 為 superadmin ，該參數才生效
                 username:
                   type: string
                   example: test0628
@@ -668,6 +677,11 @@ paths:
             type: string
           enum:
             ['pharmacy','gov','po']                   
+        - in: query
+          name: store
+          schema:
+            type: integer
+          description: store id ，未帶參數時，預設登入者的 store.id，僅 role 為 superadmin ，該參數才生效
         - name: id
           in: path
           description: staff的id
