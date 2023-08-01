@@ -2058,6 +2058,9 @@ paths:
                     data:
                       type: object
                       properties:
+                        id:
+                          type: number
+                          description: store.id
                         uuid:
                           type: string
                         status:
