@@ -545,8 +545,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-            enum:
-            ['pharmacy','gov','po']                   
+            enum: ['pharmacy','gov','po']                   
         - in: query
           name: store
           schema:
