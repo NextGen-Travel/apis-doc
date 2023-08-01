@@ -545,7 +545,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-          enum:
+            enum:
             ['pharmacy','gov','po']                   
         - in: query
           name: store
@@ -612,7 +612,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-          enum:
+            enum:
             ['pharmacy','gov','po']             
       requestBody:
         required: true
@@ -675,7 +675,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-          enum:
+            enum:
             ['pharmacy','gov','po']                   
         - in: query
           name: store
@@ -728,7 +728,7 @@ paths:
         example: pharmacy
         schema:
           type: string
-        enum:
+          enum:
           ['pharmacy','gov','po']                   
       - name: id
         in: path
@@ -785,7 +785,7 @@ paths:
         example: pharmacy
         schema:
           type: string
-        enum:
+          enum:
           ['pharmacy','gov','po']                   
       - name: id
         in: path
@@ -971,19 +971,19 @@ paths:
               schema:
                 type: object
                 properties:
-                data:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    name:
-                      type: string
-                    status:
-                      type: boolean
-                    menu:
-                      type: array
-                      items:
+                  data:
+                    type: object
+                    properties:
+                      id:
                         type: number
+                      name:
+                        type: string
+                      status:
+                        type: boolean
+                      menu:
+                        type: array
+                        items:
+                          type: number
 
     put:
       summary: 更新特定role的id

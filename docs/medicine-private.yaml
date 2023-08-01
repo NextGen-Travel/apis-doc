@@ -534,6 +534,9 @@ components:
             accessKey:
               type: string
               description: 若 SSO=true 要有 accessKey
+            label:
+              type: boolean
+              description: 是否啟用訂單內容
     storeResponse :
       type: object
       properties:
