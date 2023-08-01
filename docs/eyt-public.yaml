@@ -2172,48 +2172,6 @@ paths:
   # drug
   #
 
-  /drugs/dosageForms:
-    get:
-      summary: 藥品成分
-      tags:
-        - drug
-      responses:
-          '200':
-            description: 成功
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    msg:
-                      type: string
-                    data:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          key:
-                            type: string
-                          value:
-                            type: string
-                          name:
-                            type: string
-                          usageOptions:
-                            type: array
-                            items:
-                              type: string
-                          unitOptions:
-                            type: array
-                            items:
-                              type: string
-                          packageOptions:
-                            type: array
-                            items:
-                              type: string
-                          nameZh:
-                            type: string
-                          nameEn:
-                            type: string
   /drugs/options/holders:
     get:
       summary: 持有人
