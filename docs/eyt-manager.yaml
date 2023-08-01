@@ -545,8 +545,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-          enum:
-            ['pharmacy','gov','po']                   
+            enum: ['pharmacy','gov','po']                   
         - in: query
           name: store
           schema:
@@ -612,8 +611,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-          enum:
-            ['pharmacy','gov','po']             
+            enum: ['pharmacy','gov','po']             
       requestBody:
         required: true
         content:
@@ -675,8 +673,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-          enum:
-            ['pharmacy','gov','po']                   
+            enum: ['pharmacy','gov','po']                   
         - in: query
           name: store
           schema:
@@ -728,8 +725,7 @@ paths:
         example: pharmacy
         schema:
           type: string
-        enum:
-          ['pharmacy','gov','po']                   
+          enum: ['pharmacy','gov','po']                   
       - name: id
         in: path
         description: staff的id
@@ -785,8 +781,7 @@ paths:
         example: pharmacy
         schema:
           type: string
-        enum:
-          ['pharmacy','gov','po']                   
+          enum: ['pharmacy','gov','po']                   
       - name: id
         in: path
         description: staff的id
@@ -971,19 +966,19 @@ paths:
               schema:
                 type: object
                 properties:
-                data:
-                  type: object
-                  properties:
-                    id:
-                      type: number
-                    name:
-                      type: string
-                    status:
-                      type: boolean
-                    menu:
-                      type: array
-                      items:
+                  data:
+                    type: object
+                    properties:
+                      id:
                         type: number
+                      name:
+                        type: string
+                      status:
+                        type: boolean
+                      menu:
+                        type: array
+                        items:
+                          type: number
 
     put:
       summary: 更新特定role的id
@@ -4149,8 +4144,7 @@ paths:
                             name:
                               type: string
                         editor:
-                          type: object
-                          properties:
+                          type: string
                   pagination:
                     type: object
                     properties:
