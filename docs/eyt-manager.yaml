@@ -4146,8 +4146,7 @@ paths:
                             name:
                               type: string
                         editor:
-                          type: object
-                          properties:
+                          type: string
                   pagination:
                     type: object
                     properties:
