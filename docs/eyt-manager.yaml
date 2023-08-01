@@ -611,8 +611,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-            enum:
-            ['pharmacy','gov','po']             
+            enum: ['pharmacy','gov','po']             
       requestBody:
         required: true
         content:
@@ -674,8 +673,7 @@ paths:
           example: pharmacy
           schema:
             type: string
-            enum:
-            ['pharmacy','gov','po']                   
+            enum: ['pharmacy','gov','po']                   
         - in: query
           name: store
           schema:
@@ -727,8 +725,7 @@ paths:
         example: pharmacy
         schema:
           type: string
-          enum:
-          ['pharmacy','gov','po']                   
+          enum: ['pharmacy','gov','po']                   
       - name: id
         in: path
         description: staff的id
@@ -784,8 +781,7 @@ paths:
         example: pharmacy
         schema:
           type: string
-          enum:
-          ['pharmacy','gov','po']                   
+          enum: ['pharmacy','gov','po']                   
       - name: id
         in: path
         description: staff的id
