@@ -2309,6 +2309,12 @@ components:
               additional_note:
                 type: string
                 description: 銷售備註
+              total_paid:
+                type: number
+                description: 已付金額
+              total_unpaid:
+                type: number
+                description: 總未付金額
         links:
           description: LazyLoading資料
           type: object
@@ -4213,6 +4219,8 @@ paths:
                     return_not_refund: ""
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 100
+                    total_unpaid: 0
                   - order_id: 4
                     order_num: 0002
                     order_date: "2022-09-12 17:05:11"
@@ -4226,6 +4234,8 @@ paths:
                     return_not_refund: ""
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 100
+                    total_unpaid: 0
                   - order_id: 7
                     order_num: 0003
                     order_date: "2022-09-13 09:41:27"
@@ -4236,6 +4246,8 @@ paths:
                     - cash
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 999
+                    total_unpaid: 0
                   - order_id: 10
                     order_num: 0004
                     order_date: "2022-09-13 11:03:15"
@@ -4249,6 +4261,8 @@ paths:
                     return_not_refund: ""
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 500
+                    total_unpaid: 0
                   - order_id: 11
                     order_num: 0005
                     order_date: "2022-09-13 11:16:26"
@@ -4262,6 +4276,8 @@ paths:
                     return_not_refund: ""
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 999
+                    total_unpaid: 0
                   - order_id: 12
                     order_num: 0006
                     order_date: "2022-10-31 15:09:24"
@@ -4275,6 +4291,8 @@ paths:
                     return_not_refund: ""
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 100
+                    total_unpaid: 0
                   - order_id: 14
                     order_num: 0007
                     order_date: "2022-11-07 11:28:38"
@@ -4288,6 +4306,8 @@ paths:
                     return_not_refund: ""
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 225
+                    total_unpaid: 0
                   - order_id: 15
                     order_num: 0008
                     order_date: "2022-11-07 11:51:21"
@@ -4301,6 +4321,8 @@ paths:
                     return_not_refund: ""
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 1224
+                    total_unpaid: 0
                   - order_id: 16
                     order_num: 0009
                     order_date: "2022-11-07 11:54:02"
@@ -4314,6 +4336,8 @@ paths:
                     return_not_refund: ""
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 1099
+                    total_unpaid: 0
                   - order_id: 17
                     order_num: 0010
                     order_date: "2022-11-07 12:42:50"
@@ -4327,6 +4351,8 @@ paths:
                     return_not_refund: 110
                     creator_name: JackYeh
                     additional_note: ""
+                    total_paid: 190
+                    total_unpaid: 0
                   links:
                     first: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/orders?page=1
                     last: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/orders?page=4
