@@ -1685,6 +1685,9 @@ components:
         receipt:
           type: string
           description: 發票
+        transaction_id:
+          type: number
+          description: 銷售id
     BusinessInfoResponse:
       type: object
       properties:
@@ -3940,6 +3943,7 @@ paths:
                 success: 1
                 msg: Sale added successfully
                 receipt: null
+                transaction_id: 819
         '404':
           description: 失敗
           content:
