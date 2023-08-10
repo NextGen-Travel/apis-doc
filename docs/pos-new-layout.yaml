@@ -1765,6 +1765,25 @@ components:
         alert_pos_cash:
           type: integer
           description: 收銀現金額度提醒
+        keyboard_shortcuts:
+          type: object
+          description: 快捷鍵
+          properties:
+            pay_n_ckeckout:
+              type: string
+              description: 結帳
+            cancel:
+              type: string
+              description: 取消
+            recent_product_quantity:
+              type: string
+              description: 前往產品數量
+            edit_discount:
+              type: string
+              description: 編輯折扣
+            add_payment_row:
+              type: string
+              description: 增加付費
 
     LocationListResponse:
       type: object
