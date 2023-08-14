@@ -219,6 +219,7 @@ components:
           - business
         member_id:
           type: string
+          description: 客戶自訂ID
         customer_group_id:
           type: integer
         supplier_business_name:
@@ -321,7 +322,10 @@ components:
           description: 到期銷售總回報
         total_rp:
           type: number
-          description: 紅利
+          description: 紅利點數
+        amount_for_rp:
+          type: number
+          description: 紅利點數可折抵金額
         created_at:
           type: string
           description: 建立日期
@@ -5849,6 +5853,7 @@ paths:
                 due: 3
                 return_due: 646.05
                 total_rp: 548
+                amount_for_rp: 1096
                 created_at: 02-02-2023 12:56
         '404':
           description: 失敗
