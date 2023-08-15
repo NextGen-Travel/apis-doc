@@ -359,6 +359,9 @@ components:
               variation:
                 type: string
                 description: 衍生規格名稱
+              variation_sub:
+                type: string
+                description: 第2衍生規格名稱
               default_sell_price:
                 type: number
                 description: 產品售價 (不含稅) 
