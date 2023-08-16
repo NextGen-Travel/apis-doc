@@ -368,6 +368,9 @@ components:
               sell_price_inc_tax:
                 type: number
                 description: 產品售價 (含稅) 
+              dpp_inc_tax:
+                type: number
+                description: 產品成本 (含稅) 
               sub_sku:
                 type: string
                 description: Sub SKU
@@ -1772,6 +1775,9 @@ components:
         alert_pos_cash:
           type: integer
           description: 收銀現金額度提醒
+        show_cost_on_edit_product:
+          type: integer
+          description: 是否在”編輯商品資訊“顯示成本
         keyboard_shortcuts:
           type: object
           description: 快捷鍵
