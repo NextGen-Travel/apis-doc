@@ -3916,7 +3916,7 @@ paths:
                       name:
                         type: string
                       status:
-                        type: boolean
+                        type: number
                       description:
                         type: string
     put:
