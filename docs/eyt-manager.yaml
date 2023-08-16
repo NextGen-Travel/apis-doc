@@ -3781,7 +3781,24 @@ paths:
       security:
         - user_token: []
       tags:
-        - departments                           
+        - departments        
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 關鍵字搜尋
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁                   
       responses:
         '200':
           description: 成功
@@ -3864,7 +3881,7 @@ paths:
           required: true
           example: 1
           schema:
-            type: string     
+            type: string
       requestBody:
         required: true
         content:
