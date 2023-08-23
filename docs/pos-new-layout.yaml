@@ -2609,15 +2609,18 @@ components:
     CashRegisterDetailResponse:
       type: object
       properties:
+        cash_register_id:
+          type: integer
+          description: POS開帳id
         alert_pos_cash:
           type: integer
           description: 收銀現金額度提醒
         open_time:
           type: string
-          description: 訂單ID
+          description: 開帳時間
         close_time:
           type: string
-          description: 訂單編號
+          description: 關帳時間
         cash_in_hand:
           type: number
           description: 開機現金結餘
@@ -6259,6 +6262,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/CashRegisterDetailResponse'
               example:
+                id: 258
                 open_time: 02/15/2023 18:38
                 close_time: 02/17/2023 09:29
                 alert_pos_cash: 1000
