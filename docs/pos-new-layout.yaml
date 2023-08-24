@@ -1806,6 +1806,12 @@ components:
             add_payment_row:
               type: string
               description: 增加付費
+        add_currency_for_cny:
+          type: number
+          description: 是否啟用人民幣
+        exchange_rate_between_hk_and_cny:
+          type: number
+          description: 人民幣匯率
 
     LocationListResponse:
       type: object
@@ -2788,6 +2794,8 @@ paths:
                 date_format: m/d/Y H:i
                 denominations: [10, 20, 50, 100, 500, 1000]
                 alert_pos_cash: 10000
+                add_currency_for_cny: 1
+                exchange_rate_between_hk_and_cny: 1.25
         '404':
           description: 錯誤
           content:
