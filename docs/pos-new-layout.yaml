@@ -377,6 +377,9 @@ components:
               qty_available:
                 type: integer
                 description: 庫存總數量
+              popup_note:
+                type: string
+                description: 產品提醒
               stock:
                 type: array
                 items:
@@ -3512,6 +3515,7 @@ paths:
                     sell_price_inc_tax: 125
                     sub_sku: 0070
                     qty_available: 2232
+                    popup_note: '提醒'
                     stock:
                       - purchase_line_id: 70
                         lot_number: 
@@ -3527,6 +3531,7 @@ paths:
                     sell_price_inc_tax: 250
                     sub_sku: 0071
                     qty_available: 1010
+                    popup_note: '提醒'
                     stock:
                       - purchase_line_id: 68
                         lot_number: Batch111
