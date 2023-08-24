@@ -1781,6 +1781,12 @@ components:
         show_cost_on_edit_product:
           type: integer
           description: 是否在”編輯商品資訊“顯示成本
+        add_currency_for_cny:
+          type: integer
+          description: 是否啟用人民幣
+        exchange_rate_between_hk_and_cny:
+          type: number
+          description: 港幣及人民幣匯率
         keyboard_shortcuts:
           type: object
           description: 快捷鍵
