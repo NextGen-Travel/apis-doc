@@ -1302,6 +1302,9 @@ components:
         status:
           type: string
           description: 訂單狀態
+        cny_total:
+          type: integer
+          description: 人民幣總金額
       # Both properties are required
       required:  
         - location_id
