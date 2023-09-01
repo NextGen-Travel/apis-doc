@@ -1809,12 +1809,6 @@ components:
             add_payment_row:
               type: string
               description: 增加付費
-        add_currency_for_cny:
-          type: number
-          description: 是否啟用人民幣
-        exchange_rate_between_hk_and_cny:
-          type: number
-          description: 人民幣匯率
 
     LocationListResponse:
       type: object
