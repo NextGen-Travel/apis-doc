@@ -530,7 +530,67 @@ paths:
   #
   # user-management
   #
-  /admin/user-management/:storeType/staffs:
+
+  /admin/user-management/staffs:
+    get:
+      summary: 獲取後台不同store列表下的員工管理列表
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      parameters:                   
+        - in: query
+          name: store
+          schema:
+            type: integer
+          description: store id，未帶參數時，預設登入者的 store.id，僅 role 為 superadmin，該參數才生效
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁                               
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        account:
+                          type: string
+                        username:
+                          type: string
+                        roleName:
+                          type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
+  /admin/user-management/{storeType}/staffs:
     get:
       summary: 獲取後台不同store列表下的員工管理列表
       security:
@@ -658,7 +718,7 @@ paths:
                   msg:
                     type: string
 
-  /admin/user-management/:storeType/staffs/:id:
+  /admin/user-management/{storeType}/staffs/{id}:
     get:
       summary: 獲取特定的staff資料
       security:
@@ -766,7 +826,7 @@ paths:
                     type: string
 
 
-  /admin/user-management/:storeType/staffs/:id/delete:
+  /admin/user-management/{storeType}/staffs/{id}/delete:
     put:
       summary: 後台軟刪除staff
       security:
@@ -943,7 +1003,7 @@ paths:
                   msg:
                     type: string
 
-  /admin/user-management/roles/:id:
+  /admin/user-management/roles/{id}:
     get:
       summary: 獲取特定role的資料
       security:
@@ -1021,7 +1081,7 @@ paths:
                   msg:
                     type: string
 
-  /admin/user-management/roles/:id/delete:
+  /admin/user-management/roles/{id}/delete:
     put:
       summary: 軟刪除特定的role
       security:
@@ -1048,7 +1108,7 @@ paths:
                   msg:
                     type: string
 
-  /admin/user-management/roles/:id/status:
+  /admin/user-management/roles/{id}/status:
     put:
       summary: 更新特定role的狀態（開啟或關閉）
       security:
@@ -1797,7 +1857,7 @@ paths:
                     type: string
 
 
-  /admin/posts/review/:uuid/approve:
+  /admin/posts/review/{uuid}/approve:
     put:
       summary: 後台審核文章通過
       security:
@@ -1824,7 +1884,7 @@ paths:
                     type: string   
 
 
-  /admin/posts/:uuid/withdraw:
+  /admin/posts/{uuid}/withdraw:
     put:
       summary: 後台列表撤回文章
       security:
@@ -1851,7 +1911,7 @@ paths:
                     type: string      
 
 
-  /admin/posts/:uuid/history:
+  /admin/posts/{uuid}/history:
     get:
       summary: 取得文章狀態變化的歷史資料
       security:
@@ -2606,7 +2666,7 @@ paths:
                       type: string
                       example: 0089adf3-187e-4882-b831-e5eb6612f587
 
-  /admin/stores/:uuid/create:
+  /admin/stores/{uuid}/create:
     post:
       summary: 新增 藥房
       tags:
@@ -3283,7 +3343,7 @@ paths:
                       total:
                         type: number
 
-  /admin/drug-updates/drugs/:permitNo:
+  /admin/drug-updates/drugs/{permitNo}:
     get:
       summary: 獲取後台藥品審核資料
       security:
@@ -3867,7 +3927,7 @@ paths:
                   msg:
                     type: string
 
-  /admin/departments/:id/status:
+  /admin/departments/{id}/status:
     put:
       summary: 後台調整部門狀態
       security:
@@ -3904,7 +3964,7 @@ paths:
                   msg:
                     type: string
 
-  /admin/departments/:id:
+  /admin/departments/{id}:
     get:
       summary: 後台取得特定部門
       security:
@@ -4089,122 +4149,3 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/OptionsBaseResponse'
-
-
-  /admin/faqs:
-    get:
-      summary: 獲取後台 faq列表
-      security:
-        - user_token: []
-      tags:
-        - faqs
-      parameters:
-        - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/locale'
-        - in: query
-          name: keyword
-          schema:
-            type: string
-          description: 關鍵字搜尋(title)-模糊搜尋
-        - in: query
-          name: pageSize
-          schema:
-            type: integer
-          description: 單頁筆數
-        - in: query
-          name: page
-          schema:
-            type: integer
-            minimum: 1
-          description: 第幾頁
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        uuid:
-                          type: string
-                        title:
-                          type: string
-                        content:
-                          type: string
-                        locale:
-                          type: string
-                        tags:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                              tagName:
-                                type: string
-                        store:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            uuid:
-                              type: string
-                            name:
-                              type: string
-                        editor:
-                          type: string
-                  pagination:
-                    type: object
-                    properties:
-                      page:
-                        type: number
-                      pageSize:
-                        type: number
-                      pageCount:
-                        type: number
-                      total:
-                        type: number
-
-  /admin/faq/create:
-    post:
-      summary: 建立 faq
-      security:
-        - user_token: []
-      tags:
-        - faqs
-      requestBody:
-        required: true
-        content:
-           application/json:
-            schema:
-              type: object
-              properties:
-                locale:
-                  type: string
-                title:
-                  type: string
-                content:
-                  type: string
-                tags:
-                  type: array
-                  items:
-                    type: number
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
