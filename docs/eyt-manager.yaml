@@ -528,6 +528,188 @@ paths:
 
   # ====================
   #
+  # user roles
+  #
+
+  /admin/user-roles:
+    get:
+      summary: 獲得 Role 列表
+      security:
+        - user_token: []
+      tags:
+        - user-roles
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 關鍵字搜尋
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        enabled:
+                          type: boolean
+                        user_role_allows:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              key:
+                                type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+    post:
+      summary: 建立 role
+      security:
+        - user_token: []
+      tags:
+        - user-roles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: role name
+                enabled:
+                  type: boolean
+                  description: 是否啟用
+                allows:
+                  type: array
+                  description: 允許列表
+                  items:
+                    type: number
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/user-roles/{id}:
+    get:
+      summary: 獲得 Role
+      security:
+        - user_token: []
+      tags:
+        - user-roles
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: role id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      enabled:
+                        type: boolean
+                      user_role_allows:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            key:
+                              type: string
+    put:
+      summary: 更新 role
+      security:
+        - user_token: []
+      tags:
+        - user-roles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: role name
+                enabled:
+                  type: boolean
+                  description: 是否啟用
+                allows:
+                  type: array
+                  description: 允許列表
+                  items:
+                    type: number
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  # ====================
+  #
   # user-management
   #
 
@@ -778,21 +960,21 @@ paths:
       tags:
         - user-management
       parameters:
-      - name: storeType
-        in: path
-        description: 前綴的store 類別
-        required: true
-        example: pharmacy
-        schema:
-          type: string
-          enum: ['pharmacy','gov','po']                   
-      - name: id
-        in: path
-        description: staff的id
-        required: true
-        example: 2
-        schema:
-          type: integer           
+        - name: storeType
+          in: path
+          description: 前綴的store 類別
+          required: true
+          example: pharmacy
+          schema:
+            type: string
+            enum: ['pharmacy','gov','po']                   
+        - name: id
+          in: path
+          description: staff的id
+          required: true
+          example: 2
+          schema:
+            type: integer           
       requestBody:
         required: true
         content:
