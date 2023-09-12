@@ -576,15 +576,10 @@ paths:
                           type: string
                         enabled:
                           type: boolean
-                        user_role_allows:
+                        allows:
                           type: array
                           items:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                              key:
-                                type: string
+                            type: string
                   pagination:
                     type: object
                     properties:
@@ -619,7 +614,7 @@ paths:
                   type: array
                   description: 允許列表
                   items:
-                    type: number
+                    type: string
       responses:
         '200':
           description: 成功
@@ -666,15 +661,10 @@ paths:
                         type: string
                       enabled:
                         type: boolean
-                      user_role_allows:
+                      allows:
                         type: array
                         items:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            key:
-                              type: string
+                          type: string
     put:
       summary: 更新 role
       security:
@@ -705,7 +695,7 @@ paths:
                   type: array
                   description: 允許列表
                   items:
-                    type: number
+                    type: string
       responses:
         '200':
           description: 成功
