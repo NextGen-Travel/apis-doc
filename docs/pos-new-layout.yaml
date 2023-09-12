@@ -1795,20 +1795,55 @@ components:
           description: 快捷鍵
           properties:
             pay_n_ckeckout:
-              type: string
+              type: object
               description: 結帳
+              properties:
+                shotcut:
+                  type: string
+                  description: 快捷鍵
+                description:
+                  type: string
+                  description: 快捷鍵說明
             cancel:
-              type: string
+              type: object
               description: 取消
+              properties:
+                shotcut:
+                  type: string
+                  description: 快捷鍵
+                description:
+                  type: string
+                  description: 快捷鍵說明
             recent_product_quantity:
-              type: string
+              type: object
               description: 前往產品數量
+              properties:
+                shotcut:
+                  type: string
+                  description: 快捷鍵
+                description:
+                  type: string
+                  description: 快捷鍵說明
             edit_discount:
-              type: string
+              type: object
               description: 編輯折扣
+              properties:
+                shotcut:
+                  type: string
+                  description: 快捷鍵
+                description:
+                  type: string
+                  description: 快捷鍵說明
             add_payment_row:
-              type: string
+              type: object
               description: 增加付費
+              properties:
+                shotcut:
+                  type: string
+                  description: 快捷鍵
+                description:
+                  type: string
+                  description: 快捷鍵說明
 
     LocationListResponse:
       type: object
