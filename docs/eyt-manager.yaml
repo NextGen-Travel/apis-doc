@@ -628,9 +628,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  msg:
-                    type: string
-
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
   /admin/user-roles/{id}:
     get:
       summary: 獲得 Role
@@ -679,6 +681,13 @@ paths:
         - user_token: []
       tags:
         - user-roles
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: role id
       requestBody:
         required: true
         content:
@@ -704,9 +713,6 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  msg:
-                    type: string
 
   # ====================
   #
