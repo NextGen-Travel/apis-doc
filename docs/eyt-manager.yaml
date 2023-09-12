@@ -557,6 +557,8 @@ paths:
                           properties:
                             group:
                               type: string
+                            groupName:
+                              type: string
                             items:
                               type: array
                               items:
