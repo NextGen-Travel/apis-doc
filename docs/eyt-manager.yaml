@@ -528,6 +528,47 @@ paths:
 
   # ====================
   #
+  # user role allows
+  #
+  /admin/user-role-allows:
+    get:
+      summary: 獲得 Role 列表
+      security:
+        - user_token: []
+      tags:
+        - user-role-allows
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      allows:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            group:
+                              type: string
+                            items:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                  name:
+                                    type: string
+
+  # ====================
+  #
   # user roles
   #
 
