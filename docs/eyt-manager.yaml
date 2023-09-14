@@ -767,6 +767,11 @@ paths:
             type: integer
           description: store id，未帶參數時，預設登入者的 store.id，僅 role 為 superadmin，該參數才生效
         - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 關鍵字搜尋
+        - in: query
           name: pageSize
           schema:
             type: integer
