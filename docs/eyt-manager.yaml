@@ -792,38 +792,33 @@ paths:
                     items:
                       type: object
                       properties:
-                        msg:
+                        account:
                           type: string
-                        data:
+                        username:
+                          type: string
+                        id:
+                          type: number
+                        store:
                           type: object
                           properties:
-                            account:
-                              type: string
-                            username:
-                              type: string
                             id:
                               type: number
-                            store:
-                              type: object
-                              properties:
-                                id:
-                                  type: number
-                                name:
-                                  type: string
-                            user_role:
-                              type: object
-                              properties:
-                                id:
-                                  type: number
-                                name:
-                                  type: string
-                            role:
-                              type: object
-                              properties:
-                                id:
-                                  type: number
-                                name:
-                                  type: string
+                            name:
+                              type: string
+                        user_role:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        role:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
                   pagination:
                     type: object
                     properties:
@@ -983,6 +978,7 @@ paths:
                 password:
                   type: string
                   example: 123456
+                  nullable: true
                   description: 新密碼 至少6碼
 
       responses:
