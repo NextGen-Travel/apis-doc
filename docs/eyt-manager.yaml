@@ -970,9 +970,6 @@ paths:
                   type: string
                   example: 123456
                   description: 新密碼 至少6碼
-                confirmPassword:
-                  type: string
-                  example: 123456
 
       responses:
         '200':
