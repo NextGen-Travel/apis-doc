@@ -803,6 +803,13 @@ paths:
                               type: string
                             id:
                               type: number
+                            store:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                name:
+                                  type: string
                             user_role:
                               type: object
                               properties:
@@ -915,6 +922,13 @@ paths:
                         type: string
                       id:
                         type: number
+                      store:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
                       user_role:
                         type: object
                         properties:
