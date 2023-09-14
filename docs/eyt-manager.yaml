@@ -530,6 +530,7 @@ paths:
   #
   # user role allows
   #
+
   /admin/user-role-allows:
     get:
       summary: 獲得 Role 列表
@@ -791,14 +792,31 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
-                          type: number
-                        account:
+                        msg:
                           type: string
-                        username:
-                          type: string
-                        roleName:
-                          type: string
+                        data:
+                          type: object
+                          properties:
+                            account:
+                              type: string
+                            username:
+                              type: string
+                            id:
+                              type: number
+                            user_role:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                name:
+                                  type: string
+                            role:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                name:
+                                  type: string
                   pagination:
                     type: object
                     properties:
@@ -810,89 +828,12 @@ paths:
                         type: number
                       total:
                         type: number
-
-  /admin/user-management/{storeType}/staffs:
-    get:
-      summary: 獲取後台不同store列表下的員工管理列表
-      security:
-        - user_token: []
-      tags:
-        - user-management
-      parameters:
-        - name: storeType
-          in: path
-          description: 前綴的store 類別
-          required: true
-          example: pharmacy
-          schema:
-            type: string
-            enum: ['pharmacy','gov','po']                   
-        - in: query
-          name: store
-          schema:
-            type: integer
-          description: store id ，未帶參數時，預設登入者的 store.id，僅 role 為 superadmin ，該參數才生效
-        - in: query
-          name: pageSize
-          schema:
-            type: integer
-          description: 單頁筆數
-        - in: query
-          name: page
-          schema:
-            type: integer
-            minimum: 1
-          description: 第幾頁                               
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        account:
-                          type: string
-                        username:
-                          type: string
-                        roleName:
-                          type: string
-                  pagination:
-                    type: object
-                    properties:
-                      page:
-                        type: number
-                      pageSize:
-                        type: number
-                      pageCount:
-                        type: number
-                      total:
-                        type: number
-
     post:
       summary: 後台建立staff
       security:
         - user_token: []
       tags:
-        - user-management
-      parameters:
-        - name: storeType
-          in: path
-          description: 前綴的store 類別
-          required: true
-          example: pharmacy
-          schema:
-            type: string
-            enum: ['pharmacy','gov','po']             
+        - user-management         
       requestBody:
         required: true
         content:
@@ -907,6 +848,9 @@ paths:
                 username:
                   type: string
                   example: test0628
+                userRole:
+                  type: number
+                  example: 1
                 role:
                   type: number
                   example: 1
@@ -918,16 +862,11 @@ paths:
                   type: string
                   example: 123456
                   description: 密碼 至少6碼
-                confirmPassword:
-                  type: string
-                  example: 123456
               required:
                 - username
                 - role
                 - account
                 - password
-                - confirmPassword
-
       responses:
         '200':
           description: 成功
@@ -938,8 +877,11 @@ paths:
                 properties:
                   msg:
                     type: string
+                  id:
+                    type: integer
+                    example: 1
 
-  /admin/user-management/{storeType}/staffs/{id}:
+  /admin/user-management/staffs/{id}:
     get:
       summary: 獲取特定的staff資料
       security:
@@ -947,26 +889,13 @@ paths:
       tags:
         - user-management
       parameters:
-        - name: storeType
-          in: path
-          description: 前綴的store 類別
-          required: true
-          example: pharmacy
-          schema:
-            type: string
-            enum: ['pharmacy','gov','po']
-        - in: query
-          name: store
-          schema:
-            type: integer
-          description: store id ，未帶參數時，預設登入者的 store.id，僅 role 為 superadmin ，該參數才生效
         - name: id
           in: path
           description: staff的id
           required: true
           example: 2
           schema:
-            type: integer                             
+            type: integer
       responses:
         '200':
           description: 成功
@@ -975,6 +904,8 @@ paths:
               schema:
                 type: object
                 properties:
+                  msg:
+                    type: string
                   data:
                     type: object
                     properties:
@@ -984,6 +915,13 @@ paths:
                         type: string
                       id:
                         type: number
+                      user_role:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
                       role:
                         type: object
                         properties:
@@ -999,21 +937,13 @@ paths:
       tags:
         - user-management
       parameters:
-        - name: storeType
-          in: path
-          description: 前綴的store 類別
-          required: true
-          example: pharmacy
-          schema:
-            type: string
-            enum: ['pharmacy','gov','po']                   
         - name: id
           in: path
           description: staff的id
           required: true
           example: 2
           schema:
-            type: integer           
+            type: integer
       requestBody:
         required: true
         content:
@@ -1024,6 +954,15 @@ paths:
                 username:
                   type: string
                   example: test0628
+                account:
+                  type: string
+                  example: test0628
+                store:
+                  type: number
+                  example: 1
+                userRole:
+                  type: number
+                  example: 1
                 role:
                   type: number
                   example: 1
@@ -1045,32 +984,25 @@ paths:
                 properties:
                   msg:
                     type: string
-
-
-  /admin/user-management/{storeType}/staffs/{id}/delete:
-    put:
+    delete:
       summary: 後台軟刪除staff
       security:
         - user_token: []
       tags:
         - user-management
       parameters:
-      - name: storeType
-        in: path
-        description: 前綴的store 類別
-        required: true
-        example: pharmacy
-        schema:
-          type: string
-          enum: ['pharmacy','gov','po']                   
-      - name: id
-        in: path
-        description: staff的id
-        required: true
-        example: 2
-        schema:
-          type: integer           
-
+        - in: query
+          name: store
+          schema:
+            type: integer
+          description: store id ，未帶參數時，預設登入者的 store.id，僅 role 為 superadmin ，該參數才生效
+        - name: id
+          in: path
+          description: staff的id
+          required: true
+          example: 2
+          schema:
+            type: integer
       responses:
         '200':
           description: 成功
