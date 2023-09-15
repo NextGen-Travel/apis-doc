@@ -817,6 +817,13 @@ paths:
                               type: number
                             name:
                               type: string
+                        department:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
                         role:
                           type: object
                           properties:
@@ -855,6 +862,9 @@ paths:
                 username:
                   type: string
                   example: test0628
+                department:
+                  type: number
+                  example: 1
                 userRole:
                   type: number
                   example: 1
@@ -929,6 +939,13 @@ paths:
                             type: number
                           name:
                             type: string
+                      department:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
                       user_role:
                         type: object
                         properties:
@@ -975,6 +992,9 @@ paths:
                   type: number
                   example: 1
                 userRole:
+                  type: number
+                  example: 1
+                department:
                   type: number
                   example: 1
                 role:
