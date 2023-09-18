@@ -2394,6 +2394,9 @@ components:
               total_unpaid:
                 type: number
                 description: 總未付金額
+              is_negative:
+                type: number
+                description: 是否為負向銷售
         links:
           description: LazyLoading資料
           type: object
@@ -2577,6 +2580,9 @@ components:
             is_return:
               type: boolean
               description: 是否有退貨訂單
+        is_negative:
+          type: number
+          description: 是否為負向銷售
 
     OrdersReturnDetailResponse:
       type: object
