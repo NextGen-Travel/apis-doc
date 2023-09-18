@@ -1798,7 +1798,7 @@ components:
               type: object
               description: 結帳
               properties:
-                shotcut:
+                shortcut:
                   type: string
                   description: 快捷鍵
                 description:
@@ -1808,7 +1808,7 @@ components:
               type: object
               description: 取消
               properties:
-                shotcut:
+                shortcut:
                   type: string
                   description: 快捷鍵
                 description:
@@ -1818,7 +1818,7 @@ components:
               type: object
               description: 前往產品數量
               properties:
-                shotcut:
+                shortcut:
                   type: string
                   description: 快捷鍵
                 description:
@@ -1828,7 +1828,7 @@ components:
               type: object
               description: 編輯折扣
               properties:
-                shotcut:
+                shortcut:
                   type: string
                   description: 快捷鍵
                 description:
@@ -1838,7 +1838,7 @@ components:
               type: object
               description: 增加付費
               properties:
-                shotcut:
+                shortcut:
                   type: string
                   description: 快捷鍵
                 description:
