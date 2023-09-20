@@ -412,6 +412,203 @@ components:
           nullable: true
           description: 團檔 id
           example: [[1],[3]]
+    CollectPost:
+      type: object
+      properties:
+        id:
+          type: number
+        title:
+          type: string
+        type:
+          type: string
+        sort:
+          type: number
+        viewCount:
+          type: number
+        isApproved:
+          type: boolean
+        isDeleted:
+          type: boolean
+        publishStart:
+          type: string
+        publishEnd:
+          type: string
+          nullable: true
+        content:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        locale:
+          type: string
+        collectCount:
+          type: number
+        status:
+          type: string
+        submission_date:
+          type: string
+          nullable: true
+        review_date:
+          type: string
+        archive_date:
+          type: string
+          nullable: true
+        seoDescription:
+          type: string
+        publishType:
+          type: string
+        urlSuffix:
+          type: string
+        uuid:
+          type: string
+        store:
+          type: object
+          properties:
+            name:
+              type: string
+            uuid:
+              type: string
+    CollectDrug:
+      type: object
+      properties:
+        aka:
+          type: string
+        collectCount:
+          type: number
+        createdAt:
+          type: string
+        dosageForm:
+          type: string
+        enable:
+          type: number
+        id:
+          type: number
+        indication:
+          type: string
+        legal_classification:
+          type: string
+        nonRegistrationDate:
+          type: string
+        permitNo:
+          type: string
+        precaution:
+          type: string
+        priority:
+          type: number
+        productName:
+          type: string
+        productName_zh:
+          type: string
+        regCertHolderAddress:
+          type: string
+        regCertHolderCountry:
+          type: string
+        regCertHolderName:
+          type: string
+        registration_date:
+          type: string
+        sale_requirement:
+          type: string
+        side_effect:
+          type: string
+        updatedAt:
+          type: string
+        usage:
+          type: string
+        ingredients:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+    CollectDrugstore:
+      type: object
+      properties:
+        id:
+          type: number
+        uuid:
+          type: string
+        name:
+          type: string
+        address:
+          type: string
+        tel:
+          type: string
+        rxNo:
+          type: string
+        lat:
+          type: number
+        lng:
+          type: number
+        type:
+          type: string
+        planType:
+          type: string
+        isExcellent:
+          type: boolean
+        isGenuine:
+          type: boolean
+        businessHours:
+          type: string
+        contactNumber:
+          type: string
+        mobileCountryCode:
+          type: string
+        website:
+          type: string
+        plan:
+          type: object
+          properties:
+            email:
+              type: string
+            wechat:
+              type: object
+              properties:
+                appId:
+                  type: string
+                title:
+                  type: string
+                qrcode:
+                  type: string
+            whatsapp:
+              type: string
+            instagram:
+              type: string
+            messanger:
+              type: string
+        collectCount:
+          type: number
+        stockType:
+          type: string
+        stockMode:
+          type: string
+        stockUrl:
+          type: string
+        stockSyncParams:
+          type: object
+          properties:
+            location_id:
+              type: number
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        publishedAt:
+          type: string
+        adType:
+          type: string
+        priority:
+          type: number
+        userLimit:
+          type: number
+        status:
+          type: string
+        startedAt:
+          type: string
+        finishedAt:
+          type: string     
 
 paths:
 
@@ -4334,3 +4531,424 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/OptionsBaseResponse'
+
+  # ====================
+  #
+  # members
+  #
+  /admin/members:
+    get:
+        summary: get members
+        tags:
+          - members
+        security:
+          - user_token: []
+        parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          description: 關鍵字搜尋
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁
+        - in: query
+          name: platforms
+          schema:
+            type: array
+            items:
+              type: string
+          description: 註冊平台
+        - in: query
+          name: gender
+          schema:
+            type: array
+            items:
+              type: string
+          description: 性別
+        - in: query
+          name: bookmark
+          schema:
+            type: array
+            items:
+              type: string
+          description: 書籤
+        - in: query
+          name: device
+          schema:
+            type: string
+            minimum: 1
+          description: 登入裝置
+        - in: query
+          name: startTime
+          schema:
+            type: string
+            minimum: 1
+          description: 開始時間
+        - in: query
+          name: endTime
+          schema:
+            type: string
+            minimum: 1
+          description: 結束時間
+        responses:
+          200:
+            description: 成功的回應
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          uuid:
+                            type: string
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          gender:
+                            type: string
+                          created:
+                            type: string
+                          bookmark:
+                            type: object
+                            properties:
+                              posts:
+                                type: integer
+                              stores:
+                                type: integer
+                              drugs:
+                                type: integer
+                    pagination:
+                      type: object
+                      properties:
+                        page:
+                          type: integer
+                        pageSize:
+                          type: integer
+                        pageCount:
+                          type: integer
+                        total:
+                          type: integer
+    post:
+      summary: 創建新會員
+      tags:
+          - members
+      security:
+        - user_token: []
+      description: 用於創建新會員的 POST 請求
+      requestBody:
+        description: 請求主體
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 會員姓名
+                email:
+                  type: string
+                  description: 會員電子郵件地址
+                password:
+                  type: string
+                  description: 會員密碼
+              required:
+                - name
+                - email
+                - password
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+
+  /admin/members/{uuid}:
+    get:
+      summary: 獲取會員信息
+      description: 用於獲取特定會員信息的 GET 請求
+      tags:
+          - members
+      security:
+        - user_token: []
+      parameters:
+        - name: uuid
+          in: path
+          description: 會員的唯一識別符
+          required: true
+          example: 1
+          schema:
+            type: string
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        description: 會員 ID
+                      name:
+                        type: string
+                        description: 會員姓名
+                      avatar:
+                        type: string
+                        description: 會員頭像 URL
+                      mobileCountryCode:
+                        type: string
+                        description: 手機國家代碼
+                      mobile:
+                        type: string
+                        description: 手機號碼
+                      email:
+                        type: string
+                        description: 會員電子郵件地址
+                      faxCountryCode:
+                        type: string
+                        description: 傳真國家代碼
+                      fax:
+                        type: string
+                        description: 傳真號碼
+                      uuid:
+                        type: string
+                        description: 會員唯一識別符
+                      gender:
+                        type: string
+                        description: 會員性別
+                      createdAt:
+                        type: string
+                        description: 會員創建日期
+                      platforms:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              description: 平台 ID
+                            platform:
+                              type: string
+                              description: 平台名稱
+                            openId:
+                              type: string
+                              description: 開放 ID
+                            email:
+                              type: string
+                              description: 平台關聯的電子郵件地址
+                              
+    delete:
+      summary: 刪除會員
+      tags:
+          - members
+      security:
+        - user_token: []
+      description: 用於刪除特定會員的 DELETE 請求
+      parameters:
+        - name: uuid
+          in: path
+          description: 會員的唯一識別符
+          required: true
+          example: 1
+          schema:
+            type: string
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+
+  /admin/members/{uuid}/reset-password:
+    put:
+      summary: 重設會員密碼
+      tags:
+          - members
+      security:
+        - user_token: []
+      description: 用於重設特定會員密碼的 PUT 請求
+      parameters:
+        - name: uuid
+          in: path
+          description: 會員的唯一識別符
+          required: true
+          example: 1
+          schema:
+            type: string
+      requestBody:
+        description: 請求主體
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  description: 新的會員密碼
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+
+  /admin/members/login-unbind/{login_id}:
+    put:
+      summary: 解綁會員登入帳號
+      tags:
+          - members
+      security:
+        - user_token: []
+      description: 用於解綁特定會員登入帳號的 PUT 請求
+      parameters:
+        - name: login_id
+          in: path
+          description: 該平台 ID
+          required: true
+          example: 1
+          schema:
+            type: string
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+
+  /admin/members/export/{fileType}:
+    get:
+      summary: 導出會員數據
+      tags:
+          - members
+      security:
+        - user_token: []
+      description: 用於導出會員數據的 GET 請求
+      parameters:
+        - name: fileType
+          in: path
+          description: 導出文件的類型（例如，CSV、Excel等）
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        description: 導出文件的 URL
+  /admin/members/{uuid}/bookmark/{type}:
+    get:
+      summary: 獲取會員書籤內容
+      tags:
+          - members
+      security:
+        - user_token: []
+      description: 用於獲取特定會員書籤中的內容的 GET 請求
+      parameters:
+        - name: uuid
+          in: path
+          description: 會員的唯一識別符
+          required: true
+          schema:
+            type: string
+        - name: type
+          in: path
+          description: 書籤類型（Post、Drug、Drugstore）
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: 頁數
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 每頁顯示的項目數
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    oneOf:
+                      - $ref: '#/components/schemas/CollectPost'
+                      - $ref: '#/components/schemas/CollectDrug'
+                      - $ref: '#/components/schemas/CollectDrugstore'
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                      pageSize:
+                        type: integer
+                      pageCount:
+                        type: integer
+                      total:
+                        type: integer
+
+
+  
