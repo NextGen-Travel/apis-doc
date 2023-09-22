@@ -175,6 +175,48 @@ paths:
 
   # ====================
   #
+  # Visitor
+  #
+
+  /visitor/book:
+    post:
+      summary: 將行為記錄起來
+      tags:
+        - visitor
+      security:
+        - member_token: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 紀錄類型
+                  enum:
+                    - 'all'
+                    - 'drug'
+                    - 'drug_img'
+                    - 'store'
+                    - 'post'
+                    - 'stock'
+                keyword:
+                  type: string
+                  description: 關鍵字
+                options:
+                  type: object
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ====================
+  #
   # Member
   #
 
@@ -925,30 +967,6 @@ paths:
   # posts
   #
 
-  /search/posts:
-    post:
-      summary: 記錄 log  文章
-      tags:
-        - posts
-      security:
-        - member_token: []
-      parameters:
-        - in: query
-          name: keyword
-          schema:
-            type: string
-          description: 關鍵字搜尋(title, content, tags, store, type)-模糊搜尋                          
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                         
   /collect/posts/{uuid}:  
     post:
       summary: 收藏文章
