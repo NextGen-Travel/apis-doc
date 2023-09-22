@@ -5114,12 +5114,6 @@ paths:
           type: string
         description: 分類
       - in: query
-        name: device
-        schema:
-          type: string
-          minimum: 1
-        description: 登入裝置
-      - in: query
         name: registrationStartDate
         schema:
           type: string
