@@ -3198,26 +3198,11 @@ paths:
                 schema:
                   $ref: '#/components/schemas/OptionsBaseResponse'
 
-  /admin/drugs/options/brands:
-    get:
-      summary: 藥品品牌列表
-      tags:
-        - stores
-      security:
-        - user_token: []
-      responses:
-          '200':
-            description: 成功
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/OptionsBaseResponse'
-
   /admin/drugs/options/ingredients:
     get:
       summary: 藥品主成份列表
       tags:
-        - stores
+        - drugs
       security:
         - user_token: []
       responses:
