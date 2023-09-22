@@ -5119,7 +5119,7 @@ paths:
           type: string
         description: 註冊開始時間(範圍起)
       - in: query
-        name: registrationStartDate
+        name: registrationEndDate
         schema:
           type: string
         description: 註冊開始時間(範圍迄)
