@@ -3205,6 +3205,24 @@ paths:
         - drugs
       security:
         - user_token: []
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+            example: 阿斯匹林
+          description: 搜尋 主成份
+        - in: query
+          name: perPage
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁
       responses:
           '200':
             description: 成功
