@@ -3216,6 +3216,7 @@ paths:
           name: perPage
           schema:
             type: integer
+            default: 10
           description: 單頁筆數
         - in: query
           name: page
