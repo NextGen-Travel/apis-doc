@@ -5199,3 +5199,66 @@ paths:
                         type: integer
                       total:
                         type: integer
+
+  /admin/store-stock/export/{fileType}:
+    get:
+      summary: 導出會員數據
+      tags:
+          - store stock
+      security:
+        - user_token: []
+      description: 用於導出 藥房庫存管理列表 數據的 GET 請求
+      parameters:
+        - name: fileType
+          in: path
+          description: 導出文件的類型（例如，CSV、Excel等）
+          required: true
+          schema:
+            type: string
+            enum: ['csv', 'xlsx', pdf]
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        description: 導出文件的 URL
+  /admin/store-stock/import:
+    post:
+      summary: 用於匯入 藥房庫存管理列表 數據的 GET 請求
+      tags:
+        - store stock
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                    default: Success
