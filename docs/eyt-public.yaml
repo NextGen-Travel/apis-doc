@@ -2859,7 +2859,7 @@ paths:
             type: integer
           description: 服務篩選
         - in: query
-          name: stockType[]
+          name: stockType
           schema:
             type: array
             items:
@@ -3283,21 +3283,13 @@ paths:
         - stores
       parameters:
         - in: query
-          name: permitNo
-          schema:
-            type: array
-            items:
-              type: string
-          description: 藥品
-          example: ['HK-05357', 'HK-07007']
-        - in: query
           name: isExact
           schema:
             type: integer
             enum: [0,1]
           description: 藥品使否要完整符合
         - in: query
-          name: stockType[]
+          name: stockType
           schema:
             type: array
             items:
