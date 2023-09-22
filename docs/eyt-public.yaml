@@ -401,65 +401,6 @@ paths:
                   msg:
                     type: string
                     example: Success
-
-  /visitor/log:
-    post:
-      summary: api log trace
-      description: 讓前端 trace user api log
-      tags:
-        - visitor
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                clientId:
-                  type: string
-                fingerId:
-                  type: string
-                messages:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      text:
-                        type: string
-                      type:
-                        type: string
-                      level:
-                        type: string
-                      time:
-                        type: number
-                level:
-                  type: string
-                text:
-                  type: string
-                time:
-                  type: number
-                type:
-                  type: string
-                service:
-                  type: string
-                stage:
-                  type: string
-                url:
-                  type: string
-                visitorId:
-                  type: string
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-
-
   /visitor/hot/search:
     get:
       summary: 熱搜
