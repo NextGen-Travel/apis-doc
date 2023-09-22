@@ -2418,6 +2418,11 @@ paths:
           schema:
             type: integer
           description: 頁碼
+        - in: query
+          name: group
+          schema:
+            type: string
+          description: 集團名稱
       responses:
           '200':
             description: 成功
@@ -3167,6 +3172,51 @@ paths:
   /admin/stores/options/services:
     get:
       summary: 藥房 服務
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/stores/options/groups:
+    get:
+      summary: 藥房集團列表
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/drugs/options/brands:
+    get:
+      summary: 藥品品牌列表
+      tags:
+        - stores
+      security:
+        - user_token: []
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsBaseResponse'
+
+  /admin/drugs/options/ingredients:
+    get:
+      summary: 藥品主成份列表
       tags:
         - stores
       security:
@@ -4950,5 +5000,199 @@ paths:
                       total:
                         type: integer
 
+  /admin/store-stock/{storeUuid}/drug/{permitNo}:
+    delete:
+      summary: 刪除 特定店舖-特定藥品 的 庫存紀錄
+      tags:
+          - store stock
+      security:
+        - user_token: []
+      description: 刪除 特定店舖-特定藥品 的 庫存紀錄
+      parameters:
+        - name: storeUuid
+          in: path
+          description: 特定店舖 的 唯一識別符
+          required: true
+          example: 550e8400-e29b-41d4-a716-446655440000
+          schema:
+            type: string
+        - name: permitNo
+          in: path
+          description: 藥品的香港識別碼
+          required: true
+          example: HK-41600
+          schema:
+            type: string
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+    post:
+      summary: 建立 特定店舖-特定藥品 的 預設庫存紀錄
+      tags:
+          - store stock
+      security:
+        - user_token: []
+      description: 建立 特定店舖-特定藥品 的 預設庫存紀錄
+      parameters:
+        - name: storeUuid
+          in: path
+          description: 特定店舖 的 唯一識別符
+          required: true
+          example: 550e8400-e29b-41d4-a716-446655440000
+          schema:
+            type: string
+        - name: permitNo
+          in: path
+          description: 藥品的香港識別碼
+          required: true
+          example: HK-41600
+          schema:
+            type: string
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
 
-  
+  /admin/store-stock/{storeUuid}:
+    get:
+      summary: 取得特定藥房的藥品列表
+      description: 取得特定藥房的藥品列表
+      tags:
+        - store stock
+      security:
+        - user_token: []
+      parameters:
+      - in: query
+        name: keyword
+        schema:
+          type: string
+        description: 關鍵字搜尋
+      - in: query
+        name: perPage
+        schema:
+          type: integer
+        description: 單頁筆數
+      - in: query
+        name: page
+        schema:
+          type: integer
+          minimum: 1
+        description: 第幾頁
+      - in: query
+        name: brand
+        schema:
+          type: string
+        description: 品牌
+      - in: query
+        name: ingredients
+        schema:
+          type: array
+          items:
+            type: string
+        description: 主成份
+      - in: query
+        name: classification
+        schema:
+          type: string
+        description: 分類
+      - in: query
+        name: device
+        schema:
+          type: string
+          minimum: 1
+        description: 登入裝置
+      - in: query
+        name: registrationStartDate
+        schema:
+          type: string
+        description: 註冊開始時間(範圍起)
+      - in: query
+        name: registrationStartDate
+        schema:
+          type: string
+        description: 註冊開始時間(範圍迄)
+      - in: query
+        name: nonRegistrationStartDate
+        schema:
+          type: string
+        description: 註冊結束時間(範圍起)
+      - in: query
+        name: nonRegistrationEndDate
+        schema:
+          type: string
+        description: 註冊結束時間(範圍迄)
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        enabled:
+                          type: boolean
+                          description: 啟用庫存
+                        permitNo:
+                          type: string
+                          description: 核准字號
+                        brand:
+                          type: string
+                          description: 品牌
+                        productName_zh:
+                          type: string
+                          description: 名稱
+                        productName:
+                          type: string
+                          description: 藥品學名
+                        ingredients:
+                          type: array
+                          description: 主成份
+                          items:
+                            type: string
+                        legalClassifications:
+                          type: array
+                          description: 分類
+                          items:
+                            type: string
+                        holder:
+                          type: string
+                          description: 證書持有人
+                        registration_date:
+                          type: string
+                          description: 註冊開始日期
+                        nonRegistrationDate:
+                          type: string
+                          description: 註冊結束日期
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                      pageSize:
+                        type: integer
+                      pageCount:
+                        type: integer
+                      total:
+                        type: integer
