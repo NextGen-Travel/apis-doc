@@ -967,6 +967,41 @@ paths:
   # posts
   #
 
+  /collect/posts:
+    get:
+      summary: 收藏文章
+      tags:
+        - posts
+      security:
+        - member_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        uuid:
+                          type: string
+                        title:
+                          type: string
+                        viewCount:
+                          type: number
+                        collectCount:
+                          type: number
+                        image:
+                          type: string
+
   /collect/posts/{uuid}:  
     post:
       summary: 收藏文章
@@ -1374,6 +1409,43 @@ paths:
   #
   # drug
   #
+
+  /collect/drugs:
+    get:
+      summary: 收藏藥品
+      tags:
+        - drug
+      security:
+        - member_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        permitNo:
+                          type: string
+                        name:
+                          type: string
+                        nameZh:
+                          type: string
+                        image:
+                          type: string
+                        ingredients:
+                          type: array
+                          items:
+                            type: string
+
+
   /collect/drugs/:permit_no:
     post:
       summary: 收藏藥品
@@ -1479,6 +1551,40 @@ paths:
   #
   # store
   #
+  /collect/stores:
+    get:
+      summary: 收藏藥房列表
+      tags:
+        - store
+      security:
+        - member_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        uuid:
+                          type: string
+                        name:
+                          type: string
+                        address:
+                          type: string
+                        image:
+                          type: string
+
+
   /collect/stores/:uuid:
     post:
       summary: 收藏藥房
