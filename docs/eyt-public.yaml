@@ -203,6 +203,8 @@ components:
           ingredients:
             type: array
             description: 顯示名稱
+            items:
+              type: string
     paginationResponse:
       type: object
       properties:
