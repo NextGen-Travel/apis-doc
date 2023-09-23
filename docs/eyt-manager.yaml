@@ -283,7 +283,8 @@ components:
                 type: string
                 description: 顯示名稱
                 example: 名稱
-    BaseResponse:
+
+    OptionsModelBrandListResponse:
       type: object
       properties:
         msg :
@@ -293,44 +294,27 @@ components:
           type: array
           items:
             type: object
-
-    OptionsModelBasicItem:
-      type: object
-      properties:
-        key:
-          type: string
-          description: 用來執行搜尋用的參數
-          example: default
-        value:
-          type: string
-          description: 顯示名稱
-          example: 名稱
-    OptionsModelDBColumn:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: tags table 的 id
-          example: 1234
-        tagName:
-          type: object
-          description: tag 名稱
-          example: '良躍社區藥房'
-        icon:
-          type: string
-          description: icon class-name
-          default: ''
-    OptionsModelBrandListResponse:
-      allOf:
-        - $ref: '#/components/schemas/BaseResponse'
-        - type: object
-          properties:
-            data:
-              type: array
-              items:
-                allOf:
-                  - $ref: '#/components/schemas/OptionsModelBasicItem'
-                  - $ref: '#/components/schemas/OptionsModelDBColumn'
+            properties:
+              key:
+                type: string
+                description: 用來執行搜尋用的參數
+                example: default
+              value:
+                type: string
+                description: 顯示名稱
+                example: 名稱
+              id:
+                type: integer
+                description: tags table 的 id
+                example: 1234
+              tagName:
+                type: object
+                description: tag 名稱
+                example: '良躍社區藥房'
+              icon:
+                type: string
+                description: icon class-name
+                default: ''
 
     label:
       type: object
