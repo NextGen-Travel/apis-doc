@@ -3299,6 +3299,14 @@ paths:
             description: 庫存類型 lv1,lv2,lv3
             example: ['lv1', 'lv2']
         - in: query
+          name: permitNo
+          schema:
+            type: array
+            items:
+              type: string
+            description: 藥品號
+            example: []            
+        - in: query
           name: district
           explode: true
           schema:
