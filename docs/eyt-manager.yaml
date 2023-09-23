@@ -283,6 +283,55 @@ components:
                 type: string
                 description: 顯示名稱
                 example: 名稱
+    BaseResponse:
+      type: object
+      properties:
+        msg :
+          type: string
+          example: Success
+        data:
+          type: array
+          items:
+            type: object
+
+    OptionsModelBasicItem:
+      type: object
+      properties:
+        key:
+          type: string
+          description: 用來執行搜尋用的參數
+          example: default
+        value:
+          type: string
+          description: 顯示名稱
+          example: 名稱
+    OptionsModelDBColumn:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: tags table 的 id
+          example: 1234
+        tagName:
+          type: object
+          description: tag 名稱
+          example: '良躍社區藥房'
+        icon:
+          type: string
+          description: icon class-name
+          default: ''
+    OptionsModelBrandListResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              type: array
+              items:
+                allOf:
+                  - $ref: '#/components/schemas/OptionsModelBasicItem'
+                  - $ref: '#/components/schemas/OptionsModelDBColumn'
+
     label:
       type: object
       properties:
@@ -3822,6 +3871,9 @@ paths:
                         type: number
                       enable:
                         type: number
+                      collectCount:
+                        type: number
+                        description: 收藏數
                       dosageForm:
                         type: string
                       usage:
@@ -4022,7 +4074,7 @@ paths:
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/OptionsBaseResponse'
+                  $ref: '#/components/schemas/OptionsModelBrandListResponse'
 
   /admin/drugs/options/legalClassifications:
     get:
@@ -5256,3 +5308,31 @@ paths:
                     type: string
                     description: 回應消息
                     default: Success
+
+  /admin/store-stock/options/brands:
+    get:
+      summary: 獲取後台藥品品牌
+      security:
+        - user_token: []
+      tags:
+        - store stock
+      parameters:
+        - name: page
+          in: query
+          description: 页码，表示要获取的页数
+          schema:
+            type: integer
+            minimum: 1
+        - name: perPage
+          in: query
+          description: 每页显示的项数，表示每页包含的数据量
+          schema:
+            type: integer
+            minimum: 10
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsModelBrandListResponse'
