@@ -5135,19 +5135,19 @@ paths:
       - in: query
         name: brand
         schema:
-          type: string
+          type: number
         description: 品牌
       - in: query
         name: ingredients
         schema:
           type: array
           items:
-            type: string
+            type: number
         description: 主成份
       - in: query
         name: classification
         schema:
-          type: string
+          type: number
         description: 分類
       - in: query
         name: registrationStartDate
