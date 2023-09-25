@@ -83,15 +83,6 @@ components:
       description: 多語系輸出 繁體中文，英文，簡體中文
       required: false
       example: 'zh'
-    isCollect:
-      in: query
-      name: isCollect
-      schema:
-        type: integer
-        enum: [0,1]
-      required: false
-      description: 是否已收藏，isCollect=1 ，已收藏
-      example: 0
   schemas:
     DrugOptionsResponse:
       type: object
@@ -157,9 +148,6 @@ components:
           collectCount:
             type: number
             example: 0
-          isCollect:
-            type: boolean
-            example: false
           isExact:
             type: boolean
             example: true
@@ -185,9 +173,6 @@ components:
       items:
         type: object
         properties:
-          isCollect:
-            type: boolean
-            description: 是否收藏
           permitNo:
             type: string
             description: 用來執行搜尋用的參數
@@ -894,14 +879,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-          description: 第幾頁  
-        - in: query
-          name: isCollect
-          schema:
-            type: integer
-            enum: [0,1]
-          required: false
-          description: 會員才會用到的篩選條件，isCollect=1 ，表示要查該會員已收藏的文章                               
+          description: 第幾頁                         
       responses:
         '200':
           description: 成功
@@ -961,9 +939,6 @@ paths:
                         collectCount:
                           type: number
                           description: 收藏數
-                        isCollect:
-                          type: boolean
-                          description: 是否被登入的會員收藏，未登入時一律顯示false
                   pagination:
                     type: object
                     properties:
@@ -1052,9 +1027,6 @@ paths:
                       collectCount:
                         type: number
                         description: 文章收藏數
-                      isCollect:
-                        type: boolean
-                        description: 是否被登入的會員收藏，未登入時一律顯示false
 
   /all/posts/{uuid}/extends:  
     get:
@@ -1133,10 +1105,7 @@ paths:
                         publishedAt:
                           type: string
                         collectCount:
-                          type: number                      
-                        isCollect:
-                          type: boolean
-                          description: 是否被登入的會員收藏，未登入時一律顯示false
+                          type: number
 
   /new/posts:  
     get:
@@ -1214,9 +1183,6 @@ paths:
                         collectCount:
                           type: number
                           description: 文章收藏數
-                        isCollect:
-                          type: boolean
-                          description: 是否被登入的會員收藏，未登入時一律顯示false
 
   /type/posts:  
     get:
@@ -1300,9 +1266,6 @@ paths:
                         collectCount:
                           type: number
                           description: 文章收藏數
-                        isCollect:
-                          type: boolean
-                          description: 是否被登入的會員收藏，未登入時一律顯示false
 
   /posts/tag/{tagId}:  
     get:
@@ -1397,9 +1360,6 @@ paths:
                         collectCount:
                           type: number
                           description: 收藏數
-                        isCollect:
-                          type: boolean
-                          description: 是否被登入的會員收藏，未登入時一律顯示false
                   pagination:
                     type: object
                     properties:
@@ -1509,9 +1469,6 @@ paths:
                         collectCount:
                           type: number
                           description: 收藏數
-                        isCollect:
-                          type: boolean
-                          description: 是否被登入的會員收藏，未登入時一律顯示false
                   pagination:
                     type: object
                     properties:
@@ -2358,7 +2315,6 @@ paths:
         - drug
       parameters:
         - $ref: '#/components/parameters/visitor'
-        - $ref: '#/components/parameters/isCollect'
         - in: query
           name: ingredient
           schema:
@@ -2452,8 +2408,7 @@ paths:
                     pageCount: 1
                     total: 1
                   data:
-                    - isCollect: false
-                      permitNo: HK-21197
+                    - permitNo: HK-21197
                       name: MARSEDYL ELIXIR
                       nameZh: 萬咳療
                       url: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
@@ -2530,8 +2485,6 @@ paths:
                     data:
                       type: object
                       properties:
-                        isCollect:
-                          type: boolean
                         permitNo:
                           type: string
                         precaution:
@@ -2613,8 +2566,7 @@ paths:
                 example:
                   msg : Success
                   data:
-                    - isCollect: false
-                      permitNo: HK-65977
+                    - permitNo: HK-65977
                       name: MAX COLTALIN COUGH HOT REMEDY POWDER FOR ORAL SOLUTION
                       nameZh: 幸福傷風咳-熱飲5包
                       aka: 幸福傷風咳
@@ -2664,7 +2616,6 @@ paths:
                           isExcellent: false
                           isGenuine: true
                           collectCount: 0
-                          isCollect: false
                           isExact: true
                           drugCount: 2
                           drugs:
@@ -2677,6 +2628,7 @@ paths:
   #
   # stores 藥房搜尋
   #
+
   /stores/options/stockTypes:
     get:
       summary: 庫存類型
@@ -2826,7 +2778,6 @@ paths:
         - stores
       parameters:
         - $ref: '#/components/parameters/visitor'
-        - $ref: '#/components/parameters/isCollect'
         - in: query
           name: isPriority
           schema:
@@ -2966,8 +2917,6 @@ paths:
                                 type: string
                               collectCount:
                                 type: number
-                              isCollect:
-                                type: boolean
                               tags:
                                 type: array
                                 items:
@@ -3026,7 +2975,6 @@ paths:
                       isExcellent: false
                       isGenuine: true
                       collectCount: 0
-                      isCollect: false
                       imgUrl: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
                       tags:
                         - 24小時營業
@@ -3154,8 +3102,6 @@ paths:
                           type: string
                         collectCount:
                           type: number
-                        isCollect:
-                          type: boolean
                         imgUrls:
                           type: array
                           items:
@@ -3240,7 +3186,6 @@ paths:
                     isExcellent: false
                     isGenuine: true
                     collectCount: 0
-                    isCollect: false
                     imgUrls:
                       - https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
                     tags:
@@ -3362,7 +3307,6 @@ paths:
                       isExcellent: false
                       isGenuine: true
                       collectCount: 0
-                      isCollect: false
                       isExact: true
                       drugCount: 2
                       drugs:

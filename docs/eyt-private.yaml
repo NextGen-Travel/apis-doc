@@ -50,15 +50,6 @@ components:
         type: string
       required: false
       example: 'en'
-    isCollect:
-      in: query
-      name: isCollect
-      schema:
-        type: integer
-        enum: [0,1]
-      required: false
-      description: 是否已收藏，isCollect=1 ，已收藏
-      example: 0
   schemas:
     ProductsResponse:
       type: object
