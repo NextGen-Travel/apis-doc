@@ -984,7 +984,11 @@ paths:
                           type: number
                         uuid:
                           type: string
+                        type:
+                          type: string
                         title:
+                          type: string
+                        publishStart:
                           type: string
                         viewCount:
                           type: number
