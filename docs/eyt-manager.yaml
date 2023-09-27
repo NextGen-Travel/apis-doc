@@ -5185,7 +5185,7 @@ paths:
                       type: object
                       properties:
                         enabled:
-                          type: boolean
+                          type: integer
                           description: 啟用庫存
                         permitNo:
                           type: string
