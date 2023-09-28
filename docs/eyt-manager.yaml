@@ -3747,16 +3747,6 @@ paths:
             type: string
             example: 3535
           description: 搜尋 核准字號、藥品學名、名稱
-        - in: query
-          name: page
-          schema:
-            type: string
-          description: 第幾頁
-        - in: query
-          name: perPage
-          schema:
-            type: string
-          description: 每頁幾筆
       responses:
         '200':
           description: 成功
@@ -3807,17 +3797,6 @@ paths:
                               type: string
                         count:
                           type: number
-                  pagination:
-                    type: object
-                    properties:
-                      page:
-                        type: number
-                      pageSize:
-                        type: number
-                      pageCount:
-                        type: number
-                      total:
-                        type: number
 
   /admin/drug-updates/drugs/{permitNo}:
     get:
