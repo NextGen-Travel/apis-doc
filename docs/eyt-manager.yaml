@@ -236,11 +236,10 @@ components:
                   type: string
                   example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/qrcode_for_gh_1b9715c09cc3_1280_1_42ca67a97d.jpg
         pharmacistGroup:
-          type: array
-          items:
-            type: integer
+          type: integer
+          nullable: true
           description: "群組類型設定，id = label.id "
-          example: [1,2,3]
+          example: 1
         userLimit:
           type: integer
           example: 5
@@ -2697,18 +2696,16 @@ paths:
                               name:
                                 type: string
                         pharmacistGroup:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                                description: "群組類型設定，id = label.id "
-                                example: 1
-                              name:
-                                type: string
-                                description: 群組名稱
-                                example: VIP
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              description: "群組類型設定，id = label.id "
+                              example: 1
+                            name:
+                              type: string
+                              description: 群組名稱
+                              example: VIP
                         images:
                           type: array
                           items:
@@ -2910,6 +2907,17 @@ paths:
                           type: number
                         contactNumber:
                           type: string
+                        pharmacistGroup:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              description: "群組類型設定，id = label.id "
+                              example: 1
+                            name:
+                              type: string
+                              description: 群組名稱
+                              example: VIP
                         mobileCountryCode:
                           type: string
                           description: 國碼
