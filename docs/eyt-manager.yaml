@@ -2489,6 +2489,8 @@ paths:
                                 type: string
                               status:
                                 type: boolean
+                              group:
+                                type: string
                     pagination:
                         type: object
                         properties:
