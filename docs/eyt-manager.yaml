@@ -5307,3 +5307,18 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/OptionsModelBrandListResponse'
+
+  /api/admin/store-stock/label:
+    get:
+      summary: 獲取 藥房關聯 的 "label" 清單
+      security:
+        - user_token: []
+      tags:
+        - store stock
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/OptionsModeOneResponse'
