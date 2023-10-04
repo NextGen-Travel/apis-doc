@@ -1613,7 +1613,6 @@ paths:
 
               required:
                 - image
-
       responses:
         '200':
           description: 成功
@@ -1694,8 +1693,6 @@ paths:
                           oneOf:
                             - type: string
                             - type: number
-
-
     post:
       summary: 建立tag
       tags:
@@ -1721,7 +1718,6 @@ paths:
                   type: string
                   enum: ['zh', 'en', 'zh-CN']
                   description: 文章語言，上面分別對應 繁體中文，英文，簡體中文
-
               required:
                 - tagName
                 - locale
@@ -2371,11 +2367,6 @@ paths:
             type: string
           description: 圖片搜尋，須先呼叫 api/search/drugs/uploadImages，成功上傳圖檔，取得回傳的 imgKey
         - in: query
-          name: imgData
-          schema:
-            type: string
-          description: 圖片的base64，用來給沒辦法上傳圖片的人用的
-        - in: query
           name: sort
           schema:
             type: string
@@ -2391,6 +2382,53 @@ paths:
           schema:
             type: integer
           description: 頁碼
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg :
+                      type: string
+                    data:
+                      $ref: '#/components/schemas/DrugsResponse'
+                    pagination:
+                      $ref: '#/components/schemas/paginationResponse'
+                example:
+                  msg : Success
+                  pagination :
+                    page: 1
+                    pageSize: 50
+                    pageCount: 1
+                    total: 1
+                  data:
+                    - permitNo: HK-21197
+                      name: MARSEDYL ELIXIR
+                      nameZh: 萬咳療
+                      url: https://dcq8lblln1b30.cloudfront.net/assets/images/1673839860.png
+                      ingredients:
+                        - codeine phosphate
+                        - ephedrine hydrochloride
+                        - promethazine hydrochloride
+
+  /search/drugs-with-photo:
+    post:
+      summary: 用 base64 搜尋藥品
+      tags:
+        - drug
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+              required:
+                - image
       responses:
           '200':
             description: 成功
