@@ -2371,6 +2371,11 @@ paths:
             type: string
           description: 圖片搜尋，須先呼叫 api/search/drugs/uploadImages，成功上傳圖檔，取得回傳的 imgKey
         - in: query
+          name: imgData
+          schema:
+            type: string
+          description: 圖片的base64，用來給沒辦法上傳圖片的人用的
+        - in: query
           name: sort
           schema:
             type: string
