@@ -3527,6 +3527,11 @@ paths:
             type: number
           description: 營業地點ID
         - in: query
+          name: search_field
+          schema:
+            type: string
+          description: 搜尋欄位
+        - in: query
           name: term
           schema:
             type: string
