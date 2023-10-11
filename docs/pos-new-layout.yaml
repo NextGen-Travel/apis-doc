@@ -1844,6 +1844,9 @@ components:
                 description:
                   type: string
                   description: 快捷鍵說明
+        allow_pos_overselling:
+          type: integer
+          description: 是否允許POS超賣
 
     LocationListResponse:
       type: object
@@ -2834,6 +2837,7 @@ paths:
                 alert_pos_cash: 10000
                 add_currency_for_cny: 1
                 exchange_rate_between_hk_and_cny: 1.25
+                allow_pos_overselling: 0
         '404':
           description: 錯誤
           content:
