@@ -4702,6 +4702,10 @@ paths:
                             type: string
                           created:
                             type: string
+                          lastLoginAt:
+                            type: string
+                          device:
+                            type: string
                           bookmark:
                             type: object
                             properties:
