@@ -2731,6 +2731,46 @@ components:
               value:
                 type: number
                 description: 金額
+        cny:
+          type: object
+          description: 人民幣總銷售，總支出，總退款
+          properties:
+            sell:
+              type: array
+              description: 人民幣總銷售
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    description: 付費方式
+                  value:
+                    type: number
+                    description: 金額
+            expense:
+              type: array
+              description: 人民幣總支出
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    description: 付費方式
+                  value:
+                    type: number
+                    description: 金額
+            refund:
+              type: array
+              description: 人民幣總退款
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                    description: 付費方式
+                  value:
+                    type: number
+                    description: 金額
 
     CashRegisterStatusResponse:
       type: object
@@ -6433,6 +6473,40 @@ paths:
                     value: 0
                   - key: custom_pay_7
                     value: 0
+                cny:
+                  sell:
+                    - key: custom_pay_pos_1
+                      value: 1000
+                    - key: custom_pay_pos_2
+                      value: 2000
+                    - key: custom_pay_pos_3
+                      value: 3000
+                    - key: custom_pay_pos_4
+                      value: 4000
+                    - key: custom_pay_pos_5
+                      value: 5000
+                  expense:
+                    - key: custom_pay_pos_1
+                      value: 0
+                    - key: custom_pay_pos_2
+                      value: 0
+                    - key: custom_pay_pos_3
+                      value: 0
+                    - key: custom_pay_pos_4
+                      value: 0
+                    - key: custom_pay_pos_5
+                      value: 0
+                  refund:
+                    - key: custom_pay_pos_1
+                      value: 0
+                    - key: custom_pay_pos_2
+                      value: 0
+                    - key: custom_pay_pos_3
+                      value: 0
+                    - key: custom_pay_pos_4
+                      value: 0
+                    - key: custom_pay_pos_5
+                      value: 0
 
   /pos-v2/api/cash-register/status:
     get:
