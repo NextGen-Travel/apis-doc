@@ -2074,6 +2074,9 @@ components:
               value:
                 type: string
                 description: 下拉選單的value
+              ex_rate:
+                type: integer
+                description: 匯率(只有custom_pay_pos_1~5有這個欄位)
         links:
           description: LazyLoading資料
           type: object
@@ -3224,6 +3227,12 @@ paths:
                     name: "p3"
                   - value: "custom_pay_4"
                     name: "自定付款欄 4"
+                  - value: "custom_pay_pos_1"
+                    name: "人民幣微信支"
+                    ex_rate: 1.1
+                  - value: "custom_pay_pos_2"
+                    name: "人民幣支付寶"
+                    ex_rate: 1.07
                 links:
                   first: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/payment-type?page=1
                   last: http://localhost:8000/cloudsatlas/project/public/pos-v2/api/payment-type?page=2
