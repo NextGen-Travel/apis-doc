@@ -5010,6 +5010,12 @@ paths:
                         min_purchase_price:
                           type: string
                           description: 單位成本(最小)
+                        variation:
+                          type: string
+                          description: 衍生規格名稱
+                        variation_sub:
+                          type: string
+                          description: 第2衍生規格名稱
 
               example:
                 recordsTotal: 2
@@ -5024,7 +5030,7 @@ paths:
                     active_state: active
                     category: 飲料
                     sub_category: 含氣泡
-                    sku: adasdasdsad
+                    sku: 202210123-1
                     alert_quantity: 100
                     current_stock: 70
                     offsite_stock: 300
@@ -5035,6 +5041,29 @@ paths:
                     min_price: 20
                     max_purchase_price: 12
                     min_purchase_price: 12
+                    variation: 大
+                    variation_sub: Red
+                  - position: A區
+                    row: 3
+                    rack: 6
+                    product_name: 可樂
+                    is_inactive: 0
+                    active_state: active
+                    category: 飲料
+                    sub_category: 含氣泡
+                    sku: 202210123-1
+                    alert_quantity: 100
+                    current_stock: 70
+                    offsite_stock: 300
+                    unit: 罐
+                    base_unit: 箱
+                    base_unit_multiplier: 24
+                    max_price: 50
+                    min_price: 20
+                    max_purchase_price: 20
+                    min_purchase_price: 10
+                    variation: 小
+                    variation_sub: Black
                   - position: A區
                     row: 3
                     rack: 5
