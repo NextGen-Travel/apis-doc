@@ -2559,6 +2559,8 @@ paths:
                           type: string
                         registrationDate:
                           type: string
+                        nonRegistrationDate:
+                          type: string
                         ingredients:
                           type: array
                           items:
