@@ -1090,7 +1090,7 @@ paths:
       tags:
         - fcm
       security:
-        - client_token: []
+        - member_token: []
       requestBody:
         required: true
         content:
