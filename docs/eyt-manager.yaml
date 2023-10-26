@@ -646,6 +646,41 @@ paths:
 
   # ====================
   #
+  # fcm
+  #
+
+  /admin/fcm:
+    post:
+      summary: 發送訊息
+      tags:
+        - fcm
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  description: title
+                body:
+                  type: string
+                  description: body text
+                topic:
+                  type: string
+                  description: target topic
+                data:
+                  type: object
+                  description: meta data
+      responses:
+        '200':
+          description: 成功
+
+  # ====================
+  #
   # user
   #
 

@@ -1064,6 +1064,49 @@ paths:
 
   # ====================
   #
+  # fcm
+  #
+
+  /member-fcm:
+    delete:
+      summary: 刪除監聽
+      tags:
+        - fcm
+      security:
+        - member_token: []
+      parameters:
+        - in: query
+          name: token
+          required: true
+          schema:
+            type: string
+          example: qqqwww
+          description: 使用者 token
+      responses:
+        '200':
+          description: 成功
+    post:
+      summary: 加入監聽
+      tags:
+        - fcm
+      security:
+        - client_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: token
+      responses:
+        '200':
+          description: 成功
+
+  # ====================
+  #
   # tags
   #
 
