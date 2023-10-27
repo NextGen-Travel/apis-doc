@@ -737,6 +737,9 @@ paths:
                 data:
                   type: object
                   description: meta data
+                dryRun:
+                  type: boolean
+                  description: 使否實質發出通知
       responses:
         '200':
           description: 成功
