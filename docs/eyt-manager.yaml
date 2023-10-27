@@ -650,6 +650,27 @@ paths:
   #
 
   /admin/fcm:
+    get:
+      summary: 獲取過往訊息
+      tags:
+        - fcm
+      security:
+        - user_token: []
+      parameters:
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁
+      responses:
+        '200':
+          description: 成功      
     post:
       summary: 發送訊息
       tags:
