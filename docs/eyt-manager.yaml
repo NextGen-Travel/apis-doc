@@ -670,7 +670,48 @@ paths:
           description: 第幾頁
       responses:
         '200':
-          description: 成功      
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        messageId:
+                          type: string
+                        title:
+                          type: string
+                        body:
+                          type: string
+                        topic:
+                          type: string
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                        publishedAt:
+                          type: string
+                        data:
+                          type: object
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
     post:
       summary: 發送訊息
       tags:
