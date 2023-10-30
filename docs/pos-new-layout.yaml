@@ -1253,9 +1253,15 @@ components:
                 type: string
               transaction_no_7:
                 type: string
+              cny_total:
+                type: integer
+                description: 人民幣金額(只有用custom_pay_pos_1~5需要這個欄位)
               note:
                 type: string
                 description: 付款註記
+        hk_cash_change_flag:
+          type: integer
+          description: 是否有港幣找零
         sale_note:
           type: string
           description: 銷售備註
@@ -4062,10 +4068,12 @@ paths:
                   transaction_no_5:
                   transaction_no_6:
                   transaction_no_7:
+                  cny_total: 0
                   note:
               sale_note: 
               staff_note: 
               change_return: 0.00
+              hk_cash_change_flag: 0
               additional_notes: 'axios post test'
               is_suspend: 1  # 1 = 暫存訂單, 0 = 一般訂單
               recur_interval:  3
