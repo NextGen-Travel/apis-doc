@@ -3747,7 +3747,221 @@ paths:
                           type: number
                         name:
                           type: string
-  
+
+  /admin/tags/list:
+    get:
+      summary: 取得後台 tags 設定用的列表
+      security:
+        - user_token: []
+      tags:
+        - tags
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          required: false
+          description: 關鍵字搜尋, 模糊搜尋 繁簡英的 name 值
+        - in: query
+          name: tagTypeId
+          schema:
+            type: number
+          required: false
+          description: 選擇欲回傳的 Tag Type
+        - in: query
+          name: page
+          schema:
+            type: string
+            minimum: 1
+          description: 第幾頁
+        - in: query
+          name: perPage
+          schema:
+            type: string
+          description: 每頁幾筆
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        isUsed:
+                          type: boolean
+                          description: 是否有被使用
+                        tagType:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                              description: tag type 名稱, 會依照 user.locale 給出相對應 繁簡英 的值
+                        nameZh:
+                          type: string
+                        nameZhCN:
+                          type: string
+                        nameEn:
+                          type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
+  /admin/tags/type/list:
+    get:
+      summary: 下拉選單用的 tag type 列表
+      security:
+        - user_token: []
+      tags:
+        - tags
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                          description: tag type 名稱, 會依照 user.locale 給出相對應 繁簡英 的值
+
+  /admin/tags/create:
+    post:
+      summary: 建立 tag
+      security:
+        - user_token: []
+      tags:
+        - tags
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagTypeId:
+                  type: number
+                nameZh:
+                  type: string
+                nameZhCN:
+                  type: string
+                nameEn:
+                  type: string
+              required:
+                - tagTypeId
+                - nameZh
+                - nameZhCN
+                - nameEn
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/tags/{tagId}:
+    put:
+      summary: 修改 tag
+      security:
+        - user_token: []
+      tags:
+        - tags
+      parameters:
+        - name: id
+          in: path
+          description: tag id
+          required: true
+          example: 1
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tagTypeId:
+                  type: number
+                nameZh:
+                  type: string
+                nameZhCN:
+                  type: string
+                nameEn:
+                  type: string
+              required:
+                - tagTypeId
+                - nameZh
+                - nameZhCN
+                - nameEn
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+    delete:
+      summary: 刪除 tag
+      security:
+        - user_token: []
+      tags:
+        - tags
+      parameters:
+        - name: id
+          in: path
+          description: tag id
+          required: true
+          example: 1
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   # ====================
   #
   # drugs
