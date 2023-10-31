@@ -788,6 +788,17 @@ paths:
                     type: string
                   account:
                     type: string
+                  user_role:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      name:
+                        type: string
+                      allows:
+                        type: string
+                      enabled:
+                        type: boolean
                   store:
                     type: object
                     properties:
