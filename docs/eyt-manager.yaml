@@ -746,7 +746,6 @@ paths:
                             collectCount:
                               type: number
 
-
   /admin/dashboard/visitors:
     get:
       summary: 獲取儀表板訊息
@@ -754,6 +753,12 @@ paths:
         - dashboard
       security:
         - user_token: []
+      parameters:
+        - in: query
+          name: month
+          schema:
+            type: string
+          description: 月份 20xx-01
       responses:
         '200':
           description: 成功
