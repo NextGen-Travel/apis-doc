@@ -646,6 +646,139 @@ paths:
 
   # ====================
   #
+  # dashboard
+  #
+
+  /admin/dashboard:
+    get:
+      summary: 獲取儀表板訊息
+      tags:
+        - dashboard
+      security:
+        - user_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      drugCount:
+                        type: number
+                      drugExpiredCount:
+                        type: number
+                      drugStoreEnabledCount:
+                        type: number
+                      drugStoreDisabledCount:
+                        type: number
+                      nondrugStoreEnabledCount:
+                        type: number
+                      nondrugStoreDisabledCount:
+                        type: number
+                      memberCount:
+                        type: number
+                      memberDisabledCount:
+                        type: number
+                      memberSubscribeCount:
+                        type: number
+                      memberHasSubscribeCount:
+                        type: number
+                      memberMaleCount:
+                        type: number
+                      memberFemaleCount:
+                        type: number
+                      memberLoginsCount:
+                        type: object
+                        properties:
+                          eyt:
+                            type: number
+                          sms:
+                            type: number
+                          google:
+                            type: number
+                          apple:
+                            type: number
+                          facebook:
+                            type: number
+                          wechat:
+                            type: number
+                      keywords:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            keyword:
+                              type: string
+                            searchCount:
+                              type: string
+                      drugCollectCount:
+                        type: number
+                      postCollectCount:
+                        type: number
+                      storeCollectCount:
+                        type: number
+                      drugCollectOrders:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            productName:
+                              type: string
+                            permitNo:
+                              type: string
+                            collectCount:
+                              type: number
+                      storeCollectOrders:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            uuid:
+                              type: string
+                            collectCount:
+                              type: number
+
+
+  /admin/dashboard/visitors:
+    get:
+      summary: 獲取儀表板訊息
+      tags:
+        - dashboard
+      security:
+        - user_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                            count:
+                              type: number
+
+  # ====================
+  #
   # fcm
   #
 
@@ -1672,6 +1805,7 @@ paths:
   #
   # other
   #
+
   /upload:
     post:
       summary: 上傳檔案
