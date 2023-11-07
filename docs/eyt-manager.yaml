@@ -3910,13 +3910,13 @@ paths:
         - in: query
           name: page
           schema:
-            type: string
+            type: number
             minimum: 1
           description: 第幾頁
         - in: query
           name: perPage
           schema:
-            type: string
+            type: number
           description: 每頁幾筆
       responses:
         '200':
