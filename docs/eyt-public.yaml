@@ -1995,6 +1995,8 @@ paths:
                       properties:
                         id:
                           type: number
+                        locale:
+                          type: string
                         tagName:
                           type: string
 
