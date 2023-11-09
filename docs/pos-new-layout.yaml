@@ -5460,6 +5460,12 @@ paths:
                             adjust_quantity:
                               type: string
                               description: 調節量
+                            variation:
+                              type: string
+                              description: variation
+                            variation_sub:
+                              type: string
+                              description: variation_sub
 
               example:
                 success: 1
@@ -5508,6 +5514,8 @@ paths:
                       inventory_transaction_date: null
                       inventory_staff: null
                       adjust_quantity: null
+                      variation: ""
+                      variation_sub: ""
                     - purchase_line_id: 2
                       product_id: 7
                       variation_id: 10
@@ -5530,6 +5538,8 @@ paths:
                       inventory_transaction_date: null
                       inventory_staff: null
                       adjust_quantity: null
+                      variation: ""
+                      variation_sub: ""
 
   /pos-v2/api/warehouse/receive/{id}:
     post:
