@@ -2531,6 +2531,12 @@ components:
               exp:
                 type: string
                 description: EXP
+              variation:
+                type: string
+                description: variation
+              variation_sub:
+                type: string
+                description: variation_sub
         total_price:
           type: number
           description: 商品原價
@@ -4569,6 +4575,8 @@ paths:
                     qty_returned: 0.00
                     exp: ""
                     lot: ""
+                    variation: ""
+                    variation_sub: ""
                   total_price: 450
                   final_total: 346
                   unpaid_amonut: 346
