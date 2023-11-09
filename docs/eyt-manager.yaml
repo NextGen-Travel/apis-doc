@@ -2647,6 +2647,7 @@ paths:
       summary: 藥房
       tags:
         - stores
+        - ads
       security:
         - user_token: []
       parameters:
@@ -5792,3 +5793,517 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schemas/OptionsModeOneResponse'
+
+  /admin/ads/list:
+    get:
+      summary: 獲取後台廣告列表
+      security:
+        - user_token: []
+      tags:
+        - ads
+      parameters:
+        - name: keyword
+          in: query
+          description: 關鍵字搜尋
+          schema:
+            type: string
+          required: false
+        - name: adTypes
+          in: query
+          description: 廣告類型
+          schema:
+            type: array
+            items:
+              type: string
+              enum: ['home-page-pop-up', 'master-carousel-ad', 'horizontal-carousel-ads', 'vertical-carousel-ads', 'iframe-tags']
+          required: true
+          example: ['home-page-pop-up', 'master-carousel-ad']
+        - name: storeId
+          in: query
+          description: 行銷客戶
+          schema:
+            type: integer
+          required: false
+        - name: startTime
+          in: query
+          description: 開始日期
+          example: 2023-09-01
+          schema:
+            type: string
+        - name: endTime
+          in: query
+          description: 結束日期
+          example: 2023-12-01
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: 頁碼，表示要獲取的頁數
+          schema:
+            type: integer
+            minimum: 1
+        - name: perPage
+          in: query
+          description: 每頁顯示的項目數，表示每頁包含的資料量
+          schema:
+            type: integer
+            minimum: 10
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            description: 廣告紀錄的 ID
+                            example: 1
+                          enabled:
+                            type: boolean
+                            description: 啟用廣告
+                            example: true
+                          title:
+                            type: string
+                            description: 管理介面廣告標題
+                            example: 管理介面廣告標題
+                          adType:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                description: 廣告類型
+                                example: home-page-pop-up
+                              name:
+                                type: string
+                                description: 廣告類型顯示文字
+                                example: 首頁彈窗
+                          priority:
+                            type: integer
+                            description: 優先順序, 數字越大越優先
+                            example: 1
+                          store:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                description: 行銷客戶 ID
+                                example: 1
+                              name:
+                                type: string
+                                description: 行銷客戶名稱
+                                example: 行銷客戶名稱
+                          startTime:
+                            type: string
+                            description: 開始日期
+                            example: 2023-09-01
+                          endTime:
+                            type: string
+                            description: 結束日期
+                            example: 2024-09-01
+                          deletable:
+                            type: boolean
+                            description: 是否可刪除
+                            example: true
+                          webImg:
+                            type: string
+                            description: 網頁版圖片
+                            example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+                          appImg:
+                            type: string
+                            description: 行動版圖片
+                            example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+                          targetUrl:
+                            type: string
+                            description: 目標網址
+                            example: https://www.google.com.tw/
+                          iframeTag:
+                            type: string
+                            description: iframe tag
+                            example: <iframe src="https://www.google.com.tw/" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                          popupTitle:
+                            type: string
+                            description: 彈窗標題
+                            example: 彈窗標題
+                          popupContent:
+                            type: string
+                            description: 彈窗內容
+                            example: 彈窗內容
+                    pagination:
+                      type: object
+                      properties:
+                        page:
+                          type: integer
+                          example: 1
+                        pageSize:
+                          type: integer
+                          example: 7
+                        pageCount:
+                          type: integer
+                          example: 10
+                        total:
+                          type: integer
+                          example: 63
+
+  /admin/ads/type/list:
+    get:
+      summary: 獲取後台廣告類型列表
+      security:
+        - user_token: []
+      tags:
+        - ads
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            description: 廣告類型
+                            example: home-page-pop-up
+                          name:
+                            type: string
+                            description: 廣告類型顯示文字
+                            example: 首頁彈窗
+
+  /admin/ads/create:
+    post:
+      summary: 建立新的廣告
+      security:
+        - user_token: []
+      tags:
+        - ads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  description: 啟用廣告
+                  example: true
+                title:
+                  type: string
+                  description: 管理介面廣告標題
+                  example: 管理介面廣告標題
+                adType:
+                  type: string
+                  description: 廣告類型 ("home-page-pop-up" 不能被新增)
+                  enum: ['master-carousel-ad', 'horizontal-carousel-ads', 'vertical-carousel-ads', 'iframe-tags']
+                  example: master-carousel-ad
+                priority:
+                  type: integer
+                  description: 優先順序, 數字越大越優先
+                  example: 1
+                storeId:
+                  type: integer
+                  description: 行銷客戶 ID
+                  example: 1
+                startTime:
+                  type: string
+                  description: 開始日期
+                  example: 2023-09-01
+                endTime:
+                  type: string
+                  description: 結束日期
+                  example: 2024-09-01
+                webImg:
+                  type: string
+                  description: 網頁版圖片
+                  example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+                appImg:
+                  type: string
+                  description: 行動版圖片
+                  example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+                targetUrl:
+                  type: string
+                  description: 目標網址
+                  example: https://www.google.com.tw/
+                iframeTag:
+                  type: string
+                  description: iframe tag
+                  example: ""
+                popupTitle:
+                  type: string
+                  description: 彈窗標題
+                  example: ""
+                popupContent:
+                  type: string
+                  description: 彈窗內容
+                  example: ""
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+
+  /admin/ads/{adsType}/{adsId}:
+    put:
+      summary: 更新廣告
+      security:
+        - user_token: []
+      tags:
+        - ads
+      parameters:
+        - name: adsType
+          in: path
+          description: 廣告類型
+          required: true
+          example: master-carousel-ad
+          schema:
+            type: string
+            enum: ['home-page-pop-up', 'master-carousel-ad', 'horizontal-carousel-ads', 'vertical-carousel-ads', 'iframe-tags']
+        - name: adsId
+          in: path
+          description: 廣告 ID
+          required: true
+          example: 1
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  description: 啟用廣告
+                  example: true
+                title:
+                  type: string
+                  description: 管理介面廣告標題
+                  example: 管理介面廣告標題
+                priority:
+                  type: integer
+                  description: 優先順序, 數字越大越優先
+                  example: 1
+                storeId:
+                  type: integer
+                  description: 行銷客戶 ID
+                  example: 1
+                startTime:
+                  type: string
+                  description: 開始日期
+                  example: 2023-09-01
+                endTime:
+                  type: string
+                  description: 結束日期
+                  example: 2024-09-01
+                webImg:
+                  type: string
+                  description: 網頁版圖片
+                  example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+                appImg:
+                  type: string
+                  description: 行動版圖片
+                  example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+                targetUrl:
+                  type: string
+                  description: 目標網址
+                  example: https://www.google.com.tw/
+                iframeTag:
+                  type: string
+                  description: iframe tag
+                  example: ""
+                popupTitle:
+                  type: string
+                  description: 彈窗標題
+                  example: ""
+                popupContent:
+                  type: string
+                  description: 彈窗內容
+                  example: ""
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+
+    delete:
+      summary: 軟刪除廣告紀錄
+      security:
+        - user_token: []
+      tags:
+        - ads
+      parameters:
+        - name: adsType
+          in: path
+          description: 廣告類型 (home-page-pop-up 不能被刪除)
+          required: true
+          example: master-carousel-ad
+          schema:
+            type: string
+            enum: ['master-carousel-ad', 'horizontal-carousel-ads', 'vertical-carousel-ads', 'iframe-tags']
+        - name: adsId
+          in: path
+          description: 廣告 ID
+          required: true
+          example: 1
+          schema:
+            type: integer
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+
+  /admin/ads/schedule/{year}/{month}:
+    get:
+      summary: 獲取後台廣告排程列表
+      security:
+        - user_token: []
+      tags:
+        - ads
+      parameters:
+        - name: year
+          in: path
+          description: 年份
+          required: true
+          example: 2023
+          schema:
+            type: integer
+            minimum: 2023
+        - name: month
+          in: path
+          description: 月份 (最小在 2023 年 9 月)
+          required: true
+          example: 9
+          schema:
+            type: integer
+            enum: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            description: 廣告紀錄的 ID
+                            example: 1
+                          enabled:
+                            type: boolean
+                            description: 啟用廣告
+                            example: true
+                          title:
+                            type: string
+                            description: 管理介面廣告標題
+                            example: 管理介面廣告標題
+                          adType:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                description: 廣告類型
+                                example: home-page-pop-up
+                              name:
+                                type: string
+                                description: 廣告類型顯示文字
+                                example: 首頁彈窗
+                          priority:
+                            type: integer
+                            description: 優先順序, 數字越大越優先
+                            example: 1
+                          store:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                description: 行銷客戶 ID
+                                example: 1
+                              name:
+                                type: string
+                                description: 行銷客戶名稱
+                                example: 行銷客戶名稱
+                          startTime:
+                            type: string
+                            description: 開始日期
+                            example: 2023-09-01
+                          endTime:
+                            type: string
+                            description: 結束日期
+                            example: 2024-09-01
+
+  /admin/ads/export/{fileType}:
+    get:
+      summary: 導出 廣告管理列表 數據
+      tags:
+          - ads
+      security:
+        - user_token: []
+      description: 用於導出 廣告管理列表 數據的 GET 請求
+      parameters:
+        - name: fileType
+          in: path
+          description: 導出文件的類型（例如，CSV、Excel等）
+          required: true
+          schema:
+            type: string
+            enum: ['csv', 'xlsx', pdf]
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    type: object
+                    properties:
+                      url:
+                        type: string
+                        description: 導出文件的 URL
