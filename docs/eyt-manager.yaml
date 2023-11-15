@@ -698,10 +698,6 @@ paths:
                           type: array
                           items:
                             type: string
-                        createdAt:
-                          type: string
-                        updatedAt:
-                          type: string
                   pagination:
                     type: object
                     properties:
@@ -799,10 +795,6 @@ paths:
                       content:
                         type: string
                       memo:
-                        type: string
-                      createdAt:
-                        type: string
-                      updatedAt:
                         type: string
     put:
       summary: 更新 edm
