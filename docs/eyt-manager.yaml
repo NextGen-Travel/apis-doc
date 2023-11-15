@@ -857,7 +857,7 @@ paths:
               schema:
                 type: object
     delete:
-      summary: 刪除 edm 細節
+      summary: 刪除 edm
       tags:
         - edm
       security:
@@ -910,6 +910,46 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        sended:
+                          type: boolean
+                        sendTime:
+                          type: string
+                        sendCount:
+                          type: number
+                        openCount:
+                          type: number
+                        clickCount:
+                          type: number
+                        id:
+                          type: number
+                        edm:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            subject:
+                              type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
 
     post:
       summary: 建立 edm project
@@ -975,6 +1015,33 @@ paths:
             application/json:
               schema:
                 type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      sended:
+                        type: boolean
+                      sendTime:
+                        type: string
+                      sendCount:
+                        type: number
+                      openCount:
+                        type: number
+                      clickCount:
+                        type: number
+                      id:
+                        type: number
+                      edm:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          subject:
+                            type: string
     put:
       summary: 更新 edm project
       tags:
@@ -1063,6 +1130,34 @@ paths:
             application/json:
               schema:
                 type: object
+
+  /admin/edm-projects/{id}/emails:
+    get:
+      summary: 獲取 edm project 的 emails
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: project id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  emails:
+                    type: array
+                    description: email
+                    items:
+                      type: string
 
   # ====================
   #
