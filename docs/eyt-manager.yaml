@@ -5818,11 +5818,11 @@ paths:
               enum: ['home-page-pop-up', 'master-carousel-ad', 'horizontal-carousel-ads', 'vertical-carousel-ads', 'iframe-tags']
           required: true
           example: ['home-page-pop-up', 'master-carousel-ad']
-        - name: storeId
+        - name: storeUuid
           in: query
           description: 行銷客戶
           schema:
-            type: integer
+            type: string
           required: false
         - name: startTime
           in: query
@@ -6015,9 +6015,9 @@ paths:
                   type: integer
                   description: 優先順序, 數字越大越優先
                   example: 1
-                storeId:
-                  type: integer
-                  description: 行銷客戶 ID
+                storeUuid:
+                  type: string
+                  description: 行銷客戶 UUID
                   example: 1
                 startTime:
                   type: string
@@ -6105,9 +6105,9 @@ paths:
                   type: integer
                   description: 優先順序, 數字越大越優先
                   example: 1
-                storeId:
-                  type: integer
-                  description: 行銷客戶 ID
+                storeUuid:
+                  type: string
+                  description: 行銷客戶 UUID
                   example: 1
                 startTime:
                   type: string
