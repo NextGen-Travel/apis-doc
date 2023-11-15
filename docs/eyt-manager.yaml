@@ -791,7 +791,9 @@ paths:
                       subject:
                         type: string
                       storeTypes:
-                        type: string
+                        type: array
+                        items:
+                          type: string
                       content:
                         type: string
                       memo:
