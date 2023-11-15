@@ -646,6 +646,426 @@ paths:
 
   # ====================
   #
+  # edm
+  #
+
+  /admin/edms:
+    get:
+      summary: 獲取 edm 列表
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+          description: page
+        - in: query
+          name: perPage
+          required: false
+          schema:
+            type: integer
+          description: perPage
+        - in: query
+          name: keyword
+          required: false
+          schema:
+            type: string
+          description: keyword
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        subject:
+                          type: string
+                        storeTypes:
+                          type: array
+                          items:
+                            type: string
+                        createdAt:
+                          type: string
+                        updatedAt:
+                          type: string
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+
+    post:
+      summary: 建立 edm
+      tags:
+        - edm
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: string
+                  description: title
+                  example: 郵件標題
+                content:
+                  type: string
+                  description: 郵件內容
+                  example: <p>郵件內容</p>
+                memo:
+                  type: string
+                  nullable: true
+                  description: 附註
+                  example: 附註
+                storeTypes:
+                  type: array
+                  description: 商店類型，非營利組織的等等...
+                  example: []
+                  items:
+                    type: string
+                tags:
+                  type: array
+                  description: 商店類型，非營利組織的等等...
+                  example: []
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+
+  /admin/edms/{id}:
+    get:
+      summary: 獲取 edm 細節
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: edm id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      subject:
+                        type: string
+                      storeTypes:
+                        type: string
+                      content:
+                        type: string
+                      memo:
+                        type: string
+                      createdAt:
+                        type: string
+                      updatedAt:
+                        type: string
+    put:
+      summary: 更新 edm
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: edm id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: string
+                  description: title
+                  example: 郵件標題
+                content:
+                  type: string
+                  description: 郵件內容
+                  example: <p>郵件內容</p>
+                memo:
+                  type: string
+                  nullable: true
+                  description: 附註
+                  example: 附註
+                storeTypes:
+                  type: array
+                  description: 商店類型，非營利組織的等等...
+                  example: []
+                  items:
+                    type: string
+                tags:
+                  type: array
+                  description: 商店類型，非營利組織的等等...
+                  example: []
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      summary: 刪除 edm 細節
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: edm id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object     
+ 
+  /admin/edm-projects:
+    get:
+      summary: 獲取 edm project 列表
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+          description: page
+        - in: query
+          name: perPage
+          required: false
+          schema:
+            type: integer
+          description: perPage
+        - in: query
+          name: keyword
+          required: false
+          schema:
+            type: string
+          description: keyword
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+    post:
+      summary: 建立 edm project
+      tags:
+        - edm
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                edmId:
+                  type: number
+                  description: title
+                  example: 1
+                name:
+                  type: string
+                  description: 名字
+                  example: 新計劃
+                sendTime:
+                  type: string
+                  nullable: true
+                  description: 發送時間
+                  example: null
+                sendTo:
+                  type: array
+                  description: email 列表
+                  items:
+                    type: string
+                  example: ['aaa@bbb.com', 'ccc@ddd.com']
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+
+  /admin/edm-projects/{id}:
+    get:
+      summary: 獲取 edm project 細節
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: edm project id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      summary: 更新 edm project
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: project id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                edmId:
+                  type: number
+                  description: title
+                  example: 1
+                name:
+                  type: string
+                  description: 名字
+                  example: 新計劃
+                sendTime:
+                  type: string
+                  nullable: true
+                  description: 發送時間
+                  example: null
+                sendTo:
+                  type: array
+                  description: email 列表
+                  items:
+                    type: string
+                  example: ['aaa@bbb.com', 'ccc@ddd.com']
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      summary: 刪除 edm project
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: project id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /admin/edm-projects/{id}/send:
+    post:
+      summary: 更新 edm project
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: project id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ====================
+  #
   # dashboard
   #
 
