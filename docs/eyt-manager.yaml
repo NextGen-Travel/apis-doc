@@ -694,10 +694,14 @@ paths:
                           type: number
                         subject:
                           type: string
+                        tags:
+                          type: array
+                          items:
+                            type: number
                         storeTypes:
                           type: array
                           items:
-                            type: string
+                            type: number
                   pagination:
                     type: object
                     properties:
@@ -741,13 +745,13 @@ paths:
                   description: 商店類型，非營利組織的等等...
                   example: []
                   items:
-                    type: string
+                    type: number
                 tags:
                   type: array
                   description: 商店類型，非營利組織的等等...
                   example: []
                   items:
-                    type: string
+                    type: number
       responses:
         '200':
           description: 成功
@@ -790,10 +794,14 @@ paths:
                         type: number
                       subject:
                         type: string
+                      tags:
+                        type: array
+                        items:
+                          type: number
                       storeTypes:
                         type: array
                         items:
-                          type: string
+                          type: number
                       content:
                         type: string
                       memo:
@@ -836,13 +844,13 @@ paths:
                   description: 商店類型，非營利組織的等等...
                   example: []
                   items:
-                    type: string
+                    type: number
                 tags:
                   type: array
-                  description: 商店類型，非營利組織的等等...
+                  description: 訂閱標籤
                   example: []
                   items:
-                    type: string
+                    type: number
       responses:
         '200':
           description: 成功
@@ -871,6 +879,74 @@ paths:
               schema:
                 type: object     
  
+  /admin/edms/{id}/recommend-emails:
+    get:
+      summary: 獲取 edm project 列表
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: edm id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      emails:
+                        type: array
+                        items:
+                          type: string
+
+  /admin/edm-test-send:
+    post:
+      summary: 測試發送 edm
+      tags:
+        - edm
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subject:
+                  type: string
+                  description: 主旨
+                  example: 主旨
+                content:
+                  type: string
+                  description: 內容
+                  example: 內容
+                emails:
+                  type: array
+                  description: email 列表
+                  items:
+                    type: string
+                  example: ['aaa@bbb.com', 'ccc@ddd.com']
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
   /admin/edm-projects:
     get:
       summary: 獲取 edm project 列表
