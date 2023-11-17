@@ -6389,7 +6389,7 @@ paths:
       parameters:
         - name: keyword
           in: query
-          description: 關鍵字搜尋
+          description: 只能找標題欄位, 廣告內容欄位不搜尋
           schema:
             type: string
           required: false
@@ -6401,7 +6401,7 @@ paths:
             items:
               type: string
               enum: ['home-page-pop-up', 'master-carousel-ad', 'horizontal-carousel-ads', 'vertical-carousel-ads', 'iframe-tags']
-          required: true
+          required: false
           example: ['home-page-pop-up', 'master-carousel-ad']
         - name: storeUuid
           in: query
@@ -6411,14 +6411,14 @@ paths:
           required: false
         - name: startTime
           in: query
-          description: 開始日期
-          example: 2023-09-01
+          description: 開始時間 (開始當日的 00:00:00 在 UTC 的時間)
+          example: 2023-08-31T16:00:00.000Z
           schema:
             type: string
         - name: endTime
           in: query
-          description: 結束日期
-          example: 2023-12-01
+          description: 結束時間 (結束當日的 00:00:00 在 UTC 的時間)
+          example: 2023-12-30T16:00:00.000Z
           schema:
             type: string
         - name: page
@@ -6433,6 +6433,7 @@ paths:
           schema:
             type: integer
             minimum: 10
+            maximum: 100
       responses:
           '200':
             description: 成功
@@ -6492,15 +6493,15 @@ paths:
                                 example: 行銷客戶名稱
                           startTime:
                             type: string
-                            description: 開始日期
-                            example: 2023-09-01
+                            description: 開始時間 (開始當日的 00:00:00 在 UTC 的時間)
+                            example: 2023-08-31T16:00:00.000Z
                           endTime:
                             type: string
-                            description: 結束日期
-                            example: 2024-09-01
+                            description: 結束時間 (結束當日的 23:59:59 在 UTC 的時間)
+                            example: 2023-09-30T15:59:59.000Z
                           deletable:
                             type: boolean
-                            description: 是否可刪除
+                            description: 是否可刪除 目前只有是 home-page-pop-up(首頁彈窗) 才會是 false
                             example: true
                           webImg:
                             type: string
@@ -6610,12 +6611,12 @@ paths:
                   example: 1
                 startTime:
                   type: string
-                  description: 開始日期
-                  example: 2023-09-01
+                  description: 開始時間 (開始當日的 00:00:00 在 UTC 的時間)
+                  example: 2023-08-31T16:00:00.000Z
                 endTime:
                   type: string
-                  description: 結束日期
-                  example: 2024-09-01
+                  description: 結束時間 (結束當日的 00:00:00 在 UTC 的時間, 後端會轉為 結束當日的 23:59:59 存入資料庫)
+                  example: 2023-09-29T16:00:00.000Z
                 webImg:
                   type: string
                   description: 網頁版圖片
@@ -6700,12 +6701,12 @@ paths:
                   example: 1
                 startTime:
                   type: string
-                  description: 開始日期
-                  example: 2023-09-01
+                  description: 開始時間 (開始當日的 00:00:00 在 UTC 的時間)
+                  example: 2023-08-31T16:00:00.000Z
                 endTime:
                   type: string
-                  description: 結束日期
-                  example: 2024-09-01
+                  description: 結束時間 (結束當日的 00:00:00 在 UTC 的時間, 後端會轉為 結束當日的 23:59:59 存入資料庫)
+                  example: 2023-09-29T16:00:00.000Z
                 webImg:
                   type: string
                   description: 網頁版圖片
@@ -6776,6 +6777,53 @@ paths:
                     type: string
                     description: 回應消息
 
+  /admin/ads/{adType}/{adId}/enabled/{isEnabled}:
+    patch:
+      summary: 更新廣告啟用狀態
+      security:
+        - user_token: []
+      tags:
+        - ads
+      parameters:
+        - name: adType
+          in: path
+          description: 廣告類型 (home-page-pop-up 不能被禁用)
+          required: true
+          example: master-carousel-ad
+          schema:
+            type: string
+            enum: ['master-carousel-ad', 'horizontal-carousel-ads', 'vertical-carousel-ads', 'iframe-tags']
+        - name: adId
+          in: path
+          description: 廣告 ID
+          required: true
+          example: 1
+          schema:
+            type: integer
+        - name: isEnabled
+          in: path
+          description: 是否啟用
+          required: true
+          example: true
+          schema:
+            type: boolean
+            enum: [true, false, 1, 0]
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        description: 啟用廣告
+                        example: true
+
   /admin/ads/schedule/{year}/{month}:
     get:
       summary: 獲取後台廣告排程列表
@@ -6786,7 +6834,8 @@ paths:
       parameters:
         - name: year
           in: path
-          description: 年份
+          description: >
+            年份 (可用時間範圍: 2023-09 ~ 2037-12)
           required: true
           example: 2023
           schema:
@@ -6794,7 +6843,8 @@ paths:
             minimum: 2023
         - name: month
           in: path
-          description: 月份 (最小在 2023 年 9 月)
+          description: >
+            月份 (可用時間範圍: 2023-09 ~ 2037-12)
           required: true
           example: 9
           schema:
@@ -6856,12 +6906,12 @@ paths:
                                 example: 行銷客戶名稱
                           startTime:
                             type: string
-                            description: 開始日期
-                            example: 2023-09-01
+                            description: 開始時間 (開始當日的 00:00:00 在 UTC 的時間)
+                            example: 2023-08-31T16:00:00.000Z
                           endTime:
                             type: string
-                            description: 結束日期
-                            example: 2024-09-01
+                            description: 結束時間 (結束當日的 23:59:59 在 UTC 的時間)
+                            example: 2023-09-30T15:59:59.000Z
 
   /admin/ads/export/{fileType}:
     get:
