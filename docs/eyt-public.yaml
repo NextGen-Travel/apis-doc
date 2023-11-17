@@ -3362,7 +3362,60 @@ paths:
                         - permitNo : HK-07007
                           name: VENTOLIN INHALER 100MCG/METERED DOSE
 
-
+  /ads/list:
+    get:
+      summary: 獲取 本檔次 要顯示的廣告列表
+      security:
+        - user_token: []
+      tags:
+        - ads
+      responses:
+          '200':
+            description: 成功
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    msg:
+                      type: string
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          adType:
+                            type: string
+                            description: 廣告類型
+                            example: home-page-pop-up
+                          priority:
+                            type: integer
+                            description: 優先順序, 數字越大越優先
+                            example: 1
+                          webImg:
+                            type: string
+                            description: 網頁版圖片
+                            example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+                          appImg:
+                            type: string
+                            description: 行動版圖片
+                            example: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+                          targetUrl:
+                            type: string
+                            description: 目標網址
+                            example: https://www.google.com.tw/
+                          iframeTag:
+                            type: string
+                            description: iframe tag
+                            example: <iframe src="https://www.google.com.tw/" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+                          popupTitle:
+                            type: string
+                            description: 彈窗標題
+                            example: 彈窗標題
+                          popupContent:
+                            type: string
+                            description: 彈窗內容
+                            example: 彈窗內容
 
   # ====================
   #
