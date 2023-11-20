@@ -6900,6 +6900,10 @@ paths:
                                 type: integer
                                 description: 行銷客戶 ID
                                 example: 1
+                              uuid:
+                                type: string
+                                description: 行銷客戶 uuid
+                                example: 1
                               name:
                                 type: string
                                 description: 行銷客戶名稱
