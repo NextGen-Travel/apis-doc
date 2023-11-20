@@ -4284,6 +4284,38 @@ paths:
                 msg: "系統暫未能運作，請稍後再試"
                 receipt: ""
 
+
+  /pos-v2/api/pos/{id}:
+    delete:
+      summary: 刪除訂單
+      description: 刪除POS訂單.
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: number
+          description: 訂單ID
+          required: true
+      tags:
+        - Sale
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: integer
+                    description: 0=失敗, 1=成功
+                  msg:
+                    type: string
+                    description: 成功訊息
+              example:
+                success: true
+                msg: "已成功刪除銷售"
+
 # Order
   /pos-v2/api/orders:
     get:
