@@ -1002,6 +1002,8 @@ paths:
                           type: number
                         id:
                           type: number
+                        createdAt:
+                          type: string
                         edm:
                           type: object
                           properties:
@@ -1105,6 +1107,8 @@ paths:
                         type: number
                       id:
                         type: number
+                      createdAt:
+                        type: string
                       edm:
                         type: object
                         properties:
