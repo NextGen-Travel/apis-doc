@@ -1914,6 +1914,106 @@ components:
               description: 總筆數
 
 
+    LocationDetailResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: 分店 id
+              business_id:
+                type: number
+                description: business id
+              location_id: 
+                type: string
+                description: 店鋪 ID
+              name:
+                type: string
+                description: 店鋪名稱
+              landmark:
+                type: string
+                description: 地址
+              country:
+                type: string
+                description: 國家
+              state:
+                type: string
+                description: 地區
+              city:
+                type: string
+                description: 區份
+              zip_code:
+                type: string
+                description: 郵政編碼
+              invoice_scheme_id: 
+                type: number
+                description: 發票計劃 id
+              invoice_layout_id:
+                type: number
+                description: 發票格式 id
+              sale_invoice_layout_id:
+                type: number
+                description: 待售 發票格式 id
+              selling_price_group_id:
+                type: number
+                description: 預設售價組 id
+              print_receipt_on_invoice:
+                type: number
+                description: 完成後自動打印發票
+              receipt_printer_type:
+                type: string
+                description: 收據打印機類型
+              printer_id: 
+                type: number
+                description: 列印機 id
+              mobile:
+                type: string
+                description: 流動電話號碼
+              alternate_number:
+                type: string
+                description: 備用電話號碼
+              email:
+                type: string
+                description: 電郵地址
+              websit": 
+                type: string
+                description: 網站
+              featured_products: 
+                type: array
+                description: POS系統特色產品
+              is_active:
+                type: number
+                description: 是否啟用
+              custom_field1:
+                type: string
+                description: 自訂欄位1
+              custom_field2:
+                type: string
+                description: 自訂欄位2
+              custom_field3:
+                type: string
+                description: 自訂欄位3
+              custom_field4:
+                type: string
+                description: 自訂欄位4
+              deleted_at:
+                type: string
+                description: 刪除時間
+              created_at:
+                type: string
+                description: 建立時間
+              updated_at:
+                type: string
+                description: 更新時間
+              payment_methods:
+                type: array
+                description: 付款選項
+
+
     TransportStatusResponse:
       type: object
       properties:
@@ -2942,6 +3042,99 @@ paths:
                   per_page: 10
                   to: 5
                   total: 5
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
+
+
+  /pos-v2/api/business-locations/{location_id}:
+    get:
+      summary: 取得特定分店詳細資訊
+      description: 取得特定分店詳細資訊
+      tags:
+        - Common
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LocationDetailResponse'
+              example:
+                data:
+                  - id: 1
+                    business_id: 1
+                    location_id: BL0001
+                    name: 藥局 A
+                    landmark: 加多利山亞皆老街147A號
+                    country: 香港
+                    state: 九龍
+                    city: Taipei city
+                    zip_code: 111
+                    invoice_scheme_id: 1
+                    invoice_layout_id: 2
+                    sale_invoice_layout_id: 2
+                    selling_price_group_id: null
+                    print_receipt_on_invoice: 1
+                    receipt_printer_type: browser
+                    printer_id: null
+                    mobile: 09123456
+                    alternate_number: 77777777
+                    email: oscarkuo@nextgen.com.hk
+                    website: https://www.google.com
+                    featured_products: null
+                    custom_tag_products: "{\"1\":[\"10\",\"120\",\"749\"],\"2\":[\"749\",\"750\",\"751\",\"754\"],\"3\":[\"749\",\"752\",\"753\"]}"
+                    is_active: 1
+                    custom_field1: A1
+                    custom_field2: A2
+                    custom_field3: A3
+                    custom_field4: A4
+                    deleted_at: null
+                    created_at: 2022-08-08 07:58:32
+                    updated_at: 2023-09-21 16:25:22
+                    payment_methods: 
+                      - name: cash
+                        label: Cash
+                        account_id: null
+                      - name: card
+                        label: Card
+                        account_id: null
+                      - name: cheque
+                        label: Cheque
+                        account_id: null
+                      - name: bank_transfer
+                        label: Bank Transfer
+                        account_id: null
+                      - name: other
+                        label: Other
+                        account_id: null
+                      - name: custom_pay_1
+                        label: 電子支付
+                        account_id: null
+                      - name: custom_pay_2
+                        label: p2
+                        account_id: null
+                      - name: custom_pay_3
+                        label: p3
+                        account_id: null
+                      - name: custom_pay_4
+                        label: Custom Payment 4
+                        account_id: null
+                      - name: custom_pay_5
+                        label: Custom Payment 5
+                        account_id: null
+                      - name: custom_pay_6
+                        label: Custom Payment 6
+                        account_id: null
+                      - name: custom_pay_7
+                        label: Custom Payment 7
+                        account_id: null
         '404':
           description: 錯誤
           content:
