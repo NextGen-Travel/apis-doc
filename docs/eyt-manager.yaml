@@ -1227,11 +1227,14 @@ paths:
               schema:
                 type: object
                 properties:
-                  emails:
-                    type: array
-                    description: email
-                    items:
-                      type: string
+                  data:
+                    type: object
+                    properties:
+                      emails:
+                        type: array
+                        description: email
+                        items:
+                          type: string
 
   # ====================
   #
