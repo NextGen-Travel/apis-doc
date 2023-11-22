@@ -888,8 +888,38 @@ paths:
           content:
             application/json:
               schema:
-                type: object     
- 
+                type: object  
+
+  /admin/edms/{id}/preview:
+     get:
+      summary: 獲取 edm 預覽
+      tags:
+        - edm
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: edm id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      html:
+                        type: string
+
   /admin/edms/{id}/recommend-emails:
     get:
       summary: 獲取 edm project 列表
