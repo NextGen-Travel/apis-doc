@@ -692,6 +692,8 @@ paths:
                       properties:
                         id:
                           type: number
+                        locale:
+                          type: string
                         subject:
                           type: string
                         tags:
@@ -731,6 +733,8 @@ paths:
                   type: string
                   description: title
                   example: 郵件標題
+                locale:
+                  type: string
                 content:
                   type: string
                   description: 郵件內容
@@ -760,8 +764,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
-                    type: number
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
 
   /admin/edms/{id}:
     get:
@@ -793,6 +800,8 @@ paths:
                       id:
                         type: number
                       subject:
+                        type: string
+                      locale:
                         type: string
                       tags:
                         type: array
@@ -834,6 +843,8 @@ paths:
                   type: string
                   description: 郵件內容
                   example: <p>郵件內容</p>
+                locale:
+                  type: string
                 memo:
                   type: string
                   nullable: true
@@ -973,6 +984,12 @@ paths:
           schema:
             type: string
           description: keyword
+        - in: query
+          name: edm
+          required: false
+          schema:
+            type: integer
+          description: edm
       responses:
         '200':
           description: 成功
