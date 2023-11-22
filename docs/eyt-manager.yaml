@@ -890,8 +890,8 @@ paths:
               schema:
                 type: object  
 
-  /admin/edms/{id}/preview:
-     get:
+  /admin/edm-preview:
+     post:
       summary: 獲取 edm 預覽
       tags:
         - edm
@@ -904,6 +904,21 @@ paths:
           schema:
             type: integer
           description: edm id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                layout:
+                  type: string
+                  description: 版型
+                  example: basic:zh-TW
+                content:
+                  type: string
+                  description: 內容
+                  example: <h1>Hello!</h1>
       responses:
         '200':
           description: 成功
