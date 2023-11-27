@@ -7111,7 +7111,7 @@ paths:
                           type: number
                           example: 100
                           description: 總共幾筆
-                        limit:
+                        pageSize:
                           type: number
                           example: 10
                           description: 每頁顯示數量
@@ -7119,7 +7119,7 @@ paths:
                           type: number
                           example: 1
                           description: 當前頁數
-                        pages:
+                        pageCount:
                           type: number
                           example: 10
                           description: 總共幾頁
@@ -7202,7 +7202,7 @@ paths:
                           type: number
                           example: 100
                           description: 總共幾筆
-                        limit:
+                        pageSize:
                           type: number
                           example: 10
                           description: 每頁顯示數量
@@ -7210,7 +7210,7 @@ paths:
                           type: number
                           example: 1
                           description: 當前頁數
-                        pages:
+                        pageCount:
                           type: number
                           example: 10
                           description: 總共幾頁
