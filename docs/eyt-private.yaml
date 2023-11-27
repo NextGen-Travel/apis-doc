@@ -1685,3 +1685,242 @@ paths:
                   msg:
                     type: string
                     example: 取消收藏！
+
+  # ====================
+  #
+  # human customer services
+  #
+
+  /member/hcs/list:
+    get:
+      summary: 該會員所有客服單列表, 倒序 (最新的在最上面)
+      tags:
+        - human customer services
+      security:
+        - member_token: []
+      parameters:
+        - name: page
+          in: query
+          description: 頁數
+          required: false
+          example: 1
+          schema:
+            type: number
+        - name: limit
+          in: query
+          description: 每頁顯示數量
+          required: false
+          example: 10
+          schema:
+            type: number
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tickets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        serialNumber:
+                          type: string
+                          example: '0123456789123456'
+                          description: 客服單流水號
+                        ticket:
+                          type: string
+                          example: '我要問問題'
+                          description: 客服單主題
+                        status:
+                          type: string
+                          example: 'open'
+                          description: 客服單狀態
+                          enum: [open, closed]
+                        createdAt:
+                          type: string
+                          example: '2021-05-17T09:43:09.944Z'
+                          description: 客服單建立時間
+                        lastMessageTime:
+                          type: string
+                          example: '2021-05-17T09:43:09.944Z'
+                          description: 最後訊息時間
+
+                  pagination:
+                    type: object
+                    properties:
+                      total:
+                        type: number
+                        example: 100
+                        description: 總共幾筆
+                      limit:
+                        type: number
+                        example: 10
+                        description: 每頁顯示數量
+                      page:
+                        type: number
+                        example: 1
+                        description: 當前頁數
+                      pages:
+                        type: number
+                        example: 10
+                        description: 總共幾頁
+
+  /member/hcs/{serialNumber}/history:
+    get:
+      summary: 會員查詢特定客服單歷史紀錄
+      tags:
+        - human customer services
+      security:
+        - member_token: []
+      parameters:
+        - name: serialNumber
+          in: path
+          description: 客服單流水號 (要有前置零, 16位數字)
+          required: true
+          example: '0123456789123456'
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: 頁數
+          required: false
+          example: 1
+          schema:
+            type: number
+        - name: prePage
+          in: query
+          description: 每頁顯示數量
+          required: false
+          example: 10
+          schema:
+            type: number
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ticket:
+                    type: string
+                    example: '我要問問題'
+                    description: 客服單主題
+                  status:
+                    type: string
+                    example: 'open'
+                    description: 客服單狀態
+                    enum: [open, closed]
+                  createdAt:
+                    type: string
+                    example: '2021-05-17T09:43:09.944Z'
+                    description: 客服單建立時間
+                  history:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        content:
+                          type: string
+                          example: '我要問問題'
+                          description: 客服單內容
+                        time:
+                          type: string
+                          example: '2021-05-17T09:43:09.944Z'
+                          description: 訊息傳送時間
+                        isMember:
+                          type: boolean
+                          example: true
+                          description: 是否為會員回覆
+                        name:
+                          type: string
+                          example: '會員'
+                          description: 回覆者名稱
+                  pagination:
+                    type: object
+                    properties:
+                      total:
+                        type: number
+                        example: 100
+                        description: 總共幾筆
+                      limit:
+                        type: number
+                        example: 10
+                        description: 每頁顯示數量
+                      page:
+                        type: number
+                        example: 1
+                        description: 當前頁數
+                      pages:
+                        type: number
+                        example: 10
+                        description: 總共幾頁
+
+  /member/hcs/create:
+    post:
+      summary: 會員建立客服單
+      tags:
+        - human customer services
+      security:
+        - member_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ticket:
+                  type: string
+                  description: 客服單主題
+                content:
+                  type: string
+                  description: 客服單內容
+              required:
+                - title
+                - content
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /member/hcs/{serialNumber}/push:
+    patch:
+      summary: 會員添加客服單回覆
+      tags:
+        - human customer services
+      security:
+        - member_token: []
+      parameters:
+        - name: serialNumber
+          in: path
+          description: 客服單流水號 (要有前置零, 16位數字)
+          required: true
+          example: '0123456789123456'
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: 回覆內容
+              required:
+                - content
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
