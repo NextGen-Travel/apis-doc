@@ -696,6 +696,8 @@ paths:
                           type: string
                         subject:
                           type: string
+                        memo:
+                          type: string
                         tags:
                           type: array
                           items:
