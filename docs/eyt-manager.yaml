@@ -2693,6 +2693,85 @@ paths:
   #
   # posts
   #
+  /admin/faq-posts/{uuid}:
+    get:  
+      summary: 後台獲取指定文章
+      security:
+        - user_token: []
+      tags:
+        - posts
+      parameters:
+        - name: uuid
+          in: path
+          description: 文章uuid
+          required: true
+          example: e6d37477-7224-4fb6-a56a-d860228d48f4
+          schema:
+            type: string
+      responses:  
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      contents:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            locale:
+                              type: string
+                            title:
+                              type: string
+                            uuid:
+                              type: string
+                            content:
+                              type: string
+                            seoDescription:
+                              type: string
+                            image:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                url:
+                                  type: string
+                      publishType:
+                        type: string
+                        enum: [ now , reserve]
+                        description: 立即 now, 預約reserve
+                      publishStart:
+                        type: string
+                      publishEnd:
+                        type: string
+                      urlSuffix:
+                        type: string
+                      store:
+                        type: number
+                      editor:
+                        type: string
+                      type:
+                        type: number
+                      firstCategory:
+                        type: number
+                      secondCategory:
+                        type: number
+                      tags:
+                        type: array
+                        items:
+                          type: number
+                      status:
+                        type: string
+                        enum: [pendingReview,draft]
+                        description: superAdmin的話不是pendingPublish就是draft,其他身份點擊儲存並審核則帶pendingReview,不然就是draft
+                      updatedAt:
+                        type: string
+                        description: 最後編輯日期
 
   /admin/faq-posts:
     get:
