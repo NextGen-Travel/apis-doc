@@ -646,6 +646,69 @@ paths:
 
   # ====================
   #
+  # visitor question
+  #
+
+  /admin/visitor-question/setting:
+    get:
+      summary: 獲取問答設定
+      tags:
+        - visitor-question
+      security:
+        - user_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      questionTxtLength:
+                        type: number
+                      questionDailyLimit:
+                        type: number
+    post:
+      summary: 獲取問答設定
+      tags:
+        - visitor-question
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                questionTxtLength:
+                  type: number
+                  description: 每次說話的長度
+                  example: 1
+                questionDailyLimit:
+                  type: number
+                  description: 每天限制的長度
+                  example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+
+  # ====================
+  #
   # edm
   #
 
@@ -2631,6 +2694,104 @@ paths:
   # posts
   #
 
+  /admin/faq-posts:
+    get:
+      summary: 獲取後台文章列表及審核文章列表
+      security:
+        - user_token: []
+      tags:
+        - posts
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+          required: false
+          description:  關鍵字
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          description: 單頁筆數
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+          description: 第幾頁                                 
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        uuid:
+                          type: string
+                        title:
+                          type: string
+                        type:
+                          type: object
+                          description: 文章類別
+                          properties:
+                            id:
+                              type: number
+                            name:
+                              type: string
+                        categories:
+                          type: array
+                          description: 文章分類
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        store:
+                          type: object
+                          description: 公司名稱
+                          properties:
+                            uuid:
+                              type: string
+                            name:
+                              type: string
+                        status:
+                          type: string
+                        editor:
+                          type: string
+                          description: 編輯者
+                        date:
+                          type: string
+                        image:
+                          type: string
+                        reasonForReject:
+                          type: string
+                          description: 文章退件原因
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                        description: 當前頁面
+                      pageSize:
+                        type: number
+                        description: 每頁筆數
+                      pageCount:
+                        type: number
+                        description: 總共頁數
+                      total:
+                        type: number
+                        description: 總共筆數
+
   /admin/posts:
     get:
       summary: 獲取後台文章列表及審核文章列表
@@ -4493,6 +4654,31 @@ paths:
             type: string
             enum: [ zh, zh-CN, en]
           description: 文章類別的語言                              
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+  
+  /admin/faq-types:
+    get:
+      summary: 獲取問答文章類別
+      security:
+        - user_token: []
+      tags:
+        - tags                         
       responses:
         '200':
           description: 成功
