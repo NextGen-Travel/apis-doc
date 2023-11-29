@@ -5832,6 +5832,8 @@ paths:
                           properties:
                             id:
                               type: number
+                            rank:
+                              type: number
                             memo:
                               type: string
                             tag:
@@ -5882,6 +5884,8 @@ paths:
               properties:
                 memo:
                   type: string
+                rank:
+                  type: number
                 editor:
                   type: number
                 store:
@@ -5945,6 +5949,8 @@ paths:
                         type: number
                       memo:
                         type: string
+                      rank:
+                        type: number
                       tag:
                         type: object
                         properties:
@@ -6006,6 +6012,8 @@ paths:
               properties:
                 memo:
                   type: string
+                rank:
+                  type: number
                 editor:
                   type: number
                 store:
