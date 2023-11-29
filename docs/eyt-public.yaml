@@ -3362,7 +3362,7 @@ paths:
                         - permitNo : HK-07007
                           name: VENTOLIN INHALER 100MCG/METERED DOSE
 
-  /ads/list:
+  /ad-eyt/list:
     get:
       summary: 獲取 本檔次 要顯示的廣告列表
       security:
