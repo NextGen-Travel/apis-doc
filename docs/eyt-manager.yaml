@@ -2693,183 +2693,6 @@ paths:
   #
   # posts
   #
-  /admin/faq-posts/{uuid}:
-    get:  
-      summary: 後台獲取指定文章
-      security:
-        - user_token: []
-      tags:
-        - posts
-      parameters:
-        - name: uuid
-          in: path
-          description: 文章uuid
-          required: true
-          example: e6d37477-7224-4fb6-a56a-d860228d48f4
-          schema:
-            type: string
-      responses:  
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                    properties:
-                      contents:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            locale:
-                              type: string
-                            title:
-                              type: string
-                            uuid:
-                              type: string
-                            content:
-                              type: string
-                            seoDescription:
-                              type: string
-                            image:
-                              type: object
-                              properties:
-                                id:
-                                  type: number
-                                url:
-                                  type: string
-                      publishType:
-                        type: string
-                        enum: [ now , reserve]
-                        description: 立即 now, 預約reserve
-                      publishStart:
-                        type: string
-                      publishEnd:
-                        type: string
-                      urlSuffix:
-                        type: string
-                      store:
-                        type: number
-                      editor:
-                        type: string
-                      type:
-                        type: number
-                      firstCategory:
-                        type: number
-                      secondCategory:
-                        type: number
-                      tags:
-                        type: array
-                        items:
-                          type: number
-                      status:
-                        type: string
-                        enum: [pendingReview,draft]
-                        description: superAdmin的話不是pendingPublish就是draft,其他身份點擊儲存並審核則帶pendingReview,不然就是draft
-                      updatedAt:
-                        type: string
-                        description: 最後編輯日期
-
-  /admin/faq-posts:
-    get:
-      summary: 獲取後台文章列表及審核文章列表
-      security:
-        - user_token: []
-      tags:
-        - posts
-      parameters:
-        - in: query
-          name: keyword
-          schema:
-            type: string
-          required: false
-          description:  關鍵字
-        - in: query
-          name: pageSize
-          schema:
-            type: integer
-          description: 單頁筆數
-        - in: query
-          name: page
-          schema:
-            type: integer
-            minimum: 1
-          description: 第幾頁                                 
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        uuid:
-                          type: string
-                        title:
-                          type: string
-                        type:
-                          type: object
-                          description: 文章類別
-                          properties:
-                            id:
-                              type: number
-                            name:
-                              type: string
-                        categories:
-                          type: array
-                          description: 文章分類
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                              name:
-                                type: string
-                        store:
-                          type: object
-                          description: 公司名稱
-                          properties:
-                            uuid:
-                              type: string
-                            name:
-                              type: string
-                        status:
-                          type: string
-                        editor:
-                          type: string
-                          description: 編輯者
-                        date:
-                          type: string
-                        image:
-                          type: string
-                        reasonForReject:
-                          type: string
-                          description: 文章退件原因
-                  pagination:
-                    type: object
-                    properties:
-                      page:
-                        type: number
-                        description: 當前頁面
-                      pageSize:
-                        type: number
-                        description: 每頁筆數
-                      pageCount:
-                        type: number
-                        description: 總共頁數
-                      total:
-                        type: number
-                        description: 總共筆數
 
   /admin/posts:
     get:
@@ -5899,8 +5722,7 @@ paths:
           required: true
           example: 1
           schema:
-            type: string     
-                        
+            type: string
       responses:
         '200':
           description: 成功
@@ -5982,23 +5804,235 @@ paths:
   #
   # faqs
   #
-  /admin/faq/options/tags:
+
+  /admin/faqs:
     get:
-      summary: faq Tags
+      summary: 獲取 faq 列表
+      tags:
+        - faqs
+      security:
+        - user_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            memo:
+                              type: string
+                            tag:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                tagName:
+                                  type: string
+                            store:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                name:
+                                  type: string
+                            editor:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                username:
+                                  type: string
+    post:
+      summary: 建立 faq
+      tags:
+        - faqs
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              example:
+                memo: "123"
+                editor: 1
+                store: 1
+                tag: 1
+                contents:
+                  - locale: zh
+                    title: test
+                    content: test!
+                  - locale: zh-CN
+                    title: test222
+                    content: test222!
+              properties:
+                memo:
+                  type: string
+                editor:
+                  type: number
+                store:
+                  type: number
+                tag:
+                  type: number
+                contents:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      content:
+                        type: string
+                      locale:
+                        type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+
+  /admin/faqs/{id}:
+    get:
+      summary: 獲取 faq 列表
       tags:
         - faqs
       security:
         - user_token: []
       parameters:
-        - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/locale'
+        - name: id
+          in: path
+          description: 部門id
+          required: true
+          example: 1
+          schema:
+            type: string
       responses:
-          '200':
-            description: 成功
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/OptionsBaseResponse'
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      memo:
+                        type: string
+                      tag:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          tagName:
+                            type: string
+                      store:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          name:
+                            type: string
+                      editor:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          username:
+                            type: string
+                      faq_contents:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            title:
+                              type: string
+                            locale:
+                              type: string
+                            content:
+                              type: string
+    put:
+      summary: 更新 faq
+      tags:
+        - faqs
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+           application/json:
+            schema:
+              type: object
+              example:
+                memo: "123"
+                editor: 1
+                store: 1
+                tag: 1
+                contents:
+                  - locale: zh
+                    title: test
+                    content: test!
+                  - locale: zh-CN
+                    title: test222
+                    content: test222!
+              properties:
+                memo:
+                  type: string
+                editor:
+                  type: number
+                store:
+                  type: number
+                tag:
+                  type: number
+                contents:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                      content:
+                        type: string
+                      locale:
+                        type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
 
   # ====================
   #

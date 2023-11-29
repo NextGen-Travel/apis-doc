@@ -213,6 +213,44 @@ components:
 paths:
   # ====================
   #
+  # Faq
+  #
+
+  /faq-contents:
+    get:
+      summary: 獲取 faq 列表
+      tags:
+        - faq
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /faq-contents/{faqId}:
+    get:
+      summary: 獲取 faq 列表
+      tags:
+        - faq
+      parameters:
+        - in: path
+          name: faqId
+          required: true
+          schema:
+            type: string
+          example: 1
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+  # ====================
+  #
   # Auth
   #
 
@@ -1511,52 +1549,6 @@ paths:
                       type: number
                     name:
                       type: string
-
-  /faq:  
-    get:
-      summary: 獲取常見問題的文章
-      tags:
-        - posts
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        category:
-                          type: string
-                        questions:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              uuid:
-                                type: string
-                              title:
-                                type: string
-                              content:
-                                type: string
-                              updatedAt:
-                                type: string
-                              source:
-                                type: object
-                                properties:
-                                  name:
-                                    type: string
-                                    description: 空字串則表示畫面不用顯示來源及更新日期
-                                  website:
-                                    type: string
-                                    description: 空字串則表示畫面不用顯示來源及更新日期
-
   /postTypes:
     get:
       summary: 獲取文章類別 id 及 name 及 typeName
@@ -1897,40 +1889,11 @@ paths:
                             id:
                               type: number
                             tagName:
-                              type: string
-
-  /categories/faq:
-    get:
-      summary: 獲取faq的category
-      tags:
-        - tags
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        name:
-                          type: string
-                        parent_id:
-                          type: string
-                          description: 暫時先開出來的欄位，不確定之後會不會用到
-                     
+                              type: string              
   # ====================
   #
   # categories
-  #                              
+  #
 
   /categories/posts:
     get:
