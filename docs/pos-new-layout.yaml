@@ -4962,14 +4962,12 @@ paths:
                 enum:
                   - "ASC"
                   - "DESC"
-                  - null
               current_stock :
                 description: 本地庫存
                 type: string
                 enum:
                   - "ASC"
                   - "DESC"
-                  - undefined
         - in: query
           name: length
           schema:
