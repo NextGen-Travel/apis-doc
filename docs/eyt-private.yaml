@@ -1721,11 +1721,17 @@ paths:
               schema:
                 type: object
                 properties:
-                  tickets:
+                  msg:
+                    type: string
+                  data:
                     type: array
                     items:
                       type: object
                       properties:
+                        ticketId:
+                          type: number
+                          example: 1
+                          description: 客服單id
                         serialNumber:
                           type: string
                           example: '0123456789123456'
@@ -1823,6 +1829,10 @@ paths:
                     items:
                       type: object
                       properties:
+                        historyId:
+                          type: number
+                          example: 1
+                          description: 歷史紀錄流水號
                         content:
                           type: string
                           example: '我要問問題'
