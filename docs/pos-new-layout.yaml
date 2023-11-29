@@ -4968,7 +4968,7 @@ paths:
                 enum:
                   - "ASC"
                   - "DESC"
-                required: ['']
+                  - undefined
         - in: query
           name: length
           schema:
