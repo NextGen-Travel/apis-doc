@@ -5923,7 +5923,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: 部門id
+          description: Faq id
           required: true
           example: 1
           schema:
@@ -6033,6 +6033,27 @@ paths:
                 properties:
                   data:
                     type: object
+    delete:
+      summary: 刪除 faq
+      tags:
+        - faqs
+      security:
+        - user_token: []
+      parameters:
+        - name: id
+          in: path
+          description: Faq id
+          required: true
+          example: 1
+          schema:
+            type: string     
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
 
   # ====================
   #
