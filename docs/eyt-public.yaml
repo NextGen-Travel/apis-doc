@@ -241,6 +241,8 @@ paths:
                           properties:
                             title:
                               type: string
+                            updatedAt:
+                              type: string
                             id:
                               type: number
                             faq:
@@ -248,10 +250,6 @@ paths:
                               properties:
                                 id:
                                   type: number
-                                updatedAt:
-                                  type: string
-                                source:
-                                  type: string
                                 tag:
                                   type: object
                                   properties:
@@ -296,6 +294,8 @@ paths:
                       title:
                         type: string
                       content:
+                        type: string
+                      updatedAt:
                         type: string
                       faq:
                         type: object

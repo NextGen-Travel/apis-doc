@@ -5834,8 +5834,6 @@ paths:
                               type: number
                             rank:
                               type: number
-                            source:
-                              type: string
                             memo:
                               type: string
                             tag:
@@ -5894,8 +5892,6 @@ paths:
                   type: number
                 tag:
                   type: number
-                source:
-                  type: string
                 contents:
                   type: array
                   items:
@@ -5955,8 +5951,6 @@ paths:
                         type: string
                       rank:
                         type: number
-                      source:
-                        type: string
                       tag:
                         type: object
                         properties:
@@ -6026,8 +6020,6 @@ paths:
                   type: number
                 tag:
                   type: number
-                source:
-                  type: string
                 contents:
                   type: array
                   items:
