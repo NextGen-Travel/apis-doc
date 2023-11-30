@@ -7507,6 +7507,9 @@ paths:
                       type: string
                       example: '2021-05-17T09:43:09.944Z'
                       description: 客服單建立時間
+                    memberEmail:
+                      type: string
+                      example: 'member-email@email.server.com'
                     history:
                       type: array
                       items:
