@@ -248,6 +248,10 @@ paths:
                               properties:
                                 id:
                                   type: number
+                                updatedAt:
+                                  type: string
+                                source:
+                                  type: string
                                 tag:
                                   type: object
                                   properties:
