@@ -7510,6 +7510,12 @@ paths:
                     memberEmail:
                       type: string
                       example: 'member-email@email.server.com'
+                    memberUuid:
+                      type: string
+                      example: 'memberUuid-memberUuid-memberUuid-memberUuid'
+                    memberName:
+                      type: string
+                      example: 'member name'
                     history:
                       type: array
                       items:
