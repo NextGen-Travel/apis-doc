@@ -7494,72 +7494,79 @@ paths:
                 schema:
                   type: object
                   properties:
-                    ticket:
+                    msg:
                       type: string
-                      example: '我要問問題'
-                      description: 客服單主題
-                    status:
-                      type: string
-                      example: 'open'
-                      description: 客服單狀態
-                      enum: [open, closed]
-                    createdAt:
-                      type: string
-                      example: '2021-05-17T09:43:09.944Z'
-                      description: 客服單建立時間
-                    memberEmail:
-                      type: string
-                      example: 'member-email@email.server.com'
-                    memberUuid:
-                      type: string
-                      example: 'memberUuid-memberUuid-memberUuid-memberUuid'
-                    memberName:
-                      type: string
-                      example: 'member name'
-                    history:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          historyId:
-                            type: number
-                            example: 1
-                            description: 歷史紀錄流水號
-                          content:
-                            type: string
-                            example: '我要問問題'
-                            description: 客服單內容
-                          time:
-                            type: string
-                            example: '2021-05-17T09:43:09.944Z'
-                            description: 訊息傳送時間
-                          isMember:
-                            type: boolean
-                            example: true
-                            description: 是否為會員回覆
-                          name:
-                            type: string
-                            example: '會員'
-                            description: 回覆者名稱
-                    pagination:
+                      example: ''
+                      description: 訊息
+                    data:
                       type: object
                       properties:
-                        total:
-                          type: number
-                          example: 100
-                          description: 總共幾筆
-                        pageSize:
-                          type: number
-                          example: 10
-                          description: 每頁顯示數量
-                        page:
-                          type: number
-                          example: 1
-                          description: 當前頁數
-                        pageCount:
-                          type: number
-                          example: 10
-                          description: 總共幾頁
+                        ticket:
+                          type: string
+                          example: '我要問問題'
+                          description: 客服單主題
+                        status:
+                          type: string
+                          example: 'open'
+                          description: 客服單狀態
+                          enum: [open, closed]
+                        createdAt:
+                          type: string
+                          example: '2021-05-17T09:43:09.944Z'
+                          description: 客服單建立時間
+                        memberEmail:
+                          type: string
+                          example: 'member-email@email.server.com'
+                        memberUuid:
+                          type: string
+                          example: 'memberUuid-memberUuid-memberUuid-memberUuid'
+                        memberName:
+                          type: string
+                          example: 'member name'
+                        history:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              historyId:
+                                type: number
+                                example: 1
+                                description: 歷史紀錄流水號
+                              content:
+                                type: string
+                                example: '我要問問題'
+                                description: 客服單內容
+                              time:
+                                type: string
+                                example: '2021-05-17T09:43:09.944Z'
+                                description: 訊息傳送時間
+                              isMember:
+                                type: boolean
+                                example: true
+                                description: 是否為會員回覆
+                              name:
+                                type: string
+                                example: '會員'
+                                description: 回覆者名稱
+                        pagination:
+                          type: object
+                          properties:
+                            total:
+                              type: number
+                              example: 100
+                              description: 總共幾筆
+                            pageSize:
+                              type: number
+                              example: 10
+                              description: 每頁顯示數量
+                            page:
+                              type: number
+                              example: 1
+                              description: 當前頁數
+                            pageCount:
+                              type: number
+                              example: 10
+                              description: 總共幾頁
 
   /admin/hcs/{serialNumber}/status/{status}:
     patch:
