@@ -646,14 +646,14 @@ paths:
 
   # ====================
   #
-  # visitor question
+  # chatbot
   #
 
-  /admin/visitor-question/setting:
+  /admin/chat-bot-chat/setting:
     get:
       summary: 獲取問答設定
       tags:
-        - visitor-question
+        - chat-bot-chat
       security:
         - user_token: []
       responses:
@@ -676,7 +676,7 @@ paths:
     post:
       summary: 獲取問答設定
       tags:
-        - visitor-question
+        - chat-bot-chat
       security:
         - user_token: []
       requestBody:

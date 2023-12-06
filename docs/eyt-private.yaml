@@ -163,6 +163,106 @@ components:
                 description: 顯示名稱
 
 paths:
+  # ====================
+  #
+  # ChatBot
+  #
+
+  /chat-bot-chats/now:
+    get:
+      summary: 將行為記錄起來
+      tags:
+        - chatbot
+      security:
+        - member_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      mode:
+                        type: string
+                      isClosed:
+                        type: boolean
+                      chat_bot_chat_contents:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            role:
+                              type: string
+                            contents:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  text:
+                                    type: string
+                                  type:
+                                    type: string
+                            isCompleted:
+                              type: boolean
+
+  /chat-bot-chats/now/close:
+    delete:
+      summary: 將行為記錄起來
+      tags:
+        - chatbot
+      security:
+        - member_token: []
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /chat-bot-chats/now/talk:
+    post:
+      summary: 將行為記錄起來
+      tags:
+        - chatbot
+      security:
+        - member_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contents:
+                  type: array
+                  description: 內容
+                  items:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        enum:
+                          - text
+                        example: text
+                      content:
+                        type: string
+                        example: 'hello'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
 
   # ====================
   #
@@ -890,58 +990,6 @@ paths:
             enum: [all, drug, store, post, stock]
           example: web
           description: 記錄類型
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-
-  /members/chatbot/question:
-    post:
-      summary: chatbot客服
-      description: 回應內容靠 sse 回傳，網址：https://api-dev.e-drugsearch.com.hk/event.sse/:visitor_uuid
-      tags:
-        - members
-      security:
-        - member_token: []
-      parameters:
-        - $ref: '#/components/parameters/visitor'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  description: 問題
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-
-  /members/chatbot/question/refresh:
-    post:
-      summary: 重置 chatbot客服 對話
-      description: 重置 對話
-      tags:
-        - members
-      security:
-        - member_token: []
-      parameters:
-        - $ref: '#/components/parameters/visitor'
       responses:
         '200':
           description: 成功
