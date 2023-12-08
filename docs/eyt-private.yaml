@@ -248,6 +248,22 @@ paths:
         - chatbot
       security:
         - member_token: []
+      parameters:
+        - in: query
+          name: rating
+          schema:
+            type: string
+            enum:
+              - GOOD
+              - BAD
+          required: false
+          example: 'GOOD'
+        - in: query
+          name: suggest
+          schema:
+            type: string
+          required: false
+          example: '廢到笑'
       responses:
         '200':
           description: 成功
