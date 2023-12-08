@@ -2282,6 +2282,29 @@ paths:
                         type: string
                         description: 下載路徑
 
+  /admin/user-management/staffs/import:
+    post:
+      summary: 員工資料匯入
+      security:
+        - user_token: []
+      tags:
+        - user-management
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: 成功
+        '400':
+          description: 失敗
+
   # ====================
   #
   # role
