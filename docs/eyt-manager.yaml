@@ -646,6 +646,376 @@ paths:
 
   # ====================
   #
+  # survey
+  #
+
+  /admin/surveys:
+    get:
+      summary: 獲取問卷列表
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+          description: page
+        - in: query
+          name: perPage
+          required: false
+          schema:
+            type: integer
+          description: perPage
+        - in: query
+          name: keyword
+          required: false
+          schema:
+            type: string
+          description: keyword
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        title:
+                          type: string
+                        enabled:
+                          type: boolean
+                        publishStartAt:
+                          type: string
+                        publishEndAt:
+                          type: string
+                        publishNow:
+                          type: boolean
+                        replyLimit:
+                          type: number
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: number
+                      pageSize:
+                        type: number
+                      pageCount:
+                        type: number
+                      total:
+                        type: number
+    post:
+      summary: 建立問卷
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "標題示例"
+                  description: "項目標題"
+                textThanks:
+                  type: string
+                  example: "感謝文本示例"
+                  description: "感謝文本"
+                textWelcome:
+                  type: string
+                  example: "歡迎文本示例"
+                  description: "歡迎文本"
+                enabled:
+                  type: boolean
+                  example: true
+                  description: "是否啟用"
+                publishStartAt:
+                  type: string
+                  format: date-time
+                  example: "2023-01-01T00:00:00Z"
+                  description: "發佈開始時間"
+                publishEndAt:
+                  type: string
+                  format: date-time
+                  example: "2023-12-31T23:59:59Z"
+                  description: "發佈結束時間"
+                publishNow:
+                  type: boolean
+                  example: true
+                  description: "立即發佈"
+                replyLimit:
+                  type: number
+                  example: 50
+                  description: "回覆限制數量"
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+
+  /admin/surveys/{id}:
+    get:
+      summary: 獲取問卷
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                      enabled:
+                        type: boolean
+                      publishStartAt:
+                        type: string
+                      publishEndAt:
+                        type: string
+                      publishNow:
+                        type: boolean
+                      replyLimit:
+                        type: number
+                      textThanks:
+                        type: string
+                      textWelcome:
+                        type: string
+    put:
+      summary: 更新問卷
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: "標題示例"
+                  description: "項目標題"
+                textThanks:
+                  type: string
+                  example: "感謝文本示例"
+                  description: "感謝文本"
+                textWelcome:
+                  type: string
+                  example: "歡迎文本示例"
+                  description: "歡迎文本"
+                enabled:
+                  type: boolean
+                  example: true
+                  description: "是否啟用"
+                publishStartAt:
+                  type: string
+                  format: date-time
+                  example: "2023-01-01T00:00:00Z"
+                  description: "發佈開始時間"
+                publishEndAt:
+                  type: string
+                  format: date-time
+                  example: "2023-12-31T23:59:59Z"
+                  description: "發佈結束時間"
+                publishNow:
+                  type: boolean
+                  example: true
+                  description: "立即發佈"
+                replyLimit:
+                  type: number
+                  example: 50
+                  description: "回覆限制數量"
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+    delete:
+      summary: 刪除問卷
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+  
+  /admin/surveys/{id}/items:
+    post:
+      summary: 更新項目
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - name: id
+          in: path
+          description: 問卷的ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      rank:
+                        type: number
+                        description: 項目排序
+                        example: 1
+                      title:
+                        type: string
+                        description: 項目標題
+                        example: "標題"
+                      options:
+                        type: object
+                        description: 選項資料
+                        example: {}
+                      mode:
+                        type: string
+                        description: 模式
+                        enum:
+                          - single
+                          - multiple
+                          - text
+                        example: "single"
+              required:
+                - items
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
+  /admin/surveys/{id}/replies:
+    get:
+      summary: 獲取問卷結果
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - name: id
+          in: path
+          description: 問卷的ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        title:
+                          type: string
+                        enabled:
+                          type: boolean
+                        publishStartAt:
+                          type: string
+                        publishEndAt:
+                          type: string
+                        publishNow:
+                          type: boolean
+                        replyLimit:
+                          type: number
+
+  # ====================
+  #
   # chatbot
   #
 

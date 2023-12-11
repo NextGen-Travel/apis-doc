@@ -211,6 +211,98 @@ components:
           example: 236
 
 paths:
+
+  # ====================
+  #
+  # survey
+  #
+
+  /surveys/{id}:
+    get:
+      summary: 獲取問卷
+      tags:
+        - surveys
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                      title:
+                        type: string
+                      enabled:
+                        type: boolean
+                      publishStartAt:
+                        type: string
+                      publishEndAt:
+                        type: string
+                      publishNow:
+                        type: boolean
+                      replyLimit:
+                        type: number
+                      textThanks:
+                        type: string
+                      textWelcome:
+                        type: string
+    post:
+      summary: 提交問卷
+      tags:
+        - surveys
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      value:
+                        description: 項目值
+                        example: "some value"
+                      itemId:
+                        type: number
+                        description: 項目ID
+                        example: 1
+              required:
+                - items
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   # ====================
   #
   # Faq
