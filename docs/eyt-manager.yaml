@@ -1001,18 +1001,20 @@ paths:
                       properties:
                         id:
                           type: number
-                        title:
-                          type: string
-                        enabled:
-                          type: boolean
-                        publishStartAt:
-                          type: string
-                        publishEndAt:
-                          type: string
-                        publishNow:
-                          type: boolean
-                        replyLimit:
-                          type: number
+                        surveyReplyItems:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              value:
+                                type: string
+                              surveyItem:
+                                type: object
+                                properties:
+                                  id:
+                                    type: number
 
   # ====================
   #
