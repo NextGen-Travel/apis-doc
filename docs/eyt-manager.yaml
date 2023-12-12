@@ -919,6 +919,45 @@ paths:
                     type: string
   
   /admin/surveys/{id}/items:
+    get:
+      summary: 獲取項目
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - name: id
+          in: path
+          description: 問卷的ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        rank:
+                          type: number
+                        title:
+                          type: string
+                        options:
+                          type: object
+                        mode:
+                          type: string
+
     post:
       summary: 更新項目
       tags:
