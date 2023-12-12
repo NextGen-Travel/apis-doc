@@ -823,6 +823,13 @@ paths:
                         type: string
                       textWelcome:
                         type: string
+                      creator:
+                        type: object
+                        properties:
+                          id:
+                            type: number
+                          username:
+                            type: string
     put:
       summary: 更新問卷
       tags:
