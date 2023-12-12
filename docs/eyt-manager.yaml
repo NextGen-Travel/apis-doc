@@ -957,7 +957,10 @@ paths:
                           type: object
                         mode:
                           type: string
-
+                          enum:
+                            - single
+                            - multiple
+                            - text
     post:
       summary: 更新項目
       tags:
