@@ -246,20 +246,36 @@ paths:
                         type: number
                       title:
                         type: string
-                      enabled:
-                        type: boolean
-                      publishStartAt:
-                        type: string
-                      publishEndAt:
-                        type: string
-                      publishNow:
-                        type: boolean
-                      replyLimit:
-                        type: number
                       textThanks:
                         type: string
                       textWelcome:
                         type: string
+                      surveyItems:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            rank:
+                              type: number
+                            title:
+                              type: string
+                            options:
+                              type: object
+                              properties:
+                                items:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      value:
+                                        type: string
+                                placeholder:
+                                  type: string
+                            mode:
+                              type: string
+
     post:
       summary: 提交問卷
       tags:
