@@ -955,6 +955,20 @@ paths:
                           type: string
                         options:
                           type: object
+                          properties:
+                            placeholder:
+                              type: string
+                              nullable: true
+                            items:
+                              type: array
+                              nullable: true
+                              items:
+                                type: object
+                                properties:
+                                  title:
+                                    type: string
+                                  value:
+                                    type: string
                         mode:
                           type: string
                           enum:
