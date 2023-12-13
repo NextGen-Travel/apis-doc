@@ -955,6 +955,8 @@ paths:
                           type: string
                         options:
                           type: object
+                          required:
+                            - ''
                           properties:
                             placeholder:
                               type: string
