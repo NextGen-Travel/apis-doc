@@ -271,6 +271,8 @@ paths:
                               type: string
                             required:
                               type: boolean
+                            regexPattern:
+                              type: string
                             options:
                               type: object
                               properties:

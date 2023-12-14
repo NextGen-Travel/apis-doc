@@ -965,6 +965,8 @@ paths:
                           type: boolean
                         defaultValue:
                           type: string
+                        regexPattern:
+                          type: string
                         options:
                           type: object
                           properties:
@@ -1030,6 +1032,8 @@ paths:
                         type: boolean
                       disabled:
                         type: boolean
+                      regexPattern:
+                        type: string
                       defaultValue:
                         oneOf:
                           - type: string
