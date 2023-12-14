@@ -977,6 +977,11 @@ paths:
                             placeholder:
                               type: string
                               nullable: true
+                            display:
+                              type: string
+                              enum:
+                                - single
+                                - multiple
                             items:
                               type: array
                               nullable: true

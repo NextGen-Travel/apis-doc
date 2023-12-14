@@ -285,6 +285,11 @@ paths:
                                         type: string
                                 placeholder:
                                   type: string
+                                display:
+                                  type: string
+                                  enum:
+                                    - single
+                                    - multiple
                             mode:
                               type: string
     post:
