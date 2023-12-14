@@ -250,12 +250,6 @@ paths:
                         type: string
                       textWelcome:
                         type: string
-                      unique:
-                        type: boolean
-                      uniqueMode:
-                        type: string
-                        enum:
-                          - email
                       surveyItems:
                         type: array
                         items:
@@ -266,6 +260,14 @@ paths:
                             rank:
                               type: number
                             title:
+                              type: string
+                            unique:
+                              type: boolean
+                            hidden:
+                              type: boolean
+                            disabled:
+                              type: boolean
+                            defaultValue:
                               type: string
                             required:
                               type: boolean
@@ -325,40 +327,6 @@ paths:
                 properties:
                   msg:
                     type: string
-  /surveys/{uuid}/unique-exist:
-    get:
-      summary: 驗證是否重複辨識碼
-      tags:
-        - surveys
-      parameters:
-        - in: path
-          name: uuid
-          required: true
-          schema:
-            type: string
-          description: uuid
-        - in: query
-          name: unique
-          required: true
-          schema:
-            type: string
-          example: aaa@aaa.com
-          description: uuid
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: object
-                    properties:
-                      exist:
-                        type: boolean
 
   # ====================
   #

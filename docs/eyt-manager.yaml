@@ -704,6 +704,8 @@ paths:
                           type: boolean
                         replyLimit:
                           type: number
+                        replyCount:
+                          type: number
                   pagination:
                     type: object
                     properties:
@@ -744,16 +746,6 @@ paths:
                   type: boolean
                   example: true
                   description: "是否啟用"
-                unique:
-                  type: boolean
-                  example: true
-                  description: "是否啟用唯一鍵"
-                uniqueMode:
-                  type: string
-                  example: email
-                  description: "唯一鍵模式"
-                  enum:
-                    - email
                 publishStartAt:
                   type: string
                   format: date-time
@@ -833,16 +825,6 @@ paths:
                         type: string
                       textWelcome:
                         type: string
-                      unique:
-                        type: boolean
-                        example: true
-                        description: "是否啟用唯一鍵"
-                      uniqueMode:
-                        type: string
-                        example: true
-                        description: "唯一鍵模式"
-                        enum:
-                          - email
                       creator:
                         type: object
                         properties:
@@ -900,16 +882,6 @@ paths:
                   type: boolean
                   example: true
                   description: "立即發佈"
-                unique:
-                  type: boolean
-                  example: true
-                  description: "是否啟用唯一鍵"
-                uniqueMode:
-                  type: string
-                  example: email
-                  description: "唯一鍵模式"
-                  enum:
-                    - email
                 replyLimit:
                   type: number
                   example: 50
@@ -985,6 +957,14 @@ paths:
                           type: string
                         required:
                           type: boolean
+                        unique:
+                          type: boolean
+                        hidden:
+                          type: boolean
+                        disabled:
+                          type: boolean
+                        defaultValue:
+                          type: string
                         options:
                           type: object
                           properties:
@@ -1044,6 +1024,14 @@ paths:
                         example: {}
                       required:
                         type: boolean
+                      unique:
+                        type: boolean
+                      hidden:
+                        type: boolean
+                      disabled:
+                        type: boolean
+                      defaultValue:
+                        type: string
                       mode:
                         type: string
                         description: 模式
@@ -1096,10 +1084,6 @@ paths:
                       properties:
                         id:
                           type: number
-                        unique:
-                          type: string
-                          example: true
-                          description: "aaa@aaa.com"
                         surveyReplyItems:
                           type: array
                           items:
