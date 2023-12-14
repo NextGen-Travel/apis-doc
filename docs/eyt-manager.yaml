@@ -1031,7 +1031,11 @@ paths:
                       disabled:
                         type: boolean
                       defaultValue:
-                        type: string
+                        oneOf:
+                          - type: string
+                          - type: array
+                            items:
+                              type: string
                       mode:
                         type: string
                         description: 模式
