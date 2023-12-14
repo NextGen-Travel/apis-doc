@@ -1034,6 +1034,7 @@ paths:
                         type: boolean
                       regexPattern:
                         type: string
+                        nullable: true
                       defaultValue:
                         oneOf:
                           - type: string
