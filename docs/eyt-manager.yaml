@@ -692,6 +692,8 @@ paths:
                       properties:
                         id:
                           type: number
+                        uuid:
+                          type: string
                         title:
                           type: string
                         enabled:
@@ -809,6 +811,8 @@ paths:
                     properties:
                       id:
                         type: number
+                      uuid:
+                        type: string
                       title:
                         type: string
                       enabled:
