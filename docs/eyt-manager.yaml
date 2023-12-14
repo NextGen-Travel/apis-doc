@@ -983,8 +983,8 @@ paths:
                           type: number
                         title:
                           type: string
-                        unique:
-                          type: string
+                        required:
+                          type: boolean
                         options:
                           type: object
                           properties:
@@ -1042,6 +1042,8 @@ paths:
                         type: object
                         description: 選項資料
                         example: {}
+                      required:
+                        type: boolean
                       mode:
                         type: string
                         description: 模式
@@ -1094,6 +1096,10 @@ paths:
                       properties:
                         id:
                           type: number
+                        unique:
+                          type: string
+                          example: true
+                          description: "aaa@aaa.com"
                         surveyReplyItems:
                           type: array
                           items:
