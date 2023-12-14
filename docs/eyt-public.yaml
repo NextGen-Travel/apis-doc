@@ -250,6 +250,12 @@ paths:
                         type: string
                       textWelcome:
                         type: string
+                      unique:
+                        type: boolean
+                      uniqueMode:
+                        type: string
+                        enum:
+                          - email
                       surveyItems:
                         type: array
                         items:
@@ -261,6 +267,8 @@ paths:
                               type: number
                             title:
                               type: string
+                            required:
+                              type: boolean
                             options:
                               type: object
                               properties:

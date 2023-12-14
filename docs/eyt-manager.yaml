@@ -744,6 +744,16 @@ paths:
                   type: boolean
                   example: true
                   description: "是否啟用"
+                unique:
+                  type: boolean
+                  example: true
+                  description: "是否啟用唯一鍵"
+                uniqueMode:
+                  type: string
+                  example: email
+                  description: "唯一鍵模式"
+                  enum:
+                    - email
                 publishStartAt:
                   type: string
                   format: date-time
@@ -823,6 +833,16 @@ paths:
                         type: string
                       textWelcome:
                         type: string
+                      unique:
+                        type: boolean
+                        example: true
+                        description: "是否啟用唯一鍵"
+                      uniqueMode:
+                        type: string
+                        example: true
+                        description: "唯一鍵模式"
+                        enum:
+                          - email
                       creator:
                         type: object
                         properties:
@@ -880,6 +900,16 @@ paths:
                   type: boolean
                   example: true
                   description: "立即發佈"
+                unique:
+                  type: boolean
+                  example: true
+                  description: "是否啟用唯一鍵"
+                uniqueMode:
+                  type: string
+                  example: email
+                  description: "唯一鍵模式"
+                  enum:
+                    - email
                 replyLimit:
                   type: number
                   example: 50
@@ -952,6 +982,8 @@ paths:
                         rank:
                           type: number
                         title:
+                          type: string
+                        unique:
                           type: string
                         options:
                           type: object
