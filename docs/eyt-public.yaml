@@ -217,18 +217,18 @@ paths:
   # survey
   #
 
-  /surveys/{id}:
+  /surveys/{uuid}:
     get:
       summary: 獲取問卷
       tags:
         - surveys
       parameters:
         - in: path
-          name: id
+          name: uuid
           required: true
           schema:
-            type: integer
-          description: id
+            type: string
+          description: uuid
       responses:
         '200':
           description: 成功
@@ -283,18 +283,17 @@ paths:
                                   type: string
                             mode:
                               type: string
-
     post:
       summary: 提交問卷
       tags:
         - surveys
       parameters:
         - in: path
-          name: id
+          name: uuid
           required: true
           schema:
-            type: integer
-          description: id
+            type: string
+          description: uuid
       requestBody:
         required: true
         content:
@@ -326,6 +325,40 @@ paths:
                 properties:
                   msg:
                     type: string
+  /surveys/{uuid}/unique-exist:
+    get:
+      summary: 驗證是否重複辨識碼
+      tags:
+        - surveys
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema:
+            type: string
+          description: uuid
+        - in: query
+          name: unique
+          required: true
+          schema:
+            type: string
+          example: aaa@aaa.com
+          description: uuid
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      exist:
+                        type: boolean
 
   # ====================
   #
