@@ -704,10 +704,14 @@ paths:
                           type: string
                         publishNow:
                           type: boolean
+                        createdAt:
+                          type: string
                         replyLimit:
                           type: number
                         replyCount:
                           type: number
+                        lastReplyAt:
+                          type: string
                   pagination:
                     type: object
                     properties:
@@ -829,6 +833,8 @@ paths:
                         type: string
                       textWelcome:
                         type: string
+                      createdAt:
+                        type: string
                       creator:
                         type: object
                         properties:
@@ -924,6 +930,31 @@ paths:
                   msg:
                     type: string
   
+  /admin/surveys/:id/replies:
+    delete:
+      summary: 刪除所有回覆
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - name: id
+          in: path
+          description: 問卷的ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+
   /admin/surveys/{id}/items:
     get:
       summary: 獲取項目
