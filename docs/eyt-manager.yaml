@@ -990,6 +990,8 @@ paths:
                           type: number
                         title:
                           type: string
+                        desc:
+                          type: string
                         required:
                           type: boolean
                         unique:
@@ -1064,6 +1066,8 @@ paths:
                         type: object
                         description: 選項資料
                         example: {}
+                      desc:
+                        type: string
                       required:
                         type: boolean
                       unique:

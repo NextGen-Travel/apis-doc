@@ -265,6 +265,8 @@ paths:
                               type: boolean
                             hidden:
                               type: boolean
+                            desc:
+                              type: string
                             disabled:
                               type: boolean
                             defaultValue:
