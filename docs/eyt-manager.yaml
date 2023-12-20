@@ -644,6 +644,57 @@ components:
 
 paths:
 
+  /admin/exports/drugs:
+    get:
+      summary: 導出藥品數據
+      tags:
+          - exports
+      security:
+        - user_token: []
+      description: 導出藥品數據
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        description: 導出文件的資料
+  /admin/exports/stores:
+    get:
+      summary: 導出藥房數據
+      tags:
+          - exports
+      security:
+        - user_token: []
+      description: 導出藥房數據
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        description: 導出文件的資料
+
   # ====================
   #
   # survey
@@ -2762,13 +2813,6 @@ paths:
         - user_token: []
       tags:
         - user-management
-      parameters:
-        - in: query
-          name: type
-          schema:
-            type: string
-            enum: [pdf, csv, xlsx]
-          description: 下載的檔案類型
       responses:
         '200':
           description: 成功
@@ -2782,13 +2826,9 @@ paths:
                   data:
                     type: object
                     properties:
-                      id:
-                        type: number
-                      imgKey:
-                        type: string
-                      url:
-                        type: string
-                        description: 下載路徑
+                      items:
+                        type: array
+                        description: 輸出資料
 
   /admin/user-management/staffs/import:
     post:
@@ -4836,13 +4876,6 @@ paths:
         - user_token: []
       tags:
         - user-management
-      parameters:
-        - in: query
-          name: type
-          schema:
-            type: string
-            enum: [pdf, csv, xlsx]
-          description: 下載的檔案類型
       responses:
         '200':
           description: 成功
@@ -4856,15 +4889,9 @@ paths:
                   data:
                     type: object
                     properties:
-                      id:
-                        type: number
-                      imgKey:
-                        type: string
-                      url:
-                        type: string
-                        description: 下載路徑
-
-
+                      items:
+                        type: array
+                        description: 輸出內容
 
   # ====================
   #
@@ -6926,11 +6953,12 @@ paths:
                     type: string
                     description: 回應消息
 
-  /admin/members/export:
+  /admin/exports/members:
     get:
       summary: 導出會員數據
       tags:
           - members
+          - exports
       security:
         - user_token: []
       description: 用於導出會員數據的 GET 請求
@@ -7202,11 +7230,12 @@ paths:
                       total:
                         type: integer
 
-  /admin/store-stock/export:
+  /admin/exports/store-stock:
     get:
-      summary: 導出會員數據
+      summary: 導出藥品數據
       tags:
           - store stock
+          - exports
       security:
         - user_token: []
       description: 用於導出 藥房庫存管理列表 數據的 GET 請求
@@ -7839,11 +7868,12 @@ paths:
                             description: 結束時間 (結束當日的 23:59:59 在 UTC 的時間)
                             example: 2023-09-30T15:59:59.000Z
 
-  /admin/ads/export:
+  /admin/exports/ads:
     get:
       summary: 導出 廣告管理列表 數據
       tags:
           - ads
+          - exports
       security:
         - user_token: []
       description: 用於導出 廣告管理列表 數據的 GET 請求
