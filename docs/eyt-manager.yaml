@@ -6926,7 +6926,7 @@ paths:
                     type: string
                     description: 回應消息
 
-  /admin/members/export/{fileType}:
+  /admin/members/export:
     get:
       summary: 導出會員數據
       tags:
@@ -6934,13 +6934,6 @@ paths:
       security:
         - user_token: []
       description: 用於導出會員數據的 GET 請求
-      parameters:
-        - name: fileType
-          in: path
-          description: 導出文件的類型（例如，CSV、Excel等）
-          required: true
-          schema:
-            type: string
       responses:
         200:
           description: 成功的回應
@@ -6955,9 +6948,10 @@ paths:
                   data:
                     type: object
                     properties:
-                      url:
-                        type: string
-                        description: 導出文件的 URL
+                      items:
+                        type: array
+                        description: 導出文件的資料
+
   /admin/members/{uuid}/bookmark/{type}:
     get:
       summary: 獲取會員書籤內容
@@ -7208,7 +7202,7 @@ paths:
                       total:
                         type: integer
 
-  /admin/store-stock/export/{fileType}:
+  /admin/store-stock/export:
     get:
       summary: 導出會員數據
       tags:
@@ -7216,14 +7210,6 @@ paths:
       security:
         - user_token: []
       description: 用於導出 藥房庫存管理列表 數據的 GET 請求
-      parameters:
-        - name: fileType
-          in: path
-          description: 導出文件的類型（例如，CSV、Excel等）
-          required: true
-          schema:
-            type: string
-            enum: ['csv', 'xlsx', pdf]
       responses:
         200:
           description: 成功的回應
@@ -7238,9 +7224,10 @@ paths:
                   data:
                     type: object
                     properties:
-                      url:
-                        type: string
-                        description: 導出文件的 URL
+                      items:
+                        type: array
+                        description: 導出文件的資料集
+
   /admin/store-stock/import:
     post:
       summary: 用於匯入 藥房庫存管理列表 數據的 GET 請求
@@ -7852,7 +7839,7 @@ paths:
                             description: 結束時間 (結束當日的 23:59:59 在 UTC 的時間)
                             example: 2023-09-30T15:59:59.000Z
 
-  /admin/ads/export/{fileType}:
+  /admin/ads/export:
     get:
       summary: 導出 廣告管理列表 數據
       tags:
@@ -7860,14 +7847,6 @@ paths:
       security:
         - user_token: []
       description: 用於導出 廣告管理列表 數據的 GET 請求
-      parameters:
-        - name: fileType
-          in: path
-          description: 導出文件的類型（例如，CSV、Excel等）
-          required: true
-          schema:
-            type: string
-            enum: ['csv', 'xlsx', pdf]
       responses:
         200:
           description: 成功的回應
@@ -7882,9 +7861,9 @@ paths:
                   data:
                     type: object
                     properties:
-                      url:
-                        type: string
-                        description: 導出文件的 URL
+                      items:
+                        type: array
+                        description: 導出的資料
 
   # ====================
   #
