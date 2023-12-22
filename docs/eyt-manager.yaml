@@ -2005,28 +2005,151 @@ paths:
                         type: number
                       storeCollectCount:
                         type: number
-                      drugCollectOrders:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            productName:
-                              type: string
-                            permitNo:
-                              type: string
-                            collectCount:
-                              type: number
-                      storeCollectOrders:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            uuid:
-                              type: string
-                            collectCount:
-                              type: number
+                      drugViewCount:
+                        type: object
+                        properties:
+                          statisticType:
+                            type: string
+                            example: 'visitor-accesses:view-count'
+                          tableName:
+                            type: string
+                            example: 'drugs'
+                          listType:
+                            type: string
+                            example: 'drugs'
+                          top5Cnt:
+                            type: number
+                            example: 5
+                          quickTop5:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                  example: 24596
+                                rank:
+                                  type: number
+                                  example: 1
+                                times:
+                                  type: number
+                                  example: 101
+                                name:
+                                  type: string
+                                  example: "WELLO ANTISEPTIC LIQUID 4.8% W/V"
+                                collectedCount:
+                                  type: number
+                                  example: 7
+                                collectedRate:
+                                  type: number
+                                  example: 0.1206896551724138
+                                  description: >
+                                    收藏率, 0~1, 數值 = 0.12068 即表示 12.068%
+                                    因為若會員人數多（分母大）那數字一定很小，就不化成百分比了
+                                    也許他們會要求呈現為每萬人收藏，這時候百分比就用不到了
+                          rankDetail:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                rank:
+                                  type: number
+                                  example: 1
+                                names:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: number
+                                        example: 24596
+                                      rank:
+                                        type: number
+                                        example: 1
+                                      times:
+                                        type: number
+                                        example: 101
+                                      name:
+                                        type: string
+                                        example: "WELLO ANTISEPTIC LIQUID 4.8% W/V"
+                                      collectedCount:
+                                        type: number
+                                        example: 7
+                                      collectedRate:
+                                        type: number
+                                        example: 0.1206896551724138
+
+                      storeViewCount:
+                        type: object
+                        properties:
+                          statisticType:
+                            type: string
+                            example: 'visitor-accesses:view-count'
+                          tableName:
+                            type: string
+                            example: 'stores'
+                          listType:
+                            type: string
+                            example: 'stores'
+                          quickTop5:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                  example: 3350
+                                rank:
+                                  type: number
+                                  example: 1
+                                times:
+                                  type: number
+                                  example: 101
+                                name:
+                                  type: string
+                                  example: "葛蘭素史克有限公司"
+                                collectedCount:
+                                  type: number
+                                  example: 39
+                                collectedRate:
+                                  type: number
+                                  example: 0.6724137931034483
+                          top5Cnt:
+                            type: number
+                            example: 39
+                          rankDetail:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                rank:
+                                  type: number
+                                  example: 1
+                                names:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: number
+                                        example: 24596
+                                      rank:
+                                        type: number
+                                        example: 1
+                                      times:
+                                        type: number
+                                        example: 101
+                                      name:
+                                        type: string
+                                        example: "WELLO ANTISEPTIC LIQUID 4.8% W/V"
+                                      collectedCount:
+                                        type: number
+                                        example: 7
+                                      collectedRate:
+                                        type: number
+                                        example: 0.1206896551724138
+
+
 
   /admin/dashboard/visitors:
     get:
