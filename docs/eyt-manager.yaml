@@ -643,7 +643,31 @@ components:
           type: string     
 
 paths:
-
+  /admin/exports/packages:
+    get:
+      summary: 導出藥品包裝數據
+      tags:
+          - exports
+      security:
+        - user_token: []
+      description: 導出藥品包裝數據
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        description: 導出文件的資料
   /admin/exports/drugs:
     get:
       summary: 導出藥品數據
@@ -669,14 +693,14 @@ paths:
                       items:
                         type: array
                         description: 導出文件的資料
-  /admin/exports/stores:
+  /admin/exports/users:
     get:
-      summary: 導出藥房數據
+      summary: 導出客戶數據
       tags:
           - exports
       security:
         - user_token: []
-      description: 導出藥房數據
+      description: 導出客戶數據
       responses:
         200:
           description: 成功的回應
