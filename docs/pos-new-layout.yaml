@@ -222,6 +222,9 @@ components:
           description: 客戶自訂ID
         customer_group_id:
           type: integer
+        name:
+          type: string
+          description: 會員全名
         supplier_business_name:
           type: string
           description: 供應商公司名稱
