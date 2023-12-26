@@ -1262,18 +1262,18 @@ components:
               note:
                 type: string
                 description: 付款註記
-        hk_cash_change_flag:
-          type: integer
-          description: 是否有港幣找零
         sale_note:
           type: string
           description: 銷售備註
         staff_note:
           type: string
           description: 員工備註
+        change_return_type:
+          type: integer
+          description: 找零幣別(1=系統幣別，2=人民幣)
         change_return:
           type: integer
-          description: 退費金額
+          description: 退費或找零金額
           default: 0.00
         additional_notes:
           type: string
@@ -1311,9 +1311,6 @@ components:
         status:
           type: string
           description: 訂單狀態
-        cny_total:
-          type: integer
-          description: 人民幣總金額
       # Both properties are required
       required:  
         - location_id
