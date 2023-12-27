@@ -1853,6 +1853,9 @@ components:
         allow_pos_overselling:
           type: integer
           description: 是否允許POS超賣
+        payment_not_enough_remind:
+          type: integer
+          description: 顯示ePOS會員“未付金額提示”
 
     LocationListResponse:
       type: object
