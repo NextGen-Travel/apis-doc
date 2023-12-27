@@ -3706,6 +3706,8 @@ paths:
                           type: number
                         name:
                           type: string
+                        uuid:
+                          type: string
                   pagination:
                     type: object
                     properties:
