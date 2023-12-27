@@ -5257,6 +5257,9 @@ paths:
                         variation_sub:
                           type: string
                           description: 第2衍生規格名稱
+                        image_url:
+                          type: string
+                          description: 圖片
 
               example:
                 recordsTotal: 2
