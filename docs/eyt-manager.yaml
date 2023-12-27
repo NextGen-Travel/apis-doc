@@ -7188,6 +7188,39 @@ paths:
                       total:
                         type: integer
 
+  /admin/store-stock-count:
+    get:
+      summary: 導出庫存計數
+      tags:
+          - store stock
+      security:
+        - user_token: []
+      description: 導出庫存計數
+      parameters:
+        - in: query
+          name: type
+          schema:
+            type: string
+          example: 'lv1'
+          description: 庫存類別
+      responses:
+        200:
+          description: 成功的回應
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    description: 回應消息
+                  data:
+                    type: object
+                    properties:
+                      count:
+                        type: number
+                        description: 計數
+
   /admin/store-stock/{storeUuid}/drug/{permitNo}:
     delete:
       summary: 刪除 特定店舖-特定藥品 的 庫存紀錄
