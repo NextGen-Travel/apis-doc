@@ -1985,7 +1985,7 @@ components:
               email:
                 type: string
                 description: 電郵地址
-              websit": 
+              website: 
                 type: string
                 description: 網站
               featured_products: 
