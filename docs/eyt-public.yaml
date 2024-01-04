@@ -449,7 +449,7 @@ paths:
                                 type: number
                               username:
                                 type: string
-                              editor:
+                              store:
                                 type: object
                                 properties:
                                   id:
