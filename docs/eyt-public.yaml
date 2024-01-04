@@ -449,7 +449,15 @@ paths:
                                 type: number
                               username:
                                 type: string
-
+                              editor:
+                                type: object
+                                properties:
+                                  id:
+                                    type: number
+                                  name:
+                                    type: string
+                                  website:
+                                    type: string
   # ====================
   #
   # Auth
