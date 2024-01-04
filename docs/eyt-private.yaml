@@ -930,7 +930,7 @@ paths:
                   msg:
                     type: string
 
-  /members/search/history/:type:
+  /members/search/history/{type}:
     get:
       summary: 會員搜尋記錄
       tags:
@@ -987,7 +987,7 @@ paths:
                           example: 2023-05-17T09:43:09.944Z
                           description: 建立時間
 
-  /members/search/repeat/:uuid:
+  /members/search/repeat/{uuid}:
     get:
       summary: 重複搜尋
       tags:
@@ -1018,7 +1018,7 @@ paths:
                       type: object
 
 
-  /members/search/history/clear/:type:
+  /members/search/history/clear/{type}:
     delete:
       summary: 清空會員搜尋記錄
       tags:
@@ -1466,7 +1466,7 @@ paths:
                         items:
                           type: string
 
-  /member/subscribe/:uuid:
+  /member/subscribe/{uuid}:
     put:
       summary: 更新訂閱的選項
       tags:
@@ -1576,7 +1576,7 @@ paths:
                             type: string
 
 
-  /collect/drugs/:permit_no:
+  /collect/drugs/{permit_no}:
     post:
       summary: 收藏藥品
       tags:
@@ -1612,7 +1612,7 @@ paths:
                     type: string
                     example: 收藏失敗            
 
-  /collect/drugs/:permit_no/cancel:
+  /collect/drugs/{permit_no}/cancel:
     put:
       summary: 取消收藏
       tags:
@@ -1715,7 +1715,7 @@ paths:
                           type: string
 
 
-  /collect/stores/:uuid:
+  /collect/stores/{uuid}:
     post:
       summary: 收藏藥房
       tags:
@@ -1751,7 +1751,7 @@ paths:
                     type: string
                     example: 收藏失敗            
 
-  /collect/stores/:uuid/cancel:
+  /collect/stores/{uuid}/cancel:
     put:
       summary: 取消收藏
       tags:

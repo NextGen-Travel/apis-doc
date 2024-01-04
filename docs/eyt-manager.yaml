@@ -1005,7 +1005,7 @@ paths:
                   msg:
                     type: string
   
-  /admin/surveys/:id/replies:
+  /admin/surveys/{id}/replies:
     delete:
       summary: 刪除所有回覆
       tags:
