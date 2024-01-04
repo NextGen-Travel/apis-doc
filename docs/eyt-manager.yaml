@@ -1030,6 +1030,53 @@ paths:
                   msg:
                     type: string
 
+    get:
+      summary: 獲取問卷結果
+      tags:
+        - surveys
+      security:
+        - user_token: []
+      parameters:
+        - name: id
+          in: path
+          description: 問卷的ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        surveyReplyItems:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              value:
+                                type: string
+                              surveyItem:
+                                type: object
+                                properties:
+                                  id:
+                                    type: number
+
+
+
   /admin/surveys/{id}/items:
     get:
       summary: 獲取項目
@@ -1181,51 +1228,6 @@ paths:
                   msg:
                     type: string
 
-  /admin/surveys/{id}/replies:
-    get:
-      summary: 獲取問卷結果
-      tags:
-        - surveys
-      security:
-        - user_token: []
-      parameters:
-        - name: id
-          in: path
-          description: 問卷的ID
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        surveyReplyItems:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                              value:
-                                type: string
-                              surveyItem:
-                                type: object
-                                properties:
-                                  id:
-                                    type: number
 
   # ====================
   #
