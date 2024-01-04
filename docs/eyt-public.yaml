@@ -442,22 +442,8 @@ paths:
                                 type: number
                               name:
                                 type: string
-                          editor:
-                            type: object
-                            properties:
-                              id:
-                                type: number
-                              username:
+                              website:
                                 type: string
-                              store:
-                                type: object
-                                properties:
-                                  id:
-                                    type: number
-                                  name:
-                                    type: string
-                                  website:
-                                    type: string
   # ====================
   #
   # Auth
