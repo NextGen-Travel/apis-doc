@@ -1978,7 +1978,7 @@ paths:
 
   /all/tags/{id}:
     get:
-      summary: 獲取tag
+      summary: 獲取該tag 當前語系的 tag name, 如果沒有則回傳預設語系內容
       tags:
         - tags
       parameters:
@@ -2006,25 +2006,6 @@ paths:
                         type: number
                       tagName:
                         type: string
-                      type:
-                        type: string
-                      parent:
-                        type: object
-                        properties:
-                          id:
-                            type: number
-                          tagName:
-                            type: string
-                      children:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                            tagName:
-                              type: string
-
 
     put:
       summary: 修改tag
