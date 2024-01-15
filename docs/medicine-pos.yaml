@@ -158,7 +158,40 @@ components:
           description: 處方簽症狀
         products:
           type: string
-          description: 藥品清單
+          description:  | 
+            藥品清單
+
+            days: 配藥天數
+            
+            total: 總數量
+
+            dosage: 每次數量
+
+            interval: 服用間隔
+
+            frequency: 每天次數
+
+            product_id: 藥品ID
+
+            variation_id: 規格ID
+
+            cautions: 警示
+
+            custom_caution: 自訂警示
+
+            dosage_form: 劑型
+
+            unit: 單位
+
+            usage: 服用方式
+
+            regular: 定時用
+
+            in_case: 需要時用
+
+            sell_line_note: 用藥說明第一欄
+
+            medicine_note: 用藥說明第二欄
         contact_custom_field1:
           type: string
           description: 病人身分證字號
@@ -228,21 +261,27 @@ components:
 
             dosage: 每次數量
 
+            interval: 服用間隔
+
             frequency: 每天次數
 
             product_id: 藥品ID
 
             variation_id: 規格ID
 
-            cautions: 
+            cautions: 警示
 
-            custom_caution:
+            custom_caution: 自訂警示
 
             dosage_form: 劑型
 
             unit: 單位
 
-            usage: 
+            usage: 服用方式
+
+            regular: 定時用
+
+            in_case: 需要時用
 
             sell_line_note: 用藥說明第一欄
 
