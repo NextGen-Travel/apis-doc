@@ -211,7 +211,6 @@ components:
           example: 236
 
 paths:
-
   # ====================
   #
   # survey
@@ -527,6 +526,51 @@ paths:
                                 type: string
                               publishedAt:
                                 type: string
+
+                    # type: yup.string().oneOf([TYPE_DRUG_IMG, TYPE_DRUG, TYPE_POSTS, TYPE_STOCK, TYPE_STORE]).required(),
+                    # keyword: yup.string().nullable().default(''),
+  /visitor/book:
+    post:
+      summary: 紀錄搜尋
+      description: 紀錄搜尋
+      tags:
+        - visitor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: 搜尋類型
+                  example: 'drug'
+                  enum:
+                    - drug
+                    - drug_img
+                    - store
+                    - post
+                    - stock
+                keyword:
+                  type: string
+                  description: 搜尋類型
+                  example: 'hello'
+                options:
+                  type: object
+                  description: 其他附註
+                  example: {}
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
 
   /visitor/token/{mode}:
     get:
