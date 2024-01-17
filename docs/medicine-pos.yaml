@@ -167,9 +167,15 @@ components:
 
             dosage: 每次數量
 
+            dosage_unit: 每次數量的單位
+
             interval: 服用間隔
 
+            interval_times: 服用間隔的時數
+
             frequency: 每天次數
+
+            frequency_times: 每天次數的數量
 
             product_id: 藥品ID
 
@@ -261,9 +267,15 @@ components:
 
             dosage: 每次數量
 
+            dosage_unit: 每次數量的單位
+
             interval: 服用間隔
 
+            interval_times: 服用間隔的時數
+
             frequency: 每天次數
+
+            frequency_times: 每天次數的數量
 
             product_id: 藥品ID
 
