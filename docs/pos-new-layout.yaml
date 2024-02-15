@@ -1862,7 +1862,9 @@ components:
         show_over_due_tip:
           type: integer
           description: 未付金額提示 0=關閉, 1=開啟
-
+        enable_service_staff:
+          type: integer
+          description: 服務人員功能是否開啟 0=關閉, 1=開啟
     LocationListResponse:
       type: object
       properties:
@@ -2461,6 +2463,20 @@ components:
               type: integer
               description: 總筆數
 
+    ServiceStaffResponse:
+      type: object
+      properties:
+        data:  
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: number
+                description: 服務人員id
+              name:
+                type: string
+                description: 服務人員名稱
 
     OrdersResponse:
       type: object
@@ -3002,6 +3018,7 @@ paths:
                 add_currency_for_cny: 1
                 exchange_rate_between_hk_and_cny: 1.25
                 allow_pos_overselling: 0
+                enable_service_staff: 1
         '404':
           description: 錯誤
           content:
@@ -3770,6 +3787,42 @@ paths:
                   per_page: 10
                   to: 2
                   total: 2
+        '404':
+          description: 錯誤
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                success: 0
+                msg: Something Wrong
+  /pos-v2/api/service-staff-list:
+    get:
+      summary: 取得服務人員列表
+      description: 取得服務人員列表
+      tags:
+        - Common
+      parameters:
+        - in: query
+          name: location_id
+          schema:
+            type: number
+          description: location id
+          required: true
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceStaffResponse'
+              example:
+                data:
+                  - id: 1
+                    name: "Mr waiter A"
+                  - id: 2
+                    name: "Miss waiter B"
+
         '404':
           description: 錯誤
           content:
