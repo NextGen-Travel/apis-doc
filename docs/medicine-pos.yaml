@@ -955,6 +955,24 @@ paths:
                         medicine_note:
                           type: string
                           description: 英文用藥說明
+                        frequency_times:
+                          type: string
+                          description: 服用次數
+                        interval:
+                          type: string
+                          description: 服用間隔
+                        interval_times:
+                          type: string
+                          description: 服用間隔 間隔時間
+                        regular:
+                          type: string
+                          description: 定時用
+                        in_case:
+                          type: string
+                          description: 需要時
+                        dosage_unit:
+                          type: string
+                          description: 每次數量 單位
                   links:
                     type: object
                     properties:
