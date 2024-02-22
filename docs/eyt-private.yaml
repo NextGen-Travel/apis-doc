@@ -1568,6 +1568,10 @@ paths:
                           type: string
                         nameZh:
                           type: string
+                        nameEn:
+                          type: string
+                        nameCn:
+                          type: string
                         image:
                           type: string
                         ingredients:
