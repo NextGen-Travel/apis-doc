@@ -973,6 +973,9 @@ paths:
                         dosage_unit:
                           type: string
                           description: 每次數量 單位
+                        lot:
+                          type: string
+                          description: 產品批號
                   links:
                     type: object
                     properties:
@@ -1022,6 +1025,7 @@ paths:
                   usage: "oral"
                   sell_line_note: "吃少點"
                   medicine_note: "eat less"
+                  lot: "Lot20240301"
                 links:
                   type: object
                   properties:
