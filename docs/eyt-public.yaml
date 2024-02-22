@@ -2687,6 +2687,10 @@ paths:
                           type: string
                         nameZh:
                           type: string
+                        nameEn:
+                          type: string
+                        nameCn:
+                          type: string
                         aka:
                           type: string
                         dosageForm:
