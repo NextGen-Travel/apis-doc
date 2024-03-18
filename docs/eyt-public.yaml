@@ -2655,11 +2655,7 @@ paths:
                               type: string
                         name:
                           type: string
-                        nameZh:
-                          type: string
-                        nameEn:
-                          type: string
-                        nameCn:
+                        displayProductName:
                           type: string
                         aka:
                           type: string
@@ -2696,23 +2692,11 @@ paths:
                           items:
                             type: object
                             properties:
-                              id:
-                                type: number
-                              dosage:
-                                type: number
-                              usage:
+                              sku:
                                 type: string
                               unit:
                                 type: string
-                              sku:
-                                type: string
-                              createdAt:
-                                type: string
-                              updatedAt:
-                                type: string
                               name:
-                                type: string
-                              dosageForm:
                                 type: string
                               urls:
                                 type: array
@@ -2729,7 +2713,7 @@ paths:
                   data:
                     - permitNo: HK-65977
                       name: MAX COLTALIN COUGH HOT REMEDY POWDER FOR ORAL SOLUTION
-                      nameZh: 幸福傷風咳-熱飲5包
+                      displayProductName: 幸福傷風咳-熱飲5包
                       aka: 幸福傷風咳
                       dosageForm: powder
                       usage: oral
@@ -2752,9 +2736,8 @@ paths:
                         - https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/f0db146f_7cea_4ae0_abab_000c3e70ddfb_1087e50d9e.png
                       packages:
                         sku: 3514671130562
-                        name: 幸福傷風咳-熱飲5包
-                        dosage: 1
                         unit: sachet
+                        name: 幸福傷風咳-熱飲5包
                         urls:
                           - https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/f0db146f_7cea_4ae0_abab_000c3e70ddfb_a1c38f0e0f.png
                       holder:
