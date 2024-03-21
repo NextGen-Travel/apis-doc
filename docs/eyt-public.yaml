@@ -176,12 +176,9 @@ components:
           permitNo:
             type: string
             description: 用來執行搜尋用的參數
-          name:
+          displayProductName:
             type: string
             description: 顯示名稱
-          nameZh:
-            type: string
-            description: 顯示名稱(中文)
           url:
             type: string
             description: 藥品圖示
