@@ -5744,35 +5744,75 @@ paths:
                   data:
                     type: object
                     properties:
-                      productName:
-                        type: string
+                      id:
+                        type: number
+                        description: 藥品 id (DB)
                       permitNo:
                         type: string
+                        description: 核准字號
+                      productName:
+                        type: string
+                        description: 藥品學名
                       productName_zh:
                         type: string
+                        description: 藥品名稱
+                      productName_en:
+                        type: string
+                        description: 藥品英文名稱
+                      productName_cn:
+                        type: string
+                        description: 藥品簡體名稱
                       aka:
                         type: string
+                        description: 別名
                       indication:
                         type: string
+                        description: 適應症 繁體中文
+                      indication_en:
+                        type: string
+                        description: 適應症 英文
+                      indication_cn:
+                        type: string
+                        description: 適應症 簡體中文
                       side_effect:
                         type: string
-                      registration_date:
+                        description: 副作用 繁體中文
+                      side_effect_en:
                         type: string
+                        description: 副作用 英文
+                      side_effect_cn:
+                        type: string
+                        description: 副作用 簡體中文
                       precaution:
                         type: string
-                      nonRegistrationDate:
+                        description: 注意事項 繁體中文
+                      precaution_en:
                         type: string
-                      priority:
-                        type: number
-                      enable:
-                        type: number
+                        description: 注意事項 英文
+                      precaution_cn:
+                        type: string
+                        description: 注意事項 簡體中文
+                      dosageForm:
+                        type: string
+                        description: 劑型 (key)
+                      usage:
+                        type: string
+                        description: 用法 (key)
                       collectCount:
                         type: number
                         description: 收藏數
-                      dosageForm:
+                      priority:
+                        type: number
+                        description: 優先權 0:最低 10:最高
+                      enable:
+                        type: number
+                        description: 是否啟用 1:啟用 0:不啟用
+                      registration_date:
                         type: string
-                      usage:
+                        description: 註冊核准日期
+                      nonRegistrationDate:
                         type: string
+                        description: 註冊核准撤銷日期
                       images:
                         type: array
                         items:
@@ -5782,8 +5822,6 @@ paths:
                               type: number
                             url:
                               type: string
-                      id:
-                        type: number
                       drugUpdates:
                         type: array
                         items:
