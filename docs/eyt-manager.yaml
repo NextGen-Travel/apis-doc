@@ -5930,10 +5930,17 @@ paths:
                           properties:
                             id:
                               type: number
-                            name:
-                              type: string
                             sku:
                               type: string
+                            name:
+                              type: string
+                              description: 藥品外包裝名稱 繁體中文
+                            name_en:
+                              type: string
+                              description: 藥品外包裝名稱 英文
+                            name_cn:
+                              type: string
+                              description: 藥品外包裝名稱 簡體中文
                             unit:
                               type: string
                             images:
