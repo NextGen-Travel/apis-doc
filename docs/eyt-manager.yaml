@@ -455,6 +455,12 @@ components:
           items:
             type: object
             properties:
+              id:
+                oneOf:
+                  - type: integer
+                  - type: string
+                description: 包裝 id
+                example: _NEW_ID__random_string
               name:
                 type: string
                 description: 包裝名稱 繁體中文
