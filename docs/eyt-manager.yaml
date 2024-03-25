@@ -379,6 +379,8 @@ components:
         - packages.name_cn
         - packages.sku
         - packages.unit
+        - images
+        - tags
       properties:
         enable:
           type: boolean
