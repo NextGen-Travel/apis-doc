@@ -455,6 +455,7 @@ components:
             type: object
             properties:
               id:
+                type: integer
                 description: 包裝 id, 也可能是新的包裝 (timestamp)
                 example: 123456
               isNew:
