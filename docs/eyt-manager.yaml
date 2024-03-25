@@ -491,7 +491,7 @@ components:
               description: 品牌 id
               example: 1
             tagName:
-              type: object
+              type: string
               description: 品牌名稱
         images:
           type: array
