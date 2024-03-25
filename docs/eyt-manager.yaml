@@ -374,6 +374,7 @@ components:
         # - precaution_cn
         # - dosageForm
         # - usage
+        - packages.id
         - packages.name
         - packages.name_en
         - packages.name_cn
@@ -456,11 +457,12 @@ components:
             type: object
             properties:
               id:
-                oneOf:
-                  - type: integer
-                  - type: string
-                description: 包裝 id
-                example: _NEW_ID__random_string
+                description: 包裝 id, 也可能是新的包裝 (timestamp)
+                example: 123456
+              isNew:
+                type: boolean
+                description: 是否為新的包裝
+                example: true
               name:
                 type: string
                 description: 包裝名稱 繁體中文
