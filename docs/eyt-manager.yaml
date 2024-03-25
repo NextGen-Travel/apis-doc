@@ -378,8 +378,6 @@ components:
         - packages.name
         - packages.name_en
         - packages.name_cn
-        - packages.sku
-        - packages.unit
         - brand.id
         - images[].id
         - tags
