@@ -490,12 +490,12 @@ components:
             type: integer
           description: 團檔 id
           example: [1]
-        dosage:
-          type: array
-          items:
-            type: integer
-          description: 藥品劑量
-          example: [1,1]
+        # dosage:
+        #   type: array
+        #   items:
+        #     type: integer
+        #   description: 藥品劑量
+        #   example: [1,1]
     CollectPost:
       type: object
       properties:
