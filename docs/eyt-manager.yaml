@@ -379,7 +379,8 @@ components:
         - packages.name_cn
         - packages.sku
         - packages.unit
-        - images
+        - brand.id
+        - images[].id
         - tags
       properties:
         enable:
@@ -483,21 +484,28 @@ components:
             description: 藥品分類id
           example: [1,4,7]
         brand:
-          type: integer
-          description: 品牌 id
-          example: 1
+          type: object
+          properties:
+            id:
+              type: integer
+              description: 品牌 id
+              example: 1
+            tagName:
+              type: object
+              description: 品牌名稱
         images:
           type: array
           items:
-            type: integer
-          description: 團檔 id
-          example: [1]
-        # dosage:
-        #   type: array
-        #   items:
-        #     type: integer
-        #   description: 藥品劑量
-        #   example: [1,1]
+            type: object
+            properties:
+              id:
+                type: integer
+                description: 圖片 id
+                example: 1
+              url:
+                type: string
+                description: 圖片 url
+                example: 'https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/1.jpg'
     CollectPost:
       type: object
       properties:
