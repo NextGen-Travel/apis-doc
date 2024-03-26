@@ -458,10 +458,14 @@ components:
                 type: integer
                 description: 包裝 id, 也可能是新的包裝 (timestamp)
                 example: 123456
-              isNew:
-                type: boolean
-                description: 是否為新的包裝
-                example: true
+              modifiedType:
+                type: string
+                enum:
+                  - 'new'
+                  - 'delete'
+                  - 'update'
+                  - ''
+                description: 是否修改過
               name:
                 type: string
                 description: 包裝名稱 繁體中文
