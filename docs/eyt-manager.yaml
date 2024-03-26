@@ -461,11 +461,11 @@ components:
               modifiedType:
                 type: string
                 enum:
-                  - 'new'
-                  - 'delete'
-                  - 'update'
-                  - ''
+                  - new
+                  - delete
+                  - keeping
                 description: 是否修改過
+                default: keeping
               name:
                 type: string
                 description: 包裝名稱 繁體中文
