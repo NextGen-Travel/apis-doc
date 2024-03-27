@@ -307,7 +307,7 @@ components:
                 description: tags table 的 id
                 example: 1234
               tagName:
-                type: object
+                type: string
                 description: tag 名稱
                 example: '良躍社區藥房'
               icon:
