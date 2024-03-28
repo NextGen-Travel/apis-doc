@@ -511,6 +511,9 @@ components:
                 - remove_related
                 - create_related
                 - no_action
+              description: 設定異動狀態
+              default: no_action
+              example: no_action
         images:
           type: array
           items:
