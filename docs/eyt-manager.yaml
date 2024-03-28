@@ -501,9 +501,16 @@ components:
               type: integer
               description: 品牌 id
               example: 1
+              nullable: true
             tagName:
               type: string
               description: 品牌名稱
+            actionType:
+              type: string
+              enum:
+                - remove_related
+                - create_related
+                - no_action
         images:
           type: array
           items:
