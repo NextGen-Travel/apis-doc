@@ -5987,12 +5987,40 @@ paths:
                               type: string
                             indication:
                               type: string
+                              description: 適應症 繁體中文
+                            indication_en:
+                              type: string
+                              description: 適應症 英文
+                            indication_cn:
+                              type: string
+                              description: 適應症 簡體中文
                             precaution:
                               type: string
+                              description: 注意事項 繁體中文
+                            precaution_en:
+                              type: string
+                              description: 注意事項 英文
+                            precaution_cn:
+                              type: string
+                              description: 注意事項 簡體中文
                             side_effect:
                               type: string
+                              description: 副作用 繁體中文
+                            side_effect_en:
+                              type: string
+                              description: 副作用 英文
+                            side_effect_cn:
+                              type: string
+                              description: 副作用 簡體中文
                             productName_zh:
                               type: string
+                              description: 藥品名稱 繁體中文
+                            productName_en:
+                              type: string
+                              description: 藥品名稱 英文
+                            productName_cn:
+                              type: string
+                              description: 藥品名稱 簡體中文
                             legalClassifications:
                               type: array
                               items:
