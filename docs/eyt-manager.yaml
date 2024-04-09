@@ -5959,8 +5959,12 @@ paths:
                               items:
                                 type: object
                                 properties:
+                                  id:
+                                    type: number
+                                    description: 藥品外包裝 id
                                   sku:
                                     type: string
+                                    description: 藥品外包裝 sku
                                   name:
                                     type: string
                                     description: 藥品外包裝名稱 繁體中文
@@ -5972,6 +5976,7 @@ paths:
                                     description: 藥品外包裝名稱 簡體中文
                                   unit:
                                     type: string
+                                    description: 單位
                                   dosage:
                                     type: number
                                   images:
