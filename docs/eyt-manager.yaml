@@ -6234,44 +6234,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/drugUpdateRevise'
-              uuidArr:
-                type: array
-                items:
-                  type: string
-                description: cancel的uuid
-                example: ['685cc162-b2bf-4fcc-879b-41e05c11d43d']
-          application/x-www-form-urlencoded:
-            encoding :
-              sku :
-                style : form
-                explode : true
-              packageName:
-                style : form
-                explode : true
-              dosageForm :
-                style : form
-                explode : true
-              usage :
-                style : form
-                explode : true
-              dosage :
-                style : form
-                explode : true
-              unit :
-                style : form
-                explode : true
-              images:
-                style : form
-                explode : true
-            schema:
-              $ref: '#/components/schemas/drugUpdateRevise'
-              uuidArr:
-                type: array
-                items:
-                  type: string
-                description: cancel的uuid
-                example: ['685cc162-b2bf-4fcc-879b-41e05c11d43d']
+              type: object
+              properties:
+                columnNames:
+                  type: array
+                  items:
+                    type: string
+                  description: 要修改的欄位名稱
+                  example: ['drug.sku', 'drug.dosageForm', 'drug.sku', 'packages[20]', 'packages[21]', 'unit', 'drug.image[123]', 'drug.image[144]', 'brand']
       responses:
         '200':
           description: 成功
