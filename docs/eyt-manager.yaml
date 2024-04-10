@@ -5977,8 +5977,13 @@ paths:
                                   unit:
                                     type: string
                                     description: 單位
-                                  dosage:
-                                    type: number
+                                  actionType:
+                                    type: string
+                                    enum:
+                                      - no-change
+                                      - new
+                                      - update
+                                      - delete
                                   images:
                                     type: array
                                     items:
