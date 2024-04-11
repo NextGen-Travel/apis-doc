@@ -5827,6 +5827,29 @@ paths:
                   data:
                     type: object
                     properties:
+                      historyRecords:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            createdAt:
+                              type: string
+                            applyUser:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                account:
+                                  type: string
+                                store:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: number
+                                    name:
+                                      type: string
                       drugUpdates:
                         type: array
                         items:
@@ -6110,29 +6133,6 @@ paths:
                                   type: number
                                 tagName:
                                   type: string
-                          historyRecords:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                id:
-                                  type: number
-                                createdAt:
-                                  type: string
-                                applyUser:
-                                  type: object
-                                  properties:
-                                    id:
-                                      type: number
-                                    account:
-                                      type: string
-                                    store:
-                                      type: object
-                                      properties:
-                                        id:
-                                          type: number
-                                        name:
-                                          type: string
                       baseData:
                         type: object
                         description: 申請時的藥品內容
@@ -6285,29 +6285,6 @@ paths:
                                   type: number
                                 tagName:
                                   type: string
-                          historyRecords:
-                            type: array
-                            items:
-                              type: object
-                              properties:
-                                id:
-                                  type: number
-                                createdAt:
-                                  type: string
-                                applyUser:
-                                  type: object
-                                  properties:
-                                    id:
-                                      type: number
-                                    account:
-                                      type: string
-                                    store:
-                                      type: object
-                                      properties:
-                                        id:
-                                          type: number
-                                        name:
-                                          type: string
 
   /admin/drugs/options/brands:
     get:
