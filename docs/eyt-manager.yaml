@@ -5895,6 +5895,7 @@ paths:
                               type: array
                               items:
                                 type: object
+                                nullable: true
                                 properties:
                                   id:
                                     type: number
@@ -6054,6 +6055,9 @@ paths:
                           nonRegistrationDate:
                             type: string
                             description: 註冊核准撤銷日期
+                          updatedAt:
+                            type: string
+                            nullable: true
                           images:
                             type: array
                             items:
@@ -6063,6 +6067,9 @@ paths:
                                   type: number
                                 url:
                                   type: string
+                                linkedAt:
+                                  type: string
+                                  nullable: true
                           brand:
                             type: object
                             properties:
@@ -6070,6 +6077,9 @@ paths:
                                 type: number
                               tagName:
                                 type: string
+                              linkedAt:
+                                type: string
+                                nullable: true
                           ingredients:
                             type: array
                             items:
@@ -6099,6 +6109,9 @@ paths:
                                   description: 藥品外包裝名稱 簡體中文
                                 unit:
                                   type: string
+                                linkedAt:
+                                  type: string
+                                  nullable: true
                                 images:
                                   type: array
                                   items:
@@ -6108,6 +6121,9 @@ paths:
                                         type: number
                                       url:
                                         type: string
+                                      linkedAt:
+                                        type: string
+                                        nullable: true
                           saleRequirement:
                             type: object
                             properties:
@@ -6206,6 +6222,9 @@ paths:
                           nonRegistrationDate:
                             type: string
                             description: 註冊核准撤銷日期
+                          updatedAt:
+                            type: string
+                            nullable: true
                           images:
                             type: array
                             items:
@@ -6215,13 +6234,20 @@ paths:
                                   type: number
                                 url:
                                   type: string
+                                linkedAt:
+                                  type: string
+                                  nullable: true
                           brand:
                             type: object
+                            nullable: true
                             properties:
                               id:
                                 type: number
                               tagName:
                                 type: string
+                              linkedAt:
+                                type: string
+                                nullable: true
                           ingredients:
                             type: array
                             items:
@@ -6251,6 +6277,9 @@ paths:
                                   description: 藥品外包裝名稱 簡體中文
                                 unit:
                                   type: string
+                                linkedAt:
+                                  type: string
+                                  nullable: true
                                 images:
                                   type: array
                                   items:
