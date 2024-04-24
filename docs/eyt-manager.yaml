@@ -5809,7 +5809,7 @@ paths:
 
   /admin/t/drug-updates/{permitNo}:
     get:
-      summary: 獲取後台藥品審核資料
+      summary: 後台藥品修改流程 的 當前藥品詳細資訊
       security:
         - user_token: []
       tags:
