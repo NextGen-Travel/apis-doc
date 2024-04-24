@@ -5805,7 +5805,365 @@ paths:
                         count:
                           type: number
 
+
+
+  /admin/t/drug-updates/{permitNo}:
+    get:
+      summary: 獲取後台藥品審核資料
+      security:
+        - user_token: []
+      tags:
+        - drugs
+      parameters:
+        - $ref: '#/components/parameters/drugPathNo'
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    properties:
+                      drugs:
+                        type: object
+                        required:
+                          - id
+                          - permit_no
+                          - product_name
+                          - product_name_zh
+                          - product_name_en
+                          - product_name_cn
+                          - aka
+
+                          - indication
+                          - indication_en
+                          - indication_cn
+                          - side_effect
+                          - side_effect_en
+                          - side_effect_cn
+                          - precaution
+                          - precaution_en
+                          - precaution_cn
+                          - dosage_form
+                          - usage
+
+                          - reg_cert_holder_name
+                          - reg_cert_holder_address
+                          - reg_cert_holder_country
+
+                          - legal_classification
+                          - sale_requirement
+
+                          - registration_date
+                          - non_registration_date
+                          - priority
+                          - enable
+                          - changeables_approved_at
+
+                          - collect_count
+                          # - package
+                          # - created_at
+                          # - updated_at
+                          # - created_by_id
+                          # - updated_by_id
+                        properties:
+                          id:
+                            type: number
+                            nullable: false
+                            example: 8489
+                            description: 藥品 id
+                          permit_no:
+                            type: string
+                            nullable: false
+                            example: HK-45133
+                            description: 香港藥品核准字號
+                          product_name:
+                            type: string
+                            nullable: false
+                            example: COLTALIN-ND TAB
+                            description: 藥品註冊名稱
+                          product_name_zh:
+                            type: string
+                            nullable: true
+                            example: 幸福傷風素 無睡意 36片
+                            description: 藥品名稱 繁體中文
+                          product_name_en:
+                            type: string
+                            nullable: true
+                            example: COLTALIN-ND TAB
+                            description: 藥品名稱 英文
+                          product_name_cn:
+                            type: string
+                            nullable: true
+                            example: COLTALIN-ND TAB
+                            description: 藥品名稱 簡體中文
+                          aka:
+                            type: string
+                            nullable: true
+                            example: null
+                            description: 藥品別名, 俗稱
+                          indication:
+                            type: string
+                            description: 適應症 繁體中文
+                            nullable: true
+                            example: 噴嚏、發燒、鼻塞、肌肉酸痛及頭痛
+                          indication_en:
+                            type: string
+                            description: 適應症 英文
+                            nullable: true
+                            example: Sneezing, fever, nasal congestion, muscle soreness and headache
+                          indication_cn:
+                            type: string
+                            description: 適應症 簡體中文
+                            nullable: true
+                            example: 打喷嚏、发烧、鼻塞、肌肉酸痛及头痛
+                          side_effect:
+                            type: string
+                            description: 副作用 繁體中文
+                            nullable: true
+                            example: 不適當使用可引致肝中毒或肝臟嚴重損傷
+                          side_effect_en:
+                            type: string
+                            description: 副作用 英文
+                            nullable: true
+                            example: Inappropriate use can cause liver toxicity or severe liver damage
+                          side_effect_cn:
+                            type: string
+                            description: 副作用 簡體中文
+                            nullable: true
+                            example: 不当使用可引致肝中毒或肝脏严重损伤
+                          precaution:
+                            type: string
+                            nullable: true
+                            description: 注意事項 繁體中文
+                            example: 24小時內不可服用超過8片
+                          precaution_en:
+                            type: string
+                            nullable: true
+                            description: 注意事項 英文
+                            example: Do not take more than 8 tablets within 24 hours
+                          precaution_cn:
+                            type: string
+                            nullable: true
+                            description: 注意事項 簡體中文
+                            example: 24小时内不可服用超过8片
+                          dosage_form:
+                            type: string
+                            description: 劑型 (key name in English)
+                            nullable: true
+                            example: tablet
+                          usage:
+                            type: string
+                            description: 用法 (key name in English)
+                            nullable: true
+                            example: oral
+                          reg_cert_holder_name:
+                            type: string
+                            nullable: true
+                            example: FORTUNE PHARMACAL CO LTD
+                            description: 註冊持有人名稱
+                          reg_cert_holder_address:
+                            type: string
+                            nullable: true
+                            example: 5/F SAFETY GODOWN IND BLDG, 56 KA YIP ST. CHAI WAN HK
+                            description: 註冊持有人地址
+                          reg_cert_holder_country:
+                            type: string
+                            nullable: true
+                            example: China
+                            description: 註冊持有人國家
+                          legal_classification:
+                            type: string
+                            nullable: false
+                            example: Not A Poison
+                            description: 藥品分類 (法定)
+                          sale_requirement:
+                            type: string
+                            nullable: true
+                            example: Over-The-Counter Medicines
+                            description: 銷售要求
+                          registration_date:
+                            type: string
+                            nullable: false
+                            example: 2023-07-07T07:00:00.000Z
+                            description: 註冊核准日期
+                          non_registration_date:
+                            type: string
+                            nullable: true
+                            example: 2023-07-07T07:00:00.000Z
+                            description: 註冊核准撤銷日期
+                          priority:
+                            type: number
+                            nullable: true
+                            example: 0
+                            description: 優先權 0:最低 10:最高
+                          enable:
+                            type: number
+                            nullable: false
+                            example: 1
+                            description: 是否啟用, 可於前台顯示 (1 啟用, 0 不啟用)
+                          changeables_approved_at:
+                            type: string
+                            nullable: true
+                            example: 2023-07-07T07:00:00.000Z
+                            description: 上次被修改內容審核通過時間
+                          collect_count:
+                            type: number
+                            description: 收藏數
+                            nullable: true
+                            example: 100
+
+                          # 以下可不用
+                          created_at:
+                            type: string
+                            nullable: true
+                          updated_at:
+                            type: string
+                            nullable: true
+                          created_by_id:
+                            type: number
+                            nullable: true
+                          updated_by_id:
+                            type: number
+                            nullable: true
+
+                      brand:
+                        oneOf:
+                        - type: object
+                          properties:
+                            id:
+                              type: number
+                              nullable: false
+                              description: 品牌的 tag id
+                              example: 1847
+                            name:
+                              type: string
+                              nullable: false
+                              description: 品牌名稱
+                              example: COLTALIN
+                            linked_at:
+                              type: string
+                              nullable: false
+                              description: 藥品與品牌的關聯建立時間
+                        - type: object
+                          properties:
+                            unlinked_at:
+                              type: string
+                              nullable: true
+                              description: >
+                                1. 藥品與品牌的關聯解除時間,
+                                2. null 表示 藥品從未與任何品牌關聯過
+                              example: null
+
+                      images:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              nullable: false
+                              description: 藥品圖片 的 檔案id
+                              example: 63
+                            linked_at:
+                              type: string
+                              nullable: false
+                              description: 藥品與圖片的關聯建立時間
+                              example: 2023-07-07 07:02:00.000000
+                            url:
+                              type: string
+                              nullable: true
+                              description: 藥品圖片 url
+                              example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
+
+                      packages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              nullable: false
+                              description: 藥品包裝id
+                              example: 12
+                            data:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                  nullable: false
+                                  description: 藥品包裝id
+                                  example: 12
+                                sku:
+                                  type: string
+                                  nullable: true
+                                  description: 藥品包裝 sku
+                                  example: 351467109127
+                                unit:
+                                  type: string
+                                  nullable: true
+                                  description: 單位 (key name in English)
+                                  example: box
+                                name:
+                                  type: string
+                                  nullable: true
+                                  description: >
+                                    藥品包裝名稱 繁體中文
+                                    其實不應該是 nullable, 但是因為有些藥品沒有包裝名稱, 暫時先這樣處理
+                                  example: 幸福傷風素 無睡意 12片
+                                name_en:
+                                  type: string
+                                  nullable: true
+                                  description: 藥品包裝名稱 英文
+                                  example: (engilsh) 幸福傷風素 無睡意 12片
+                                name_cn:
+                                  type: string
+                                  nullable: true
+                                  description: 藥品包裝名稱 簡體中文
+                                  example: (簡中) 幸福傷風素 無睡意 12片
+                                updated_at:
+                                  type: string
+                                  nullable: false
+                                  description: 藥品包裝文字內容更新時間
+                                  example: 2023-07-07 07:02:00.000000
+                                linked_at:
+                                  type: string
+                                  nullable: false
+                                  description: 藥品與包裝的關聯建立時間
+                                  example: 2023-07-08 14:02:31.000000
+
+                                images:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      id:
+                                        type: number
+                                        nullable: false
+                                        description: 藥品包裝圖片 的 檔案id
+                                        example: 63
+                                      linked_at:
+                                        type: string
+                                        nullable: false
+                                        description: 藥品包裝 與 藥品包裝圖片 的 關聯建立時間
+                                        example: 2023-07-07 07:02:00.000000
+                                      url:
+                                        type: string
+                                        nullable: true
+                                        description: 藥品包裝圖片 url
+                                        example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
+
+
+
+
   /admin/drug-updates/drugs/{permitNo}:
+    # 將被 '/admin/t/drug-updates/{permitNo}' 取代
     get:
       summary: 獲取後台藥品審核資料
       security:
