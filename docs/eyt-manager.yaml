@@ -6138,26 +6138,26 @@ paths:
                                   description: 藥品與包裝的關聯建立時間
                                   example: 2023-07-08 14:02:31.000000
 
-                                images:
-                                  type: array
-                                  items:
-                                    type: object
-                                    properties:
-                                      id:
-                                        type: number
-                                        nullable: false
-                                        description: 藥品包裝圖片 的 檔案id
-                                        example: 63
-                                      linked_at:
-                                        type: string
-                                        nullable: false
-                                        description: 藥品包裝 與 藥品包裝圖片 的 關聯建立時間
-                                        example: 2023-07-07 07:02:00.000000
-                                      url:
-                                        type: string
-                                        nullable: true
-                                        description: 藥品包裝圖片 url
-                                        example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
+                            images:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  id:
+                                    type: number
+                                    nullable: false
+                                    description: 藥品包裝圖片 的 檔案id
+                                    example: 63
+                                  linked_at:
+                                    type: string
+                                    nullable: false
+                                    description: 藥品包裝 與 藥品包裝圖片 的 關聯建立時間
+                                    example: 2023-07-07 07:02:00.000000
+                                  url:
+                                    type: string
+                                    nullable: true
+                                    description: 藥品包裝圖片 url
+                                    example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
 
 
 
