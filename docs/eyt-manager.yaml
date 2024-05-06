@@ -282,6 +282,10 @@ components:
                 type: string
                 description: 顯示名稱
                 example: 名稱
+              name:
+                type: string
+                description: 顯示名稱
+                example: 名稱
 
     OptionsModelBrandListResponse:
       type: object
