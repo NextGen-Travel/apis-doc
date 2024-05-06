@@ -6160,6 +6160,272 @@ paths:
                                     description: 藥品包裝圖片 url
                                     example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
 
+  /admin/t/drug-updates/apply/{permitNo}:
+    post:
+      summary: 後台藥品修改流程 的 提交申請階段
+      security:
+        - user_token: []
+      tags:
+        - drugs
+      parameters:
+        - name: permitNo
+          in: path
+          description: 藥品唯一代碼
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - drugs
+                - brand
+                - packages
+                - images
+              properties:
+                drugs:
+                  type: object
+                  required:
+                    - permit_no
+                    - product_name_zh
+                    - product_name_en
+                    - product_name_cn
+                    - aka
+                    - indication
+                    - indication_en
+                    - indication_cn
+                    - side_effect
+                    - side_effect_en
+                    - side_effect_cn
+                    - precaution
+                    - precaution_en
+                    - precaution_cn
+                    - dosage_form
+                    - usage
+                  properties:
+                    permit_no:
+                      type: string
+                      description: 香港藥品核准字號
+                      example: HK-45133
+                    product_name_zh:
+                      type: string
+                      nullable: false
+                      example: 幸福傷風素 無睡意 36片
+                      description: 藥品名稱 繁體中文
+                    product_name_en:
+                      type: string
+                      nullable: false
+                      example: COLTALIN-ND TAB
+                      description: 藥品名稱 英文
+                    product_name_cn:
+                      type: string
+                      nullable: false
+                      example: COLTALIN-ND TAB
+                      description: 藥品名稱 簡體中文
+                    aka:
+                      type: string
+                      nullable: true
+                      example: null
+                      description: 藥品別名, 俗稱
+                    indication:
+                      type: string
+                      description: 適應症 繁體中文
+                      nullable: true
+                      example: 噴嚏、發燒、鼻塞、肌肉酸痛及頭痛
+                    indication_en:
+                      type: string
+                      description: 適應症 英文
+                      nullable: true
+                      example: Sneezing, fever, nasal congestion, muscle soreness and headache
+                    indication_cn:
+                      type: string
+                      description: 適應症 簡體中文
+                      nullable: true
+                      example: 打喷嚏、发烧、鼻塞、肌肉酸痛及头痛
+
+                    side_effect:
+                      type: string
+                      description: 副作用 繁體中文
+                      nullable: true
+                      example: 不適當使用可引致肝中毒或肝臟嚴重損傷
+                    side_effect_en:
+                      type: string
+                      description: 副作用 英文
+                      nullable: true
+                      example: Inappropriate use can cause liver toxicity or severe liver damage
+                    side_effect_cn:
+                      type: string
+                      description: 副作用 簡體中文
+                      nullable: true
+                      example: 不当使用可引致肝中毒或肝脏严重损伤
+                    precaution:
+                      type: string
+                      nullable: true
+                      description: 注意事項 繁體中文
+                      example: 24小時內不可服用超過8片
+                    precaution_en:
+                      type: string
+                      nullable: true
+                      description: 注意事項 英文
+                      example: Do not take more than 8 tablets within 24 hours
+                    precaution_cn:
+                      type: string
+                      nullable: true
+                      description: 注意事項 簡體中文
+                      example: 24小时内不可服用超过8片
+                    dosage_form:
+                      type: string
+                      description: 劑型 (key name in English)
+                      nullable: true
+                      example: tablet
+                    usage:
+                      type: string
+                      description: 用法 (key name in English)
+                      nullable: true
+                      example: oral
+                    priority:
+                      type: number
+                      enum: [0,1,2,3,4,5,6,7,8,9]
+                      nullable: false
+                      example: 0
+                      description: 優先權 0:最低 9:最高
+                    enable:
+                      type: number
+                      enum: [0,1]
+                      nullable: false
+                      example: 1
+                      description: 是否啟用, 可於前台顯示 (1 啟用, 0 不啟用)
+                brand:
+                  type: number
+                  nullable: true
+                  description: 品牌的 tag id
+                  example: 1847
+                images:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: number
+                        nullable: false
+                        description: 藥品圖片 的 檔案id
+                        example: 63
+                      actionType:
+                        type: string
+                        enum:
+                          - new
+                          - keep
+                          - delete
+                        nullable: false
+                        description: 操作類型
+                        example: new
+                packages:
+                  type: array
+                  items:
+                    oneOf:
+                    - type: object
+                      required:
+                        - id
+                        - actionType
+                      properties:
+                        id:
+                          type: number
+                          nullable: false
+                          description: 藥品包裝 的 DB id
+                          example: 12
+                        actionType:
+                          type: string
+                          enum:
+                            - delete
+                          nullable: false
+                          description: 操作類型 (delete=刪除)
+                          example: delete
+                    - type: object
+                      required:
+                        - id
+                        - actionType
+                        - data
+                        - images
+                      properties:
+                        id:
+                          type: number
+                          nullable: false
+                          description: 藥品包裝 的 DB id
+                          example: 163
+                        actionType:
+                          type: string
+                          enum:
+                            - new
+                            - keep
+                          nullable: false
+                          description: 操作類型 (new=新增, keep=保持)
+                          example: keep
+                        data:
+                          type: object
+                          required:
+                            - sku
+                            - name
+                            - name_en
+                            - name_cn
+                            - unit
+                          properties:
+                            sku:
+                              type: string
+                              nullable: true
+                              description: 藥品包裝 sku
+                              example: 351467109127
+                            unit:
+                              type: string
+                              nullable: true
+                              description: 單位 (key name in English)
+                              example: box
+                            name:
+                              type: string
+                              nullable: false
+                              description: 藥品包裝名稱 繁體中文
+                              example: 幸福傷風素 無睡意 12片
+                            name_en:
+                              type: string
+                              nullable: false
+                              description: 藥品包裝名稱 英文
+                              example: (engilsh) 幸福傷風素 無睡意 12片
+                            name_cn:
+                              type: string
+                              nullable: false
+                              description: 藥品包裝名稱 簡體中文
+                              example: (簡中) 幸福傷風素 無睡意 12片
+                        images:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                                nullable: false
+                                description: 藥品包裝圖片的 的 檔案id
+                                example: 63
+                              actionType:
+                                type: string
+                                enum:
+                                  - new
+                                  - keep
+                                  - delete
+                                nullable: false
+                                description: 操作類型 (new=新增, keep=保持, delete=刪除)
+                                example: new
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
 
 
 
