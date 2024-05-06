@@ -6000,11 +6000,13 @@ paths:
                             description: 註冊核准撤銷日期
                           priority:
                             type: number
+                            enum: [0,1,2,3,4,5,6,7,8,9]
                             nullable: true
                             example: 0
-                            description: 優先權 0:最低 10:最高
+                            description: 優先權 0:最低 9:最高
                           enable:
                             type: number
+                            enum: [0,1]
                             nullable: false
                             example: 1
                             description: 是否啟用, 可於前台顯示 (1 啟用, 0 不啟用)
@@ -6073,7 +6075,7 @@ paths:
                               example: 63
                             linked_at:
                               type: string
-                              nullable: false
+                              nullable: true
                               description: 藥品與圖片的關聯建立時間
                               example: 2023-07-07 07:02:00.000000
                             url:
@@ -6081,7 +6083,6 @@ paths:
                               nullable: true
                               description: 藥品圖片 url
                               example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
-
                       packages:
                         type: array
                         items:
@@ -6129,12 +6130,12 @@ paths:
                                   example: (簡中) 幸福傷風素 無睡意 12片
                                 updated_at:
                                   type: string
-                                  nullable: false
+                                  nullable: true
                                   description: 藥品包裝文字內容更新時間
                                   example: 2023-07-07 07:02:00.000000
                                 linked_at:
                                   type: string
-                                  nullable: false
+                                  nullable: true
                                   description: 藥品與包裝的關聯建立時間
                                   example: 2023-07-08 14:02:31.000000
 
@@ -6150,7 +6151,7 @@ paths:
                                     example: 63
                                   linked_at:
                                     type: string
-                                    nullable: false
+                                    nullable: true
                                     description: 藥品包裝 與 藥品包裝圖片 的 關聯建立時間
                                     example: 2023-07-07 07:02:00.000000
                                   url:
