@@ -289,16 +289,9 @@ components:
               usageOptions:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    key:
-                      type: string
-                      description: 用來執行搜尋用的參數
-                      example: default
-                    name:
-                      type: string
-                      description: 顯示名稱
-                      example: 名稱
+                  type: string
+                  description: 用法選項 key
+                  example: default
 
     OptionsModelBrandListResponse:
       type: object
