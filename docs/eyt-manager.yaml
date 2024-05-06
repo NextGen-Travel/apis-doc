@@ -6174,48 +6174,45 @@ paths:
                       history_records:
                         type: array
                         items:
-                          type: object
-                          properties:
-                            id:
-                              type: number
-                              nullable: false
-                              description: 歷史紀錄id
-                              example: 1234
-                            apply_user:
-                              type: object
+                          oneOf:
+                            - type: object
                               properties:
                                 id:
                                   type: number
                                   nullable: false
-                                  description: 申請人id
+                                  description: 歷史紀錄id
                                   example: 1234
-                                account:
-                                  type: string
-                                  nullable: false
-                                  description: 申請人帳號
-                                  example: 申請人帳號
-                                store:
+                                apply_user:
                                   type: object
                                   properties:
                                     id:
                                       type: number
                                       nullable: false
-                                      description: 申請人藥房id
+                                      description: 申請人id
                                       example: 1234
-                                    name:
+                                    account:
                                       type: string
                                       nullable: false
-                                      description: 申請人藥房名稱
-                                      example: 申請人藥房名稱
-                            applied_at:
-                              type: string
-                              nullable: false
-                              description: 申請時間
-                              example: 2023-07-07 07:02:00.000000
-
-                          oneOf:
-                            - type: object
-                              properties:
+                                      description: 申請人帳號
+                                      example: 申請人帳號
+                                    store:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: number
+                                          nullable: false
+                                          description: 申請人藥房id
+                                          example: 1234
+                                        name:
+                                          type: string
+                                          nullable: false
+                                          description: 申請人藥房名稱
+                                          example: 申請人藥房名稱
+                                applied_at:
+                                  type: string
+                                  nullable: false
+                                  description: 申請時間
+                                  example: 2023-07-07 07:02:00.000000
                                 process_status:
                                   type: string
                                   nullable: false
@@ -6224,9 +6221,44 @@ paths:
                                     - pending
                                     - withdraw-submission
                                   example: pending
-
                             - type: object
                               properties:
+                                id:
+                                  type: number
+                                  nullable: false
+                                  description: 歷史紀錄id
+                                  example: 1234
+                                apply_user:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: number
+                                      nullable: false
+                                      description: 申請人id
+                                      example: 1234
+                                    account:
+                                      type: string
+                                      nullable: false
+                                      description: 申請人帳號
+                                      example: 申請人帳號
+                                    store:
+                                      type: object
+                                      properties:
+                                        id:
+                                          type: number
+                                          nullable: false
+                                          description: 申請人藥房id
+                                          example: 1234
+                                        name:
+                                          type: string
+                                          nullable: false
+                                          description: 申請人藥房名稱
+                                          example: 申請人藥房名稱
+                                applied_at:
+                                  type: string
+                                  nullable: false
+                                  description: 申請時間
+                                  example: 2023-07-07 07:02:00.000000
                                 process_status:
                                   type: string
                                   nullable: false
