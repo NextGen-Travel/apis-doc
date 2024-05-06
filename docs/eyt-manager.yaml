@@ -5877,6 +5877,7 @@ paths:
                           - changeables_approved_at
 
                           - collect_count
+                          - history_records
                           # - package
                           # - created_at
                           # - updated_at
@@ -6169,6 +6170,96 @@ paths:
                                     nullable: true
                                     description: 藥品包裝圖片 url
                                     example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
+
+                      history_records:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              nullable: false
+                              description: 歷史紀錄id
+                              example: 1234
+                            applyUser:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                  nullable: false
+                                  description: 申請人id
+                                  example: 1234
+                                account:
+                                  type: string
+                                  nullable: false
+                                  description: 申請人帳號
+                                  example: 申請人帳號
+                                store:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: number
+                                      nullable: false
+                                      description: 申請人藥房id
+                                      example: 1234
+                                    name:
+                                      type: string
+                                      nullable: false
+                                      description: 申請人藥房名稱
+                                      example: 申請人藥房名稱
+                            applied_at:
+                              type: string
+                              nullable: false
+                              description: 申請時間
+                              example: 2023-07-07 07:02:00.000000
+
+                          oneOf:
+                            - type: object
+                              properties:
+                                process_status:
+                                  type: string
+                                  nullable: false
+                                  description: 流程狀態
+                                  enum:
+                                    - pending
+                                    - withdraw-submission
+                                  example: pending
+
+                            - type: object
+                              properties:
+                                process_status:
+                                  type: string
+                                  nullable: false
+                                  description: 流程狀態
+                                  enum:
+                                    - done
+                                  example: pending
+                                approval_status:
+                                  type: string
+                                  nullable: false
+                                  description: 審核狀態
+                                  enum:
+                                    - all-or-some-approved
+                                    - all-rejected
+                                  example: all-or-some-approved
+                                approved_at:
+                                  type: string
+                                  nullable: false
+                                  description: 審核時間
+                                  example: 2023-07-07 07:02:00.000000
+                                approved_user:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: number
+                                      nullable: false
+                                      description: 審核人id
+                                      example: 1234
+                                    account:
+                                      type: string
+                                      nullable: false
+                                      description: 審核人帳號
+                                      example: 審核人帳號
 
   /admin/t/drug-updates/apply/{permitNo}:
     post:
