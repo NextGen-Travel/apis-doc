@@ -7820,6 +7820,99 @@ paths:
                                             nullable: true
                                             example: null
 
+  /admin/t/drug-updates/approved/{permitNo}:
+    post:
+      summary: 後台藥品修改流程 的 同意特定一次申請中的 複數個項修改內容
+      security:
+        - user_token: []
+      tags:
+        - drugs
+      parameters:
+        - name: permitNo
+          in: path
+          description: 藥品唯一代碼
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applyUuid
+                - verifiedCode
+                - approvedKeys
+              properties:
+                applyUuid:
+                  type: string
+                  description: 申請的 uuid
+                  nullable: false
+                verifiedCode:
+                  type: string
+                  description: 審核碼, 避免重複審核同一提交
+                  nullable: false
+                approvedKeys:
+                  nullable: false
+                  type: array
+                  items:
+                    type: string
+                    description: 同意申請的 key, 在 drug_updates table 的 optional_keys 欄位的內容值
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+
+  /admin/t/drug-updates/rejected/{permitNo}:
+    delete:
+      summary: 後台藥品修改流程 的 否決特定申請
+      security:
+        - user_token: []
+      tags:
+        - drugs
+      parameters:
+        - name: permitNo
+          in: path
+          description: 藥品唯一代碼
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - applyUuid
+                - verifiedCode
+              properties:
+                applyUuid:
+                  type: string
+                  description: 申請的 uuid
+                  nullable: false
+                verifiedCode:
+                  type: string
+                  description: 審核碼, 避免重複審核同一提交
+                  nullable: false
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+
   /admin/drug-updates/drugs/{permitNo}:
     # 將被 '/admin/t/drug-updates/{permitNo}' 取代
     get:
