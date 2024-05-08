@@ -6588,6 +6588,7 @@ paths:
                     example: Success
                   data:
                     type: object
+                    nullable: false
                     required:
                       - verifiedCode
                       - currentData
@@ -6602,6 +6603,7 @@ paths:
 
                       imagesForAddRelation:
                         type: array
+                        nullable: false
                         items:
                           type: object
                           required:
@@ -6629,6 +6631,7 @@ paths:
                           - images
                         properties:
                           drugs:
+                            nullable: false
                             type: object
                             required:
                               - id
@@ -6830,6 +6833,7 @@ paths:
                                 description: 上次被修改內容審核通過時間 或 自動更新時間
 
                           brand:
+                            nullable: false
                             oneOf:
                             - type: object
                               required:
@@ -6864,6 +6868,7 @@ paths:
                                   example: null
 
                           images:
+                            nullable: false
                             type: array
                             items:
                               type: object
@@ -6888,6 +6893,7 @@ paths:
                                   description: 藥品圖片 url
                                   example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
                           packages:
+                            nullable: false
                             type: array
                             items:
                               type: object
@@ -6955,6 +6961,7 @@ paths:
                                       example: 2023-07-08 14:02:31.000000
 
                                 images:
+                                  nullable: false
                                   type: array
                                   items:
                                     type: object
@@ -6980,6 +6987,7 @@ paths:
                                         example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
 
                       diff:
+                        nullable: false
                         type: object
                         required:
                           - drugs
@@ -7550,6 +7558,7 @@ paths:
                                           description: 此新藥品包裝 的 名稱 簡體中文
                                     images:
                                       type: array
+                                      nullable: false
                                       description: >
                                         linked_at 欄位 內容必為 null
                                         url 請參照 imagesForAddRelation
@@ -7586,6 +7595,7 @@ paths:
                                             description: 操作類型, add-related=新增 藥品包裝 與 藥品包裝圖片 關聯
 
                                 - type: object
+                                  nullable: false
                                   description: >
                                     actionType=update: 更新文字內容, 或者 藥品 與 圖片的關聯
                                     data 各欄位為 key, applyContent, snapshotContent, lastUpdatedTimeOfSnapshot
@@ -7625,6 +7635,7 @@ paths:
                                       description: 藥品 與 包裝 關聯建立的時間
                                     data:
                                       type: object
+                                      nullable: true
                                       description: >
                                         data 各欄位為 key, applyContent, snapshotContent, lastUpdatedTimeOfSnapshot
                                         data 欄位 同意權行使 可以依據各自欄位
@@ -7775,6 +7786,7 @@ paths:
 
                                     images:
                                       type: array
+                                      nullable: true
                                       description: >
                                         actionType: add-relation / delete-relation, 可以刪到沒圖
                                         actionType=add-relation: linked_at 欄位 內容必為 null, url 請參照 imagesForAddRelation
