@@ -6560,7 +6560,1253 @@ paths:
                     type: string
                     example: Success
 
+  /admin/t/drug-updates/review/{permitNo}/{applyUuid}:
+    get:
+      summary: 後台藥品修改流程 的 審核階段
+      security:
+        - user_token: []
+      tags:
+        - drugs
+      parameters:
+        - $ref: '#/components/parameters/drugPathNo'
+        - name: applyUuid
+          in: path
+          description: 申請 uuid
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                    example: Success
+                  data:
+                    type: object
+                    required:
+                      - verifiedCode
+                      - currentData
+                      - imagesForAddRelation
+                      - diff
+                    properties:
+                      verifiedCode:
+                        type: string
+                        nullable: false
+                        example: fec30a41371c29f8bcd3fe10373649b25a89d6a3ea598c4f8e76eb69e213c2df
+                        description: 審核碼, 每次重新刷新都會產新的 hash
 
+                      imagesForAddRelation:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                            - id
+                            - url
+                          description: 藥品 / 包裝圖片, 用於建立關聯的圖片
+                          properties:
+                            id:
+                              type: number
+                              nullable: false
+                              description: 圖片檔案id
+                              example: 63
+                            url:
+                              type: string
+                              nullable: false
+                              description: 圖片 url
+                              example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
+
+                      currentData:
+                        type: object
+                        required:
+                          - drugs
+                          - brand
+                          - packages
+                          - images
+                        properties:
+                          drugs:
+                            type: object
+                            required:
+                              - id
+                              - permit_no
+                              - product_name
+                              - product_name_zh
+                              - product_name_en
+                              - product_name_cn
+                              - aka
+
+                              - indication
+                              - indication_en
+                              - indication_cn
+                              - side_effect
+                              - side_effect_en
+                              - side_effect_cn
+                              - precaution
+                              - precaution_en
+                              - precaution_cn
+                              - dosage_form
+                              - usage
+
+                              - reg_cert_holder_name
+                              - reg_cert_holder_address
+                              - reg_cert_holder_country
+
+                              - legal_classification
+                              - sale_requirement
+
+                              - registration_date
+                              - non_registration_date
+                              - priority
+                              - enable
+                              - changeables_approved_at
+
+                              - collect_count
+                              - history_records
+                              # - package
+                              # - created_at
+                              # - updated_at
+                              # - created_by_id
+                              # - updated_by_id
+                            properties:
+                              id:
+                                type: number
+                                nullable: false
+                                example: 8489
+                                description: 藥品 id
+                              permit_no:
+                                type: string
+                                nullable: false
+                                example: HK-45133
+                                description: 香港藥品核准字號
+                              product_name:
+                                type: string
+                                nullable: false
+                                example: COLTALIN-ND TAB
+                                description: 藥品註冊名稱
+                              product_name_zh:
+                                type: string
+                                nullable: false
+                                example: 幸福傷風素 無睡意 36片
+                                description: 藥品名稱 繁體中文
+                              product_name_en:
+                                type: string
+                                nullable: false
+                                example: COLTALIN-ND TAB
+                                description: 藥品名稱 英文
+                              product_name_cn:
+                                type: string
+                                nullable: false
+                                example: COLTALIN-ND TAB
+                                description: 藥品名稱 簡體中文
+                              aka:
+                                type: string
+                                nullable: true
+                                example: null
+                                description: 藥品別名, 俗稱
+                              indication:
+                                type: string
+                                description: 適應症 繁體中文
+                                nullable: true
+                                example: 噴嚏、發燒、鼻塞、肌肉酸痛及頭痛
+                              indication_en:
+                                type: string
+                                description: 適應症 英文
+                                nullable: true
+                                example: Sneezing, fever, nasal congestion, muscle soreness and headache
+                              indication_cn:
+                                type: string
+                                description: 適應症 簡體中文
+                                nullable: true
+                                example: 打喷嚏、发烧、鼻塞、肌肉酸痛及头痛
+                              side_effect:
+                                type: string
+                                description: 副作用 繁體中文
+                                nullable: true
+                                example: 不適當使用可引致肝中毒或肝臟嚴重損傷
+                              side_effect_en:
+                                type: string
+                                description: 副作用 英文
+                                nullable: true
+                                example: Inappropriate use can cause liver toxicity or severe liver damage
+                              side_effect_cn:
+                                type: string
+                                description: 副作用 簡體中文
+                                nullable: true
+                                example: 不当使用可引致肝中毒或肝脏严重损伤
+                              precaution:
+                                type: string
+                                nullable: true
+                                description: 注意事項 繁體中文
+                                example: 24小時內不可服用超過8片
+                              precaution_en:
+                                type: string
+                                nullable: true
+                                description: 注意事項 英文
+                                example: Do not take more than 8 tablets within 24 hours
+                              precaution_cn:
+                                type: string
+                                nullable: true
+                                description: 注意事項 簡體中文
+                                example: 24小时内不可服用超过8片
+                              dosage_form:
+                                type: string
+                                description: 劑型 (key name in English)
+                                nullable: true
+                                example: tablet
+                              usage:
+                                type: string
+                                description: 用法 (key name in English)
+                                nullable: true
+                                example: oral
+
+                              reg_cert_holder_name:
+                                type: string
+                                nullable: true
+                                example: FORTUNE PHARMACAL CO LTD
+                                description: 註冊持有人名稱
+                              reg_cert_holder_address:
+                                type: string
+                                nullable: true
+                                example: 5/F SAFETY GODOWN IND BLDG, 56 KA YIP ST. CHAI WAN HK
+                                description: 註冊持有人地址
+                              reg_cert_holder_country:
+                                type: string
+                                nullable: true
+                                example: China
+                                description: 註冊持有人國家
+
+                              legal_classification:
+                                type: string
+                                nullable: false
+                                example: Not A Poison
+                                description: 藥品分類 (法定)
+                              sale_requirement:
+                                type: string
+                                nullable: true
+                                example: Over-The-Counter Medicines
+                                description: 銷售要求
+                              registration_date:
+                                type: string
+                                nullable: false
+                                example: 2023-07-07T07:00:00.000Z
+                                description: 註冊核准日期
+                              non_registration_date:
+                                type: string
+                                nullable: true
+                                example: 2023-07-07T07:00:00.000Z
+                                description: 註冊核准撤銷日期
+                              priority:
+                                type: number
+                                enum: [0,1,2,3,4,5,6,7,8,9]
+                                nullable: true
+                                example: 0
+                                description: 優先權 0:最低 9:最高
+                              enable:
+                                type: number
+                                enum: [0,1]
+                                nullable: false
+                                example: 1
+                                description: 是否啟用, 可於前台顯示 (1 啟用, 0 不啟用)
+                              changeables_approved_at:
+                                type: string
+                                nullable: true
+                                example: 2023-07-07T07:00:00.000Z
+                                description: >
+                                  上次被修改內容審核通過時間,
+                                  null 表示不曾有任何申請審核通過
+                              collect_count:
+                                type: number
+                                description: 收藏數
+                                nullable: true
+                                example: 100
+
+                              updated_at:
+                                type: string
+                                nullable: false
+                                description: 上次被修改內容審核通過時間 或 自動更新時間
+
+                          brand:
+                            oneOf:
+                            - type: object
+                              required:
+                                - id
+                                - name
+                                - linked_at
+                              properties:
+                                id:
+                                  type: number
+                                  nullable: false
+                                  description: 品牌的 tag id
+                                  example: 1847
+                                name:
+                                  type: string
+                                  nullable: false
+                                  description: 品牌名稱
+                                  example: COLTALIN
+                                linked_at:
+                                  type: string
+                                  nullable: false
+                                  description: 藥品與品牌的關聯建立時間
+                            - type: object
+                              required:
+                                - unlinked_at
+                              properties:
+                                unlinked_at:
+                                  type: string
+                                  nullable: true
+                                  description: >
+                                    1. 藥品與品牌的關聯解除時間,
+                                    2. null 表示 藥品從未與任何品牌關聯過
+                                  example: null
+
+                          images:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - id
+                                - url
+                                - linked_at
+                              properties:
+                                id:
+                                  type: number
+                                  nullable: false
+                                  description: 藥品圖片 的 檔案id
+                                  example: 63
+                                linked_at:
+                                  type: string
+                                  nullable: false
+                                  description: 藥品與圖片的關聯建立時間
+                                  example: 2023-07-07 07:02:00.000000
+                                url:
+                                  type: string
+                                  nullable: false
+                                  description: 藥品圖片 url
+                                  example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
+                          packages:
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - id
+                                - data
+                                - images
+                              properties:
+                                id:
+                                  type: number
+                                  nullable: false
+                                  description: 藥品包裝id
+                                  example: 12
+                                data:
+                                  type: object
+                                  required:
+                                    - id
+                                    - sku
+                                    - unit
+                                    - name
+                                    - name_en
+                                    - name_cn
+                                    - updated_at
+                                    - linked_at
+                                  properties:
+                                    id:
+                                      type: number
+                                      nullable: false
+                                      description: 藥品包裝id
+                                      example: 12
+                                    sku:
+                                      type: string
+                                      nullable: true
+                                      description: 藥品包裝 sku
+                                      example: 351467109127
+                                    unit:
+                                      type: string
+                                      nullable: true
+                                      description: 單位 (key name in English)
+                                      example: box
+                                    name:
+                                      type: string
+                                      nullable: true
+                                      description: 藥品包裝名稱 繁體中文
+                                      example: 幸福傷風素 無睡意 12片
+                                    name_en:
+                                      type: string
+                                      nullable: true
+                                      description: 藥品包裝名稱 英文
+                                      example: (engilsh) 幸福傷風素 無睡意 12片
+                                    name_cn:
+                                      type: string
+                                      nullable: true
+                                      description: 藥品包裝名稱 簡體中文
+                                      example: (簡中) 幸福傷風素 無睡意 12片
+                                    updated_at:
+                                      type: string
+                                      nullable: true
+                                      description: 藥品包裝文字內容更新時間
+                                      example: 2023-07-07 07:02:00.000000
+                                    linked_at:
+                                      type: string
+                                      nullable: false
+                                      description: 藥品與包裝的關聯建立時間
+                                      example: 2023-07-08 14:02:31.000000
+
+                                images:
+                                  type: array
+                                  items:
+                                    type: object
+                                    required:
+                                      - id
+                                      - url
+                                      - linked_at
+                                    properties:
+                                      id:
+                                        type: number
+                                        nullable: false
+                                        description: 藥品包裝圖片 的 檔案id
+                                        example: 63
+                                      linked_at:
+                                        type: string
+                                        nullable: false
+                                        description: 藥品包裝 與 藥品包裝圖片 的 關聯建立時間
+                                        example: 2023-07-07 07:02:00.000000
+                                      url:
+                                        type: string
+                                        nullable: false
+                                        description: 藥品包裝圖片 url
+                                        example: https://s3.ap-southeast-1.amazonaws.com/medicine-s3.cloudsatlas.com.hk/351467109240_c1bcf39099.jpg
+
+                      diff:
+                        type: object
+                        required:
+                          - drugs
+                          - brand
+                          - packages
+                          - images
+                        properties:
+                          drugs:
+                            nullable: true
+                            type: object
+                            properties:
+                              product_name_zh:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.product_name_zh-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: false
+                                    example: 幸福傷風素 無睡意 36片
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: 幸福傷風素 無睡意 36片
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              product_name_en:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.product_name_en-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: false
+                                    example: 幸福傷風素 無睡意 36片
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: 幸福傷風素 無睡意 36片
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              product_name_cn:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.product_name_cn-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: false
+                                    example: 幸福傷風素 無睡意 36片
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: 幸福傷風素 無睡意 36片
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              aka:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.aka-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+
+                              indication:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.indication-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              indication_en:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.indication_en-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              indication_cn:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.indication_cn-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+
+                              precaution:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.precaution-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              precaution_en:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.precaution_en-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              precaution_cn:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.precaution_cn-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+
+                              side_effect:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.side_effect-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              side_effect_en:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.side_effect_en-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+                              side_effect_cn:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.side_effect_cn-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+
+                              dosage_form:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.dosage_form-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+
+                              usage:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.usage-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  snapshotContent:
+                                    type: string
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+
+                              priority:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.priority-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: number
+                                    enum: [0,1,2,3,4,5,6,7,8,9]
+                                    nullable: true
+                                    example: 2
+                                  snapshotContent:
+                                    type: number
+                                    enum: [0,1,2,3,4,5,6,7,8,9]
+                                    nullable: true
+                                    example: null
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+
+                              enable:
+                                type: object
+                                properties:
+                                  key:
+                                    type: string
+                                    nullable: false
+                                    example: drug.enable-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                  applyContent:
+                                    type: number
+                                    enum: [0,1]
+                                    nullable: false
+                                    example: 1
+                                  snapshotContent:
+                                    type: number
+                                    enum: [0,1]
+                                    nullable: false
+                                    example: 0
+                                  lastUpdatedTimeOfSnapshot:
+                                    type: string
+                                    nullable: true
+                                    example: 2024-02-02T09:32:49.000Z
+
+                          images:
+                            nullable: false
+                            type: array
+                            items:
+                              type: object
+                              required:
+                                - id
+                                - actionType
+                                - key
+                                - linked_at
+                              properties:
+                                id:
+                                  type: number
+                                  nullable: false
+                                  description: 藥品圖片 的 檔案id
+                                  example: 63
+                                key:
+                                  type: string
+                                  nullable: false
+                                  example: images-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                actionType:
+                                  type: string
+                                  nullable: false
+                                  enum:
+                                    - add-relation
+                                    - delete-relation
+                                  example: add-relation
+                                linked_at:
+                                  type: string
+                                  nullable: true
+                                  example: null
+                                  description: >
+                                    1. 當 actionType=add-relation 時, 此欄位為 null
+                                    2. 當 actionType=delete-relation 時, 此欄位為 圖片 與 藥品關聯的時間
+
+                          brand:
+                            nullable: false
+                            type: object
+                            required:
+                              - key
+                              - actionType
+                              - applyContent
+                              - snapshotContent
+                            properties:
+                              key:
+                                type: string
+                                nullable: false
+                                example: brand-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                              actionType:
+                                type: string
+                                enum:
+                                  - set-null
+                                  - change-related
+                                  - add-related
+                                nullable: false
+                                example: add-related
+                              applyContent:
+                                type: number
+                                nullable: true
+                                example: 229
+                                description: >
+                                  申請的 品牌的 tag id
+                                  actionType = change-related / add-related 均須有值
+                                  actionType = set-null, 則為 null
+                              snapshotContent:
+                                oneOf:
+                                  - type: object
+                                    required:
+                                      - id
+                                      - name
+                                      - linked_at
+                                    description: >
+                                      actionType = change-related / set-null 採用此型別
+                                      actionType = add-related 不採用此型別
+                                    properties:
+                                      id:
+                                        type: number
+                                        nullable: false
+                                        example: 229
+                                      name:
+                                        type: string
+                                        nullable: false
+                                        example: COLTALIN
+                                      linked_at:
+                                        type: string
+                                        nullable: false
+                                        example: 2023-07-07 07:02:00.000000
+                                  - type: object
+                                    description: >
+                                      actionType = add-related 採用此型別
+                                      actionType = change-related / set-null 不採用此型別
+                                    required:
+                                      - unlinked_at
+                                    properties:
+                                      unlinked_at:
+                                        type: string
+                                        nullable: true
+                                        example: 2023-07-07 07:02:00.000000
+                                        description: >
+                                          1. 申請當下 品牌與藥品的關聯解除時間 快照的,
+                                          2. null 表示 申請當下 品牌從未與任何藥品關聯過
+
+                          packages:
+                            type: array
+                            nullable: false
+                            description: >
+                              藥品包裝
+                              根據 actionType 來判斷是新增、刪除、保持, 亦對應三種不同的資料型別
+                              actionType=delete: 意指解除 藥品 與 包裝 關聯, 但不刪除包裝, 也不處理包裝的圖片
+                              actionType=new: 新增 藥品 與 包裝 關聯, 包裝 與 包裝圖片 關聯
+                              actionType=update: 更新文字內容, 或者 藥品 與 圖片的關聯
+                            items:
+                              oneOf:
+                                - type: object
+                                  description: >
+                                    actionType=delete: 意指解除 藥品 與 包裝 關聯, 但不刪除包裝, 也不處理包裝的圖片
+                                    所以沒有 data, images 欄位
+                                  nullable: false
+                                  required:
+                                    - id
+                                    - actionType
+                                    - key
+                                    - linked_at
+                                  properties:
+                                    id:
+                                      type: number
+                                      nullable: false
+                                      description: 藥品包裝id
+                                      example: 12
+                                    key:
+                                      type: string
+                                      nullable: false
+                                      example: packages[14]-[rk]:993390199078f78f784f7ade55792374
+                                      description: 選項的 key
+                                    actionType:
+                                      type: string
+                                      nullable: false
+                                      enum:
+                                        - delete
+                                      example: delete
+                                      description: 操作類型, delete=意指解除 藥品 與 包裝 關聯, 但不刪除包裝, 也不處理包裝的圖片
+                                    linked_at:
+                                      type: string
+                                      nullable: false
+                                      example: 2023-07-07 07:02:00.000000
+                                      description: 藥品 與 包裝 關聯建立的時間
+
+                                - type: object
+                                  description: >
+                                    actionType=new: 新增 藥品 與 包裝 關聯, 包裝 與 包裝圖片 關聯
+                                    data 欄位 內容均為值
+                                    images 欄位 內容均為 add-relation
+                                    linked_at 欄位 內容必為 null
+                                    要就同意全部, 不然就不要同意
+                                  nullable: false
+                                  required:
+                                    - id
+                                    - key
+                                    - actionType
+                                    - data
+                                    - images
+                                    - linked_at
+                                  properties:
+                                    id:
+                                      type: number
+                                      nullable: false
+                                      description: 藥品包裝id, 假的 id 不存在於 DB package table, 只存於 drug_update table
+                                      example: 958621277
+                                    key:
+                                      type: string
+                                      nullable: false
+                                      example: packages[958621277]-[rk]:993390199078f78f784f7ade55792374
+                                      description: 選項的 key
+                                    actionType:
+                                      type: string
+                                      nullable: false
+                                      enum:
+                                        - new
+                                      example: new
+                                      description: 操作類型, new=新增 藥品 與 包裝 關聯, 包裝 與 包裝圖片 關聯
+                                    linked_at:
+                                      type: string
+                                      nullable: true
+                                      example: null
+                                      description: 藥品 與 包裝 關聯建立的時間
+                                    data:
+                                      description: >
+                                        此新藥品包裝 的 詳細內容
+                                        name, name_en, name_cn 三個欄位必填
+                                      type: object
+                                      required:
+                                        - sku
+                                        - unit
+                                        - name
+                                        - name_en
+                                        - name_cn
+                                      properties:
+                                        sku:
+                                          type: string
+                                          nullable: true
+                                          example: 351467109127
+                                          description: 此新藥品包裝 的 sku
+                                        unit:
+                                          type: string
+                                          nullable: true
+                                          example: box
+                                          description: 此新藥品包裝 的 單位 (key name in English)
+                                        name:
+                                          type: string
+                                          nullable: false
+                                          example: 幸福傷風素 無睡意 12片
+                                          description: 此新藥品包裝 的 名稱 繁體中文
+                                        name_en:
+                                          type: string
+                                          nullable: true
+                                          example: (engilsh) 幸福傷風素 無睡意 12片
+                                          description: 此新藥品包裝 的 名稱 英文
+                                        name_cn:
+                                          type: string
+                                          nullable: true
+                                          example: (簡中) 幸福傷風素 無睡意 12片
+                                          description: 此新藥品包裝 的 名稱 簡體中文
+                                    images:
+                                      type: array
+                                      description: >
+                                        linked_at 欄位 內容必為 null
+                                        url 請參照 imagesForAddRelation
+                                        要就同意全部, 不然就不要同意
+                                        同意權行使 由 上層 package 決定
+                                      items:
+                                        type: object
+                                        required:
+                                          - id
+                                          - linked_at
+                                          - actionType
+                                          - key
+                                        properties:
+                                          id:
+                                            type: number
+                                            nullable: false
+                                            description: 藥品包裝圖片 的 檔案id
+                                            example: 63
+                                          linked_at:
+                                            type: string
+                                            nullable: true
+                                            description: 藥品包裝 與 藥品包裝圖片 的 關聯建立時間
+                                            example: null
+                                          key:
+                                            type: string
+                                            nullable: false
+                                            example: packages[958621277]-[rk]:993390199078f78f784f7ade55792374.images-[rk]:4e7de0ef27c5da339a542163a463f2e9
+                                          actionType:
+                                            type: string
+                                            nullable: false
+                                            enum:
+                                              - add-related
+                                            example: add-related
+                                            description: 操作類型, add-related=新增 藥品包裝 與 藥品包裝圖片 關聯
+
+                                - type: object
+                                  description: >
+                                    actionType=update: 更新文字內容, 或者 藥品 與 圖片的關聯
+                                    data 各欄位為 key, applyContent, snapshotContent, lastUpdatedTimeOfSnapshot
+                                    data 欄位 同意權行使 可以依據各自欄位
+                                    data 欄位 同意權行使後 必須使得 name, name_en, name_cn 三個欄位 均有內容值 (applyContent 與 currentData 交集後, 必須有值)
+                                    images 欄位 actionType: add-relation / delete-relation, 可以刪到沒圖
+                                    linked_at 欄位 內容必有值
+                                  required:
+                                    - id
+                                    - key
+                                    - actionType
+                                    - data
+                                    - images
+                                    - linked_at
+                                  properties:
+                                    id:
+                                      type: number
+                                      nullable: false
+                                      description: 藥品包裝id
+                                      example: 12
+                                    key:
+                                      type: string
+                                      nullable: false
+                                      example: packages[14]-[rk]:993390199078f78f784f7ade55792374
+                                      description: 選項的 key
+                                    actionType:
+                                      type: string
+                                      nullable: false
+                                      enum:
+                                        - update
+                                      example: update
+                                      description: 操作類型, update=更新文字內容, 或者 藥品 與 圖片的關聯
+                                    linked_at:
+                                      type: string
+                                      nullable: false
+                                      example: 2023-07-07 07:02:00.000000
+                                      description: 藥品 與 包裝 關聯建立的時間
+                                    data:
+                                      type: object
+                                      description: >
+                                        data 各欄位為 key, applyContent, snapshotContent, lastUpdatedTimeOfSnapshot
+                                        data 欄位 同意權行使 可以依據各自欄位
+                                        data 欄位 同意權行使後 必須使得 name, name_en, name_cn 三個欄位 均有內容值 (applyContent 與 currentData 交集後, 必須有值)
+                                        除非 currentData name = null 且 data 沒有 name 的申請
+                                      properties:
+                                        sku:
+                                          description: 藥品包裝 sku
+                                          type: object
+                                          required:
+                                            - key
+                                            - applyContent
+                                            - snapshotContent
+                                            - lastUpdatedTimeOfSnapshot
+                                          properties:
+                                            key:
+                                              type: string
+                                              nullable: false
+                                              example: packages[14]-[rk]:993390199078f78f784f7ade55792374.sku-[rk]:47194f25b26dab612c205c9c2092742c
+                                              description: 選項的 key
+                                            applyContent:
+                                              type: string
+                                              nullable: true
+                                              example: 351467109127
+                                              description: 申請的 sku
+                                            snapshotContent:
+                                              type: string
+                                              nullable: true
+                                              example: null
+                                              description: 申請當下快照的 sku
+                                            lastUpdatedTimeOfSnapshot:
+                                              type: string
+                                              nullable: false
+                                              example: 2024-02-02T09:32:49.000Z
+                                              description: 申請當下快照的 sku 更新時間
+                                        unit:
+                                          type: object
+                                          required:
+                                            - key
+                                            - applyContent
+                                            - snapshotContent
+                                            - lastUpdatedTimeOfSnapshot
+                                          properties:
+                                            key:
+                                              type: string
+                                              nullable: false
+                                              example: packages[14]-[rk]:993390199078f78f784f7ade55792374.unit-[rk]:47194f25b26dab612c205c9c2092742c
+                                              description: 選項的 key
+                                            applyContent:
+                                              type: string
+                                              nullable: true
+                                              example: null
+                                              description: 申請的 unit
+                                            snapshotContent:
+                                              type: string
+                                              nullable: true
+                                              example: box
+                                              description: 申請當下快照的 unit key
+                                            lastUpdatedTimeOfSnapshot:
+                                              type: string
+                                              nullable: false
+                                              example: 2024-02-02T09:32:49.000Z
+                                              description: 申請當下快照的 unit 更新時間
+                                        name:
+                                          type: object
+                                          required:
+                                            - key
+                                            - applyContent
+                                            - snapshotContent
+                                            - lastUpdatedTimeOfSnapshot
+                                          properties:
+                                            key:
+                                              type: string
+                                              nullable: false
+                                              example: packages[14]-[rk]:993390199078f78f784f7ade55792374.name-[rk]:47194f25b26dab612c205c9c2092742c
+                                              description: 選項的 key
+                                            applyContent:
+                                              type: string
+                                              nullable: false
+                                              example: 申請的 name 申請的 name 申請的 name
+                                              description: 申請的 name
+                                            snapshotContent:
+                                              type: string
+                                              nullable: true
+                                              example: null
+                                              description: 申請當下快照的 name
+                                            lastUpdatedTimeOfSnapshot:
+                                              type: string
+                                              nullable: false
+                                              example: 2024-02-02T09:32:49.000Z
+                                              description: 申請當下快照的 name 更新時間
+                                        name_en:
+                                          type: object
+                                          required:
+                                            - key
+                                            - applyContent
+                                            - snapshotContent
+                                            - lastUpdatedTimeOfSnapshot
+                                          properties:
+                                            key:
+                                              type: string
+                                              nullable: false
+                                              example: packages[14]-[rk]:993390199078f78f784f7ade55792374.name_en-[rk]:47194f25b26dab612c205c9c2092742c
+                                              description: 選項的 key
+                                            applyContent:
+                                              type: string
+                                              nullable: false
+                                              example: 申請的 name_en 申請的 name_en 申請的 name_en
+                                              description: 申請的 name_en
+                                            snapshotContent:
+                                              type: string
+                                              nullable: true
+                                              example: null
+                                              description: 申請當下快照的 name_en
+                                            lastUpdatedTimeOfSnapshot:
+                                              type: string
+                                              nullable: false
+                                              example: 2024-02-02T09:32:49.000Z
+                                              description: 申請當下快照的 name_en 更新時間
+                                        name_cn:
+                                          type: object
+                                          required:
+                                            - key
+                                            - applyContent
+                                            - snapshotContent
+                                            - lastUpdatedTimeOfSnapshot
+                                          properties:
+                                            key:
+                                              type: string
+                                              nullable: false
+                                              example: packages[14]-[rk]:993390199078f78f784f7ade55792374.name_cn-[rk]:47194f25b26dab612c205c9c2092742c
+                                              description: 選項的 key
+                                            applyContent:
+                                              type: string
+                                              nullable: false
+                                              example: 申請的 name_cn 申請的 name_cn 申請的 name_cn
+                                              description: 申請的 name_cn
+                                            snapshotContent:
+                                              type: string
+                                              nullable: true
+                                              example: null
+                                              description: 申請當下快照的 name_cn
+                                            lastUpdatedTimeOfSnapshot:
+                                              type: string
+                                              nullable: false
+                                              example: 2024-02-02T09:32:49.000Z
+                                              description: 申請當下快照的 name_cn 更新時間
+
+                                    images:
+                                      type: array
+                                      description: >
+                                        actionType: add-relation / delete-relation, 可以刪到沒圖
+                                        actionType=add-relation: linked_at 欄位 內容必為 null, url 請參照 imagesForAddRelation
+                                        actionType=delete-relation: linked_at 欄位 內容必有值, url 請參照 currentData 相對位置的 image url
+                                      items:
+                                        type: object
+                                        required:
+                                          - id
+                                          - key
+                                          - actionType
+                                          - linked_at
+                                        properties:
+                                          id:
+                                            type: number
+                                            nullable: false
+                                            description: 藥品圖片 的 檔案id
+                                            example: 63
+                                          key:
+                                            type: string
+                                            nullable: false
+                                            example: packages[14]-[rk]:993390199078f78f784f7ade55792374.images[1210]-[rk]:faefddd0f361c8720897f17a658826f1
+                                          actionType:
+                                            type: string
+                                            nullable: false
+                                            enum:
+                                              - add-relation
+                                              - delete-relation
+                                            example: add-relation
+                                          linked_at:
+                                            type: string
+                                            nullable: true
+                                            example: null
 
   /admin/drug-updates/drugs/{permitNo}:
     # 將被 '/admin/t/drug-updates/{permitNo}' 取代
