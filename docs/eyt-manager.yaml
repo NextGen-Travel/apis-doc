@@ -7854,10 +7854,10 @@ paths:
                   nullable: false
                 approvedKeys:
                   nullable: false
+                  description: 同意申請的 key, 在 drug_updates table 的 optional_keys 欄位的內容值
                   type: array
                   items:
                     type: string
-                    description: 同意申請的 key, 在 drug_updates table 的 optional_keys 欄位的內容值
       responses:
         '200':
           description: 成功

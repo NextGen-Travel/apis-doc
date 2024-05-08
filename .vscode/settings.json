@@ -1,5 +1,13 @@
 {
     "yaml.schemas": {
         "openapi:v3": "file:///Users/zhihao/Desktop/Codes/api-docs/docs/ulitmate-pos.yaml"
+    },
+    "background.fullscreen": {
+
+        "images": ["/Users/davidchang/Pictures/vscode/api-doc.png"],
+        "opacity": 0.91,
+        "size": "cover",
+        "position": "center",
+        "interval": 0
     }
 }
