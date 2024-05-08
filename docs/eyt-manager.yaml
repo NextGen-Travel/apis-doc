@@ -6594,7 +6594,15 @@ paths:
                       - currentData
                       - imagesForAddRelation
                       - diff
+                      - appliedAt
                     properties:
+
+                      appliedAt:
+                        type: string
+                        nullable: false
+                        example: 2023-07-07 07:02:00.000000
+                        description: 申請提交時間
+
                       verifiedCode:
                         type: string
                         nullable: false
