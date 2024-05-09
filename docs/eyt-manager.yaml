@@ -6594,14 +6594,24 @@ paths:
                       - currentData
                       - imagesForAddRelation
                       - diff
-                      - appliedAt
+                      - appliedMetaInfo
                     properties:
 
-                      appliedAt:
-                        type: string
+                      appliedMetaInfo:
                         nullable: false
-                        example: 2023-07-07 07:02:00.000000
-                        description: 申請提交時間
+                        description: 申請相關資訊
+                        type: object
+                        properties:
+                          appliedAt:
+                            type: string
+                            nullable: false
+                            example: 2023-07-07 07:02:00.000000
+                            description: 申請提交時間
+                          byUserAccount:
+                            type: string
+                            nullable: false
+                            example: 申請人帳號
+                            description: 申請人帳號
 
                       verifiedCode:
                         type: string
