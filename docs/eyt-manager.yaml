@@ -5815,7 +5815,76 @@ paths:
                         count:
                           type: number
 
-
+  /admin/t/drug-updates:
+    get:
+      summary: 獲取後台藥品審核列表(new)
+      security:
+        - user_token: []
+      tags:
+        - drugs
+      parameters:
+        - in: query
+          name: keyword
+          schema:
+            type: string
+            example: 3535
+          description: 搜尋 核准字號、藥品學名、名稱
+      responses:
+        '200':
+          description: 成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  msg:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        applyUuid:
+                          type: string
+                        permitNo:
+                          type: string
+                        productName:
+                          type: string
+                        productName_zh:
+                          type: string
+                        productName_en:
+                          type: string
+                        productName_cn:
+                          type: string
+                        ingredients:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              name:
+                                type: string
+                        legalClassifications:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: number
+                              tagName:
+                                type: string
+                        saleRequirement:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                            tagName:
+                              type: string
+                        count:
+                          type: number
 
   /admin/t/drug-updates/{permitNo}:
     get:
