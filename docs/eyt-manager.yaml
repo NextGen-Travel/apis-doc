@@ -7958,7 +7958,7 @@ paths:
                     example: Success
 
   /admin/t/drug-updates/rejected/{permitNo}:
-    delete:
+    patch:
       summary: 後台藥品修改流程 的 否決特定申請
       security:
         - user_token: []
